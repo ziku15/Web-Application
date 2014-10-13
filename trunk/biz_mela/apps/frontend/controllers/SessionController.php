@@ -197,7 +197,7 @@ class SessionController extends ControllerBase
 						$body='Hi, <br/> <br/> Please verify your email and get started using your Website account.Your password is: '.$password.'
 						<br/> <br/> <a href="http://localhost/bizmela/session/accountconfirm/'.$user->id.'">Click Here To Confirm</a>' ;
 						$this->Send_Mail($to,$subject,$body,$userid);	*/
-						return $this->forward('/frontend/session/index');
+						return $this->forward('/session/index');
             }
         }
     }
