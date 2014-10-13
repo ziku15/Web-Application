@@ -61,7 +61,7 @@ padding: 15px;
 <div class="page-header">
 <h3>LogIn</h3>
 </div>
-<form action="/bizmela/session/start" class="form-inline" method="post" autocomplete="off">
+<form action="<?php echo $this->url->get().'session/session/';?>" class="form-inline" method="post" autocomplete="off">
 <fieldset>
 <div class="control-group">
 <label class="control-label" for="email">UserName/Email</label>
