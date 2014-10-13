@@ -1,0 +1,96 @@
+<style>
+.green{
+	background-color: #00872A;
+	color: white;
+}
+.form-element{
+	margin-top: 8px;
+}
+.input-lg{
+height:50 px;
+font-size:30 px;
+line weight:1.4;
+border radious: 6 px;
+padding: 10px 16px;
+}
+</style>
+
+<div class="row">
+    
+    <div class="form-area">
+	
+	<?php echo $this->getContent(); ?>
+	
+	
+	<form action="" method="post" >
+	<div class="row-cell">
+	<div class="col-md-12">
+		
+		<?php echo $form->render("shop_id"); ?>
+		<?php echo $form->render("product_name"); ?>
+		<?php
+		$message = $form->getMessagesFor('product_name');
+                foreach ($message as $m) {
+                    ?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php } ?>
+		<?php echo $form->render("type"); ?>
+		<?php
+		$message = $form->getMessagesFor('type');
+                foreach ($message as $m) {
+                    ?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php } ?>
+		<?php echo $form->render("product_description"); ?>
+		
+		
+		<?php echo $form->render("price"); ?>
+		<?php
+		$message = $form->getMessagesFor('price');
+                foreach ($message as $m) {
+                    ?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php } ?>
+		
+		<?php echo $form->render("discount"); ?>
+		
+		<?php echo $form->render("in_stock"); ?>
+		<?php
+		$message = $form->getMessagesFor('in_stock');
+                foreach ($message as $m) {
+                    ?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php } ?>
+		
+		<?php echo $form->render("minimum_order_level"); ?>
+		<?php
+		$message = $form->getMessagesFor('minimum_order_level');
+                foreach ($message as $m) {
+                    ?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php } ?>
+		
+		
+		</br>
+	
+		<div class="btn-group btn-group-justified button-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Add New Product</button>
+                    </div>			  
+                </div>
+                <div class="btn-group btn-group-justified form-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="cancel" class="btn btn-lg btn-custom btn-danger">Cancel</button>
+                    </div>		  
+                </div>
+	
+	
+	</div>
+	</div>
+	
+	</form>
+	
+	
+	</div>
+	
+</div>
