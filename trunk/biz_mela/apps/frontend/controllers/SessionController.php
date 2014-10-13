@@ -1,4 +1,5 @@
 <?php
+
 namespace Biz_mela\Frontend\Controllers;
 
 use Phalcon\Tag as Tag,
@@ -14,12 +15,14 @@ use Phalcon\Tag as Tag,
 
 class SessionController extends ControllerBase
 {
+
 //    public function initialize()
 //    {
 //        Tag::setTitle('Sign Up/Sign In');
 //        parent::initialize();
 //
 //    }
+
 
     public function indexAction()
     {	
@@ -194,7 +197,7 @@ class SessionController extends ControllerBase
 						$body='Hi, <br/> <br/> Please verify your email and get started using your Website account.Your password is: '.$password.'
 						<br/> <br/> <a href="http://localhost/bizmela/session/accountconfirm/'.$user->id.'">Click Here To Confirm</a>' ;
 						$this->Send_Mail($to,$subject,$body,$userid);	*/
-						return $this->forward('session/index');
+						return $this->forward('/frontend/session/index');
             }
         }
     }
