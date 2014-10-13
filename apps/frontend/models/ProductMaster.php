@@ -19,6 +19,12 @@ class ProductMaster extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
+    public $is_hot;
+
+    /**
+     *
+     * @var integer
+     */
     public $cat_id;
 
     /**
