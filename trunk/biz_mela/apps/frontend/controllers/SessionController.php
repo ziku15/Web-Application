@@ -1,4 +1,5 @@
 <?php
+namespace Biz_mela\Frontend\Controllers;
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
@@ -13,13 +14,12 @@ use Phalcon\Tag as Tag,
 
 class SessionController extends ControllerBase
 {
-    public function initialize()
-    {	
-        //$this->view->setTemplateAfter('main');
-        Tag::setTitle('Sign Up/Sign In');
-        parent::initialize();
-		
-    }
+//    public function initialize()
+//    {
+//        Tag::setTitle('Sign Up/Sign In');
+//        parent::initialize();
+//
+//    }
 
     public function indexAction()
     {	
