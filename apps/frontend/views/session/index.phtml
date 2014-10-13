@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<style>
+p{
+color:#45238E;
+font-size: 16px;
+}
+h3{
+
+color:#330000;
+font-size: 32px;
+}
+h2{
+color:#624949
+}
+.page-header {
+    border-bottom: 1px solid #eee;
+    margin: 25px 0 20px;
+    padding-bottom: 9px;
+}
+.col-md-6 {
+    width: 50%;
+}
+.btn{
+
+font-size: 18px;
+
+}
+
+.errorMessage{
+color:#624949;
+font-size: 18px;
+padding: 15px;
+}
+
+.successMessage{
+color:#339966;
+font-size: 18px;
+padding: 15px;
+
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<?php echo $this->getContent(); ?>
+<div class="container">
+<div class="logIn or signUp">
+<div class="row">
+<div class="col-md-6">
+<div class="page-header">
+<h3>LogIn</h3>
+</div>
+<form action="/bizmela/session/start" class="form-inline" method="post" autocomplete="off">
+<fieldset>
+<div class="control-group">
+<label class="control-label" for="email">UserName/Email</label>
+<div class="controls">
+<input type="text" id="email" name="email" class="form-control input-lg form-element" placeholder="example" pb-role="username">
+</div>
+</div>
+<div class="control-group">
+</br>
+<label class="control-label" for="password">Password</label>
+<div class="controls">
+<input type="password" id="password" name="password" class="form-control input-lg form-element" placeholder="password" pb-role="password">
+</div>
+</div>
+
+
+<div class="form-actions">
+</br>
+<input type="submit" value="Login" class="btn btn-primary btn-large" pb-role="submit">
+
+</div>
+
+
+</fieldset>
+
+</form>
+
+</div>
+
+<div class="col-md-6 ">
+<div class="page-header">
+<h3>Don't have an account yet?</h3>
+</div>
+<p><b>Create an account will provide many advantages..</b></p>
+<ul>
+<li>B2B,B2C and C2C eCommerce service</li>
+</br>
+<li>Its going to be g2c in near future</li>
+</br>
+<li>Save ur time by selling and buying from ur account</li>
+</br>
+</br>
+</br>
+
+</ul>
+
+<div class="clearfix-center">
+<a href="/bizmela/session/register" class="btn btn-primary btn-large btn-success">Sign Up</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+<div class="col-md-6">
+</br>
+<h5>@bizmela.com</h5>
+</div>
+
+</footer>
+
+</div>
+
+
+
+
+
+</div>
+</body>
+</html>
