@@ -74,12 +74,17 @@ class Application extends \Phalcon\Mvc\Application
                 'controller' => 'index',
                 'action' => 1,
             ));
-
-            $router->add("/:controller/:action", array(
+            $router->add("/session/start", array(
                 'module' => 'frontend',
-                'controller' => 1,
-                'action' => 2,
+                'controller' => 'session',
+                'action' => 'start',
             ));
+
+            // $router->add("/:controller/:action", array(
+            //     'module' => 'frontend',
+            //     'controller' => 1,
+            //     'action' => 2,
+            // ));
 
             return $router;
 
