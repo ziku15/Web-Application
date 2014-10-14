@@ -12,6 +12,7 @@ use Phalcon\Tag as Tag,
 	Phalcon\Mvc\Model\Validator\Email,
 	Phalcon\Forms\Element\Select,
 	Phalcon\Security;
+use Biz_mela\Frontend\Models\UserMaster as UserMaster;
 
 class SessionController extends ControllerBase
 {
@@ -289,8 +290,8 @@ class SessionController extends ControllerBase
 				$a=UserMaster::findFirst("email="."'".$email."'");
                 //return $this->forward('buy/index');
 				
-				if($a->type == 'B') return $this->forward('buy/index');
-                else if($a->type =='S') return $this->forward('sell/index');
+				if($a->type == 'B') return $this->response->redirect('buy/index');
+                else if($a->type =='S') return $this->response->redirect('sell/index');
             }
 
             $username = $this->request->getPost('email', 'alphanum');
@@ -314,7 +315,7 @@ class SessionController extends ControllerBase
 				//return $this->forward('session/shop/'.$userid );
 				}
 				else if ($a->status == 1)
-				return $this->forward('sell/index/'.$userid);
+				return $this->response->redirect('sell/index/'.$userid);
 				}
             }
 

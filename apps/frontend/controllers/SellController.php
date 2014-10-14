@@ -1,5 +1,5 @@
 <?php
-
+namespace Biz_mela\Frontend\Controllers;
 use Phalcon\Tag as Tag;
 
 class SellController extends ControllerBase
