@@ -126,7 +126,10 @@ class SessionController extends ControllerBase
                 'placeholder' => 'date of birth'
                 
             ));*/
-		
+
+
+//        print_r($_REQUEST);
+//        exit();
         $request = $this->request;
         if ($request->isPost()) {
 
@@ -139,6 +142,7 @@ class SessionController extends ControllerBase
 			$contact_no=$this->request->getPost('contact_no');
 			$address=$this->request->getPost('address');
 			$dob=$this->request->getPost('dob');
+
 			$previous_user = UserMaster::find('username=' . "'" . $username . "'" );
 			$previous_email = UserMaster::find('email=' . "'" . $email . "'" );
 			

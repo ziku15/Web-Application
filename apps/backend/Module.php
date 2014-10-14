@@ -2,65 +2,59 @@
 
 namespace Biz_mela\Backend;
 
-use Phalcon\Loader;
-use Phalcon\Mvc\View;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-use Phalcon\Mvc\ModuleDefinitionInterface;
-
-
-class Module implements ModuleDefinitionInterface
+class Module
 {
 
-    /**
-     * Registers the module auto-loader
-     */
     public function registerAutoloaders()
     {
 
-        $loader = new Loader();
+        $loader = new \Phalcon\Loader();
 
         $loader->registerNamespaces(array(
-            'Biz_mela\Backend\Controllers' => __DIR__ . '/controllers/',
-            'Biz_mela\Backend\Models' => __DIR__ . '/models/',
+            'Biz_mela\Backend\Controllers' => '../apps/backend/controllers/',
+            'Biz_mela\Backend\Models' => '../apps/backend/models/',
+            'Biz_mela\Backend\Plugins' => '../apps/backend/plugins/',
         ));
 
         $loader->register();
     }
 
     /**
-     * Registers the module-only services
-     *
-     * @param Phalcon\DI $di
+     * Register the services here to make them general or register in the ModuleDefinition to make them module-specific
      */
     public function registerServices($di)
     {
 
-        /**
-         * Read configuration
-         */
-        $config = include __DIR__ . "/config/config.php";
+        //Registering a dispatcher
+        $di->set('dispatcher', function() {
 
-        /**
-         * Setting up the view component
-         */
-        $di['view'] = function () {
-            $view = new View();
-            $view->setViewsDir(__DIR__ . '/views/');
+            $dispatcher = new \Phalcon\Mvc\Dispatcher();
 
+            //Attach a event listener to the dispatcher
+            $eventManager = new \Phalcon\Events\Manager();
+            $eventManager->attach('dispatch', new \Acl('backend'));
+
+            $dispatcher->setEventsManager($eventManager);
+            $dispatcher->setDefaultNamespace("Biz_mela\Backend\Controllers\\");
+            return $dispatcher;
+        });
+
+        //Registering the view component
+        $di->set('view', function() {
+            $view = new \Phalcon\Mvc\View();
+            $view->setViewsDir('../apps/backend/views/');
             return $view;
-        };
+        });
 
-        /**
-         * Database connection is created based in the parameters defined in the configuration file
-         */
-        $di['db'] = function () use ($config) {
-            return new DbAdapter(array(
-                "host" => $config->database->host,
-                "username" => $config->database->username,
-                "password" => $config->database->password,
-                "dbname" => $config->database->name
+        //Set a different connection in each module
+        $di->set('db', function() {
+            return new \Phalcon\Db\Adapter\Pdo\Mysql(array(
+                "host" => "114.134.91.91",
+                "username" => "root",
+                "password" => "btz123",
+                "dbname" => "bizmela"
             ));
-        };
+        });
 
     }
 
