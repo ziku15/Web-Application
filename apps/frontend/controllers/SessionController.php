@@ -1,6 +1,10 @@
 <?php
 
 namespace Biz_mela\Frontend\Controllers;
+use Biz_mela\Frontend\Models\UserMaster as UserMaster;
+use Biz_mela\Frontend\Models\ShopMaster as ShopMaster;
+use Biz_mela\Frontend\Models\UserBankInfo as UserBankInfo;
+use Biz_mela\Frontend\Library\PHPMailer as PHPMailer;
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
@@ -88,7 +92,7 @@ class SessionController extends ControllerBase
 			$user->contact_no =$contact_no ;
 			$user->address =$address ;
 			$user->dob=$dob ;
-            $user->created_at = new Phalcon\Db\RawValue('now()');
+            //$user->created_at = new Phalcon\Db\RawValue('now()');
 			$user->status = 0;
             //$user->active = 'Y';
             if ($user->save() == false) {
@@ -106,10 +110,17 @@ class SessionController extends ControllerBase
 						
 						$subject="Email verification";
 						$body='Hi, <br/> <br/> Please verify your email and get started using your Website account.
-						<br/> <br/> <a href="http://localhost/bizmela/session/status/'.$userid.'">Click Here To Confirm</a>' ;
+						<br/> <br/> <a href="http://localhost/biz_mela/session/status/'.$userid.'">Click Here To Confirm</a>' ;
 						//mail($to,$subject,$body);
-						$this->Send_Mail($to,$subject,$body);	
-						return $this->forward('session/index');
+						//$this->Send_Mail($to,$subject,$body);	
+						//return $this->forward('session/index');
+						return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'session',
+					 		'action' => 'index'
+					 		
+					 		)
+					 	);
 						
 						//return $this->forward('session/index');
             }
@@ -121,7 +132,8 @@ class SessionController extends ControllerBase
 	
 	private function Send_Mail($to,$subject,$body)
 	{
-	require_once __DIR__ . '/../../PHPMailer/class.phpmailer.php';
+	//echo __DIR__; exit();
+	//require_once __DIR__ . '/../../../PHPMailer/class.phpmailer.php';
 	$from       = "info@optimaxbd.net";
 	$mail       = new PHPMailer();
 	$mail->IsSMTP(true);            // use SMTP
@@ -270,9 +282,24 @@ class SessionController extends ControllerBase
 				$userid=$a->id;
 				if($a->type == 'B') {
 				if($a->status == 0)
-				return $this->forward('buy/index');
+				//return $this->forward('buy/index');
+					return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'buy',
+					 		'action' => 'index',
+					 		
+					 		)
+					 	);
 				else if ($a->status == 1)
-				return $this->forward('buy/index');
+				//return $this->forward('buy/index');
+					return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'buy',
+					 		'action' => 'index'
+					 		
+					 		)
+					 	);
+
 				}
                 else if($a->type == 'S') {
 				if($a->status == 0){
@@ -281,7 +308,7 @@ class SessionController extends ControllerBase
 				//return $this->forward('session/shop/'.$userid );
 				}
 				else if ($a->status == 1)
-				return $this->forward('sell/index/'.$userid);
+				return $this->response->redirect('sell/index/'.$userid);
 				}
 				
 				
@@ -299,25 +326,61 @@ class SessionController extends ControllerBase
 				$userid=$a->id;
 				if($a->type == 'B') {
 				if($a->status == 0)
-				return $this->forward('buy/index');
+				//return $this->forward('buy/index');
+					return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'buy',
+					 		'action' => 'index'
+					 		
+					 		)
+					 	);
 				else if ($a->status == 1)
-				return $this->forward('buy/index');
+				//return $this->forward('buy/index');
+					return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'buy',
+					 		'action' => 'index'
+					 		
+					 		)
+					 	);
 				}
                 else if($a->type == 'S') {
 				if($a->status == 0){
-				//$userid['value']=$value;
-				return $this->response->redirect('session/shop/'.$userid);
+				
+				//return $this->response->redirect('session/shop/'.$userid);
 				//return $this->forward('session/shop/'.$userid );
+				return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'session',
+					 		'action' => 'shop',
+					 		'param' => $userid
+					 		)
+					 	);
 				}
 				else if ($a->status == 1)
-				return $this->forward('sell/index/'.$userid);
+				// return $this->dispatcher->forward('sell/index/'.$userid);
+					 return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'sell',
+					 		'action' => 'index',
+					 		'param' => $userid
+					 		)
+					 	);
 				}
             }
 
             $this->flash->error('Wrong username/password');
         }
 
-        return $this->forward('session/index');
+        //return $this->forward('session/index');
+        return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'session',
+					 		'action' => 'index'
+					 		
+					 		)
+					 	);
+
     }
 	
 	public function shopAction($userid)
