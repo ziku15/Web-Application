@@ -1,6 +1,7 @@
 <?php
 
 namespace Biz_mela\Frontend\Controllers;
+use Biz_mela\Frontend\Models\UserMaster as UserMaster;
 
 use Phalcon\Tag as Tag;
 
@@ -28,24 +29,12 @@ class AccinfoController extends ControllerBase
 	
 	
 	
-	public function accinfoAction(	) {
-	$username = $this->session->get('auth');
-	//$email= $this->session->get('auth');
-	//print_r("username:".$username['name']);
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
+	public function accinfoAction() {
+		$username = $this->session->get('auth');
+		$con=UserMaster::findFirst("username="."'".$username['name']."'");
 		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");
-			$data['value']=$con;
-		
-		
-		$this->view->setVar('data',$data);
-		
-		
-		
+		$data['value']=$con;
+		$this->view->setVar('data',$data);	
     }
-		
-	
-	
-	
-	
 	
 }
