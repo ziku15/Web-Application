@@ -1,6 +1,7 @@
 <style>
-h4{
-color:#DF013A
+
+h4 {
+    color:#000000;
 
 }
 h4.padding{
@@ -12,17 +13,16 @@ h4.padding{
 }
 .seperator-dotted{
 	width: 100%;
-	border-bottom: 1px dotted #000;
-	margin: 5px 0px 5px 0px;
+	border-bottom: 1px solid #ECECEC;
+	margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
 }
 .green{
 	background-color: #00872A;
 	color: white;
 }
-a{
-color:#2E05AA;
 
-}
 
 .settings-area {
     font-size: 13px;
@@ -32,50 +32,126 @@ color:#2E05AA;
     top: 10px;
 }
 
+h2{
+
+    font-size:25 px;
+    text-align: center;
+}
+
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 505px;
+    width: 95%;
+
+
+}
+
+.dash {
+
+    padding-left: 20px;
+    font-size:20px;
+
+}
+
+h5{
+
+    color: #D44243;
+
+}
+
+.subscription{
+
+    font-size: 15px;
+
+}
+
+p{
+
+    font-size: 15px;
+
+}
+
 </style>
 
 <div class="row-cell">
 
-    <div class="col-md-4">
-        </br>
-        <h4>Contact Information</h4>
-        <div class="seperator-dotted"></div>
-            <p>User Name : <?php echo $data['value']->username;?></p>
-            <p>Email: <?php echo $data['value']->email;?></p>
-            <p>Cell Phone : <?php echo $data['value']->contact_no;?></p>
-            <p>Date of Birth : <?php echo $data['value']->dob;?></p>
-
-            <div class="z"><a href='/bizmela/accdashboard/edit'><h5>Edit Profile</h5></a></div>
-            <div><a href="<?php echo $this->url->get("settings/changepassword"); ?>"><h5>Change Password</h5></a></div>
-
-            </br>
-            </br>
+    <div >
+        <p class="dash">ACCOUNT  INFORMATION</p>
     </div>
 
-    <div class="col-md-3 col-md-offset-3">
-        </br>
-        <h4>Newsletter</h4>
+    <div class="seperator-dotted"></div>
 
-        <div class="seperator-dotted"></div>
+     <div class="col-md-6">
+        <h4>Contact Information &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 
+            <a href="<?php echo $this->url->get("accdashboard/edit"); ?>">
+                Edit
+             </a>
+         </h4>   
         
+        <div class="seperator-dotted">
+
+        </div>
+
+
+     </div>
+
+     <div class="col-md-6">
+        <h4>Newsletter Subscription</h4>
+        <div class="seperator-dotted">
+
+        </div>
+     </div> 
+
+ 
+
+     <div class="col-md-6">
+        <p><?php echo $data['value']->username;?></p>
+        <p><?php echo $data['value']->email;?></p>
+            <a href="<?php echo $this->url->get("settings/changepassword"); ?>">
+                <h5>Change Password</h5>
+            </a>
+            </br>
+     </div>
+
+     <div class="col-md-6">
+        <p class="subscription">You Are Currently Subscribed to General Subscription..</p>
         </br>
-    </div>
-
-    <div class="col-md-10">
-        <h3>Address Book</h3>
-        <div class="seperator-dotted"></div>
-        </hr>
-    </div>
-
-
-
-    <div class="col-md-4 ">
-        <h4>Default Billing Address</h4>
-        <div class="seperator-dotted"></div>
-        <?php echo $record['value']->account_holder_name;?>
         </br>
-        <p>Account No. :<?php echo $record['value']->account_no;?></p>
-        <?php echo $record['value']->branch_name;?>,<?php echo $record['value']->bank_name;?>.
-    </div>
+     </div>
 
+
+     <div class="col-md-12">
+        <p class="address"> <b>Address Book </b></p>
+        <div class="seperator-dotted">
+
+        </div>
+     </div>
+
+     <div class="col-md-6">
+        <p><strong>Default Billing Address</strong></p>
+        <p><?php echo $data['value']->username;?></p>
+        <p><?php echo $address['value']->billing_address;?></p>
+        <p><?php echo $address['value']->country;?></p>
+        <p><?php echo $address['value']->zip_code;?></p>
+        <p>T:<?php echo $data['value']->contact_no;?></p>
+
+        <a href="<?php echo $this->url->get("accdashboard/editaddress"); ?>">
+                <h5>Edit Address</h5>
+        </a>
+
+     </div>
+
+     <div class="col-md-6">
+        <p ><strong>Default Shipping Address</strong></p>
+        <p><?php echo $data['value']->username;?></p>
+        <p><?php echo $shipment['value']->shipping_address;?></p>
+        <p><?php echo $shipment['value']->country;?></p>
+        <p><?php echo $shipment['value']->zip_code;?></p>
+        <p>T:<?php echo $shipment['value']->contact_no;?></p>
+        <a href="<?php echo $this->url->get("accdashboard/editshipment"); ?>">
+                <h5>Edit Address</h5>
+        </a>
+     </div>
 </div>
