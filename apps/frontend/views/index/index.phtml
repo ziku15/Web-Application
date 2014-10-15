@@ -1,5 +1,5 @@
  <!-- mid menu part -->
- <style>
+<style>
 
 .hover {
     display: inline-block;
@@ -30,24 +30,32 @@
 
 .text p{margin-top: 35%;}
 
+.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover {border-width: 0;}
+
+.nav-tabs> li > a, .nav-tabs> li > a:hover {border: none;}
+
 
 </style>
+
   <div class="container">
-      <div class="mid-menu">
-        <div class="item"><a href="<?php echo $this->url->get().'index/hotnewbest/1';?>">New Products</a></div>
-        <div class="item"><a href="<?php echo $this->url->get().'index/hotnewbest/2';?>">Hot Products</a></div>
-        <div class="item"><a href="<?php echo $this->url->get().'index/hotnewbest/3';?>">Best Selling</a></div>
-      </div>
-      <div class="red-joint"></div>
+
+  
+  <div class="tabbable">
+  <div class="mid-menu">
+  <ul class="nav nav-tabs">
     
+    <li class="active"><a href="#pane1" data-toggle="tab"><div class="item">New Products</div></a></li>
+    <li><a href="#pane2" data-toggle="tab"><div class="item">Hot Products</div></a></li>
+    <li><a href="#pane3" data-toggle="tab"><div class="item">Best Selling</div></a></li>
+  </ul>
   </div>
-  <!-- mid menu part ends here -->
 
-
-  <!-- item area part -->
-
-<div class="container item-area">
-    <?php foreach ($result as $row){?>
+  <div class="red-joint"></div>
+   
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane active">
+    <div class="container item-area">
+    <?php foreach ($newResult as $row){?>
   
     <div class="col-md-3 hover">
       <div class="item">
@@ -59,7 +67,52 @@
 
     <?php }?>
 
-</div>
+    </div> <!---Container item-area !-->
+
+    </div> <!---pane1 !-->
+    <div id="pane2" class="tab-pane">
+    <div class="container item-area">
+    <?php foreach ($hotResult as $row){?>
+  
+    <div class="col-md-3 hover">
+      <div class="item">
+        <div class="text"><p><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P></div>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+        <div class="price">Price: <?php echo $row->price; ?> </div>
+      </div>
+    </div>
+
+    <?php }?>
+
+    </div> <!---Container item-area !-->
+    </div> <!---pane2 !-->
+    <div id="pane3" class="tab-pane">
+    <div class="container item-area">
+    <?php foreach ($bestResult as $row){?>
+  
+    <div class="col-md-3 hover">
+      <div class="item">
+        <div class="text"><p><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P></div>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+        <div class="price">Price: <?php echo $row->price; ?> </div>
+      </div>
+    </div>
+
+    <?php }?>
+
+    </div> <!---Container item-area !-->
+    </div><!---pane3 !-->
+  </div><!-- /.tab-content -->
+
+  </div>
+
+      
+    
+  </div>
+  <!-- mid menu part ends here -->
+
+
+  <!-- item area part -->
 
   <!-- item area part ends -->
 
