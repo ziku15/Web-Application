@@ -1,0 +1,128 @@
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/myaccount.css"); ?>
+
+<!-- main body part -->
+<div class="container fixed-container">
+	<!-- left menu start here -->
+	<div class="col-md-3 left-menu">
+		<div class="title">My Account For Buyer</div>
+		<div class="panel-group row" id="accordion">
+		
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                        Home
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                        Account Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+						
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("accinfo/index/") ?>">
+                                        My Orders
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+						
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                        My WishList
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+						
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                        Mails
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+						
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                        Newsletter Subscription
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+						
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                        Referred Friends
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+						
+			
+		
+		</div>
+		
+	</div>
+	
+	
+	<div class="col-md-9 right-menu">
+
+                    <div class="settings-area">
+                        <div>Logged in as:</div>
+                        <div>
+                            <?php
+                            $auth = $this->session->get('auth');
+                            echo $auth['name'];
+                            ?>
+                        </div>
+                        <div><a href="<?php echo $this->url->get("home/logout"); ?>">Logout</a></div>
+                    </div>
+					<div class="row text-center title-area">
+                        <div class="main-menu-title"><h2><?php echo $title; ?></h2></div>
+                        <div class="sub-menu-title">
+                            <h4><?php
+                                if (isset($action)) {
+                                    echo $action;
+                                }
+                                ?>
+                            </h4>
+                        </div>
+                    </div>
+
+                    
+
+
+                    <div class="main-area">
+<?php echo $this->getContent() ?>
+                    </div>
+
+
+                </div>
+	<!-- left menu ends here -->
+
+	
+</div>
+</div>
+<!-- main body part ends here -->
+
+
+
+<?php echo $this->partial('shared/ad'); ?>

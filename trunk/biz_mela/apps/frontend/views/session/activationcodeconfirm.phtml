@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bizmela</title>
+
+		<!-- bootstrap integration -->
+		<?php echo \Phalcon\Tag::stylesheetLink("bootstrap/css/bootstrap.min.css"); ?>
+
+		<!-- font-awesome integration -->
+		<?php echo \Phalcon\Tag::stylesheetLink("font-awesome/css/font-awesome.min.css"); ?>
+
+		<!-- integrate login css -->
+		<?php echo \Phalcon\Tag::stylesheetLink("main/css/login.css"); ?>
+
+		<!-- integrate common css -->
+		<?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
+
+	</head>
+	<body>
+
+
+		<!-- main area -->
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 login-area">
+				<div class="row text-center"><h2><strong>Forget Password?</strong></h2></div>
+				<div class="row form-area">
+					
+					<?php echo $this->getContent(); ?>
+
+				<form action="" method="post">
+					<!-- <input class="form-control input-lg" type="text" name="username" placeholder="username" /> -->
+					<?php echo $form->render("activation_code"); ?>
+					<?php $message = $form->getMessagesFor('activation_code');
+					foreach ($message as $m) {?>
+						<div class="alert alert-danger form-element"><?php echo $m; ?></div>
+					<?php }?>
+					
+					
+				    <div class="btn-group btn-group-justified button-element">
+					  <div class="btn-group">
+					    <button type="submit" class="btn btn-lg btn-custom green">Confirm Activation Code</button>
+					  </div>
+					</div>
+					<div class="btn-group btn-group-justified form-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="cancel" class="btn btn-lg btn-custom btn-danger">Cancel</button>
+                    </div>		  
+                </div>
+				</form>
+				</div>
+			</div>
+		</div>
+		<!-- main area ends here -->
+
+
+		<!-- jquery integration -->
+		<?php echo \Phalcon\Tag::javascriptInclude("jquery/jquery-1.11.1.min.js"); ?>
+
+		<!-- bootstrap integration -->
+		<?php echo \Phalcon\Tag::javascriptInclude("bootstrap/js/bootstrap.min.js"); ?>
+
+		<!-- common js integration -->
+		<?php echo \Phalcon\Tag::javascriptInclude("main/js/common.js"); ?>
+
+	</body>
+</html>

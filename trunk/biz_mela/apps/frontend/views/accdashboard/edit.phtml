@@ -1,0 +1,39 @@
+
+<div class="row">
+    <div class="item-area">
+	
+        <div class="form-area">
+
+            <?php echo $this->getContent(); ?>
+
+            <form action="" method="post">
+                    <!-- <input class="form-control input-lg" type="text" name="username" placeholder="username" /> -->
+				<div class="col-md-10 col-md-offset-1">
+				<div class="row cell">
+    				<?php echo $form->render("username"); ?>
+    				<?php echo $form->render("email"); ?>
+    				<?php echo $form->render("contactno"); ?>
+    				<?php echo $form->render("dob"); ?>
+				    </br>
+
+                <div class="btn-group btn-group-justified button-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Update Profile</button>
+                    </div>			  
+                </div>
+				<div class="btn-group btn-group-justified form-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="cancel" class="btn btn-lg btn-custom btn-danger">Cancel</button>
+                    </div>		  
+                </div>
+                
+			</div>
+				</div>
+            </form>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        
+    </script>
+</div>
