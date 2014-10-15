@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Controllers;
+
 use Phalcon\Tag as Tag,
 Phalcon\Forms\Element\Text,
 Phalcon\Validation\Validator\PresenceOf,

@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Controllers;
+
 use Phalcon\Tag as Tag;
 
 class AccinfoController extends ControllerBase
