@@ -1,4 +1,7 @@
 <?php
+
+namespace Biz_mela\Frontend\Controllers;
+
 use Phalcon\Tag as Tag,
 Phalcon\Forms\Form,
 Phalcon\Forms\Element\Text,

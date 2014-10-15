@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Controllers;
+
 use Phalcon\Mvc\View,
     Phalcon\Forms\Form,
     Phalcon\Forms\Element\Text,

@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Controllers;
+
 class HomeController extends \Phalcon\Mvc\Controller
 {
 
