@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class OrderHistory extends \Phalcon\Mvc\Model
 {
 

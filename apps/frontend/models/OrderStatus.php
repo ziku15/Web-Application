@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class OrderStatus extends \Phalcon\Mvc\Model
 {
 

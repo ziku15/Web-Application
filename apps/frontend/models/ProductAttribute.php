@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class ProductAttribute extends \Phalcon\Mvc\Model
 {
 
