@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin Login</title>
+
+    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/bootstrap.min.css"); ?>
+        <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/metisMenu/metisMenu.min.css"); ?>
+        <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/timeline.css"); ?>
+        <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/sb-admin-2.css"); ?>
+        <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/morris.css"); ?>
+        <?php echo \Phalcon\Tag::stylesheetLink("main/admin/font-awesome-4.1.0/css/font-awesome.min.css"); ?>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                            <?php echo $this->getContent(); ?>
+                        <form action="" method="post">
+                            <fieldset>
+                                <?php echo $form->render("name"); ?>
+                                <?php $message = $form->getMessagesFor('name');
+                                foreach ($message as $m) {?>
+                                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                                <?php }?>
+                                
+                                <?php echo $form->render("password"); ?>
+                                <?php $message = $form->getMessagesFor('password');
+                                foreach ($message as $m) {?>
+                                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                                <?php }?>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                                
+                                <!-- Change this to a button or input when using this as a form -->
+                               
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/jquery-1.11.0.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/bootstrap.min.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/metisMenu/metisMenu.min.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/morris/raphael.min.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/morris/morris.min.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/morris/morris-data.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/sb-admin-2.js"); ?>
+
+</body>
+
+</html>
