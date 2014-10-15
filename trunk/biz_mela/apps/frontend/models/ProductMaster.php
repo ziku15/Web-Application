@@ -2,6 +2,7 @@
 
 namespace Biz_mela\Frontend\Models;
 
+
 class ProductMaster extends \Phalcon\Mvc\Model
 {
 
@@ -85,6 +86,12 @@ class ProductMaster extends \Phalcon\Mvc\Model
 
     /**
      *
+     * @var integer
+     */
+    public $is_hot;
+
+    /**
+     *
      * @var string
      */
     public $updated_at;
@@ -94,5 +101,7 @@ class ProductMaster extends \Phalcon\Mvc\Model
      * @var string
      */
     public $created_at;
+
+
 
 }
