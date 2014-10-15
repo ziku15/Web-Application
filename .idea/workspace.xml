@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c45955c-ee87-4059-98f7-3e12194791d7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/AccdashboardController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/AccdashboardController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/AccinfoController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/AccinfoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/AddressController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/AddressController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/BuyController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/BuyController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/HelpController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/HelpController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/HomeController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/InventoryController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/InventoryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/MyaccountController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/MyaccountController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/OrderController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/OrderController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/SellController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/SellController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/SettingsController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/SettingsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/frontend/controllers/WalletController.php" afterPath="$PROJECT_DIR$/apps/frontend/controllers/WalletController.php" />
-    </list>
+    <list default="true" id="6c45955c-ee87-4059-98f7-3e12194791d7" name="Default" comment="" />
     <ignored path="biz_mela.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -93,7 +80,7 @@
       <file leaf-file-name="WalletController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/frontend/controllers/WalletController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="6" selection-end="6" vertical-scroll-proportion="0.01884422" vertical-offset="0" max-vertical-offset="2955">
+            <state line="27" column="33" selection-start="595" selection-end="595" vertical-scroll-proportion="0.43341708" vertical-offset="60" max-vertical-offset="2955">
               <folding />
             </state>
           </provider>
@@ -816,7 +803,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/frontend/controllers/WalletController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="6" selection-end="6" vertical-scroll-proportion="0.01884422" vertical-offset="0" max-vertical-offset="2955">
+        <state line="27" column="33" selection-start="595" selection-end="595" vertical-scroll-proportion="0.43341708" vertical-offset="60" max-vertical-offset="2955">
           <folding />
         </state>
       </provider>
