@@ -1,0 +1,201 @@
+ <style>
+
+.hover {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+  text-decoration:none;
+  
+}
+.hover .text {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+    text-align:center;
+    left: 0;
+    top: 0;
+  
+   -webkit-transition: opacity 500ms;
+     -moz-transition: opacity 500ms;
+     -o-transition: opacity 500ms;
+     transition: opacity 500ms;
+}
+.hover:hover .text { display: block; opacity: 1;}
+
+.text p{margin-top: 35%;}
+
+
+</style>
+
+ <!-- mid menu part -->
+  <div class="container">
+      <div class="mid-menu">
+        <div class="item"><a href="<?php echo $this->url->get().'index/hotnewbest/1';?>">New Products</a></div>
+        <div class="item"><a href="<?php echo $this->url->get().'index/hotnewbest/2';?>">Hot Products</a></div>
+        <div class="item"><a href="<?php echo $this->url->get().'index/hotnewbest/3';?>">Best Selling</a></div>
+      </div>
+      <div class="red-joint"></div>
+    
+  </div>
+  <!-- mid menu part ends here -->
+
+
+  <!-- item area part -->
+
+  <div class="container item-area">
+    <?php foreach ($result as $row){?>
+  
+    <div class="col-md-3 hover">
+      <div class="item">
+        <div class="text"><p><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P></div>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+        <div class="price">Price: <?php echo $row->price; ?> </div>
+      </div>
+    </div>
+
+    <?php }?>
+
+  </div>
+
+  <!-- item area part ends -->
+
+
+  <?php echo $this->partial('shared/ad'); ?>
+
+
+  <!-- bottom item area -->
+
+  <div class="container bottom-item-area">
+    <div class="col-md-9">
+      <div class="row product">
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product2.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product3.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product4.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product5.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product6.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product7.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product8.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product9.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product10.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product11.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product12.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product2.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product3.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="item">
+            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product4.jpg"></img>
+            <div class="product-name">Product Name</div>
+            <div class="product-price">$200</div>
+          </div>
+        </div>
+       
+        
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="portal"></div>
+      <div class="portal"></div>
+
+    </div>
+  </div>
+
+  <!-- bottom item area ends here -->
+
+

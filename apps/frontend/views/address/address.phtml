@@ -1,0 +1,87 @@
+<style>
+h4{
+color:#780000;
+	padding-top: 20px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+    padding-left: 0px;
+}
+
+a{
+color:#3300CC;
+
+}
+table, td, th {
+    border: 1px solid black;
+}
+</style>
+
+<div class="col-md-10 ">
+<h4><strong><u>Default Billing Address</u></strong></h4>
+<div class="fixed">
+<div class="container">
+<div class="info">
+<div class="col-md-2 ">
+<p><b>Account Holder:</b></p>
+</div>
+<div class="col-md-8 ">
+<?php echo $record['value']->account_holder_name;?>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="info">
+<div class="col-md-2 ">
+<p><b>Account Number:</b></p>
+</div>
+<div class="col-md-8 ">
+<?php echo $record['value']->account_no;?>
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="info">
+<div class="col-md-2 ">
+<p><b>Bank Name:</b></p>
+</div>
+<div class="col-md-8 ">
+<?php echo $record['value']->bank_name;?>
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="info">
+<div class="col-md-2 ">
+<p><b>Branch Name:</b></p>
+</div>
+<div class="col-md-8 ">
+<?php echo $record['value']->branch_name;?>
+</div>
+</div>
+</div>
+
+<div class="container">
+<div class="info">
+<div class="col-md-2 ">
+<p><b>Swift Code:</b></p>
+</div>
+<div class="col-md-8 ">
+<?php echo $record['value']->swift_code;?>
+</div>
+</div>
+</div>
+
+
+<div class="container">
+<div class="info">
+<div class="col-md-2 ">
+<a href="<?php echo $this->url->get("address/edit/") ?>">Edit</a>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>

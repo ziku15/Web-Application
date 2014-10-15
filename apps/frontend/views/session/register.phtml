@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Welcome</title>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="jquery-1.11.1.js">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<style>
+p{
+color:#1BD8E9;
+font-size: 16px;
+}
+
+.foo{
+font-size: 16px;
+color:#000000;
+}
+h3{
+
+color:#FF0000
+}
+h2{
+color:#624949;
+font-size:40px;
+weight:60%;
+}
+
+option{
+	padding-top: 16px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-left: 0px;
+}
+
+</style>
+<script type="text/javascript">
+$(function(){
+
+	var isFormValid=true;
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+	$(".form-horizontal").submit(function() {
+		//alert("form submitted");
+		var name=$("#name").val();
+		var username=$("#username").val();
+		var email=$("#email").val();
+		var passWord=$("#password").val();
+		var repassWord=$("#repeatPassword").val();
+		var contact_no=$("#contact_no").val();
+		var dob=$("#dob").val();
+		var type=$("#type").val();
+
+		if(!filter.test(email)){
+				$("#email_alert").show().html("Invalid Email");
+				isFormValid=false;
+		
+		}
+		
+		if(username.length == 0){
+				$("#username_alert").show().html("Username Required");
+				isFormValid=false;
+			}
+			
+		if(name.length == 0){
+				$("#name_alert").show().html("Fullname Required");
+				isFormValid=false;
+			}
+			
+		if(contact_no.length == 0){
+				$("#cell_alert").show().html("Please provide your phone number");
+				isFormValid=false;
+			}
+		
+			
+		if(passWord.length < 8){
+				$("#password_alert").show().html("Password too Short");
+				isFormValid=false;
+			}
+			
+		if(dob.length == 0){
+				$("#dob_alert").show().html("Please provide your date of birth");
+				isFormValid=false;
+			}
+
+		
+		
+			
+			return isFormValid;
+	
+	})
+
+
+
+
+
+})
+
+</script>
+</head>
+
+<body>
+<div class="container">
+
+<div class="container">
+
+
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+<div class="page-header">
+<h2>Register For Bizmela</h2>
+<?php echo $this->getContent(); ?>
+
+</div>
+
+<form action="<?php echo $this->url->get().'session/register/';?>" id="registerForm" class="form-horizontal" onbeforesubmit="return false" method="post" pb-signup="true" autocomplete="off">    <fieldset>
+        <div class="control-group">
+			<div class="alert alert-danger" id="name_alert" style="display: none;" role="alert">
+                    <strong>Warning!</strong> Please enter your full name
+                </div>
+            <label class="control-label" for="name">Your Full Name</label>
+            <div class="controls">
+                <input type="text" id="name" name="name" class="form-control input-lg form-element" pb-role="full_name">                <p class="help-block"> (required)</p>
+                
+            </div>
+        </div>
+        <div class="control-group">
+			<div class="alert alert-danger" id="username_alert" style="display: none;" role="alert">
+                    <strong>Warning!</strong> Please enter your desired user name
+                </div>
+            <label class="control-label" for="username">Username</label>
+            <div class="controls">
+                <input type="text" id="username" name="username" class="form-control input-lg form-element" pb-role="username">                <p class="help-block">(required)</p>
+				
+                
+            <passwordboxicon pb-icon="username" style="position: absolute; width: 30px; height: 28px; z-index: auto; visibility: hidden; top: 213px; left: 544.90625px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTNGRTI3REQyOTQxMUUxOTY3NDk1OEY5Nzc4MDgyRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTNGRTI3RUQyOTQxMUUxOTY3NDk1OEY5Nzc4MDgyRCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5M0ZFMjdCRDI5NDExRTE5Njc0OTU4Rjk3NzgwODJEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5M0ZFMjdDRDI5NDExRTE5Njc0OTU4Rjk3NzgwODJEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+vG1KUAAABBpJREFUeNqElF1oHFUUx/93ZnZm9iOb3c2XyaaJqW0Sq2Jiq1YJNlDqBxSqQmtAfRAfpKJSQR8UpIhglYoRwYeKor5JqEIV1FBroi3SxESLaa3VtKY2H2V3s5vsZmd2Pu69nh2fs7lwmZnLnfO/53f/57B3v+i/Sw8ZIV2rg6aGmaIYiqqYUFiIqYrOAJUJyWVEbxchrU5I6QuASUgpJLjwuS9oBw3X2zfw+nmsM7RUzLhTUwUc/xJCoSjCRj3qws2IhdugqjqJKxSX4YbEZhihVrjeGrjP4XEXrmvTtwXbseG4rBpvfaFCcc0KG9FIb/ogwuE4LUksFy/hujWLRKwTiqLRmg9dycPQFHh+BYIHudC7R9OFT0/X4zZqDK1UtqSCKHZ0v4xoTP1/leCc+u0w8sVJ1Ec7KSMenJzJchBYSoCTmM89elanT2JEssZQXJdJx62e0MHkhU/x2TcPw/Eq2NbxBByHo+IUkVu5jOXVK7CcPCQdomRlULazhM5CobhEInxjoUqF7scRxD+ChdwFjE6dQHEtj6jZhELpX6xZFdzc/jS600NkiwQyhb/Q0TRIWHsoSw/be56iK4zAdouiJjqrIqSueUHQB3a8hntveRYauW5k7HHYto2Bu49gU1tPsLmzZRdOnH6OTGKib8tjWMz9gabkFoxNv0d4DdTMyLaFtGwR8FaVEBriNyISjmGllEM6tScQmZj5BKOTr1bNh1s3P4rRicNwfRttTdvwwy/DWC1dJ8TOBugcKe2KRCreieNjb2LPIQUzl0/iyfu/RLpxAB5h/W7yDZz5/X3K+ipaG/rxz8IU5hbPBgHmFn+FVSnDsmujUxwykeNyCOGRw9pBTsVC9gri0UaYeoqyUOgODeQKZYS0SIBYV1uQbu4PAtze/QgWM3+TUcq1M/LIcRVyl0J1uXfXMzh9TGLf4PO4unQOX58ZhqYDB3YPY+89b1ERN2F8+iMMbn8hsPT41MfYedsQulp3IrM8V1NICylh6ZHQByMvobfrDjrpVnBZwfFTRzH95zg+//YIhh56BX09DxKyaczM/oj9u9/G9xPH8NVP71BdcaorY0N7s/0vbj0oJVMyK/NUPxZM0yRcEol4KpgrpWu4r+8AbtrUi7PnR+iPEBWuRrU1TyhNFFbn0VzXAS0c844e+vnDdTOCnRwXzGptCHc1yKifgMJ1pkpCycjePiJmG05OjODcbAwtjR2wrLXqxVMJhME9QybM3mWH84xtiWs10TEev8igXmRCo6oXkKpXRy0nKVSe9DSe4qpIxox00tRNdWXFzlMfzSqyOStEJKfKaF6qzHeMTNDQawpV+1jQvEBFQkiYQAlMLUnJlxhEPTW+JDWqBs/zNXhaFr6ehTQLkIZkTCfMfoCasZo6+E+AAQCmTgzZSvGiZwAAAABJRU5ErkJggg==) 100% 50% no-repeat;"></passwordboxicon></div>
+        </div>
+		<div class="control-group">
+		<div class="alert alert-danger" id="cell_alert" style="display: none;" role="alert">
+                    <strong>Warning!</strong> Please Provide Your Phone Number
+                </div>
+		<label class="control-label" for="contact_no">Cellphone</label>
+		<div class="controls">
+		<input type="text" id="contact_no" name="contact_no" class="form-control input-lg form-element" pb-role="contact_no">                <p class="help-block">(required)</p>
+		
+		</div>
+		</div>
+        <div class="control-group">
+			<div class="alert alert-danger" id="email_alert" style="display: none;" role="alert">
+                    <strong>Warning!</strong> Please enter your email
+                </div>
+            <label class="control-label" for="email">Email Address</label>
+            <div class="controls">
+                <input type="text" id="email" name="email" class="form-control input-lg form-element" pb-role="email">                <p class="help-block">(required)</p>
+                
+            </div>
+        </div>
+        <div class="control-group">
+			<div class="alert alert-danger" id="password_alert" style="display: none;" role="alert">
+                    <strong>Warning!</strong> Please provide a valid password
+                </div>
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password" id="password" name="password" class="form-control input-lg form-element" pb-role="password">                <p class="help-block">(required)(minimum 8 characters)</p>
+                
+            <passwordboxicon pb-icon="password" style="position: absolute; width: 30px; height: 28px; z-index: auto; visibility: hidden; top: 359px; left: 544.90625px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTNGRTI3REQyOTQxMUUxOTY3NDk1OEY5Nzc4MDgyRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTNGRTI3RUQyOTQxMUUxOTY3NDk1OEY5Nzc4MDgyRCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5M0ZFMjdCRDI5NDExRTE5Njc0OTU4Rjk3NzgwODJEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5M0ZFMjdDRDI5NDExRTE5Njc0OTU4Rjk3NzgwODJEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+vG1KUAAABBpJREFUeNqElF1oHFUUx/93ZnZm9iOb3c2XyaaJqW0Sq2Jiq1YJNlDqBxSqQmtAfRAfpKJSQR8UpIhglYoRwYeKor5JqEIV1FBroi3SxESLaa3VtKY2H2V3s5vsZmd2Pu69nh2fs7lwmZnLnfO/53f/57B3v+i/Sw8ZIV2rg6aGmaIYiqqYUFiIqYrOAJUJyWVEbxchrU5I6QuASUgpJLjwuS9oBw3X2zfw+nmsM7RUzLhTUwUc/xJCoSjCRj3qws2IhdugqjqJKxSX4YbEZhihVrjeGrjP4XEXrmvTtwXbseG4rBpvfaFCcc0KG9FIb/ogwuE4LUksFy/hujWLRKwTiqLRmg9dycPQFHh+BYIHudC7R9OFT0/X4zZqDK1UtqSCKHZ0v4xoTP1/leCc+u0w8sVJ1Ec7KSMenJzJchBYSoCTmM89elanT2JEssZQXJdJx62e0MHkhU/x2TcPw/Eq2NbxBByHo+IUkVu5jOXVK7CcPCQdomRlULazhM5CobhEInxjoUqF7scRxD+ChdwFjE6dQHEtj6jZhELpX6xZFdzc/jS600NkiwQyhb/Q0TRIWHsoSw/be56iK4zAdouiJjqrIqSueUHQB3a8hntveRYauW5k7HHYto2Bu49gU1tPsLmzZRdOnH6OTGKib8tjWMz9gabkFoxNv0d4DdTMyLaFtGwR8FaVEBriNyISjmGllEM6tScQmZj5BKOTr1bNh1s3P4rRicNwfRttTdvwwy/DWC1dJ8TOBugcKe2KRCreieNjb2LPIQUzl0/iyfu/RLpxAB5h/W7yDZz5/X3K+ipaG/rxz8IU5hbPBgHmFn+FVSnDsmujUxwykeNyCOGRw9pBTsVC9gri0UaYeoqyUOgODeQKZYS0SIBYV1uQbu4PAtze/QgWM3+TUcq1M/LIcRVyl0J1uXfXMzh9TGLf4PO4unQOX58ZhqYDB3YPY+89b1ERN2F8+iMMbn8hsPT41MfYedsQulp3IrM8V1NICylh6ZHQByMvobfrDjrpVnBZwfFTRzH95zg+//YIhh56BX09DxKyaczM/oj9u9/G9xPH8NVP71BdcaorY0N7s/0vbj0oJVMyK/NUPxZM0yRcEol4KpgrpWu4r+8AbtrUi7PnR+iPEBWuRrU1TyhNFFbn0VzXAS0c844e+vnDdTOCnRwXzGptCHc1yKifgMJ1pkpCycjePiJmG05OjODcbAwtjR2wrLXqxVMJhME9QybM3mWH84xtiWs10TEev8igXmRCo6oXkKpXRy0nKVSe9DSe4qpIxox00tRNdWXFzlMfzSqyOStEJKfKaF6qzHeMTNDQawpV+1jQvEBFQkiYQAlMLUnJlxhEPTW+JDWqBs/zNXhaFr6ehTQLkIZkTCfMfoCasZo6+E+AAQCmTgzZSvGiZwAAAABJRU5ErkJggg==) 100% 50% no-repeat;"></passwordboxicon></div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="repeatPassword">Repeat Password</label>
+            <div class="controls">
+                <input type="password" id="repeatPassword" name="repeatPassword" class="form-control input-lg form-element" pb-role="password">                <div class="alert" id="repeatPassword_alert" style="display: none;">
+                    <strong>Warning!</strong> The password does not match
+                </div>
+            <passwordboxicon pb-icon="password" style="position: absolute; width: 30px; height: 28px; z-index: auto; visibility: hidden; top: 432px; left: 544.90625px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowOTNGRTI3REQyOTQxMUUxOTY3NDk1OEY5Nzc4MDgyRCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowOTNGRTI3RUQyOTQxMUUxOTY3NDk1OEY5Nzc4MDgyRCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5M0ZFMjdCRDI5NDExRTE5Njc0OTU4Rjk3NzgwODJEIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjA5M0ZFMjdDRDI5NDExRTE5Njc0OTU4Rjk3NzgwODJEIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+vG1KUAAABBpJREFUeNqElF1oHFUUx/93ZnZm9iOb3c2XyaaJqW0Sq2Jiq1YJNlDqBxSqQmtAfRAfpKJSQR8UpIhglYoRwYeKor5JqEIV1FBroi3SxESLaa3VtKY2H2V3s5vsZmd2Pu69nh2fs7lwmZnLnfO/53f/57B3v+i/Sw8ZIV2rg6aGmaIYiqqYUFiIqYrOAJUJyWVEbxchrU5I6QuASUgpJLjwuS9oBw3X2zfw+nmsM7RUzLhTUwUc/xJCoSjCRj3qws2IhdugqjqJKxSX4YbEZhihVrjeGrjP4XEXrmvTtwXbseG4rBpvfaFCcc0KG9FIb/ogwuE4LUksFy/hujWLRKwTiqLRmg9dycPQFHh+BYIHudC7R9OFT0/X4zZqDK1UtqSCKHZ0v4xoTP1/leCc+u0w8sVJ1Ec7KSMenJzJchBYSoCTmM89elanT2JEssZQXJdJx62e0MHkhU/x2TcPw/Eq2NbxBByHo+IUkVu5jOXVK7CcPCQdomRlULazhM5CobhEInxjoUqF7scRxD+ChdwFjE6dQHEtj6jZhELpX6xZFdzc/jS600NkiwQyhb/Q0TRIWHsoSw/be56iK4zAdouiJjqrIqSueUHQB3a8hntveRYauW5k7HHYto2Bu49gU1tPsLmzZRdOnH6OTGKib8tjWMz9gabkFoxNv0d4DdTMyLaFtGwR8FaVEBriNyISjmGllEM6tScQmZj5BKOTr1bNh1s3P4rRicNwfRttTdvwwy/DWC1dJ8TOBugcKe2KRCreieNjb2LPIQUzl0/iyfu/RLpxAB5h/W7yDZz5/X3K+ipaG/rxz8IU5hbPBgHmFn+FVSnDsmujUxwykeNyCOGRw9pBTsVC9gri0UaYeoqyUOgODeQKZYS0SIBYV1uQbu4PAtze/QgWM3+TUcq1M/LIcRVyl0J1uXfXMzh9TGLf4PO4unQOX58ZhqYDB3YPY+89b1ERN2F8+iMMbn8hsPT41MfYedsQulp3IrM8V1NICylh6ZHQByMvobfrDjrpVnBZwfFTRzH95zg+//YIhh56BX09DxKyaczM/oj9u9/G9xPH8NVP71BdcaorY0N7s/0vbj0oJVMyK/NUPxZM0yRcEol4KpgrpWu4r+8AbtrUi7PnR+iPEBWuRrU1TyhNFFbn0VzXAS0c844e+vnDdTOCnRwXzGptCHc1yKifgMJ1pkpCycjePiJmG05OjODcbAwtjR2wrLXqxVMJhME9QybM3mWH84xtiWs10TEev8igXmRCo6oXkKpXRy0nKVSe9DSe4qpIxox00tRNdWXFzlMfzSqyOStEJKfKaF6qzHeMTNDQawpV+1jQvEBFQkiYQAlMLUnJlxhEPTW+JDWqBs/zNXhaFr6ehTQLkIZkTCfMfoCasZo6+E+AAQCmTgzZSvGiZwAAAABJRU5ErkJggg==) 100% 50% no-repeat;"></passwordboxicon></div>
+        </div>
+		<div class="control-group">
+            <label class="control-label" for="address">Address</label>
+            <div class="controls">
+                <input type="text" id="address" name="address" class="form-control input-lg form-element" pb-role="type">                <p class="help-block">(Details address consisting of district & country)</p>
+                
+            </div>
+        </div>
+		
+		
+		
+		
+		<div class="control-group">
+		
+            <label class="control-label" for="status">Type</label>
+			</br>
+			</br>
+			
+            <select name="type" >
+			<option value="S" ><p>Seller &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;</p></option>
+			<option value="B">Buyer</option>
+			
+			</select>
+        </div>
+
+		
+		<div class="control-group">
+		<div class="alert alert-danger" id="dob_alert" style="display: none;" role="alert">
+                    <strong>Warning!</strong> Please provide a valid date
+                </div>  
+            <label class="control-label" for="status">Date of Birth</label>
+            <div class="controls">
+                <input type="date" id="dob" name="dob" class="form-control input-lg form-element" pb-role="dob">                <p class="help-block">(required)(YYYY-MM-DD Formate)</p>
+              
+            </div>
+        </div>
+		</br>
+		</br>
+        <p>By signing up, you accept terms of use and privacy policy.</p>
+        <div class="form-actions">
+            <input type="submit" value="Register" class="btn btn-primary btn-large" onclick="return SignUp.validate();" pb-role="submit">        </div>
+    </fieldset>
+</form>
+<footer>
+		</br>
+		</br>
+        <p class="foo">©Bizmela 2014</p>
+    </footer>
+</div>
+
+
+</div>
+</div>
+</div>
+</body>
+</html>

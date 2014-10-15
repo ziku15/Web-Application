@@ -1,0 +1,46 @@
+.dott:before {
+    content: ' \25CF';
+    font-size: 12px;
+    margin-right: 20px;
+}
+.title{
+	padding: 10px 10px 10px 10px;
+	/*margin-bottom: 10px;*/
+	font-size: 25px;
+	color: black;
+	height: auto;
+	overflow: auto;
+	/*font-weight: bold;*/
+}
+.details-text{
+	padding: 10px 15px 10px 15px;
+	margin-top: 10px;
+}
+.details{
+	padding: 10px 15px 10px 15px;
+	border:1px solid #ececec;
+}
+.subtitle{
+	font-size: 16px;
+	color: black;
+	height: auto;
+	overflow: auto;
+	padding: 10px 0px 10px 0px;
+}
+.list-group-item{
+	cursor: pointer;
+}
+.list-group-item:first-child{
+	border-radius: 0px;
+}
+.list-group-item:last-child{
+	border-radius: 0px;
+}
+.list-group-item:hover{
+	border:1px solid #CC0001;
+	margin-bottom: 0px;
+}
+.lis-group-item,.active{
+	border:1px solid #CC0001;
+	margin-bottom: 0px;
+}
