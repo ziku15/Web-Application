@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class ProductLike extends \Phalcon\Mvc\Model
 {
 

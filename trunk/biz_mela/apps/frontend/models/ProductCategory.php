@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class ProductCategory extends \Phalcon\Mvc\Model
 {
 

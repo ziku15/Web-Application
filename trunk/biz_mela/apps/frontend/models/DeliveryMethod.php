@@ -1,4 +1,5 @@
 <?php
+namespace Biz_mela\Frontend\Models;
 
 class DeliveryMethod extends \Phalcon\Mvc\Model
 {

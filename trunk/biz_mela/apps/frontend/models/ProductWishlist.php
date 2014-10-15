@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class ProductWishlist extends \Phalcon\Mvc\Model
 {
 

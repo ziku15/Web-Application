@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 use Phalcon\Mvc\Model\Validator\Email as Email;
 
 class UserMaster extends \Phalcon\Mvc\Model

@@ -1,5 +1,7 @@
 <?php
 
+namespace Biz_mela\Frontend\Models;
+
 class OrderMaster extends \Phalcon\Mvc\Model
 {
 
