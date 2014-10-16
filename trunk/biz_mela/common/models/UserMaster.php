@@ -4,8 +4,7 @@ namespace Biz_mela\Models;
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
 
-class UserMaster extends ModelBase
-//class UserMaster extends \Phalcon\Mvc\Model
+class UserMaster extends \Phalcon\Mvc\Model
 {
 
     /**
