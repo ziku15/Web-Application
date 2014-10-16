@@ -10,6 +10,8 @@ try {
      * Include services
      */
     require __DIR__ . '/../config/services.php';
+    require __DIR__ . '/../config/loader.php';
+
 
     /**
      * Handle the request
