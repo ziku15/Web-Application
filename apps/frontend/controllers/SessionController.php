@@ -1,10 +1,13 @@
 <?php
 
 namespace Biz_mela\Frontend\Controllers;
-use Biz_mela\Frontend\Models\UserMaster as UserMaster;
-use Biz_mela\Frontend\Models\ShopMaster as ShopMaster;
-use Biz_mela\Frontend\Models\UserBankInfo as UserBankInfo;
-use Biz_mela\Frontend\Library\PHPMailer as PHPMailer;
+//namespace Biz_mela\Controllers\ControllerBase;
+
+
+use Biz_mela\Models\UserMaster as UserMaster;
+use Biz_mela\Models\ShopMaster as ShopMaster;
+use Biz_mela\Models\UserBankInfo as UserBankInfo;
+use Biz_mela\Library\PHPMailer as PHPMailer;
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
