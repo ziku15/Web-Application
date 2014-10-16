@@ -17,14 +17,14 @@ class Module implements ModuleDefinitionInterface
     public function registerAutoloaders()
     {
 
-        $loader = new Loader();
-
-        $loader->registerNamespaces(array(
-            'Biz_mela\Frontend\Controllers' => __DIR__ . '/controllers/',
-            'Biz_mela\Frontend\Models' => __DIR__ . '/models/',
-        ));
-
-        $loader->register();
+//        $loader = new Loader();
+//
+//        $loader->registerNamespaces(array(
+//            'Biz_mela\Frontend\Controllers' => __DIR__ . '/controllers/',
+//            'Biz_mela\Frontend\Models' => __DIR__ . '/models/',
+//        ));
+//
+//        $loader->register();
     }
 
     /**
