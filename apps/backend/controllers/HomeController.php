@@ -28,7 +28,7 @@ class HomeController extends \Phalcon\Mvc\Controller
     public function logoutAction()
     {
          $this->session->destroy();
-         $this->response->redirect('auth/login/');
+         $this->response->redirect('admin/auth/login/');
     }
 
 }
