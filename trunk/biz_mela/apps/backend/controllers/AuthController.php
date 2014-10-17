@@ -1,6 +1,6 @@
 <?php
 namespace Biz_mela\Backend\Controllers;
-use Biz_mela\Backend\Models\Admin as Admin;
+use Biz_mela\Models\Admin as Admin;
 use Phalcon\Mvc\View,
     Phalcon\Forms\Form,
     Phalcon\Forms\Element\Text,
@@ -18,7 +18,7 @@ class AuthController extends \Phalcon\Mvc\Controller
         if (!$auth) {
             $role = 'Guests';
         } else {
-            $this->response->redirect('home/index/');
+            $this->response->redirect('admin');
         }
         
     }
@@ -72,11 +72,19 @@ class AuthController extends \Phalcon\Mvc\Controller
                 // $password = sha1($password);
 
                 $user = Admin::findFirst("name = '$name' AND status = 1");
+                $pass=$user->password;
                 if ($user != false) {
+                    $password=sha1($password);
+                    if ($password==$pass){
+                        if($user->first_login==null)
+                        {
 
-                    if ($this->security->checkHash($password, $user->password)){
+                            $user->first_login=date("Y-m-d h:i:s");
+                        }
+                        $user->login_time=date("Y-m-d h:i:s");
+                        $user->save();
                         $this->_registerSession($user);                    
-                            $this->response->redirect('index/index/');
+                            $this->response->redirect('admin');
                     }else{
                         $this->flash->error("Wrong username or password !!");
                     }
@@ -94,5 +102,6 @@ class AuthController extends \Phalcon\Mvc\Controller
 
     }
 
+    
 }
 

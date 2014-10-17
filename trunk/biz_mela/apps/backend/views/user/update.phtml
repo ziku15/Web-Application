@@ -1,0 +1,55 @@
+<?php
+$name=$user->name;
+$email=$user->email;
+
+?>
+<div class="row">
+     <div style="font-size:14px;text-align:center;color:#428bca;"><h1>User Update</h1></div>
+</div>
+<div class="row">
+    <div class="item-area">
+        <div class="form-area">
+                    
+            <?php echo $this->getContent(); ?>
+
+            <form action="" method="post">
+                <!-- <input class="form-control input-lg" type="text" name="username" placeholder="username" /> -->
+                <div class="form-group">
+                                    <input class="form-control"  name="name"  type="text" value="<?php echo $name;?>"  >
+                </div>
+                <?php $message = $form->getMessagesFor('name');
+                foreach ($message as $m) {?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php }?>
+                
+                <div class="form-group">
+                                    <input class="form-control" name="email" value="<?php echo $name;?>" >
+                                </div>
+                <?php $message = $form->getMessagesFor('email');
+                foreach ($message as $m) {?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php }?>
+
+                 <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="password" type="password"  >
+                                </div>
+                <?php $message = $form->getMessagesFor('password');
+                foreach ($message as $m) {?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php }?>
+
+                
+
+                <div class="btn-group btn-group-justified button-element">
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-lg btn-success btn-block">Update</button>
+                  </div>
+                  
+                </div>
+
+            </form>
+        </div>
+        
+
+    </div>
+</div>

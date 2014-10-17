@@ -40,13 +40,18 @@
                             <?php echo $this->getContent(); ?>
                         <form action="" method="post">
                             <fieldset>
-                                <?php echo $form->render("name"); ?>
+                               <!-- <?php echo $form->render("name"); ?>-->
+                               <div class="form-group">
+                                    <input class="form-control" placeholder="name" name="name"  autofocus>
+                                </div>
                                 <?php $message = $form->getMessagesFor('name');
                                 foreach ($message as $m) {?>
                                     <div class="alert alert-danger form-element"><?php echo $m; ?></div>
                                 <?php }?>
                                 
-                                <?php echo $form->render("password"); ?>
+                               <div class="form-group">
+                                    <input class="form-control" placeholder="password" name="password" type="password"  autofocus>
+                                </div>
                                 <?php $message = $form->getMessagesFor('password');
                                 foreach ($message as $m) {?>
                                     <div class="alert alert-danger form-element"><?php echo $m; ?></div>

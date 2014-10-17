@@ -1,0 +1,82 @@
+
+<style>
+.seperator-dotted {
+    border-bottom: 1px dotted #000;
+    margin: 5px 0;
+    width: 100%;
+}
+</style>
+
+<!--<div class="row">
+    <h3>Group:Admin<a href="<?php echo $this->url->get('user/new/')?>"><span class="glyphicon glyphicon-plus pull-right" style="background-color: #FFFFFF;padding: 5px;border-radius: 10px;cursor:pointer;"></span></a></h3>
+</div>-->
+
+<div class="row">
+    <div class="item-area">
+        <div style="font-size:14px;text-align:center;color:#428bca;"><h1>Product Management</h1></div>
+        <?php foreach ($product as $aa) { ?>
+
+            <div class="row cell">
+                <div class="col-md-12">
+                    <div class="title">
+                        <div>
+                            <a href="<?php echo $this->url->get('admin/product/detail/'.$aa->id);?>">
+                        <strong><?php echo $aa->product_name; ?></strong>
+                    </a>
+                       </div>
+                       <div style="float:left;">
+                         Created: <?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?>
+                    </div>
+                    <div style="float:right;">
+                        <a href="<?php echo $this->url->get('admin/product/update/'.$aa->id);?>">Block</a>
+                    </div>
+
+                    </div>
+					
+                    <!-- <div class="">
+                            Section: Sidra In the News
+                    </div> -->
+					
+                    
+					
+                    
+                </div>
+            </div>
+            
+ <div class="seperator-dotted"></div>
+        <?php } ?>
+
+
+
+
+
+
+
+
+    </div>
+   
+    <div>
+       <!-- <ul class="pager">
+            <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
+            <li><a href="<?php echo $this->url->get("user/index/"); ?>">First</a></li>
+            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->before); ?>">Previous</a></li>
+            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->next); ?>">Next</a></li>
+            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->last); ?>">Last</a></li>			  
+        </ul>-->
+
+      <!--  <ul class="pager">
+                <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("user/index/" . $value); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->last); ?>">Last</a></li>             
+                </ul>-->
+   </div>        
+
+
+
+
+    </div>
+
+</div>
+
