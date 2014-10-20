@@ -4,6 +4,7 @@
     margin-top: 5px;
     padding: 5px;
     margin-bottom: 5px;
+
 }
 
 .top-padding{
@@ -24,31 +25,52 @@
 .form-box{
 
     border: 1px solid #dadada;
-    height: 350px;
+    height: 600px;
     margin-top: 15px;
     width: 100%;
+    padding: 10px;
 
 
 }
 
+.bg-button {
+    background-color: #909090;
+    color: white;
+    font-size: 16px;
+}
 </style>
 
 <div class="container">
-  <div class="row">
+  <div class="row" style="padding-top:10px; padding-bottom:10px;">
     <div class="col-md-4">
-     <font size="15">Your Shopping Cart (3 items/ 100 items)</font>
+     <font size="5">Your Shopping Cart</font>&ensp; (3 items/ 100 items)
     </div>
 
     <div class="col-md-3 col-md-offset-5">
-     Proceed to payment <span class="glyphicon glyphicon-chevron-right"></span>
+      &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+     <button type="button" class="btn btn-default bg-button">Proceed to payment &ensp;<span class="glyphicon glyphicon-chevron-right"></span>
+     </button> 
     </div>
   </div>
-
 </div>
+
+
+<div class="seperator marg-top"></div>
+
+
+<div class="container">
+  <div class="row" style="padding-top:10px;">
+    <div class="col-md-4">
+      Seller: Beauty house, beuty you
+    </div>
+  </div>
+</div>
+
+
 
 <div class="container-fluid">
   <div class="row ash-bg">
-    <div class="col-md-2 col-md-offset-2">
+    <div class="col-md-2 col-md-offset-3">
       Product Name
     </div>
 
@@ -60,24 +82,25 @@
       Price
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
       Subtotal
     </div>
   </div>
 </div>
 
 
-<div class="container">
+<div class="container-fluid">
+  <?php foreach ($cResult as $row){?>
 
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2 col-md-offset-1">
       <div class="image">
-        <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product2.jpg"></img>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
       </div>
     </div>
 
     <div class="col-md-2 top-padding">
-      Black mask pilaten face mask
+      <?php echo $row->product_name; ?>
     </div>
 
     <div class="col-md-2 col-md-offset-1 top-padding cart">
@@ -86,14 +109,14 @@
     </div>
 
     <div class="col-md-1  top-padding">
-      Tk. 1200
+      <?php echo $row->price; ?>
     </div>
 
     <div class="col-md-1 col-md-offset-1 top-padding">
-      Tk. 1200
+      <?php echo $row->price; ?>
     </div>
 
-    <div class="col-md-1 col-md-offset-1 top-padding">
+    <div class="col-md-1 top-padding">
       <span class="glyphicon glyphicon-shopping-cart"></span>
     </div>
 
@@ -101,23 +124,68 @@
 
   <div class="seperator"></div>
 
+  <?php }?>
+
 </div>
 
-<div class="container">
-  <div class="col-md-3 col-md-offset-5">
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-md-4 col-md-offset-5">
     <div class="form-box">
+      Estimate Shipping and Tax <br>
+      <font color="#D1D1D1">
+      Enter your destination to get a shipping estimate.
+
+      <p></p>
+
+      Country<br>
+      <select class="form-control">
+        <option>Bangladesh</option>
+      </select>
+      
+      <br>District/State<br>
+      <select class="form-control">
+        <option>Please select district,state or region</option>
+      </select>
+
+      <br>Zip/Postal code<br>
+      <input type="text" class="form-control">
+
+      <p><br></p>
+
+    </font>
+
+      <button type="button" class="btn btn-default bg-button"> Get a Quote
+      </button>
+      
+      <p><br></p>
+      Shipping Method<br>
+      <input type="radio" name="home_delivery" value="home_delivery"><font color="#D1D1D1">Home Delivery: Tk 60</font><br>
+
+      Pickup from office<br>
+      <input type="radio" name="pick_from_office" value="pick_from_office"><font color="#D1D1D1">Free Tk 0 </font><br>
+
+      <p></p>
+
+      <button type="button" class="btn btn-default bg-button">Update Total
+      </button> 
+
+
+
+
     </div>
   </div>
 
-  <div class="col-md-3 col-md-offset-1 top-padding">
+  <div class="col-md-2 col-md-offset-1 top-padding">
     Subtotal &ensp;&ensp; 9855 <br>
     All total &ensp;&ensp; 9855<br>
+    <p></p>
+    <button type="button" class="btn btn-default bg-button">Proceed to payment &ensp;<span class="glyphicon glyphicon-chevron-right"></span>
+    </button> 
+
     
-
-
-
   </div>
-
+  </div>
 </div>
 
 
