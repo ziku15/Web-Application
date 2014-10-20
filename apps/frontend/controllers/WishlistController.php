@@ -34,35 +34,36 @@ class WishlistController extends ControllerBase
 	public function wishAction()
 	{
 
-		$username = $this->session->get('auth');
+		/*$username = $this->session->get('auth');
 		$con=UserMaster::findFirst("username="."'".$username['name']."'");
 
 		$userid=$con->id;
 
 		$data=ProductWishlist::find("user_id="."'".$userid."'");
-		//$data['value']=$user;
-		//$productid=$user->product_id;
+		
 
-		/*$newResult = $this->modelsManager->createBuilder()
-		->from('Biz_mela\Models\ProductMaster')
-                  ->columns('Biz_mela\Models\ProductMaster.product_name')
-                  ->andWhere('Biz_mela\Models\ProductMaster.id= "'.$productid.'"')
-                  //->andWhere('Biz_mela\Models\ProductMaster.id= "'.$productid.'"')
-                  ->orderBy('Biz_mela\Models\ProductMaster.id desc')
-                  ->getQuery()
-                  ->execute();
+		
+		$this->view->setVar(data,$data);*/
 
-        $this->view->setVar(newResult,$newResult);*/
+		$username = $this->session->get('auth');
+		
+        $con=UserMaster::findFirst("username="."'".$username['name']."'");
+		
+		$userid=$con->id;
+		$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.price
+			FROM Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductWishlist, Biz_mela\Models\UserMaster
+			WHERE Biz_mela\Models\ProductMaster.id = Biz_mela\Models\ProductWishlist.product_id
+			AND Biz_mela\Models\UserMaster.id = Biz_mela\Models\ProductWishlist.user_id
+			AND Biz_mela\Models\ProductWishlist.user_id = $userid
+			LIMIT 0 , 30");
 
-		//$data['value']=$newResult;
-		$this->view->setVar(data,$data);
-		//$productid=$user->product_id;
+		$newresult = $this->modelsManager->executeQuery($phql);
 
-		//$product=ProductMaster::findFirst("id="."'".$productid."'");
-
-		/*$data['product_name']=$product->product_name;
-		$data['product_description']=$product->product_description;
-		$this->view->setVars($data);*/
+		//$newresult = $query->execute();
+		//$data['value']=$newresult;
+                 //print_r($data['value']);exit();
+         $this->view->setVar(newresult,$newresult);
+		
 
 
 	}
