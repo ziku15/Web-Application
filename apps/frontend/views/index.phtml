@@ -103,7 +103,10 @@
         </div>
       </div>
       <div class="col-md-3 text-right shopping-cart">
-        <span class="glyphicon glyphicon-shopping-cart"></span>  <span class="shopping-text">Shopping Cart</span>  
+        <span class="glyphicon glyphicon-shopping-cart"></span> 
+         <span class="shopping-text">
+          <a href="<?php echo $this->url->get().'index/shoppingcart/';?>">Shopping Cart</a>
+         </span>  
         <span class="shopping-count arrow_box" id="my_count">
           <?php 
           if (!isset($_COOKIE['product'])) {
