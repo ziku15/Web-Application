@@ -96,6 +96,11 @@ p{
 
 }
 
+.product > a{
+    
+    color: #585858;
+}
+
 </style>
 
 
@@ -109,7 +114,7 @@ p{
     <?php foreach ($newresult as $record){?>
     <div class="product">
 
-      <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_id); ?>"> <?php echo $record->product_name; ?></a>
+      <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_name); ?>"> <?php echo $record->product_name; ?></a>
 
         
         
