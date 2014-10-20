@@ -27,7 +27,7 @@ public function initialize() {
     {
          $newResult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\ProductCategory')
-                  ->where('Biz_mela\Models\ProductCategory.status=1')
+                 
                   ->columns('*')
                   ->getQuery()
                   ->execute();
@@ -179,8 +179,23 @@ public function initialize() {
         //$data['action'] = "Create Press Release";
     }
 public function deleteAction($value) {
-    $User = ProductCategory::findFirst('id=' . $value);
-    $User->delete();
+    $ProductCategory = ProductCategory::findFirst('id=' . $value);
+    $ProductCategory->delete();
+    $this->response->redirect('admin/productcategory');
+ }
+
+ public function changestatusAction($value) {
+    $ProductCategory = ProductCategory::findFirst('id=' . $value);
+    if(($ProductCategory->status)==1)
+    {
+        $ProductCategory->status=0;
+    }
+    else
+    {
+
+        $ProductCategory->status=1;
+    }
+    $ProductCategory->save();
     $this->response->redirect('admin/productcategory');
  }
  
