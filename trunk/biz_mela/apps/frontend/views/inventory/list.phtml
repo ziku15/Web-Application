@@ -20,10 +20,13 @@ text-align:center;
 
 
 }
-
+.intro{
+    color:#870415;
+}
 
 a {
-    color: #D44243;
+    
+    color:#900000;
 	text-decoration: none;
     
 }
@@ -38,7 +41,7 @@ a {
     padding-right: 0px;
     padding-bottom: 0px;
     padding-left: 10px;
-    color:#330099;
+    color:#031675;
 
 
 }
@@ -60,7 +63,7 @@ strong > a{
     padding-top: 5px;
     padding-right: 5px;
     padding-bottom: 5px;
-    padding-left: 5px;
+    padding-left: 0px;
 
 
 
@@ -71,6 +74,7 @@ strong > a:hover{
 
     background-color: #52575F;
     color: white;
+    font-size: 15px;
 }
 
 
@@ -90,10 +94,18 @@ i{
     border-radius: 4px;   
 
 }
-p{
+.product>p{
 
     font-size: 15px;
+    padding-left: 1px;
 
+}
+
+.glyphicon{
+    float:right;
+}
+.delete{
+    float: right;
 }
 
 </style>
@@ -112,6 +124,9 @@ p{
         <strong> <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> <?php echo $record->product_name; ?>
         </a>
         </strong>
+        <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>"><i class="delete fa fa-trash-o fa-lg" ></i></a>
+        <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>"><i class="glyphicon glyphicon-pencil" ></i></a>
+        
         <p> <?php echo $record->product_description;?></p>
 
     </div>

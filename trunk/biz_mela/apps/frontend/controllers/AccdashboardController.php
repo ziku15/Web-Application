@@ -9,6 +9,9 @@ use Biz_mela\Models\OrderUserShippinInfo as OrderUserShippinInfo;
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
+	Phalcon\Forms\Element\Password,
+	Phalcon\Validation\Validator\PresenceOf,
+	Phalcon\Validation\Validator\StringLength,
 	Phalcon\Forms\Element\Text;
 
 class AccdashboardController extends ControllerBase
@@ -290,10 +293,137 @@ class AccdashboardController extends ControllerBase
 
 
 	}
-	
-	
-	
-	
-	
-	
+
+	public function changepasswordAction()
+	{
+
+
+
+    	$form = new Form();
+
+        $current_password = new Password("current_pass", array(
+                'class' => 'form-control input-lg form-element',
+                'id' => 'current_pass',
+                'placeholder' => 'current password'
+            ));
+        $current_password->addValidator(new PresenceOf(array(
+            'message' => 'The current password field is required'
+        )));
+
+
+        $new_password = new Password("new_pass", array(
+                'class' => 'form-control input-lg form-element',
+                'id' => 'new_pass',
+                'placeholder' => 'new password'
+            ));
+        $new_password->addValidator(new PresenceOf(array(
+            'message' => 'The new password field is required'
+        )));
+
+        $confirm_password = new Password("confirm_pass", array(
+                'class' => 'form-control input-lg form-element',
+                'id' => 'confirm_pass',
+                'placeholder' => 'confirm password'
+            ));
+        $confirm_password->addValidator(new PresenceOf(array(
+            'message' => 'The confirm password field is required'
+        )));
+		
+		
+		
+		$new_password->addValidator(new StringLength(array(
+			  'max'=>50,
+			  'min' => 8,
+			  'messageMaximum' => '',
+			  'messageMinimum' => 'Password should be minimum 8 characters long'
+		)));
+
+        $form->add($current_password);
+        $form->add($new_password);
+        $form->add($confirm_password);
+
+        $data['form'] = $form;
+        $this->view->setVars($data);
+
+        if($this->request->isPost()){
+            if (!$form->isValid($_POST)) {
+                $this->flash->error("Please solve the following error !!");
+            }else{
+                //$id = $this->auth['id'];
+                $current_password = $this->request->getPost('current_pass');
+                $current_password = sha1($current_password);
+				$new_password = $this->request->getPost('new_pass');
+				$new_password = sha1($new_password);
+                $confirm_password = $this->request->getPost('confirm_pass');
+                $confirm_password=sha1($confirm_password);
+
+                // echo $current_password;
+
+               // $user = UserMaster::findFirst("id = '$id' AND status = 1");
+
+                $username = $this->session->get('auth');	
+				$user = UserMaster::findFirst("username="."'".$username['name']."'");
+				$prev=$user->password;
+				//$prev=sha1($prev);
+                if ($user != false) {
+					
+
+					 if($new_password != $confirm_password){
+						$this->flash->error("Confirm password doesn't match !!");
+					}
+
+					else if($prev!= $current_password){
+						$this->flash->error("Wrong Current Password !!");
+					}
+
+					else{
+								// $new_password = sha1($new_password);
+								
+								$user->password = $new_password;
+								$user->save();
+								$this->flash->success("Password successfully changed !!");
+						}
+					}
+					}
+
+                }else{
+                    $this->flash->error("");
+                }
+                //$data['form'] = $form;
+       			// $this->view->setVars($data);
+
+    }
+        
+
+
+
+
+
 }
+        
+
+        //$data['form'] = $form;
+       // $this->view->setVars($data);
+    	
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	

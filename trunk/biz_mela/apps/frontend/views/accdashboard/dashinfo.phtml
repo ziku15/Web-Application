@@ -57,7 +57,7 @@ h2{
 
 h5{
 
-    color: #D44243;
+    color: #870415;
 
 }
 
@@ -74,6 +74,15 @@ p{
 }
 a{
     text-decoration: none;
+    color:#870415;
+}
+
+h4>a{
+    color:#870415;
+}
+
+.intro{
+    color:#870415;
 }
 
 </style>
@@ -112,7 +121,7 @@ a{
      <div class="col-md-6">
         <p><?php echo $data['value']->username;?></p>
         <p><?php echo $data['value']->email;?></p>
-            <a href="<?php echo $this->url->get("settings/changepassword"); ?>">
+            <a href="<?php echo $this->url->get("accdashboard/changepassword"); ?>">
                 <h5>Change Password</h5>
             </a>
             </br>

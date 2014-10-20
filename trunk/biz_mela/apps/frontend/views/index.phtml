@@ -56,9 +56,34 @@
         </div>
         <div class="col-md-6">
           <div class="top-menu">
-            <div class="item top-pad bottom-pad"><a href="<?php echo $this->url->get().'session/index/';?>">Sign In</a></div>
+            <div class="item top-pad bottom-pad">
+
+              <?php
+                            $auth = $this->session->get('auth');
+                            if(!$auth){?>
+                      
+                            <?php }
+                            else { ?>
+
+                              <div class="intro">Welcome <?php echo $auth['name'];?></div>
+                           <?php } ?>
+
+
+            </div>
+            <div class="item top-pad bottom-pad">
+                            <?php
+                            $auth = $this->session->get('auth');
+                            if(!$auth){?>
+                              <a href="<?php echo $this->url->get().'session/index/';?>">SignIn</a>
+                            <?php }
+                            else { ?>
+
+                              <a href="<?php echo $this->url->get().'home/logout/';?>">Logout</a>
+                           <?php } ?>
+                            
+            </div>
             <div class="item top-pad bottom-pad"><a href="/bizmela/help/index">Help & Support</a></div>
-            <div class="item top-pad bottom-pad">US</div>
+            <div class="item top-pad bottom-pad"><a>US</a></div>
           </div>
         </div>
       </div>

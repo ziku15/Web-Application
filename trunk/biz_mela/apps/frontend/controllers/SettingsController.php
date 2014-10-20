@@ -34,7 +34,7 @@ class SettingsController extends \Phalcon\Mvc\Controller
     	$form = new Form();
 
         $current_password = new Password("current_pass", array(
-                'class' => 'form-control input-lg',
+                'class' => 'form-control input-lg form-element',
                 'placeholder' => 'current password'
             ));
         $current_password->addValidator(new PresenceOf(array(
@@ -73,6 +73,9 @@ class SettingsController extends \Phalcon\Mvc\Controller
         $form->add($current_password);
         $form->add($new_password);
         $form->add($confirm_password);
+
+        $data['form'] = $form;
+        $this->view->setVars($data);
 
         if($this->request->isPost()){
             if (!$form->isValid($_POST)) {

@@ -90,7 +90,7 @@ class SessionController extends ControllerBase
 			//$user->password = $this->security->hash($new_password);
             $user->password = sha1($password);
             $user->name = $name;
-            $user->email = $email;
+            //$user->email = $email;
 			$user->type = $type;
 			$user->contact_no =$contact_no ;
 			$user->address =$address ;
@@ -283,40 +283,34 @@ class SessionController extends ControllerBase
 				$a=UserMaster::findFirst("email="."'".$email."'");
                 //return $this->forward('buy/index');
 				$userid=$a->id;
-				if($a->type == 'B') {
-				if($a->status == 0)
-				//return $this->forward('buy/index');
-					return $this->dispatcher->forward(
-					 	array(
-					 		'controller' => 'buy',
-					 		'action' => 'index',
-					 		
-					 		)
-					 	);
-				else if ($a->status == 1)
-				//return $this->forward('buy/index');
-					return $this->dispatcher->forward(
-					 	array(
-					 		'controller' => 'buy',
-					 		'action' => 'index'
-					 		
-					 		)
-					 	);
 
-				}
-                else if($a->type == 'S') {
-				if($a->status == 0){
-				//$userid['value']=$value;
-				return $this->response->redirect('session/shop/'.$userid);
-				//return $this->forward('session/shop/'.$userid );
-				}
-				else if ($a->status == 1)
-				return $this->response->redirect('sell/index/'.$userid);
-				}
+
 				
+				if($a->status == 0) {
+				//return $this->forward('buy/index');
+					return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'session',
+					 		'action' => 'shop',
+					 		'param' => $userid
+					 		
+					 		)
+					 	);
+				}
+				else if ($a->status == 1) {
+				//return $this->forward('buy/index');
+					return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'sell',
+					 		'action' => 'index',
+					 		'param' => $userid
+					 		)
+					 	);
+				}
+
 				
-				/*if($a->type == 'B') return $this->forward('buy/index');
-                else if($a->type =='S') return $this->forward('sell/index');*/
+                
+
             }
 
             $username = $this->request->getPost('email', 'alphanum');
@@ -327,27 +321,8 @@ class SessionController extends ControllerBase
 				$a=UserMaster::findFirst("username="."'".$username."'");
                 //return $this->forward('buy/index');
 				$userid=$a->id;
-				if($a->type == 'B') {
-				if($a->status == 0)
-				//return $this->forward('buy/index');
-					return $this->dispatcher->forward(
-					 	array(
-					 		'controller' => 'buy',
-					 		'action' => 'index'
-					 		
-					 		)
-					 	);
-				else if ($a->status == 1)
-				//return $this->forward('buy/index');
-					return $this->dispatcher->forward(
-					 	array(
-					 		'controller' => 'buy',
-					 		'action' => 'index'
-					 		
-					 		)
-					 	);
-				}
-                else if($a->type == 'S') {
+				
+                
 				if($a->status == 0){
 				
 				//return $this->response->redirect('session/shop/'.$userid);
@@ -360,7 +335,7 @@ class SessionController extends ControllerBase
 					 		)
 					 	);
 				}
-				else if ($a->status == 1)
+				else if ($a->status == 1){
 				// return $this->dispatcher->forward('sell/index/'.$userid);
 					 return $this->dispatcher->forward(
 					 	array(
@@ -370,6 +345,7 @@ class SessionController extends ControllerBase
 					 		)
 					 	);
 				}
+				
             }
 
             $this->flash->error('Wrong username/password');
@@ -385,6 +361,7 @@ class SessionController extends ControllerBase
 					 	);
 
     }
+
 	
 	public function shopAction($userid)
 	{

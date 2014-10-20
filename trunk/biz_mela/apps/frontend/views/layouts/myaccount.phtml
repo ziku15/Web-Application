@@ -10,7 +10,7 @@
 <div class="container fixed-container">
 	<!-- left menu start here -->
 	<div class="col-md-3 left-menu">
-		<div class="title"><h3>My Account For Seller</h3></div>
+		<div class="title"><h3>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp;</h3></div>
 		<div class="panel-group row" id="accordion">
 		
 			<div class="panel panel-default">
@@ -122,16 +122,7 @@
 	<!-- left menu ends here -->
 	<div class="col-md-9 right-menu">
 
-                    <div class="settings-area">
-                        <div>Logged in as:</div>
-                        <div>
-                            <?php
-                            $auth = $this->session->get('auth');
-                            echo $auth['name'];
-                            ?>
-                        </div>
-                        <div><a href="<?php echo $this->url->get("home/logout"); ?>">Logout</a></div>
-                    </div>
+                    
 					<div class="row text-center title-area">
                         <div class="main-menu-title"><h2><?php echo $title; ?></h2></div>
                         <div class="sub-menu-title">
