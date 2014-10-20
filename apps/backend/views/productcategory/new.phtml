@@ -1,0 +1,54 @@
+<?php
+use Biz_mela\Models\ProductCategory as ProductCategory;
+?>
+<div class="row">
+     <div style="font-size:14px;text-align:center;color:#428bca;"><h1>User Add</h1></div>
+</div>
+<div class="row">
+    <div class="item-area">
+        <div class="form-area">
+                    
+            <?php echo $this->getContent(); ?>
+
+            <form action="" method="post">
+                <!-- <input class="form-control input-lg" type="text" name="username" placeholder="username" /> -->
+                 <div class="form-group">
+                                    <input class="form-control" placeholder="Category Name" name="cat_name" type="text"  autofocus>
+                                </div>
+                <?php $message = $form->getMessagesFor('cat_name');
+                foreach ($message as $m) {?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php }?>
+                <div class="form-group" >
+                    <select class="form-control" name="parent_id">
+                        <option value="0">
+                                No Parent ID
+                            </option>
+                        <?php
+                        foreach($productcategory as $aa)
+                        {?>
+                            
+                            <option value="<?php echo $aa->id ?>"><?php echo $aa->cat_name ?></option>
+                        <?php }?>
+                        
+                    </select>    
+                </div>
+                <?php $message = $form->getMessagesFor('parent_id');
+                foreach ($message as $m) {?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php }?>
+                
+               
+                <div class="btn-group btn-group-justified button-element">
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-lg btn-success btn-block">Save</button>
+                  </div>
+                  
+                </div>
+
+            </form>
+        </div>
+        
+
+    </div>
+</div>
