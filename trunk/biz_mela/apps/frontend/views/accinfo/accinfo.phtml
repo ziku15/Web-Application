@@ -15,24 +15,103 @@ h3.a{
     text-align: right;
     top: 10px;
 }
+
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 305px;
+    width: 67.5%;
+
+
+}
+
+.seperator-dotted{
+	width: 100%;
+	border-bottom: 1px solid #ECECEC;
+	margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+b{
+	color:#606060;
+}
+
+i{
+	font-size: 18px;
+}
+a{
+	text-decoration: none;
+}
+h4>a{
+	font-size: 15px;
+}
+
 </style>
 
 <div class="container">
 </hr>
 	<div class="row-cell">
-		<div class="col-md-3">
+		<div class="col-md-6">
+        	<h4>Contact Information &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 
+		        <a href="<?php echo $this->url->get("accinfo/editcontact"); ?>">
+		            Edit
+		        </a>
+	        	
+         	</h4>   
+        
+	        <div class="seperator-dotted">
 
-			<h3 class="a"> Account Information </h3>
-			<div class="seperator-dotted"></div>
-				<p><b>User Name</b>       : <?php echo $data['value']->username;?></p>
-				<p><b>Email Address</b>   : <?php echo $data['value']->email;?></p>
-				<p><b>Cell Phone</b>    : <?php echo $data['value']->contact_no;?></p>
-				<p><b>Address</b>        : <?php echo $data['value']->address;?></p>
-				<p><b>Account Creation</b>: <?php echo $data['value']->created_at;?></p>
-				<p><b>Profile Picture</b> : <?php echo $data['value']->picture;?></p>
+	        </div>
 
-				</br>
-				</br>
+
+     	</div>
+
+
+
+     	<div class="col-md-6">
+        	<h4>
+        		Bank Account Information  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
+		            <a href="<?php echo $this->url->get("accinfo/editbank"); ?>">
+		                Edit
+		            </a>
+
+         	</h4>   
+        
+	        <div class="seperator-dotted">
+
+	        </div>
+
+
+     	</div>
+
+		
+		<div class="col-md-6">
+
+			
+			<p ><b>User Name</b>       : <?php echo $data['value']->username;?></p>
+			<p ><b>Email Address</b>   : <?php echo $data['value']->email;?></p>
+			<p ><b>Cell Phone</b>    : <?php echo $data['value']->contact_no;?></p>
+			<p ><b>Address</b>        : <?php echo $data['value']->address;?></p>
+			<p ><b>Profile Picture</b> : <?php echo $data['value']->picture;?></p>
+
+			</br>
+			</br>
+		</div>
+
+		<div class="col-md-6">
+
+			
+			
+			<p ><b>Account Holder</b>   : <?php echo $record['value']->account_holder_name;?></p>
+			<p ><b>Account No.</b>       : <?php echo $record['value']->account_no;?></p>
+			<p ><b>Bank</b>       : <?php echo $record['value']->bank_name;?></p>
+			<p><b>Branch</b>   : <?php echo $record['value']->branch_name;?></p>
+			<p ><b>Swift Code</b> : <?php echo $record['value']->swift_code;?></p>
+
+			</br>
+			</br>
 		</div>
 
 	</div>

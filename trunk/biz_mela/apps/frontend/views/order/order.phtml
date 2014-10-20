@@ -1,0 +1,73 @@
+<style>
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 505px;
+    width: 95%;
+
+
+}
+
+
+.row-cell>.col-md-6{
+	
+    height: 125px;
+    width: 100%;
+
+}
+
+.btn-group{
+
+	padding-top: 30px;
+    padding-right: 290px;
+    padding-bottom: 30px;
+    padding-left: 320px;
+    height:50px;
+    width:150px;
+}
+
+.gray{
+
+	background-color: #A0A0A0;
+	color:#336699;
+	
+
+}
+
+a{
+
+	text-decoration: none;
+
+}
+
+</style>
+
+
+<div class="row-cell">
+	<div class="col-md-6">
+		<div class="btn-group">
+			<a href="<?php echo $this->url->get('order/list/')?>" class="btn btn-lg btn-custom gray"><p>View Order List</p></a>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="btn-group">
+			<a href="<?php echo $this->url->get('order/purchase/')?>" class="btn btn-lg btn-custom gray"><p>Purchase History</p></a>
+		</div>
+		
+	</div>
+	<div class="col-md-6">
+		<div class="btn-group">
+			<a href="<?php echo $this->url->get('order/pending/')?>" class="btn btn-lg btn-custom gray"><p>&ensp; Pending List &ensp;</p></a>
+		</div>
+		
+	</div>
+	<div class="col-md-6">
+		<div class="btn-group">
+			<a href="<?php echo $this->url->get('order/reject/')?>" class="btn btn-lg btn-custom gray"><p>Reject History &ensp; </p></a>
+		</div>
+		
+	</div>
+
+
+</div>

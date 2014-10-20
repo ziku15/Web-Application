@@ -1,0 +1,79 @@
+<style>
+
+a{
+color:#880000;
+text-decoration: none;
+}
+
+
+b.padding{
+	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+}
+.seperator-dotted{
+    width: 100%;
+    border-bottom: 1px solid #ECECEC;
+    margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.settings-area {
+    font-size: 13px;
+    position: absolute;
+    right: 60px;
+    text-align: right;
+    top: 10px;
+}
+
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 505px;
+    width: 67.5%;
+
+
+}
+
+.col-md-12 > h3{
+
+    color:#330099;
+
+}
+
+.pay{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 105px;
+    width: 100%;
+}
+
+</style>
+<div class="container">
+</hr>
+    <div class="row-cell">
+        <div class="col-md-12">
+
+            <h3>Payment History</h3>
+            <div class="seperator-dotted">
+                
+            </div>
+            <?php foreach ($newresult as $row){?>
+                <div class="pay">
+                <p ><b>Order Number</b>   : <?php echo $row->order_no;?></p>
+                <p ><b>Payment Method</b>   : <?php echo $row->method_name;?></p>
+                <p ><b>Transaction Amount</b>   : <?php echo $row->total;?></p>
+
+
+                </div>
+            </br>
+            <?php }?>
+
+            </br>
+            </br>
+        </div>
+    </div>
+</div>
