@@ -1,6 +1,6 @@
 <?php
 namespace Biz_mela\Backend\Controllers;
-use Biz_mela\Models\Brand as Brand;
+use Biz_mela\Models\DeliveryMethod as DeliveryMethod;
 use Phalcon\Mvc\View,
     Phalcon\Forms\Form,
     Phalcon\Forms\Element\Text,
@@ -12,7 +12,7 @@ use Phalcon\Mvc\View,
 	Phalcon\Mvc\Model\Validator\Email,
     Phalcon\Paginator\Adapter\QueryBuilder;
 
-class BrandController extends \Phalcon\Mvc\Controller {
+class DeliveryMethodController extends \Phalcon\Mvc\Controller {
 
 public function initialize() {
     $this->auth = $auth = $this->session->get('auth');
@@ -26,16 +26,16 @@ public function initialize() {
     public function indexAction() 
     {
          $newResult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\Brand')
+                  ->from('Biz_mela\Models\DeliveryMethod')
                   
                   ->columns('*')
                   ->getQuery()
                   ->execute();
-        $page['brand'] = $newResult;
+        $page['deliverymethod'] = $newResult;
         
         // $page['value'] = $value;
 
-        $this->view->setVars(array('sub_title' => 'BrandManagement'));
+        $this->view->setVars(array('sub_title' => 'DeliveryMethodManagement'));
         $this->view->setVars($page);
 
         
@@ -45,28 +45,28 @@ public function initialize() {
 
     public function newAction() {
         $form = new Form();
-        $brand_name = new Text("brand_name", array(
+        $method_name = new Text("method_name", array(
             'class' => 'form-control input-lg form-element',
-            'id' => 'brand_name',
-            'placeholder' => 'Brand Name',
+            'id' => 'method_name',
+            'placeholder' => 'Method Name',
             'onkeyup'=>"sync()",
             'autocomplete' => 'off'
         ));
        
-        $brand_name->addValidator(new PresenceOf(array(
-            'message' => 'The Brand Name field is required'
+        $method_name->addValidator(new PresenceOf(array(
+            'message' => 'The Method Name field is required'
         )));
        
        
         
-        $form->add($brand_name);
+        $form->add($method_name);
        
         $data['form'] = $form;
         
         $this->view->setVars($data);
         if ($this->request->isPost()) {
             
-            $brand_name = $this->request->getPost('brand_name');
+            $method_name = $this->request->getPost('method_name');
             
             
            
@@ -78,15 +78,15 @@ public function initialize() {
                 else
                 {
                     
-                    $Brand = new Brand();
-                    $Brand->brand_name = $brand_name;
-                    $Brand->status=1;
-                    $Brand->created_at = date("Y-m-d h:i:s");
+                    $DeliveryMethod = new DeliveryMethod();
+                    $DeliveryMethod->method_name = $method_name;
+                    $DeliveryMethod->status=1;
+                    $DeliveryMethod->created_at = date("Y-m-d h:i:s");
                     
-                    if ($Brand->create()) {
-                        $this->flash->success("Brand  added successfully!!");
+                    if ($DeliveryMethod->create()) {
+                        $this->flash->success("Delivery Method  added successfully!!");
                                 
-                        return $this->response->redirect('admin/brand/index/');
+                        return $this->response->redirect('admin/deliverymethod/index/');
                                 
                         //return $this->response->redirect('user/passwordconfirm/');
                         //exit();
@@ -104,42 +104,42 @@ public function initialize() {
         }
 
         public function updateAction($value) {
-        $brand = Brand::findFirst('id=' . $value);
+        $deliverymethod = DeliveryMethod::findFirst('id=' . $value);
          $form = new Form();
-        $brand_name = new Text("brand_name", array(
+        $method_name = new Text("method_name", array(
             'class' => 'form-control input-lg form-element',
-            'id' => 'brand_name',
-            'placeholder' => 'Brand Name',
+            'id' => 'method_name',
+            'placeholder' => 'Method Name',
             'onkeyup'=>"sync()",
             'autocomplete' => 'off'
         ));
        
-        $brand_name->addValidator(new PresenceOf(array(
-            'message' => 'The Brand Name field is required'
+        $method_name->addValidator(new PresenceOf(array(
+            'message' => 'The Method Name field is required'
         )));
        
         
-        $form->add($brand_name);
+        $form->add($method_name);
        
         $data['form'] = $form;
-        $data['brand'] = $brand;
+        $data['deliverymethod'] = $deliverymethod;
         
         $this->view->setVars($data);
         if ($this->request->isPost()) {
             if (!$form->isValid($_POST)) {
                 $this->flash->error("Please solve the following error !!");
             } else {
-                $brand_name = $this->request->getPost('brand_name');
+                $method_name = $this->request->getPost('method_name');
            
-               $Brand = new Brand();
-               $Brand->id= $brand->id;
-                    $Brand->brand_name = $brand_name;
-                    $Brand->status = 1;
-                    $Brand->created_at = $brand->created_at;
-                    $Brand->updated_at = date("Y-m-d h:i:s");
-                    if ($Brand->save()) {
-                        $this->flash->success("Brand  updated successfully!!");
-                        return $this->response->redirect('admin/brand/index/');
+               $DeliveryMethod = new DeliveryMethod();
+               $DeliveryMethod->id= $deliverymethod->id;
+                    $DeliveryMethod->method_name = $method_name;
+                    $DeliveryMethod->status = 1;
+                    $DeliveryMethod->created_at = $deliverymethod->created_at;
+                    $DeliveryMethod->updated_at = date("Y-m-d h:i:s");
+                    if ($DeliveryMethod->save()) {
+                        $this->flash->success("Delivery Method  updated successfully!!");
+                        return $this->response->redirect('admin/deliverymethod/index/');
                     } else {
                         $this->flash->error("error occured,please try again later!!");
                     }
@@ -149,24 +149,24 @@ public function initialize() {
         //$data['action'] = "Create Press Release";
     }
 public function deleteAction($value) {
-    $Brand = Brand::findFirst('id=' . $value);
-    $Brand->delete();
-    $this->response->redirect('admin/brand');
+    $DeliveryMethod = DeliveryMethod::findFirst('id=' . $value);
+    $DeliveryMethod->delete();
+    $this->response->redirect('admin/deliverymethod');
  }
 
-  public function changestatusAction($value) {
-    $Brand = Brand::findFirst('id=' . $value);
-    if(($Brand->status)==1)
+ public function changestatusAction($value) {
+    $DeliveryMethod = DeliveryMethod::findFirst('id=' . $value);
+    if(($DeliveryMethod->status)==1)
     {
-        $Brand->status=0;
+        $DeliveryMethod->status=0;
     }
     else
     {
 
-        $Brand->status=1;
+        $DeliveryMethod->status=1;
     }
-    $Brand->save();
-    $this->response->redirect('admin/brand');
+    $DeliveryMethod->save();
+    $this->response->redirect('admin/deliverymethod');
  }
  
 }

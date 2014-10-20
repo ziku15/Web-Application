@@ -1,6 +1,6 @@
 <?php
 namespace Biz_mela\Backend\Controllers;
-use Biz_mela\Models\Brand as Brand;
+use Biz_mela\Models\PaymentMethod as PaymentMethod;
 use Phalcon\Mvc\View,
     Phalcon\Forms\Form,
     Phalcon\Forms\Element\Text,
@@ -12,7 +12,7 @@ use Phalcon\Mvc\View,
 	Phalcon\Mvc\Model\Validator\Email,
     Phalcon\Paginator\Adapter\QueryBuilder;
 
-class BrandController extends \Phalcon\Mvc\Controller {
+class PaymentMethodController extends \Phalcon\Mvc\Controller {
 
 public function initialize() {
     $this->auth = $auth = $this->session->get('auth');
@@ -26,16 +26,16 @@ public function initialize() {
     public function indexAction() 
     {
          $newResult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\Brand')
+                  ->from('Biz_mela\Models\PaymentMethod')
                   
                   ->columns('*')
                   ->getQuery()
                   ->execute();
-        $page['brand'] = $newResult;
+        $page['paymentmethod'] = $newResult;
         
         // $page['value'] = $value;
 
-        $this->view->setVars(array('sub_title' => 'BrandManagement'));
+        $this->view->setVars(array('sub_title' => 'PaymentMethodManagement'));
         $this->view->setVars($page);
 
         
@@ -45,28 +45,28 @@ public function initialize() {
 
     public function newAction() {
         $form = new Form();
-        $brand_name = new Text("brand_name", array(
+        $method_name = new Text("method_name", array(
             'class' => 'form-control input-lg form-element',
-            'id' => 'brand_name',
-            'placeholder' => 'Brand Name',
+            'id' => 'method_name',
+            'placeholder' => 'Method Name',
             'onkeyup'=>"sync()",
             'autocomplete' => 'off'
         ));
        
-        $brand_name->addValidator(new PresenceOf(array(
-            'message' => 'The Brand Name field is required'
+        $method_name->addValidator(new PresenceOf(array(
+            'message' => 'The Method Name field is required'
         )));
        
        
         
-        $form->add($brand_name);
+        $form->add($method_name);
        
         $data['form'] = $form;
         
         $this->view->setVars($data);
         if ($this->request->isPost()) {
             
-            $brand_name = $this->request->getPost('brand_name');
+            $method_name = $this->request->getPost('method_name');
             
             
            
@@ -78,15 +78,15 @@ public function initialize() {
                 else
                 {
                     
-                    $Brand = new Brand();
-                    $Brand->brand_name = $brand_name;
-                    $Brand->status=1;
-                    $Brand->created_at = date("Y-m-d h:i:s");
+                    $PaymentMethod = new PaymentMethod();
+                    $PaymentMethod->method_name = $method_name;
+                    $PaymentMethod->status=1;
+                    $PaymentMethod->created_at = date("Y-m-d h:i:s");
                     
-                    if ($Brand->create()) {
-                        $this->flash->success("Brand  added successfully!!");
+                    if ($PaymentMethod->create()) {
+                        $this->flash->success("Payment Method Area  added successfully!!");
                                 
-                        return $this->response->redirect('admin/brand/index/');
+                        return $this->response->redirect('admin/paymentmethod/index/');
                                 
                         //return $this->response->redirect('user/passwordconfirm/');
                         //exit();
@@ -104,42 +104,42 @@ public function initialize() {
         }
 
         public function updateAction($value) {
-        $brand = Brand::findFirst('id=' . $value);
+        $paymentmethod = PaymentMethod::findFirst('id=' . $value);
          $form = new Form();
-        $brand_name = new Text("brand_name", array(
+        $method_name = new Text("method_name", array(
             'class' => 'form-control input-lg form-element',
-            'id' => 'brand_name',
-            'placeholder' => 'Brand Name',
+            'id' => 'method_name',
+            'placeholder' => 'Method Name',
             'onkeyup'=>"sync()",
             'autocomplete' => 'off'
         ));
        
-        $brand_name->addValidator(new PresenceOf(array(
-            'message' => 'The Brand Name field is required'
+        $method_name->addValidator(new PresenceOf(array(
+            'message' => 'The Method Name field is required'
         )));
        
         
-        $form->add($brand_name);
+        $form->add($method_name);
        
         $data['form'] = $form;
-        $data['brand'] = $brand;
+        $data['paymentmethod'] = $paymentmethod;
         
         $this->view->setVars($data);
         if ($this->request->isPost()) {
             if (!$form->isValid($_POST)) {
                 $this->flash->error("Please solve the following error !!");
             } else {
-                $brand_name = $this->request->getPost('brand_name');
+                $method_name = $this->request->getPost('method_name');
            
-               $Brand = new Brand();
-               $Brand->id= $brand->id;
-                    $Brand->brand_name = $brand_name;
-                    $Brand->status = 1;
-                    $Brand->created_at = $brand->created_at;
-                    $Brand->updated_at = date("Y-m-d h:i:s");
-                    if ($Brand->save()) {
-                        $this->flash->success("Brand  updated successfully!!");
-                        return $this->response->redirect('admin/brand/index/');
+               $PaymentMethod = new PaymentMethod();
+               $PaymentMethod->id= $paymentmethod->id;
+                    $PaymentMethod->method_name = $method_name;
+                    $PaymentMethod->status = 1;
+                    $PaymentMethod->created_at = $paymentmethod->created_at;
+                    $PaymentMethod->updated_at = date("Y-m-d h:i:s");
+                    if ($PaymentMethod->save()) {
+                        $this->flash->success("Delivery Area  updated successfully!!");
+                        return $this->response->redirect('admin/paymentmethod/index/');
                     } else {
                         $this->flash->error("error occured,please try again later!!");
                     }
@@ -149,24 +149,23 @@ public function initialize() {
         //$data['action'] = "Create Press Release";
     }
 public function deleteAction($value) {
-    $Brand = Brand::findFirst('id=' . $value);
-    $Brand->delete();
-    $this->response->redirect('admin/brand');
+    $PaymentMethod = PaymentMethod::findFirst('id=' . $value);
+    $PaymentMethod->delete();
+    $this->response->redirect('admin/paymentmethod');
  }
-
-  public function changestatusAction($value) {
-    $Brand = Brand::findFirst('id=' . $value);
-    if(($Brand->status)==1)
+ public function changestatusAction($value) {
+    $PaymentMethod = PaymentMethod::findFirst('id=' . $value);
+    if(($PaymentMethod->status)==1)
     {
-        $Brand->status=0;
+        $PaymentMethod->status=0;
     }
     else
     {
 
-        $Brand->status=1;
+        $PaymentMethod->status=1;
     }
-    $Brand->save();
-    $this->response->redirect('admin/brand');
+    $PaymentMethod->save();
+    $this->response->redirect('admin/paymentmethod');
  }
  
 }

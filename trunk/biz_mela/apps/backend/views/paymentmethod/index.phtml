@@ -20,14 +20,14 @@
 </div>-->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Product Category Mangement</h1>
+        <h1 class="page-header">Payment Method Mangement</h1>
         </div>
 </div>
 <div class="row">
                 <div class="col-md-12">
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                            Product Category List
+                           Payment Method List
                         </div>
                      <div class="panel-body">
                      <div class="table-responsive">
@@ -47,7 +47,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Category Name</th>
+                                            <th>Method Name</th>
                                             <th>Created At</th>
                                             <th></th>
                                             <th></th>
@@ -55,20 +55,20 @@
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($productcategory as $aa) { 
+                                     foreach ($paymentmethod as $aa) { 
                                             $count++;
                                         ?>
                                      <tbody>
                                         <tr>
                                             <td><?php echo $count; ?></td>
-                                            <td><?php echo $aa->cat_name; ?></td>
+                                            <td><?php echo $aa->method_name; ?></td>
                                             <td><?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?></td>
-                                            <td><a href="<?php echo $this->url->get('admin/productcategory/update/'.$aa->id);?>"><i class="fa fa-pencil fa-lg " element_id="<?php echo $aa->id; ?>"></i></a></td>
-                                            <td><a href="<?php echo $this->url->get('admin/productcategory/delete/'.$aa->id);?>"><i class="fa fa-trash-o fa-lg delete" element_id="<?php echo $aa->id; ?>"></i></a></td>
+                                            <td><a href="<?php echo $this->url->get('admin/paymentmethod/update/'.$aa->id);?>"><i class="fa fa-pencil fa-lg " element_id="<?php echo $aa->id; ?>"></i></a></td>
+                                            <td><a href="<?php echo $this->url->get('admin/paymentmethod/delete/'.$aa->id);?>"><i class="fa fa-trash-o fa-lg delete" element_id="<?php echo $aa->id; ?>"></i></a></td>
                                             <?php if($aa->status==1){?>
-                                                <td><a href="<?php echo $this->url->get('admin/productcategory/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/OK.png')?>"></a></td>
+                                                <td><a href="<?php echo $this->url->get('admin/paymentmethod/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/OK.png')?>"></a></td>
                                             <?php } else{?>
-                                                <td><a href="<?php echo $this->url->get('admin/productcategory/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/cancel-icon.png')?>"></a></td>
+                                                <td><a href="<?php echo $this->url->get('admin/paymentmethod/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/cancel-icon.png')?>"></a></td>
                                             <?php } ?>
                                         </tr>
                                     </tbody>
@@ -79,8 +79,8 @@
 
 
 <div class="text-center new-button">
-            <a href="<?php echo $this->url->get('admin/productcategory/new/')?>"><i class="fa fa-plus-square-o fa-5x"></i></a>
-            <h3>New Product Category</h3>
+            <a href="<?php echo $this->url->get('admin/paymentmethod/new/')?>"><i class="fa fa-plus-square-o fa-5x"></i></a>
+            <h3>New Delivery Area</h3>
         </div>
 
 

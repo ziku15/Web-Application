@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Delivery Area Add</h1>
+        </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+                    
+                    
+            <?php echo $this->getContent(); ?>
+<div class="col-lg-4">
+            <form action="" method="post">
+                <!-- <input class="form-control input-lg" type="text" name="username" placeholder="username" /> -->
+                 <div class="form-group">
+                                    <input class="form-control" placeholder="Area Name" name="area_name" type="text"  autofocus>
+                                </div>
+                <?php $message = $form->getMessagesFor('area_name');
+                foreach ($message as $m) {?>
+                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+                <?php }?>
+                <div class="btn-group btn-group-justified button-element">
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-lg btn-success btn-block">Save</button>
+                  </div>
+                  
+                </div>
+
+            </form>
+        </div>
+        </div>
+        
+
+   
