@@ -10,71 +10,65 @@
 <!--<div class="row">
     <h3>Group:Admin<a href="<?php echo $this->url->get('user/new/')?>"><span class="glyphicon glyphicon-plus pull-right" style="background-color: #FFFFFF;padding: 5px;border-radius: 10px;cursor:pointer;"></span></a></h3>
 </div>-->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').dataTable();
+    });
+    </script>
+<!--<div class="row">
+    <h3>Group:Admin<a href="<?php echo $this->url->get('user/new/')?>"><span class="glyphicon glyphicon-plus pull-right" style="background-color: #FFFFFF;padding: 5px;border-radius: 10px;cursor:pointer;"></span></a></h3>
+</div>-->
 
 <div class="row">
-    <div class="item-area">
-        <div style="font-size:14px;text-align:center;color:#428bca;"><h1>Order Management</h1></div>
-        <?php foreach ($order as $aa) { ?>
-
-            <div class="row cell">
                 <div class="col-md-12">
-                    <div class="title">
-                        <div>
-                        <strong><?php echo $aa->order_no; ?></strong>
-                       </div>
-                       <div style="float:left;">
-                        Created: <?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?>
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Order List
+                        </div>
+                     <div class="panel-body">
+                     <div class="table-responsive">
+                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="row">
+                                
+                                <div class="col-sm-12">
+                                    <div id="dataTables-example_filter" class="dataTables_filter">
+                                        <label>
+                                        Search:
+                                        <input class="form-control input-sm" type="search" aria-controls="dataTables-example">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Order No</th>
+                                            <th>Created At</th>
+                                            
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                     <?php 
+                                     $count=0;
+                                     foreach ($order as $aa) { 
+                                            $count++;
+                                        ?>
+                                     <tbody>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td><?php echo $aa->order_no; ?></td>
+                                            <td><?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?></td>
+                                            
+                                            <td><a href="<?php echo $this->url->get('admin/order/update/'.$aa->id);?>">Block</a></td>
+                                        </tr>
+                                    </tbody>
+                                     <?php } ?>
+                                </table>
                     </div>
-                    <div style="float:right;">
-                        <a href="<?php echo $this->url->get('admin/order/update/'.$aa->id);?>">Block</a>
-                    </div>
-
-                    </div>
-					
-                    <!-- <div class="">
-                            Section: Sidra In the News
-                    </div> -->
-					
-                    
-					
-                    
+                   </div>
                 </div>
             </div>
             
- <div class="seperator-dotted"></div>
-        <?php } ?>
 
-
-
-
-
-
-
-
-    </div>
-   
-    <div>
-       <!-- <ul class="pager">
-            <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
-            <li><a href="<?php echo $this->url->get("user/index/"); ?>">First</a></li>
-            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->before); ?>">Previous</a></li>
-            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->next); ?>">Next</a></li>
-            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->last); ?>">Last</a></li>			  
-        </ul>-->
-
-      <!--  <ul class="pager">
-                <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->last); ?>">Last</a></li>             
-                </ul>-->
-   </div>        
-
-
-
-
-    </div>
-
-</div>
 
