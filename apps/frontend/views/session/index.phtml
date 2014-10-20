@@ -34,9 +34,14 @@ h2{
 }
 
 .errorMessage{
-	color:#624949;
-	font-size: 18px;
+	color:#a94442;
+	font-size: 15px;
 	padding: 15px;
+	background-color: #f2dede;;
+	width:50%;
+	border:1px solid #ECECEC ;
+    border-radius: 4px;
+
 }
 
 .successMessage{
@@ -50,6 +55,19 @@ h2{
 	background-color: #52575F;
 	color: white;
 }
+
+.intro{
+    color:#870415;
+}
+
+a {
+    
+    color:#900000;
+	text-decoration: none;
+    
+}
+
+
 
 
 </style>
@@ -90,7 +108,7 @@ h2{
 						</br>
 						<input type="submit" value="Login" class="btn btn-primary btn-large" pb-role="submit">
 						<div class="btn-group">
-								<a href="<?php echo $this->url->get('/session/forgetpassword/')?>" class="btn btn-primary btn-custom gray">Forgot Password</a>
+								<a href="<?php echo $this->url->get('session/forgetpassword/')?>" class="btn btn-primary btn-custom gray">Forgot Password</a>
 						</div>
 					</div>
 

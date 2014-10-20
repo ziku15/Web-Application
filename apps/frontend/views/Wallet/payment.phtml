@@ -39,22 +39,69 @@ b.padding{
 
 .col-md-12 > h3{
 
-    color:#330099;
+    
+     color: #043868;
 
 }
 
 .pay{
 
     border:1px solid #ECECEC ;
-    border-radius: 4px;
+    
     height: 105px;
     width: 100%;
+}
+
+.gray{
+
+    background-color:#F7FAFC;
+    color:#042C51;
+
+    
+
+}
+.navbar {
+    background-color: #F7FAFC;
+}
+
+.gray:hover{
+    background-color:#F7FAFC;
+    color:#84660A;
+}
+
+p{
+    font-size: 18px;
 }
 
 </style>
 <div class="container">
 </hr>
     <div class="row-cell">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <a href="<?php echo $this->url->get('wallet/account/')?>" class="btn btn-lg btn-custom gray"><p>My Account &ensp; &ensp; </p></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <a href="<?php echo $this->url->get('wallet/payment/')?>" class="btn btn-lg btn-custom gray"><p>Payment History</p></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <a href="<?php echo $this->url->get('wallet/status/')?>" class="btn btn-lg btn-custom gray"><p>Payment Status &ensp;  </p></a>
+                </div>
+                
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <a href="<?php echo $this->url->get('wallet/withdraw/')?>" class="btn btn-lg btn-custom gray"><p>Payment Withdraw &ensp;  </p></a>
+                </div>
+                
+            </div>
+    
+        </nav>
         <div class="col-md-12">
 
             <h3>Payment History</h3>
@@ -63,9 +110,9 @@ b.padding{
             </div>
             <?php foreach ($newresult as $row){?>
                 <div class="pay">
-                <p ><b>Order Number</b>   : <?php echo $row->order_no;?></p>
-                <p ><b>Payment Method</b>   : <?php echo $row->method_name;?></p>
-                <p ><b>Transaction Amount</b>   : <?php echo $row->total;?></p>
+                    <p ><b>Order Number</b>   : <?php echo $row->order_no;?></p>
+                    <p ><b>Payment Method</b>   : <?php echo $row->method_name;?></p>
+                    <p ><b>Transaction Amount</b>   : <?php echo $row->total;?></p>
 
 
                 </div>

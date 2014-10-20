@@ -306,16 +306,16 @@ LIMIT 0 , 30*/
 		
     }
 	
-	public function editAction()
+	public function editAction($value = '')
 	{
-			$username = $this->session->get('auth');
+			/*$username = $this->session->get('auth');
 			$con=UserMaster::findFirst("username="."'".$username['name']."'");
 			$user_id=$con->id;
 			$User=ShopMaster::findFirst("user_id="."'".$user_id."'");
 			$a=$User->id;
 			$inventoryData=ProductMaster::findFirst("shop_id="."'".$a."'");
-			$pro=$inventoryData->id;
-			$product=ProductMaster::findFirst("id="."'".$pro."'");
+			$pro=$inventoryData->id;*/
+			$product=ProductMaster::findFirst("id="."'".$value."'");
 			//$data['value']=$product;
 			//$product = ProductMaster::findFirst('id = "' . $id . '"');
 		
@@ -381,4 +381,25 @@ LIMIT 0 , 30*/
 	
 	
 	}
+
+	public function deleteAction($value = '')
+	{
+
+			$dump = ProductMaster::findFirst('id = "' . $value . '"');
+			
+			if ($dump != false) {
+    			if ($dump->delete() == false) {
+				        echo "Sorry, we can't delete the robot right now: \n";
+				        foreach ($robot->getMessages() as $message) {
+				            echo $message, "\n";
+				        }
+			    } else {
+			        echo "The product was deleted successfully!";
+			        return $this->response->redirect('inventory/list/');
+			    }
+			}
+
+	}
+
+
 }

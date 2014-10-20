@@ -1,6 +1,6 @@
 <style>
 h3{
-text-align:center;
+    text-align:center;
 }
 
 .settings-area {
@@ -23,7 +23,7 @@ text-align:center;
 
 
 a {
-    color: #D44243;
+    color: #870415;
 	text-decoration: none;
     
 }
@@ -92,8 +92,29 @@ i{
 }
 p{
 
-    font-size: 15px;
+    font-size: 18px;
 
+}
+
+.gray{
+
+    background-color:#F7FAFC;
+    color:#042C51;
+
+    
+
+}
+.navbar {
+    background-color: #F7FAFC;
+}
+
+h2{
+    padding-left: 5px;
+    color: #043868;
+}
+
+.intro{
+    color:#870415;
 }
 
 </style>
@@ -101,10 +122,41 @@ p{
 
 <div class="row-cell">
 
+
+    <nav class="navbar navbar-default" role="navigation">
+        
+            
+        
+        <div class="col-md-3">
+            <div class="btn-group">
+                <a href="<?php echo $this->url->get('order/list/')?>" class="btn btn-lg btn-custom gray"><p>View Order List</p></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="btn-group">
+                <a href="<?php echo $this->url->get('order/purchase/')?>" class="btn btn-lg btn-custom gray"><p>Purchase History</p></a>
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+            <div class="btn-group">
+                <a href="<?php echo $this->url->get('order/pending/')?>" class="btn btn-lg btn-custom gray"><p>&ensp; Pending List &ensp;</p></a>
+            </div>
+            
+        </div>
+        <div class="col-md-3">
+            <div class="btn-group">
+                <a href="<?php echo $this->url->get('order/reject/')?>" class="btn btn-lg btn-custom gray"><p>Reject History &ensp; </p></a>
+            </div>
+            
+        </div>
+    
+    </nav>
+
     <div >
-        <p class="dash">My Orders</p>
-    </div>
-    <div class="seperator-dotted"></div>
+        <h2>Order List</h2>
+    </div>  
+
 
     <?php foreach ($data['value'] as $record){?>
     <div class="product">

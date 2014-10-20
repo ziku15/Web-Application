@@ -23,7 +23,7 @@ text-align:center;
 
 
 a {
-    color: #D44243;
+    color:#870415 ;
 	
     text-decoration: none;
 }
@@ -38,7 +38,7 @@ a {
     padding-right: 0px;
     padding-bottom: 0px;
     padding-left: 10px;
-    color:#330099;
+    color: #043868;
 
 
 }
@@ -99,6 +99,15 @@ p{
 .product > a{
     
     color: #585858;
+    font-size: 15px;
+}
+
+.intro{
+    color:#870415;
+}
+
+a>i{
+    float: right;
 }
 
 </style>
@@ -116,6 +125,7 @@ p{
 
       <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_name); ?>"> <?php echo $record->product_name; ?></a>
 
+      <a href="<?php echo $this->url->get("wishlist/delete/" . $record->product_name); ?>"><i class="delete fa fa-trash-o fa-lg" ></i></a>
         
         
         

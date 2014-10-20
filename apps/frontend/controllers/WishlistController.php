@@ -34,23 +34,14 @@ class WishlistController extends ControllerBase
 	public function wishAction()
 	{
 
-		/*$username = $this->session->get('auth');
-		$con=UserMaster::findFirst("username="."'".$username['name']."'");
-
-		$userid=$con->id;
-
-		$data=ProductWishlist::find("user_id="."'".$userid."'");
 		
-
-		
-		$this->view->setVar(data,$data);*/
 
 		$username = $this->session->get('auth');
 		
         $con=UserMaster::findFirst("username="."'".$username['name']."'");
 		
 		$userid=$con->id;
-		$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.price
+		$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductWishlist.product_id
 			FROM Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductWishlist, Biz_mela\Models\UserMaster
 			WHERE Biz_mela\Models\ProductMaster.id = Biz_mela\Models\ProductWishlist.product_id
 			AND Biz_mela\Models\UserMaster.id = Biz_mela\Models\ProductWishlist.user_id
@@ -59,9 +50,7 @@ class WishlistController extends ControllerBase
 
 		$newresult = $this->modelsManager->executeQuery($phql);
 
-		//$newresult = $query->execute();
-		//$data['value']=$newresult;
-                 //print_r($data['value']);exit();
+		
          $this->view->setVar(newresult,$newresult);
 		
 
@@ -75,6 +64,7 @@ class WishlistController extends ControllerBase
 
 		$inventoryData = ProductMaster::findFirst('product_name = "' . $value . '"');
 
+
 			$data['id'] = $inventoryData->id;
 			$data['heading'] = $inventoryData->product_name;
 			$data['description'] = $inventoryData->product_description;
@@ -86,6 +76,25 @@ class WishlistController extends ControllerBase
 	}
 
 
+	public function deleteAction($value = '')
+	{
+			$find = ProductMaster::findFirst('product_name = "' . $value . '"');
+			$out=$find->id;
+			$dump= ProductWishlist::findFirst('product_id = ' . $out );
+			if ($dump != false) {
+    			if ($dump->delete() == false) {
+				        echo "Sorry, we can't delete the robot right now: \n";
+				        foreach ($robot->getMessages() as $message) {
+				            echo $message, "\n";
+				        }
+			    } else {
+			        echo "The product was deleted successfully!";
+			        return $this->response->redirect('wishlist/wish/');
+			    }
+			}
+
+
+	}
 
 
 
