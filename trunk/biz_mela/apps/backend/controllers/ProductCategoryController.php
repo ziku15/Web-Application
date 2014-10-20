@@ -169,6 +169,7 @@ public function initialize() {
                     $ProductCategory->updated_at = date("Y-m-d h:i:s");
                     if ($ProductCategory->save()) {
                         $this->flash->success("Product Category  updated successfully!!");
+                        return $this->response->redirect('admin/productcategory/index/');
                     } else {
                         $this->flash->error("error occured,please try again later!!");
                     }
