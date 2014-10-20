@@ -1,0 +1,124 @@
+<style type="text/css">
+.image{
+    border: 1px solid #dadada;
+    margin-top: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.top-padding{
+  padding-top: 40px;
+}
+
+.cart .form-control{
+  display: inline;
+  width: 40%;
+
+}
+
+.ash-bg{
+  background-color: #F1F1F1;
+  margin-top: 15px;
+}
+
+.form-box{
+
+    border: 1px solid #dadada;
+    height: 350px;
+    margin-top: 15px;
+    width: 100%;
+
+
+}
+
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+     <font size="15">Your Shopping Cart (3 items/ 100 items)</font>
+    </div>
+
+    <div class="col-md-3 col-md-offset-5">
+     Proceed to payment <span class="glyphicon glyphicon-chevron-right"></span>
+    </div>
+  </div>
+
+</div>
+
+<div class="container-fluid">
+  <div class="row ash-bg">
+    <div class="col-md-2 col-md-offset-2">
+      Product Name
+    </div>
+
+    <div class="col-md-2 col-md-offset-1">
+      Quantity
+    </div>
+
+    <div class="col-md-2">
+      Price
+    </div>
+
+    <div class="col-md-3">
+      Subtotal
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="image">
+        <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product2.jpg"></img>
+      </div>
+    </div>
+
+    <div class="col-md-2 top-padding">
+      Black mask pilaten face mask
+    </div>
+
+    <div class="col-md-2 col-md-offset-1 top-padding cart">
+       <input type="text" class="form-control"> &ensp; <i class="fa fa-refresh"></i>
+
+    </div>
+
+    <div class="col-md-1  top-padding">
+      Tk. 1200
+    </div>
+
+    <div class="col-md-1 col-md-offset-1 top-padding">
+      Tk. 1200
+    </div>
+
+    <div class="col-md-1 col-md-offset-1 top-padding">
+      <span class="glyphicon glyphicon-shopping-cart"></span>
+    </div>
+
+  </div>
+
+  <div class="seperator"></div>
+
+</div>
+
+<div class="container">
+  <div class="col-md-3 col-md-offset-5">
+    <div class="form-box">
+    </div>
+  </div>
+
+  <div class="col-md-3 col-md-offset-1 top-padding">
+    Subtotal &ensp;&ensp; 9855 <br>
+    All total &ensp;&ensp; 9855<br>
+    
+
+
+
+  </div>
+
+</div>
+
+
+<?php echo $this->partial('shared/ad'); ?>
