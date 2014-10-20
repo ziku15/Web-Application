@@ -73,7 +73,7 @@ class WishlistController extends ControllerBase
 	public function detailsAction($value = '')
 	{
 
-		$inventoryData = ProductMaster::findFirst('id = "' . $value . '"');
+		$inventoryData = ProductMaster::findFirst('product_name = "' . $value . '"');
 
 			$data['id'] = $inventoryData->id;
 			$data['heading'] = $inventoryData->product_name;
