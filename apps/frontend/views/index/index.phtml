@@ -28,7 +28,9 @@
 }
 .hover:hover .text { display: block; opacity: 1;}
 
-.text p{margin-top: 35%;}
+.text .top_text{margin-top: 35%;}
+
+.text .bottom_text{margin-top: 55%;}
 
 .nav-tabs> li.active > a, .nav-tabs> li.active > a:hover {border-width: 0;}
 
@@ -36,8 +38,93 @@
 
 .nav-tabs {border-bottom: none;}
 
+.cart, .wish{background-color: #454545; border:none; }
+
 
 </style>
+
+<script type="text/javascript">
+
+function processWish(id){
+
+  var find = id.toString().concat(id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url:"/biz_mela/index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            $('#'+find).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(find);
+        }
+      });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wish').on('click', function(e) {
+
+//subcategories();
+ var wishId = e.target.id;
+
+ //clicked(idClicked);
+ processWish(wishId);
+
+  });
+});
+
+
+function processCart(id){
+
+  var p_id = id.toString().split(":")[0]; 
+
+  var msg = p_id.toString().concat(p_id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url:"http://localhost/biz_mela/index/addtocart",
+        data: { data1 : p_id, },
+        success: function(html)
+        {
+            $("#my_count").html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_id);
+        }
+      });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cart').on('click', function(e) {
+
+//subcategories();
+ var cartId = e.target.id;
+
+ //clicked(idClicked);
+ processCart(cartId);
+
+  });
+});
+
+
+
+</script>
 
   <div class="container">
 
@@ -61,7 +148,18 @@
   
     <div class="col-md-3 hover">
       <div class="item">
-        <div class="text"><p><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P></div>
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
+          <div class="bottom_text">
+            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>
         <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
         <div class="price">Price: <?php echo $row->price; ?> </div>
       </div>
@@ -78,7 +176,18 @@
   
     <div class="col-md-3 hover">
       <div class="item">
-        <div class="text"><p><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P></div>
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
+          <div class="bottom_text">
+            <button class="cart" id="Hello World" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>
         <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
         <div class="price">Price: <?php echo $row->price; ?> </div>
       </div>
@@ -94,7 +203,18 @@
   
     <div class="col-md-3 hover">
       <div class="item">
-        <div class="text"><p><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P></div>
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
+          <div class="bottom_text">
+            <button class="cart" id="Hello World" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>
         <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
         <div class="price">Price: <?php echo $row->price; ?> </div>
       </div>

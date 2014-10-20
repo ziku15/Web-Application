@@ -78,7 +78,21 @@
         </div>
       </div>
       <div class="col-md-3 text-right shopping-cart">
-        <span class="glyphicon glyphicon-shopping-cart"></span>  <span class="shopping-text">Shopping Cart</span>  <span class="shopping-count arrow_box">12</span>
+        <span class="glyphicon glyphicon-shopping-cart"></span>  <span class="shopping-text">Shopping Cart</span>  
+        <span class="shopping-count arrow_box" id="my_count">
+          <?php 
+          if (!isset($_COOKIE['product'])) {
+            # code...
+            echo "0";
+          }
+          else{
+            $cookie_count = unserialize($_COOKIE['product']); 
+            //print_r($cookie_count);
+            echo count($cookie_count); 
+          }
+          
+          ?>  
+        </span>
       </div>
     </div>
   </div>
