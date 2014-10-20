@@ -106,10 +106,10 @@ p{
     </div>
     <div class="seperator-dotted"></div>
 
-    <?php foreach ($data as $record){?>
+    <?php foreach ($newresult as $record){?>
     <div class="product">
 
-      <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_id); ?>"> <?php echo $record->id; ?></a>
+      <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_id); ?>"> <?php echo $record->product_name; ?></a>
 
         
         
