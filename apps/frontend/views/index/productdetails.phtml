@@ -1,0 +1,86 @@
+<style type="text/css">
+.image{
+  width: 100%;
+  border: 1px solid #dadada;
+  margin-top: 20px;
+  padding: 5px 5px 0;
+}
+
+.price-table{
+  border: 1px solid #dadada;
+  text-align: center;
+  margin-top: 20px;
+  padding: 5px 5px 0;
+}
+
+.box{
+  border: 1px solid #dadada;
+  margin-top: 20px;
+  padding: 5px 5px 0;
+}
+</style>
+
+
+<div class="container">
+  <div class="col-md-1"> 
+        <img class="img-responsive image" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
+        <img class="img-responsive image" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
+        <img class="img-responsive image" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
+  </div>
+    
+  <div class="col-md-4">
+    <img class="img-responsive image" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
+      
+  </div>
+    
+  
+
+  <div class="col-md-6 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-12">
+      <?php echo $data['product_name']; ?> <br>
+      By <?php echo $data['shop_name']; ?>   
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 price-table">
+        Original price<br>
+        <?php echo $data['price']; ?>
+      </div>
+
+      <div class="col-md-3 price-table">
+        Special price<br>
+        Tk. 3720
+      </div>
+
+      <div class="col-md-3 price-table">
+        Discount<br>
+        discount
+      </div>
+
+      <div class="col-md-3 price-table">
+        Save <br>
+        Tk. 280
+      </div>
+
+    </div>
+
+    <div class="col-md-12 box">
+      Product description<br>
+      <?php echo $data['description']; ?><br>
+
+      About product<br>
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+    </div>
+
+    
+  </div>
+
+
+
+</div>
+
+
+
+<?php echo $this->partial('shared/ad'); ?>

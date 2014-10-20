@@ -30,15 +30,22 @@
 
 .text .top_text{margin-top: 35%;}
 
-.text .bottom_text{margin-top: 55%;}
+.text .bottom_text{margin-top: 35%;}
 
-.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover {border-width: 0;}
+.text .bottom_text2{margin-top: 40%;}
+
+.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
 
 .nav-tabs> li > a, .nav-tabs> li > a:hover {border: none; background-color: #ffffff;}
 
 .nav-tabs {border-bottom: none;}
 
 .cart, .wish{background-color: #454545; border:none; }
+
+.mid-menu .active .item{
+
+  border: 2px solid #cc0001;
+}
 
 
 </style>
@@ -126,6 +133,14 @@ $('.cart').on('click', function(e) {
 
 </script>
 
+<script type="text/javascript">
+
+console.log(window.location.protocol);
+console.log(window.location.host);
+console.log(window.location.pathname);
+
+</script>
+
   <div class="container">
 
   
@@ -149,6 +164,7 @@ $('.cart').on('click', function(e) {
     <div class="col-md-3 hover">
       <div class="item">
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
             <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
@@ -179,7 +195,7 @@ $('.cart').on('click', function(e) {
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
-            <button class="cart" id="Hello World" type="button" name="submit" value="test">
+            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
               <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
             </button>
             &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
@@ -206,7 +222,7 @@ $('.cart').on('click', function(e) {
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
-            <button class="cart" id="Hello World" type="button" name="submit" value="test">
+            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
               <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
             </button>
             &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
@@ -247,121 +263,31 @@ $('.cart').on('click', function(e) {
   <div class="container bottom-item-area">
     <div class="col-md-9">
       <div class="row product">
-        <div class="col-md-3">
+       <?php foreach ($bottomResult as $row){?>
+        <div class="col-md-3 hover">
           <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".substr($row->product_description,0,19).'..'; ?></P>
+          <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
+          <div class="bottom_text2">
+            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>            
+
+
+            <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+            <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+            <div class="product-price">$<?php echo $row->price; ?></div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product2.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product3.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product4.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product5.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product6.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product7.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product8.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product9.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product10.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product11.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product12.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product1.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product2.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product3.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="item">
-            <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>product4.jpg"></img>
-            <div class="product-name">Product Name</div>
-            <div class="product-price">$200</div>
-          </div>
-        </div>
-       
-        
-      </div>
+       <?php }?>
+         
+      </div> <!-- row ends !-->
     </div>
     <div class="col-md-3">
       <div class="portal"></div>
