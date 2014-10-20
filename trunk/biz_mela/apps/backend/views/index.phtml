@@ -13,6 +13,7 @@
 	    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/bootstrap.min.css"); ?>
 	    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/metisMenu/metisMenu.min.css"); ?>
 	    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/timeline.css"); ?>
+        <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/dataTables.bootstrap.css"); ?>
 	    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/sb-admin-2.css"); ?>
 	    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/css/plugins/morris.css"); ?>
 	    <?php echo \Phalcon\Tag::stylesheetLink("main/admin/font-awesome-4.1.0/css/font-awesome.min.css"); ?>
@@ -24,6 +25,8 @@
      <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/morris/morris.min.js"); ?>
      <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/morris/morris-data.js"); ?>
      <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/sb-admin-2.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/dataTables/jquery.dataTables.js"); ?>
+     <?php echo \Phalcon\Tag::javascriptInclude("main/admin/js/plugins/dataTables/dataTables.bootstrap.js"); ?>
    
     	 <script type="text/javascript">
             var baseUrl = "<?php echo $this->url->get(); ?>"

@@ -10,66 +10,64 @@
 <!--<div class="row">
     <h3>Group:Admin<a href="<?php echo $this->url->get('user/new/')?>"><span class="glyphicon glyphicon-plus pull-right" style="background-color: #FFFFFF;padding: 5px;border-radius: 10px;cursor:pointer;"></span></a></h3>
 </div>-->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').dataTable();
+    });
+    </script>
+<!--<div class="row">
+    <h3>Group:Admin<a href="<?php echo $this->url->get('user/new/')?>"><span class="glyphicon glyphicon-plus pull-right" style="background-color: #FFFFFF;padding: 5px;border-radius: 10px;cursor:pointer;"></span></a></h3>
+</div>-->
 
-<div class="row">
-    <div class="item-area">
-        <div style="font-size:14px;text-align:center;color:#428bca;"><h1>User Management</h1></div>
-        <?php foreach ($user as $aa) { ?>
 
-            <div class="row cell">
                 <div class="col-md-12">
-                    <div class="title">
-                        <div style="color:#428bca;">
-                        <strong><?php echo $aa->name; ?></strong>
-                       </div>
-                       <div style="float:left;">
-                        Created: <?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?>
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            User List
+                        </div>
+                     <div class="panel-body">
+                     <div class="table-responsive">
+                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="row">
+                                
+                                <div class="col-sm-12">
+                                    <div id="dataTables-example_filter" class="dataTables_filter">
+                                        <label>
+                                        Search:
+                                        <input class="form-control input-sm" type="search" aria-controls="dataTables-example">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                                <table id="dataTables-example" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User Name</th>
+                                            <th>Created At</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                     <?php 
+                                     $count=0;
+                                     foreach ($user as $aa) { 
+                                            $count++;
+                                        ?>
+                                     <tbody>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td><?php echo $aa->name; ?></td>
+                                            <td><?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?></td>
+                                            <td><a href="<?php echo $this->url->get('admin/user/update/'.$aa->id);?>"><i class="fa fa-pencil fa-lg " element_id="<?php echo $aa->id; ?>"></i></a></td>
+                                            <td><a href="<?php echo $this->url->get('admin/user/delete/'.$aa->id);?>"><i class="fa fa-trash-o fa-lg delete" element_id="<?php echo $aa->id; ?>"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                     <?php } ?>
+                                </table>
                     </div>
-                    <div style="float:right;">
-                        <a href="<?php echo $this->url->get('admin/user/update/'.$aa->id);?>"><i class="fa fa-pencil fa-lg " element_id="<?php echo $aa->id; ?>"></i></a><a href="<?php echo $this->url->get('admin/user/delete/'.$aa->id);?>"><i class="fa fa-trash-o fa-lg delete" element_id="<?php echo $aa->id; ?>"></i></a>
-                    </div>
+                  
 
-                    </div>
-					
-                    <!-- <div class="">
-                            Section: Sidra In the News
-                    </div> -->
-					
-                    
-					
-                    
-                </div>
-            </div>
-            
- <div class="seperator-dotted"></div>
-        <?php } ?>
-
-
-
-
-
-
-
-
-    </div>
-   
-    <div>
-       <!-- <ul class="pager">
-            <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
-            <li><a href="<?php echo $this->url->get("user/index/"); ?>">First</a></li>
-            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->before); ?>">Previous</a></li>
-            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->next); ?>">Next</a></li>
-            <li><a href="<?php echo $this->url->get("user/index/?page=" . $user->last); ?>">Last</a></li>			  
-        </ul>-->
-
-      <!--  <ul class="pager">
-                <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("user/index/" . $value . "?page=" . $user->last); ?>">Last</a></li>             
-                </ul>-->
-   </div>        
 
 <div class="text-center new-button">
             <a href="<?php echo $this->url->get('admin/user/new/')?>"><i class="fa fa-plus-square-o fa-5x"></i></a>
@@ -77,7 +75,7 @@
         </div>
 
 
-    </div>
 
-</div>
+
+
 
