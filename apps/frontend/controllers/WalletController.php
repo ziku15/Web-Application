@@ -1,6 +1,13 @@
 <?php
 
 namespace Biz_mela\Frontend\Controllers;
+use Biz_mela\Models\UserMaster as UserMaster;
+use Biz_mela\Models\UserBankInfo as UserBankInfo;
+use Biz_mela\Models\PaymentTransaction as PaymentTransaction;
+use Biz_mela\Models\PaymentMethod as PaymentMethod;
+use Biz_mela\Models\OrderMaster as OrderMaster;
+
+
 
 use Phalcon\Tag as Tag,
 Phalcon\Forms\Form,
@@ -42,41 +49,91 @@ class WalletController extends ControllerBase
 		$form->add($password);
 		$data['form'] = $form;
         $this->view->setVars($data);
+
 		if ($this->request->isPost()) {
 			$password = $this->request->getPost('password');
             $pass = sha1($password);
 		
-		$username = $this->session->get('auth');	
-		$user = UserMaster::findFirst("username='$username' AND password='$pass'");
+			$username = $this->session->get('auth');	
+			$user = UserMaster::findFirst("username="."'".$username['name']."'");
+			$prev=$user->password;
+			$prev=sha1($prev);
+
 		
-		if ($user != false){
-			//return $this->forward('wallet/wallet/');
-			return $this->response->redirect('wallet/wallet/');
-		
-		}
+			if ($pass=$prev){
+				//return $this->forward('wallet/wallet/');
+				return $this->response->redirect('wallet/wallet/');
+			
+			}
 		}
 		
 	}
 	
 	public function walletAction() {
-		$username = $this->session->get('auth');
-		//$email= $this->session->get('auth');
-		//print_r("username:".$username['name']);
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");
-		$userid=$con->id;
-		$a=UserBankInfo::findFirst("user_id="."'".$userid."'");
-			$data['value']=$a;
-			
-			//$data['bankname'] = $a->bankname;
 		
-		
-			$this->view->setVar('data',$data);
 		
 		
 		
     }
 	
+    public function accountAction() {
+
+    	$username = $this->session->get('auth');
+		
+        $con=UserMaster::findFirst("username="."'".$username['name']."'");
+		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");
+		$userid=$con->id;
+		$a=UserBankInfo::findFirst("user_id="."'".$userid."'");
+		$data['value']=$a;
+		
+		$this->view->setVar('data',$data);
+    }
+
+
+    public function paymentAction() {
+
+    	$username = $this->session->get('auth');
+		
+        $con=UserMaster::findFirst("username="."'".$username['name']."'");
+		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");
+		$userid=$con->id;
+
+		/*$paymentResult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no, Biz_mela\Models\OrderMaster.total, m.method_name')
+                  ->leftJoin('Biz_mela\Models\PaymentTransaction', 't.order_master_id = Biz_mela\Models\OrderMaster.id', 't')
+                  ->join('Biz_mela\Models\PaymentMethod', 'm.id = t.payment_method_id', 'm','right')
+                  ->andWhere('Biz_mela\Models\OrderMaster.user_id = $userid')
+                  ->orderBy('Biz_mela\Models\OrderMaster.id desc')
+                  
+                  ->getQuery()
+                  ->execute();
+        $this->view->setVar(paymentResult,$paymentResult);*/
+
+		/*$a=UserBankInfo::findFirst("user_id="."'".$userid."'");
+		$data['value']=$a;
+		
+		$this->view->setVar('data',$data);*/
+
+
+		$phql = ("SELECT Biz_mela\Models\OrderMaster.order_no, Biz_mela\Models\OrderMaster.total, Biz_mela\Models\PaymentMethod.method_name
+			FROM Biz_mela\Models\OrderMaster, Biz_mela\Models\PaymentMethod, Biz_mela\Models\PaymentTransaction
+			WHERE Biz_mela\Models\PaymentTransaction.order_master_id = Biz_mela\Models\OrderMaster.id
+			AND Biz_mela\Models\PaymentMethod.id = Biz_mela\Models\PaymentTransaction.payment_method_id
+			AND Biz_mela\Models\OrderMaster.user_id = $userid
+			LIMIT 0 , 30");
+
+		$newresult = $this->modelsManager->executeQuery($phql);
+
+		//$newresult = $query->execute();
+		//$data['value']=$newresult;
+                 //print_r($data['value']);exit();
+         $this->view->setVar(newresult,$newresult);
+
+    }
+
+
+
 	public function updateAction() {
 		
 		

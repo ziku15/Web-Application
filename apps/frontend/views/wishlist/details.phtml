@@ -38,31 +38,19 @@ p > a:hover{
 
         <div class="col-md-8 col-md-offset-2">
             <div class="info">
+                <Strong> Product Name: </strong><b><?php echo $heading;?></b>
+            </div>
+            <div class="info">
                 <Strong> Description: </strong><?php echo $description;?>
             </div>
 
             <div class="info">
                 <Strong> Price: </strong><?php echo $price;?>
             </div>
-
-            <div class="info">
-                <Strong> Creation: </strong><?php echo $created_at;?>
-            </div>
-
-            <div class="info">
-                <Strong> Stock Quantity: </strong><?php echo $in_stock;?>
-            </div>
-
             <div class="info">
                 <Strong> Discount Rate: </strong><?php echo $discount;?>
             </div>
-            <div class="info">
-                <Strong>Least Orders To be served:</strong> <?php echo $minimum_order_level; ?>
-            </div>
-
-            <div class="info">
-                <p><a href='/biz_mela/inventory/edit'>Edit Product  </a></p>
-            </div>
+            
         </div>
 
 

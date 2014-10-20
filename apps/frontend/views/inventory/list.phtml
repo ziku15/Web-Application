@@ -11,40 +11,122 @@ text-align:center;
     top: 10px;
 }
 
-.row {
-    margin-left: -50px;
-    margin-right: -15px;
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 805px;
+    width: 95%;
+
+
 }
 
-.col-md-3 {
-    width: 25%;
-}
+
 a {
-    color: #0099CC;
-	font-size: 18px;
+    color: #D44243;
+	text-decoration: none;
     
 }
+
+
+
+.dash{
+
+    text-align: left;
+    font-size: 30px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    color:#330099;
+
+
+}
+
+
+.seperator-dotted{
+    width: 100%;
+    border-bottom: 1px solid #ECECEC;
+    margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+
+strong > a{
+
+    color:#A8A8A8;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+
+
+
+}
+
+strong > a:hover{
+
+
+    background-color: #52575F;
+    color: white;
+}
+
+
+i{
+
+    font-size:20px;
+
+}
+
+.product{
+
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px; 
+    border:1px solid #ECECEC ;
+    border-radius: 4px;   
+
+}
+p{
+
+    font-size: 15px;
+
+}
+
 </style>
-<div class="container">
-</hr>
+
+
 <div class="row-cell">
-<div class="col-md-8">
 
-<h3 class="b"> My Products </h3>
-<?php foreach ($data['value'] as $record){?>
-<p><strong> <a href="<?php echo $this->url->get() . 'inventory/details/' . $record->id; ?>"><?php echo $record->product_name;?></a></strong></p>
-<p> <?php echo $record->product_description;?></p>
-</br>
-</br>
-<?php }?>
-</div>
-</div>
-</div>
-<div class="col-md-4 col-md-offset-4">
-        <div class="text-center new-button">
-        <a href="<?php echo $this->url->get() . 'inventory/new'; ?>"><i class="fa fa-plus-square-o fa-5x"></i></a>   
-            <h3>Add New Product</h3>
+    <div >
+        <p class="dash">My Products</p>
+    </div>
+    <div class="seperator-dotted"></div>
+
+    <?php foreach ($data['value'] as $record){?>
+    <div class="product">
+
+        <strong> <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> <?php echo $record->product_name; ?>
         </a>
+        </strong>
+        <p> <?php echo $record->product_description;?></p>
+
     </div>
+    <?php }?>
+
+    
+
+    <div class="col-md-4 col-md-offset-4">
+        <div class="text-center new-button">
+            <a href="<?php echo $this->url->get() . 'inventory/new'; ?>"><i class="fa fa-plus-square-o fa-5x"></i></a>   
+                <h3>Add New Product</h3>
+            </a>
+        </div>
     </div>
 
+    
+
+</div>

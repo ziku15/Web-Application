@@ -24,8 +24,8 @@ text-align:center;
 
 a {
     color: #D44243;
-	text-decoration: none;
-    
+	
+    text-decoration: none;
 }
 
 
@@ -102,28 +102,25 @@ p{
 <div class="row-cell">
 
     <div >
-        <p class="dash">My Orders</p>
+        <p class="dash">My WishList</p>
     </div>
     <div class="seperator-dotted"></div>
 
-    <?php foreach ($data['value'] as $record){?>
+    <?php foreach ($data as $record){?>
     <div class="product">
 
-        <strong><p>Order Number:</p> <a href="<?php echo $this->url->get("order/details/" . $record->id); ?>"> <?php echo $record->order_no; ?>
-        </a>
-        </strong>
+      <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_id); ?>"> <?php echo $record->id; ?></a>
 
+        
+        
+        
 
     </div>
     <?php }?>
 
     
 
-    <div class="">
-       <b> <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;To Find out the Order Details click on the Order No. Link</p> </b>
-
-    </div>
-
+    
     
 
 </div>

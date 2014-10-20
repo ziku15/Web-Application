@@ -1,7 +1,9 @@
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/myaccount.css"); ?>
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
 <style>
-
+.panel-group > .panel panel-default {
+    background-color: #FFFFFF;
+}
 </style>
 <!-- main body part -->
 <div class="container">
@@ -55,7 +57,7 @@
 			<div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("order/list/") ?>">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("order/order/") ?>">
                                         My Orders
                                     </a>
                                 </div>
@@ -85,7 +87,7 @@
 			<div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wallet/wallet/") ?>">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wallet/pass/") ?>">
                                         My Wallet
                                     </a>
                                 </div>
@@ -95,7 +97,7 @@
 			<div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wishlist/wish/") ?>">
                                         My Wishlists
                                     </a>
                                 </div>

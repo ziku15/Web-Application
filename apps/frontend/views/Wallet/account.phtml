@@ -1,0 +1,67 @@
+<style>
+
+a{
+color:#162D8A;
+text-decoration: none;
+}
+
+
+b.padding{
+	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+}
+.seperator-dotted{
+    width: 100%;
+    border-bottom: 1px solid #ECECEC;
+    margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.settings-area {
+    font-size: 13px;
+    position: absolute;
+    right: 60px;
+    text-align: right;
+    top: 10px;
+}
+
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 305px;
+    width: 67.5%;
+
+
+}
+
+.col-md-12 > h3{
+
+    color:#330099;
+
+}
+
+
+</style>
+<div class="container">
+</hr>
+    <div class="row-cell">
+        <div class="col-md-12">
+
+            <h3>Account Information</h3>
+            <div class="seperator-dotted">
+
+            </div>
+            <p ><b>Account Holder</b>   : <?php echo $data['value']->account_holder_name;?></p>
+            <p ><b>Account No.</b>       :<?php echo $data['value']->account_no;?></p>
+            <p ><b>Bank</b>       : <?php echo $data['value']->bank_name;?></p>
+            <p><b>Branch</b>   : <?php echo $data['value']->branch_name;?></p>
+            <p ><b>Swift Code</b> : <?php echo $data['value']->swift_code;?></p>
+
+            </br>
+            </br>
+        </div>
+    </div>
+</div>

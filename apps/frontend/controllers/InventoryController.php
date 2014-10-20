@@ -2,6 +2,10 @@
 
 namespace Biz_mela\Frontend\Controllers;
 
+use Biz_mela\Models\UserMaster as UserMaster;
+use Biz_mela\Models\ShopMaster as ShopMaster;
+use Biz_mela\Models\ProductMaster as ProductMaster;
+
 use Phalcon\Tag as Tag,
 Phalcon\Forms\Element\Text,
 Phalcon\Validation\Validator\PresenceOf,
@@ -28,6 +32,8 @@ class InventoryController extends ControllerBase
 	}
 	
 	public function listAction() {
+
+		
         
 		$username = $this->session->get('auth');
         $con=UserMaster::findFirst("username="."'".$username['name']."'");
@@ -41,7 +47,66 @@ class InventoryController extends ControllerBase
 		
 		
 		
-		
+		/*$user_id = $this->session->get('auth')['id'];
+
+
+		$phql = ("SELECT *
+			FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster
+			WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
+			AND Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
+			AND Biz_mela\Models\UserMaster.id = $user_id
+			LIMIT 0 , 30");
+
+		$newresult = $this->modelsManager->executeQuery($phql);
+
+		//$newresult = $query->execute();
+		$data['value']=$newresult;
+                 //print_r($data['value']);exit();
+         $this->view->setVar('data',$data);*/
+
+		//$numberPage = $this->request->getQuery("page", "int", 1);
+       /* $newresult = $this->modelsManager->createBuilder()
+                ->from('Biz_mela\Models\ProductMaster')
+        		->columns('Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.product_description')
+        		->andWhere('Biz_mela\Models\UserMaster.id=Biz_mela\Models\ShoptMaster.user_id')
+        		->andWhere('Biz_mela\Models\ShopMaster.id=Biz_mela\Models\ProductMaster.user_id')
+        		->andWhere('Biz_mela\Models\UserMaster.id= .$user_id')
+        		//->join('Biz_mela\Models\UserMaster', 'Biz_mela\Models\ShopMaster.user_id='.$user_id)
+		        // //$builder = $builder->where('Biz_mela\Models\ProductMaster.id desc');
+
+		        // //$builder = $builder->where('is_del = 0');
+		        // //   $builder = $builder->andWhere('Forum.created_at + INTERVAL \'7\' day>=CURRENT_DATE');
+        		// ->orderby('Biz_mela\Models\ProductMaster.shop_id desc')
+        		->getQuery()
+                ->execute();*/
+
+        /* $data['value']=$newresult;
+                 //print_r($data['value']);exit();
+         $this->view->setVar('data',$data);*/
+
+       /* $paginator = new Phalcon\Paginator\Adapter\QueryBuilder(array(
+            "builder" => $newresult,
+            "limit" => 10,
+            "page" => $numberPage
+        ));*/
+
+		/*SELECT *
+FROM shop_master, product_master, user_master
+WHERE user_master.id = shop_master.user_id
+AND shop_master.id = product_master.shop_id
+AND user_master.id =130
+LIMIT 0 , 30*/
+
+
+        // Get the paginated results
+
+		/*Look At this
+        $page['Product'] = $paginator->getPaginate();
+        $page['value'] = $value;*/
+
+        //$this->view->setVars(array('sub_title'=>'List of All Threads'));
+        //$this->view->setVars(array('action' => 'Listing all threads'));
+        //$this->view->setVars($page);
 		/*$numberPage = $this->request->getQuery("page", "int", 1);
         $builder = $this->modelsManager->createBuilder();
         $builder = $builder->from('ProductMaster');
@@ -225,6 +290,8 @@ class InventoryController extends ControllerBase
 			
 			//$data['bankname'] = $a->bankname;
 			$this->view->setVar(data,$data);*/
+			/*$data['value']=$inventoryData;
+			$this->view->setVar(data,$data);*/
 			$data['id'] = $inventoryData->id;
 			$data['heading'] = $inventoryData->product_name;
 			$data['description'] = $inventoryData->product_description;
@@ -256,25 +323,25 @@ class InventoryController extends ControllerBase
 		$description = new Text("description", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'description',
-            'placeholder' => $product->product_description,
+            'value' => $product->product_description,
             'autocomplete' => 'off'
         ));
 		$price = new Text("price", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'price',
-            'placeholder' => $product->price,
+            'value' => $product->price,
             'autocomplete' => 'off'
         ));
 		$discount = new Text("discount", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'discount',
-            'placeholder' => $product->discount,
+            'value' => $product->discount,
             'autocomplete' => 'off'
         ));
 		$minimum_order_level = new Text("minimum_order_level", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'minimum_order_level',
-            'placeholder' => $product->minimum_order_level,
+            'value' => $product->minimum_order_level,
             'autocomplete' => 'off'
         ));
 	

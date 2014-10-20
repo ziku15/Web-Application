@@ -1,11 +1,11 @@
 <?php
 
 namespace Biz_mela\Frontend\Controllers;
-use Biz_mela\Frontend\Models\UserMaster as UserMaster;
-use Biz_mela\Frontend\Models\UserBankInfo as UserBankInfo;
-use Biz_mela\Frontend\Models\OrderMaster as OrderMaster;
-use Biz_mela\Frontend\Models\OrderUserBillingInfo as OrderUserBillingInfo;
-use Biz_mela\Frontend\Models\OrderUserShippinInfo as OrderUserShippinInfo;
+use Biz_mela\Models\UserMaster as UserMaster;
+use Biz_mela\Models\UserBankInfo as UserBankInfo;
+use Biz_mela\Models\OrderMaster as OrderMaster;
+use Biz_mela\Models\OrderUserBillingInfo as OrderUserBillingInfo;
+use Biz_mela\Models\OrderUserShippinInfo as OrderUserShippinInfo;
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
@@ -244,7 +244,7 @@ class AccdashboardController extends ControllerBase
 
 		$contactno = new Text("contactno", array(
             'class' => 'form-control input-lg form-element',
-			'id' => 'zipcode',
+			'id' => 'contactno',
             'value' => $ship_addr->contact_no,
             'autocomplete' => 'off'
         ));
@@ -270,10 +270,10 @@ class AccdashboardController extends ControllerBase
 			//$dob = $this->request->getPost('dob');
 			//$accountno = $this->request->getPost('accountno');
 		
-			$ship_addr->billing_address = $address;
+			$ship_addr->shipping_address = $address;
 			$ship_addr->country = $country;
 			$ship_addr->zip_code = $zipcode;
-			$ship_addr->contactno = $contactno;
+			$ship_addr->contact_no = $contactno;
 			//$User->account_holder_name = $accountholder;
 			//$User->dob = $dob;
 			

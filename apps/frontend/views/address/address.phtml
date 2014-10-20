@@ -1,87 +1,116 @@
 <style>
-h4{
-color:#780000;
-	padding-top: 20px;
-    padding-right: 0px;
-    padding-bottom: 20px;
-    padding-left: 0px;
-}
+
 
 a{
-color:#3300CC;
+	color:#900000;
 
 }
-table, td, th {
-    border: 1px solid black;
+.row-cell{
+
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    height: 355px;
+    width: 67.5%;
 }
+
+
+.seperator-dotted{
+	width: 100%;
+	border-bottom: 1px solid #ECECEC;
+	margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+i{
+	font-size: 18px;
+}
+a{
+	text-decoration: none;
+}
+
+h4>a{
+	font-size: 16px;
+}
+
 </style>
 
-<div class="col-md-10 ">
-<h4><strong><u>Default Billing Address</u></strong></h4>
-<div class="fixed">
-<div class="container">
-<div class="info">
-<div class="col-md-2 ">
-<p><b>Account Holder:</b></p>
-</div>
-<div class="col-md-8 ">
-<?php echo $record['value']->account_holder_name;?>
-</div>
-</div>
-</div>
-<div class="container">
-<div class="info">
-<div class="col-md-2 ">
-<p><b>Account Number:</b></p>
-</div>
-<div class="col-md-8 ">
-<?php echo $record['value']->account_no;?>
-</div>
-</div>
-</div>
 
 <div class="container">
-<div class="info">
-<div class="col-md-2 ">
-<p><b>Bank Name:</b></p>
-</div>
-<div class="col-md-8 ">
-<?php echo $record['value']->bank_name;?>
-</div>
-</div>
-</div>
 
-<div class="container">
-<div class="info">
-<div class="col-md-2 ">
-<p><b>Branch Name:</b></p>
-</div>
-<div class="col-md-8 ">
-<?php echo $record['value']->branch_name;?>
-</div>
-</div>
-</div>
-
-<div class="container">
-<div class="info">
-<div class="col-md-2 ">
-<p><b>Swift Code:</b></p>
-</div>
-<div class="col-md-8 ">
-<?php echo $record['value']->swift_code;?>
-</div>
-</div>
-</div>
+	<div class="row-cell">
 
 
-<div class="container">
-<div class="info">
-<div class="col-md-2 ">
-<a href="<?php echo $this->url->get("address/edit/") ?>">Edit</a>
-</div>
+		<div class="col-md-6">
+	        <h4><b>Default Billing Address &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp;
+	            <a href="<?php echo $this->url->get("address/editbill"); ?>">
+	                Edit
+	             </a>
+	         </b></h4>   
+        
+	        <div class="seperator-dotted">
+
+	        </div>
+
+
+     	</div>
+
+
+     	<div class="col-md-6">
+	        <h4><b>Default Shipping Address &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp;  
+	            <a href="<?php echo $this->url->get("address/editshipment"); ?>">
+	                Edit
+	             </a>
+	         </b></h4>   
+        
+	        <div class="seperator-dotted">
+
+	        </div>
+
+
+     	</div>
+
+     	<div class="col-md-6">
+	        
+	        <p><?php echo $user['value']->username;?></p>
+	        <p><?php echo $data['value']->billing_address;?></p>
+	        <p><?php echo $data['value']->country;?></p>
+	        <p><?php echo $data['value']->zip_code;?></p>
+	        <p>T:<?php echo $data['value']->contact_no;?></p>
+
+	        
+
+     	</div>
+
+     	<div class="col-md-6">
+	        
+	        <p><?php echo $user['value']->username;?></p>
+	        <p><?php echo $record['value']->shipping_address;?></p>
+	        <p><?php echo $record['value']->country;?></p>
+	        <p><?php echo $record['value']->zip_code;?></p>
+	        <p>T:<?php echo $record['value']->contact_no;?></p>
+	        
+     	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
 
 </div>
-</div>
 
-</div>
-</div>
+
+
+
+
+
+
+
