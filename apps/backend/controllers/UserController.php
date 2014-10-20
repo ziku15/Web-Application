@@ -222,4 +222,19 @@ public function deleteAction($value) {
     $this->response->redirect('admin/user');
  }
 
+ public function changestatusAction($value) {
+    $User = Admin::findFirst('id=' . $value);
+    if(($User->status)==1)
+    {
+        $User->status=0;
+    }
+    else
+    {
+
+        $User->status=1;
+    }
+    $User->save();
+    $this->response->redirect('admin/user');
+ }
+
 }
