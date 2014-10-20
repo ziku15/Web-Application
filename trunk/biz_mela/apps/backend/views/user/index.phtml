@@ -65,6 +65,11 @@
                                             <td><?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?></td>
                                             <td><a href="<?php echo $this->url->get('admin/user/update/'.$aa->id);?>"><i class="fa fa-pencil fa-lg " element_id="<?php echo $aa->id; ?>"></i></a></td>
                                             <td><a href="<?php echo $this->url->get('admin/user/delete/'.$aa->id);?>"><i class="fa fa-trash-o fa-lg delete" element_id="<?php echo $aa->id; ?>"></i></a></td>
+                                            <?php if($aa->status==1){?>
+                                                <td><a href="<?php echo $this->url->get('admin/user/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/OK.png')?>"></a></td>
+                                            <?php } else{?>
+                                                <td><a href="<?php echo $this->url->get('admin/user/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/cancel-icon.png')?>"></a></td>
+                                            <?php } ?>
                                         </tr>
                                     </tbody>
                                      <?php } ?>
