@@ -54,12 +54,12 @@ class AccdashboardController extends ControllerBase
 
 		$master=$bill->id;
 
-		$bill_addr=OrderUserBillingInfo::findFirst("id="."'".$master."'");
+		$bill_addr=OrderUserBillingInfo::findFirst("order_master_id="."'".$master."'");
 		$address['value']=$bill_addr;
 
 		$this->view->setVar('address',$address);
 
-		$ship_addr=OrderUserShippinInfo::findFirst("id="."'".$master."'");
+		$ship_addr=OrderUserShippinInfo::findFirst("order_master_id="."'".$master."'");
 		$shipment['value']=$ship_addr;
 		$this->view->setVar('shipment',$shipment);
 
@@ -147,7 +147,7 @@ class AccdashboardController extends ControllerBase
 		$user_id=$con->id;
 		$bill=OrderMaster::findFirst("user_id="."'".$user_id."'");
 		$master=$bill->id;
-		$bill_addr=OrderUserBillingInfo::findFirst("id="."'".$master."'");
+		$bill_addr=OrderUserBillingInfo::findFirst("order_master_id="."'".$master."'");
 
 		$form = new Form();
 
@@ -222,7 +222,7 @@ class AccdashboardController extends ControllerBase
 		$user_id=$con->id;
 		$bill=OrderMaster::findFirst("user_id="."'".$user_id."'");
 		$master=$bill->id;
-		$ship_addr=OrderUserShippinInfo::findFirst("id="."'".$master."'");
+		$ship_addr=OrderUserShippinInfo::findFirst("order_master_id="."'".$master."'");
 
 		$form = new Form();
 

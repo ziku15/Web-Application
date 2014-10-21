@@ -5,6 +5,8 @@ use Biz_mela\Models\UserMaster as UserMaster;
 use Biz_mela\Models\ProductWishlist as ProductWishlist;
 use Biz_mela\Models\ProductMaster as ProductMaster;
 
+use Phalcon\Paginator\Adapter\Model as Paginator;
+
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
 	Phalcon\Forms\Element\Text;
@@ -41,6 +43,7 @@ class WishlistController extends ControllerBase
         $con=UserMaster::findFirst("username="."'".$username['name']."'");
 		
 		$userid=$con->id;
+		$numberPage = $this->request->getQuery("page", "int", 1);
 		$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductWishlist.product_id
 			FROM Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductWishlist, Biz_mela\Models\UserMaster
 			WHERE Biz_mela\Models\ProductMaster.id = Biz_mela\Models\ProductWishlist.product_id
@@ -50,8 +53,18 @@ class WishlistController extends ControllerBase
 
 		$newresult = $this->modelsManager->executeQuery($phql);
 
+		$paginator = new Paginator(array(
+            "data" => $newresult,
+            "limit" => 5,
+            "page" => $numberPage
+        ));
 		
-         $this->view->setVar(newresult,$newresult);
+        $page['Wish'] = $paginator->getPaginate();
+        $page['value'] = $value;
+        $this->view->setVars($page);
+
+		
+         //$this->view->setVar(newresult,$newresult);
 		
 
 

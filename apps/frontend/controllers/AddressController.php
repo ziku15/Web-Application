@@ -50,12 +50,12 @@ use Phalcon\Tag as Tag,
 
 		$master=$bill->id;
 
-		$bill_addr=OrderUserBillingInfo::findFirst("id="."'".$master."'");
+		$bill_addr=OrderUserBillingInfo::findFirst("order_master_id="."'".$master."'");
 		$data['value']=$bill_addr;
 
 		$this->view->setVar('data',$data);
 
-		$ship_addr=OrderUserShippinInfo::findFirst("id="."'".$master."'");
+		$ship_addr=OrderUserShippinInfo::findFirst("order_master_id="."'".$master."'");
 		$record['value']=$ship_addr;
 		$this->view->setVar('record',$record);
 
@@ -72,7 +72,7 @@ use Phalcon\Tag as Tag,
 		$user_id=$con->id;
 		$bill=OrderMaster::findFirst("user_id="."'".$user_id."'");
 		$master=$bill->id;
-		$bill_addr=OrderUserBillingInfo::findFirst("id="."'".$master."'");
+		$bill_addr=OrderUserBillingInfo::findFirst("order_master_id="."'".$master."'");
 
 		$form = new Form();
 
@@ -145,7 +145,7 @@ use Phalcon\Tag as Tag,
 		$user_id=$con->id;
 		$bill=OrderMaster::findFirst("user_id="."'".$user_id."'");
 		$master=$bill->id;
-		$ship_addr=OrderUserShippinInfo::findFirst("id="."'".$master."'");
+		$ship_addr=OrderUserShippinInfo::findFirst("order_master_id="."'".$master."'");
 
 		$form = new Form();
 

@@ -1,15 +1,9 @@
 <style>
+
 h3{
     text-align:center;
 }
 
-.settings-area {
-    font-size: 13px;
-    position: absolute;
-    right: 60px;
-    text-align: right;
-    top: 10px;
-}
 
 .row-cell{
 
@@ -18,24 +12,23 @@ h3{
     height: 805px;
     width: 95%;
 }
+.product{
+
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px; 
+    border:1px solid #ECECEC ;
+    border-radius: 4px;   
+
+}
 
 
 a {
     color: #870415;
 	text-decoration: none;
+    
 }
-
-.dash{
-
-    text-align: left;
-    font-size: 30px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 10px;
-    color:#330099;
-}
-
 
 .seperator-dotted{
     width: 100%;
@@ -54,9 +47,6 @@ strong > a{
     padding-right: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
-
-
-
 }
 
 strong > a:hover{
@@ -66,26 +56,10 @@ strong > a:hover{
     color: white;
 }
 
-
-i{
-
-    font-size:20px;
-
-}
-
-.product{
-
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px; 
-    border:1px solid #ECECEC ;
-    border-radius: 4px;   
-
-}
 p{
 
     font-size: 18px;
+    padding-left: 5px;
 
 }
 
@@ -113,6 +87,17 @@ p{
     color:#870415;
 }
 
+strong{
+    color:#029130;
+    padding-left: 5px;
+}
+
+strong>p{
+    color:#000000;
+    padding-left: 5px;
+}
+
+
 .pager{
     color:#000000;
 }
@@ -127,7 +112,6 @@ li>a{
 }
 
 
-
 </style>
 
 
@@ -138,43 +122,57 @@ li>a{
         
             
         
+            
         <div class="col-md-3">
             <div class="btn-group">
                 <a href="<?php echo $this->url->get('order/list/')?>" class="btn btn-lg btn-custom gray" id="list"><p>View Order List</p></a>
             </div>
         </div>
+           
+
+            
         <div class="col-md-3">
             <div class="btn-group">
                 <a href="<?php echo $this->url->get('order/purchase/')?>" class="btn btn-lg btn-custom gray" id="purchase"><p>Purchase History</p></a>
             </div>
             
         </div>
+
+        
+
+       
         <div class="col-md-3">
             <div class="btn-group">
                 <a href="<?php echo $this->url->get('order/pending/')?>" class="btn btn-lg btn-custom gray" id="pending"><p>&ensp; Pending List &ensp;</p></a>
             </div>
             
         </div>
+    
+
+          
         <div class="col-md-3">
             <div class="btn-group">
                 <a href="<?php echo $this->url->get('order/reject/')?>" class="btn btn-lg btn-custom gray" id="reject"><p>Reject History &ensp; </p></a>
             </div>
             
         </div>
+       
+    
     
     </nav>
 
     <div class="order">
-        <h2>Order List</h2>
+        <h2>Successful Orders</h2>
     </div>  
 
 
     <?php foreach ($Order->items as $record){?>
     <div class="product">
 
-        <strong><p>Order Number:</p> <a href="<?php echo $this->url->get("order/details/" . $record->id); ?>"> <?php echo $record->order_no; ?>
+        <strong><p>Order Number:</p> <a href="<?php echo $this->url->get("order/orderdetails/" . $record->id); ?>"> <?php echo $record->order_no; ?>
         </a>
         </strong>
+        <p>Status</p><strong><?php echo $record->status_name; ?></strong>
 
 
     </div>
@@ -184,10 +182,10 @@ li>a{
 
         <ul class="pager">
                 <li><?php echo "You are in page ", $Order->current, " of ", $Order->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("Order/list" ); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->last); ?>">Last</a></li>            
+                <li><a href="<?php echo $this->url->get("Order/purchase" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("Order/purchase?page=" . $Order->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("Order/purchase?page=" . $Order->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("Order/purchase?page=" . $Order->last); ?>">Last</a></li>            
         </ul>
 
     </div>
