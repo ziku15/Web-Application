@@ -1,15 +1,10 @@
 <style>
+
 h3{
     text-align:center;
 }
 
-.settings-area {
-    font-size: 13px;
-    position: absolute;
-    right: 60px;
-    text-align: right;
-    top: 10px;
-}
+
 
 .row-cell{
 
@@ -18,24 +13,23 @@ h3{
     height: 805px;
     width: 95%;
 }
+.product{
+
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px; 
+    border:1px solid #ECECEC ;
+    border-radius: 4px;   
+
+}
 
 
 a {
     color: #870415;
 	text-decoration: none;
+    
 }
-
-.dash{
-
-    text-align: left;
-    font-size: 30px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 10px;
-    color:#330099;
-}
-
 
 .seperator-dotted{
     width: 100%;
@@ -54,9 +48,6 @@ strong > a{
     padding-right: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
-
-
-
 }
 
 strong > a:hover{
@@ -66,26 +57,10 @@ strong > a:hover{
     color: white;
 }
 
-
-i{
-
-    font-size:20px;
-
-}
-
-.product{
-
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px; 
-    border:1px solid #ECECEC ;
-    border-radius: 4px;   
-
-}
 p{
 
     font-size: 18px;
+    padding-left: 5px;
 
 }
 
@@ -108,9 +83,18 @@ p{
     color: #106E96;
 }
 
-
 .intro{
     color:#870415;
+}
+
+strong{
+    color:#1B10B5;
+    padding-left: 5px;
+}
+
+strong>p{
+    color:#000000;
+    padding-left: 5px;
 }
 
 .pager{
@@ -125,7 +109,6 @@ li>a{
     color: #9E0423;
 
 }
-
 
 
 </style>
@@ -165,15 +148,20 @@ li>a{
     </nav>
 
     <div class="order">
-        <h2>Order List</h2>
+        <h2>Pending Orders</h2>
     </div>  
 
 
     <?php foreach ($Order->items as $record){?>
     <div class="product">
 
-        <strong><p>Order Number:</p> <a href="<?php echo $this->url->get("order/details/" . $record->id); ?>"> <?php echo $record->order_no; ?>
-        </a>
+        <strong>
+            <p>Order Number:</p> <a href="<?php echo $this->url->get("order/orderdetails/" . $record->id); ?>"> <?php echo $record->order_no; ?></a>
+        
+        </strong>
+        <p>Status:</p>
+        <strong>
+            <?php echo $record->status_name; ?>
         </strong>
 
 
@@ -184,16 +172,16 @@ li>a{
 
         <ul class="pager">
                 <li><?php echo "You are in page ", $Order->current, " of ", $Order->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("Order/list" ); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->last); ?>">Last</a></li>            
+                <li><a href="<?php echo $this->url->get("Order/pending" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("Order/pending?page=" . $Order->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("Order/pending?page=" . $Order->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("Order/pending?page=" . $Order->last); ?>">Last</a></li>            
         </ul>
 
     </div>
+    
 
 </div>
-
 
 <script type="text/javascript">
     var pathname = window.location.pathname;

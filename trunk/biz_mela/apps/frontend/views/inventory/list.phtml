@@ -1,14 +1,7 @@
 <style>
-h3{
-text-align:center;
-}
 
-.settings-area {
-    font-size: 13px;
-    position: absolute;
-    right: 60px;
-    text-align: right;
-    top: 10px;
+h3{
+    text-align:center;
 }
 
 .row-cell{
@@ -17,21 +10,17 @@ text-align:center;
     border-radius: 4px;
     height: 805px;
     width: 95%;
-
-
 }
+
 .intro{
     color:#870415;
 }
 
 a {
-    
     color:#900000;
 	text-decoration: none;
     
 }
-
-
 
 .dash{
 
@@ -41,8 +30,7 @@ a {
     padding-right: 0px;
     padding-bottom: 0px;
     padding-left: 10px;
-    color:#031675;
-
+    color:#106E96;
 
 }
 
@@ -64,24 +52,12 @@ strong > a{
     padding-right: 5px;
     padding-bottom: 5px;
     padding-left: 0px;
-
-
-
 }
 
 strong > a:hover{
-
-
     background-color: #52575F;
     color: white;
     font-size: 15px;
-}
-
-
-i{
-
-    font-size:20px;
-
 }
 
 .product{
@@ -103,10 +79,33 @@ i{
 
 .glyphicon{
     float:right;
+    color:#106E96;
 }
 .delete{
     float: right;
+    color:#106E96;
 }
+
+.glyphicon:hover{
+    color:#5B050B;
+}
+.delete:hover{
+    color:#5B050B;
+}
+
+.pager{
+    color:#000000;
+}
+
+li>a{
+    color: #106E96;
+}
+
+
+.fa{
+    color: #106E96;
+}
+
 
 </style>
 
@@ -118,18 +117,18 @@ i{
     </div>
     <div class="seperator-dotted"></div>
 
-    <?php foreach ($data['value'] as $record){?>
-    <div class="product">
+    <?php foreach ($Product->items as $record){?>
+        <div class="product">
 
-        <strong> <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> <?php echo $record->product_name; ?>
-        </a>
-        </strong>
-        <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>"><i class="delete fa fa-trash-o fa-lg" ></i></a>
-        <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>"><i class="glyphicon glyphicon-pencil" ></i></a>
-        
-        <p> <?php echo $record->product_description;?></p>
+            <strong> <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> <?php echo $record->product_name; ?>
+            </a>
+            </strong>
+            <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>"><i class="delete fa fa-trash-o fa-lg" ></i></a>
+            <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>"><i class="glyphicon glyphicon-pencil" ></i></a>
+            
+            <p> <?php echo $record->product_description;?></p>
 
-    </div>
+        </div>
     <?php }?>
 
     
@@ -142,6 +141,18 @@ i{
         </div>
     </div>
 
-    
+    <div class="col-md-12">
+
+        <ul class="pager">
+                <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("inventory/list" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("inventory/list?page=" . $Product->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("inventory/list?page=" . $Product->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("inventory/list?page=" . $Product->last); ?>">Last</a></li>            
+        </ul>
+
+    </div>
+
 
 </div>
+

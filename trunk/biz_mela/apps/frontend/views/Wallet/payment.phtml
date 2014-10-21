@@ -1,7 +1,7 @@
 <style>
 
 a{
-color:#880000;
+color:#870415;
 text-decoration: none;
 }
 
@@ -73,6 +73,20 @@ p{
     font-size: 18px;
 }
 
+.data{
+    font-size: 15px;
+}
+
+.intro{
+    color:#870415;
+}
+
+.red{
+    color: #9E0423;
+
+}
+
+
 </style>
 <div class="container">
 </hr>
@@ -80,23 +94,27 @@ p{
         <nav class="navbar navbar-default" role="navigation">
             <div class="col-md-3">
                 <div class="btn-group">
-                    <a href="<?php echo $this->url->get('wallet/account/')?>" class="btn btn-lg btn-custom gray"><p>My Account &ensp; &ensp; </p></a>
+                    <a href="<?php echo $this->url->get('wallet/account/')?>" class="btn btn-lg btn-custom gray" id="account">
+                        <p>My Account &ensp; &ensp; </p></a>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="btn-group">
-                    <a href="<?php echo $this->url->get('wallet/payment/')?>" class="btn btn-lg btn-custom gray"><p>Payment History</p></a>
+                    <a href="<?php echo $this->url->get('wallet/payment/')?>" class="btn btn-lg btn-custom gray" id="payment">
+                        <p>Payment History</p></a>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="btn-group">
-                    <a href="<?php echo $this->url->get('wallet/status/')?>" class="btn btn-lg btn-custom gray"><p>Payment Status &ensp;  </p></a>
+                    <a href="<?php echo $this->url->get('wallet/status/')?>" class="btn btn-lg btn-custom gray" id="status">
+                        <p>Payment Status &ensp;  </p></a>
                 </div>
                 
             </div>
             <div class="col-md-3">
                 <div class="btn-group">
-                    <a href="<?php echo $this->url->get('wallet/withdraw/')?>" class="btn btn-lg btn-custom gray"><p>Payment Withdraw &ensp;  </p></a>
+                    <a href="<?php echo $this->url->get('wallet/withdraw/')?>" class="btn btn-lg btn-custom gray" id="withdraw">
+                        <p>Payment Withdraw &ensp;  </p></a>
                 </div>
                 
             </div>
@@ -110,9 +128,9 @@ p{
             </div>
             <?php foreach ($newresult as $row){?>
                 <div class="pay">
-                    <p ><b>Order Number</b>   : <?php echo $row->order_no;?></p>
-                    <p ><b>Payment Method</b>   : <?php echo $row->method_name;?></p>
-                    <p ><b>Transaction Amount</b>   : <?php echo $row->total;?></p>
+                    <p class="data" ><b>Order Number</b>   : <?php echo $row->order_no;?></p>
+                    <p class="data"><b>Payment Method</b>   : <?php echo $row->method_name;?></p>
+                    <p class="data"><b>Transaction Amount</b>   : <?php echo $row->total;?></p>
 
 
                 </div>
@@ -124,3 +142,40 @@ p{
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    var pathname = window.location.pathname;
+    var patharray = pathname.split("/");
+    console.log("path arrray ");
+    console.log(patharray);
+
+    var choice=patharray[3];
+
+    console.log(choice);
+
+    if(choice=='account')
+    {
+        //$("#list").html("<font color="red"> View Order List </font>");
+        $("#account").addClass("red");
+    }
+
+    else if (choice=='payment')
+    {
+        //$("#purchase").html("<font color="red"> Purchase List </font>");
+        $("#payment").addClass("red");
+    }
+
+    else if (choice=='status')
+    {
+        //$("#pending").html("<font color="red"> Pending List </font>");
+        $("#status").addClass("red");
+    }
+
+    else if (choice=='withdraw')
+    {
+        //$("#reject").html("<font color="red"> Reject List </font>");
+        $("#withdraw").addClass("red");
+    }
+
+</script>

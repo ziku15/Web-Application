@@ -1,30 +1,29 @@
 <style>
+
 .row-cell{
 
     border:1px solid #ECECEC ;
     border-radius: 4px;
     height: 505px;
     width: 95%;
-
-
 }
 
+.product{
 
-.row-cell>.col-md-6{
-	
-    height: 125px;
-    width: 100%;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px; 
+    border:1px solid #ECECEC ;
+    border-radius: 4px;   
 
 }
-
 
 
 .gray{
 
 	background-color:#F7FAFC;
 	color:#042C51;
-
-	
 
 }
 
@@ -42,6 +41,14 @@ a{
 	color:#870415;
 }
 
+strong > a:hover{
+
+
+    background-color: #52575F;
+    color: white;
+}
+
+
 .col-md-3{
 	position: inherit;
 }
@@ -54,6 +61,32 @@ p{
 	color:#870415;
 }
 
+strong > a{
+
+    color:#A8A8A8;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+
+.pager{
+    color:#000000;
+}
+
+li>a{
+    color: #106E96;
+}
+
+.order>h2{
+	padding-left: 5px;
+    color: #106E96;
+}
+
+
+
 </style>
 
 
@@ -65,30 +98,57 @@ p{
    		
 		<div class="col-md-3">
 			<div class="btn-group">
-				<a href="<?php echo $this->url->get('order/list/')?>" class="btn btn-lg btn-custom gray"><p>View Order List</p></a>
+				<a href="<?php echo $this->url->get('order/list/')?>" class="btn btn-lg btn-custom gray" id="list"><p>View Order List</p></a>
 			</div>
 		</div>
 		<div class="col-md-3">
 			<div class="btn-group">
-				<a href="<?php echo $this->url->get('order/purchase/')?>" class="btn btn-lg btn-custom gray"><p>Purchase History</p></a>
-			</div>
-			
-		</div>
-		<div class="col-md-3">
-			<div class="btn-group">
-				<a href="<?php echo $this->url->get('order/pending/')?>" class="btn btn-lg btn-custom gray"><p>&ensp; Pending List &ensp;</p></a>
+				<a href="<?php echo $this->url->get('order/purchase/')?>" class="btn btn-lg btn-custom gray" id="purchase"><p>Purchase History</p></a>
 			</div>
 			
 		</div>
 		<div class="col-md-3">
 			<div class="btn-group">
-				<a href="<?php echo $this->url->get('order/reject/')?>" class="btn btn-lg btn-custom gray"><p>Reject History &ensp; </p></a>
+				<a href="<?php echo $this->url->get('order/pending/')?>" class="btn btn-lg btn-custom gray" id="pending"><p>&ensp; Pending List &ensp;</p></a>
+			</div>
+			
+		</div>
+		<div class="col-md-3">
+			<div class="btn-group">
+				<a href="<?php echo $this->url->get('order/reject/')?>" class="btn btn-lg btn-custom gray" id="reject"><p>Reject History &ensp; </p></a>
 			</div>
 			
 		</div>
 	
 	</nav>
 
+	<div class="order">
+        <h2>Order List</h2>
+    </div>  
 
 
+    <?php foreach ($Order->items as $record){?>
+    <div class="product">
+
+        <strong><p>Order Number:</p> <a href="<?php echo $this->url->get("order/details/" . $record->id); ?>"> <?php echo $record->order_no; ?>
+        </a>
+        </strong>
+
+
+    </div>
+    <?php }?>    
+
+    <div class="col-md-12">
+
+        <ul class="pager">
+                <li><?php echo "You are in page ", $Order->current, " of ", $Order->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("Order/order" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("Order/order?page=" . $Order->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("Order/order?page=" . $Order->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("Order/order?page=" . $Order->last); ?>">Last</a></li>            
+        </ul>
+
+    </div>
 </div>
+
+
