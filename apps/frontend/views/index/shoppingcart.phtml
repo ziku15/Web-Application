@@ -38,7 +38,103 @@
     color: white;
     font-size: 16px;
 }
+
+.modal-margin-top{
+  margin-top: 40%;
+}
 </style>
+
+<script type="text/javascript">
+ 
+$(function(){
+$('.quant-changed').on('change', function(e) {
+
+var quantId = e.target.id;
+console.log(quantId);
+var pId = quantId.toString().split(",")[0];
+var priceUnit = quantId.toString().split(",")[1];
+console.log(pId);
+console.log(priceUnit);
+var quantity = $(this).val();
+
+
+console.log(quantity);
+ var spin_area_id = pId.toString().concat("spin");
+$('#'+spin_area_id).html('<i class="fa fa-spin fa-refresh"></i>');
+$.ajax({
+
+        type: "POST",
+        url: "/biz_mela/index/checkStock",
+        data: { data1 : pId, },
+        success: function(result)
+        {
+            //$("#sub_cat_id").html(html);
+            //location.reload();
+            if((result=="no") || (result=="No"))
+              $('#checkStockModal').modal('show');
+            console.log(result);
+             $('#'+spin_area_id).html('');
+        }
+      });
+//checkStock(quantity);
+ if(parseInt(quantity)>0){
+  
+  var subTotal = parseInt(quantity) * parseInt(priceUnit);
+  console.log(subTotal);
+
+  var sub_text_area_id = pId.toString().concat("sub");
+
+  console.log(sub_text_area_id);
+
+  $('#'+sub_text_area_id).html(subTotal);
+
+}
+
+else{
+  //$('#'+sub_text_area_id).html("invalid quantity");
+  $('#negQuantModal').modal('show');
+}
+
+ 
+
+  console.log(spin_area_id);
+  /*
+    $('.cart-delete').click(function(){
+      $(this).parent('div').parent('div').slideUp('slow');
+  });
+  */
+  
+  });
+
+
+});
+
+$(function(){
+$('.cart-delete').on('click', function() {
+
+      //$(this).parent('div').parent('div').slideUp('slow');
+      var pId = $(this).attr('product_id');
+      console.log(pId);
+
+      $.ajax({
+
+        type: "POST",
+        url: "/biz_mela/index/updateCookie",
+        data: { data1 : pId, },
+        success: function(html)
+        {
+            //$("#sub_cat_id").html(html);
+            $("#my_count").html(html);
+        }
+      });
+
+      $(this).parent('div').parent('div').slideUp('slow');
+  
+
+  });
+});
+
+</script>
 
 <div class="container">
   <div class="row" style="padding-top:10px; padding-bottom:10px;">
@@ -104,7 +200,8 @@
     </div>
 
     <div class="col-md-2 col-md-offset-1 top-padding cart">
-       <input type="text" class="form-control"> &ensp; <i class="fa fa-refresh"></i>
+       <input type="text" class="form-control quant-changed" id="<?php echo $row->id.",".$row->price; ?>" value="1"> &ensp; 
+       <span class="spin" id="<?php echo $row->id."spin"; ?>"></span>
 
     </div>
 
@@ -112,12 +209,12 @@
       <?php echo $row->price; ?>
     </div>
 
-    <div class="col-md-1 col-md-offset-1 top-padding">
+    <div class="col-md-1 col-md-offset-1 top-padding" id="<?php echo $row->id."sub"; ?>">
       <?php echo $row->price; ?>
     </div>
 
-    <div class="col-md-1 top-padding">
-      <span class="glyphicon glyphicon-shopping-cart"></span>
+    <div class="col-md-1 top-padding ">
+      <span class="glyphicon glyphicon-shopping-cart cart-delete" style="cursor:pointer" product_id="<?php echo $row->id; ?>"> </span>
     </div>
 
   </div>
@@ -187,6 +284,36 @@
   </div>
   </div>
 </div>
+
+<div class="modal fade" id="checkStockModal" tabindex="-1" role="dialog" aria-labelledby="checkStockModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> This product is out of stock. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="negQuantModal" tabindex="-1" role="dialog" aria-labelledby="negQuantModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Quantity must be positive. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+
 
 
 <?php echo $this->partial('shared/ad'); ?>
