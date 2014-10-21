@@ -10,6 +10,7 @@ use Phalcon\Mvc\View,
     Phalcon\Validation\Validator\PresenceOf,
 	Phalcon\Validation\Validator\StringLength,
 	Phalcon\Mvc\Model\Validator\Email,
+    //Phalcon\Paginator\Adapter\Model as Paginator,
     Phalcon\Paginator\Adapter\QueryBuilder;
     use Phalcon\Paginator\Adapter\Model as Paginator;
 
@@ -26,23 +27,24 @@ public function initialize() {
 
     public function indexAction() 
     {
-        //  $newResult = $this->modelsManager->createBuilder()
-        //           ->from('Biz_mela\Models\Admin')
-        //           ->columns('*')
-        //           ->getQuery()
-        //           ->execute();
+         $newResult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\Admin')
+                  ->columns('*')
+                  ->getQuery()
+                  ->execute();
         // $page['user'] = $newResult;
         $numberPage = $this->request->getQuery("page", "int", 1);
-        $builder = $this->modelsManager->createBuilder();
-        $builder = $builder->from('Biz_mela\Models\Admin');
-        $builder = $builder->orderBy('Biz_mela\Models\Admin.id desc');
-         $paginator = new Phalcon\Paginator\Adapter\QueryBuilder(array(
-            "builder" => $builder,
+        // $builder = $this->modelsManager->createBuilder();
+        // $builder = $builder->from('Biz_mela\Models\Admin');
+        // $builder = $builder->orderBy('Biz_mela\Models\Admin.id desc');
+         $paginator = new Paginator(array(
+            "data" => $newResult,
             "limit" => 10,
             "page" => $numberPage
         ));
         // $page['value'] = $value;
         $page['user'] = $paginator->getPaginate();
+       // print_r($page['user']);exit();
         $this->view->setVars(array('sub_title' => 'UserManagement'));
         $this->view->setVars($page);
 
