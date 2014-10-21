@@ -55,7 +55,7 @@
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($deliveryarea as $aa) { 
+                                     foreach ($deliveryarea->items as $aa) { 
                                             $count++;
                                         ?>
                                      <tbody>
@@ -74,6 +74,15 @@
                                     </tbody>
                                      <?php } ?>
                                 </table>
+                                <div>
+                                    <ul class="pager">
+                                        <li><?php echo "You are in page ", $deliveryarea->current, " of ", $deliveryarea->total_pages; ?></li>
+                                        <li><a href="<?php echo $this->url->get("admin/deliveryarea" ); ?>">First</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/deliveryarea?page=" . $deliveryarea->before); ?>">Previous</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/deliveryarea?page=" . $deliveryarea->next); ?>">Next</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/deliveryarea?page=" . $deliveryarea->last); ?>">Last</a></li>            
+                                    </ul>
+                                </div>
                     </div>
        </div>           
 

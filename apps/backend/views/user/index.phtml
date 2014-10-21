@@ -60,7 +60,7 @@
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($user as $aa) { 
+                                     foreach ($user->items as $aa) { 
                                             $count++;
                                         ?>
                                      <tbody>
@@ -83,6 +83,15 @@
                                     </tbody>
                                      <?php } ?>
                                 </table>
+                                 <div>
+                                        <ul class="pager">
+                                            <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
+                                            <li><a href="<?php echo $this->url->get("admin/user" ); ?>">First</a></li>
+                                            <li><a href="<?php echo $this->url->get("admin/user?page=" . $user->before); ?>">Previous</a></li>
+                                            <li><a href="<?php echo $this->url->get("admin/user?page=" . $user->next); ?>">Next</a></li>
+                                            <li><a href="<?php echo $this->url->get("admin/user?page=" . $user->last); ?>">Last</a></li>            
+                                        </ul>
+                    </div>
                     </div>
        </div>           
 

@@ -55,7 +55,7 @@
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($paymentmethod as $aa) { 
+                                     foreach ($paymentmethod->items as $aa) { 
                                             $count++;
                                         ?>
                                      <tbody>
@@ -74,6 +74,15 @@
                                     </tbody>
                                      <?php } ?>
                                 </table>
+                                <div>
+                                    <ul class="pager">
+                                        <li><?php echo "You are in page ", $paymentmethod->current, " of ", $paymentmethod->total_pages; ?></li>
+                                        <li><a href="<?php echo $this->url->get("admin/paymentmethod" ); ?>">First</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/paymentmethod?page=" . $paymentmethod->before); ?>">Previous</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/paymentmethod?page=" . $paymentmethod->next); ?>">Next</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/paymentmethod?page=" . $paymentmethod->last); ?>">Last</a></li>            
+                                    </ul>
+                                </div>
                     </div>
        </div>           
 

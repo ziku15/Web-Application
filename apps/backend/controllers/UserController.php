@@ -13,6 +13,7 @@ use Phalcon\Mvc\View,
 	Phalcon\Validation\Validator\StringLength,
 	Phalcon\Mvc\Model\Validator\Email,
     Phalcon\Paginator\Adapter\QueryBuilder;
+    use Phalcon\Paginator\Adapter\Model as Paginator;
 
 class UserController extends \Phalcon\Mvc\Controller {
 
@@ -32,7 +33,14 @@ public function initialize() {
                   ->columns('*')
                   ->getQuery()
                   ->execute();
-        $page['user'] = $newResult;
+        $numberPage = $this->request->getQuery("page", "int", 1);
+        $paginator = new Paginator(array(
+            "data" => $newResult,
+            "limit" => 10,
+            "page" => $numberPage
+        ));
+        // $page['value'] = $value;
+        $page['user'] = $paginator->getPaginate();
         
         // $page['value'] = $value;
 
@@ -83,7 +91,15 @@ public function initialize() {
                   ->columns('*')
                   ->getQuery()
                   ->execute();
-        $page['shop'] = $newResult;
+         $numberPage = $this->request->getQuery("page", "int", 1);
+        $paginator = new Paginator(array(
+            "data" => $newResult,
+            "limit" => 10,
+            "page" => $numberPage
+        ));
+        $page['shop'] = $paginator->getPaginate();
+        $page['id']=$value;
+       // $page['shop'] = $newResult;
         
         // $page['value'] = $value;
 
@@ -100,7 +116,15 @@ public function initialize() {
                   ->columns('*')
                   ->getQuery()
                   ->execute();
-        $page['product'] = $newResult;
+        $numberPage = $this->request->getQuery("page", "int", 1);
+        $paginator = new Paginator(array(
+            "data" => $newResult,
+            "limit" => 10,
+            "page" => $numberPage
+        ));
+        $page['product'] = $paginator->getPaginate();
+        $page['id']=$value;
+        //$page['product'] = $newResult;
         
         // $page['value'] = $value;
 
