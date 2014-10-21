@@ -13,6 +13,7 @@ use Phalcon\Mvc\View,
 	Phalcon\Validation\Validator\StringLength,
 	Phalcon\Mvc\Model\Validator\Email,
     Phalcon\Paginator\Adapter\QueryBuilder;
+    use Phalcon\Paginator\Adapter\Model as Paginator;
 
 class ProductController extends \Phalcon\Mvc\Controller {
 
@@ -33,7 +34,13 @@ public function initialize() {
                   ->columns('*')
                   ->getQuery()
                   ->execute();
-        $page['product'] = $newResult;
+        $numberPage = $this->request->getQuery("page", "int", 1);
+        $paginator = new Paginator(array(
+            "data" => $newResult,
+            "limit" => 10,
+            "page" => $numberPage
+        ));
+        $page['product'] = $paginator->getPaginate();
         
         // $page['value'] = $value;
 

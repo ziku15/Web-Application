@@ -55,7 +55,7 @@
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($order as $aa) { 
+                                     foreach ($order->items as $aa) { 
                                             $count++;
                                         ?>
                                      <tbody>
@@ -69,6 +69,15 @@
                                     </tbody>
                                      <?php } ?>
                                 </table>
+                                 <div>
+                                    <ul class="pager">
+                                        <li><?php echo "You are in page ", $order->current, " of ", $order->total_pages; ?></li>
+                                        <li><a href="<?php echo $this->url->get("admin/order" ); ?>">First</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/order?page=" . $order->before); ?>">Previous</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/order?page=" . $order->next); ?>">Next</a></li>
+                                        <li><a href="<?php echo $this->url->get("admin/order?page=" . $order->last); ?>">Last</a></li>            
+                                    </ul>
+                                </div>
                     </div>
                    </div>
                 </div>

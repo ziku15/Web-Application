@@ -77,22 +77,16 @@
                                      <?php } ?>
                                 </table>
 
-        <div>
-
-            <ul class="pager">
-                <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("admin/admin" ); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("admin/admin?page=" . $user->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("admin/admin?page=" . $user->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("admin/admin?page=" . $user->last); ?>">Last</a></li>            
-            </ul>
-
-
-
-
-
-        </div>
+                    <div>
+                        <ul class="pager">
+                            <li><?php echo "You are in page ", $user->current, " of ", $user->total_pages; ?></li>
+                            <li><a href="<?php echo $this->url->get("admin/admin" ); ?>">First</a></li>
+                            <li><a href="<?php echo $this->url->get("admin/admin?page=" . $user->before); ?>">Previous</a></li>
+                            <li><a href="<?php echo $this->url->get("admin/admin?page=" . $user->next); ?>">Next</a></li>
+                            <li><a href="<?php echo $this->url->get("admin/admin?page=" . $user->last); ?>">Last</a></li>            
+                        </ul>
                     </div>
+            </div>
        </div>           
 
 
