@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                            User List
+                            Shop List
                         </div>
                      <div class="panel-body">
                      <div class="table-responsive">
@@ -47,38 +47,29 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>User Name</th>
-                                            <th>Email</th>
-                                            <th>Adress</th>
-                                            <th>Contact No</th>
+                                            <th>Shop Name</th>
                                             <th>Image</th>
+                                           
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($user as $aa) { 
+                                     foreach ($shop as $aa) { 
                                             $count++;
                                         ?>
                                      <tbody>
                                         <tr>
                                             <td><?php echo $count; ?></td>
-                                            <td><?php echo $aa->first_name; ?></td>
-                                            <td><?php echo $aa->last_name; ?></td>
-                                            <td><?php echo $aa->username; ?></td>
-                                            <td><?php echo $aa->email; ?></td>
-                                            <td><?php echo $aa->address; ?></td>
-                                            <td><?php echo $aa->contact_no; ?></td>
-                                            <td><img   src="<?php echo $this->url->get().$aa->picture; ?>" class="img-responsive img-rounded"></td>
+                                            <td><?php echo $aa->shop_name; ?></td>
+                                            <td><img   src="<?php echo $this->url->get().$aa->shop_image; ?>" class="img-responsive img-rounded"></td>
                                             <?php if($aa->status==1){?>
-                                                <td><a href="<?php echo $this->url->get('admin/user/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/OK.png')?>"></a></td>
+                                                <td><a href="<?php echo $this->url->get('admin/user/changestatus_shop/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/OK.png')?>"></a></td>
                                             <?php } else{?>
-                                                <td><a href="<?php echo $this->url->get('admin/user/changestatus/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/cancel-icon.png')?>"></a></td>
+                                                <td><a href="<?php echo $this->url->get('admin/user/changestatus_shop/'.$aa->id);?>"><img src="<?php echo $this->url->get('main/admin/img/cancel-icon.png')?>"></a></td>
                                             <?php } ?>
-                                            <td><a href="<?php echo $this->url->get('admin/user/shop/'.$aa->id);?>">Shop</a></td>
+                                            <td><a href="<?php echo $this->url->get('admin/user/product/'.$aa->id);?>">Product</a></td>
                                         </tr>
                                     </tbody>
                                      <?php } ?>
