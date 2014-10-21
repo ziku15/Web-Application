@@ -79,19 +79,7 @@ class IndexController extends ControllerBase
       $con=UserMaster::findFirst("username="."'".$username['name']."'");
       $user_id=$con->id;
 
-      //echo $user_id;
-      /*
-      // Inserting using placeholders
-     $phql = "INSERT INTO 'Biz_mela\Models\ProductWishlist' (product_id, user_id, status) "
-      . "VALUES (:product_id:, :user_id:, :status:)";
-     $manager->executeQuery($phql,
-     array(
-        'product_id' => $wish,
-        'user_id' => $user_id,
-        'status'     => 1,
-         )
-     );
-     */
+      
       $product_data = ProductMaster::findFirst("id="."'".$wish."'");
       $product_name= $product_data->product_name;
 
@@ -104,11 +92,20 @@ class IndexController extends ControllerBase
 
      $count = count($Result);
 
-     if($count>0){
+     $auth = $this->session->get('auth');
+     if(!$auth){
+
+      echo "1";
+     }
+
+     else if($count>0){
 
       //echo $product_name." exists in your wish list";
 
-      echo '<font color="red">'.$product_name." exists in your wish list".'</font>';
+      //echo '<font color="red">'.$product_name." exists in your wish list".'</font>';
+      echo "2";
+
+      //return "123";
 
 
 
@@ -122,30 +119,14 @@ class IndexController extends ControllerBase
 
      //echo $product_name." is added to your wish list";
 
-     echo '<font color="green">'.$product_name." is added to your wish list".'</font>';
+     //echo '<font color="green">'.$product_name." is added to your wish list".'</font>';
+     echo "3";
+
+     //return "456";
 
      }
     
-    /*
-     $Result = $this->modelsManager->createBuilder()
-        ->from('ProductWishlist')
-        ->where('user_id = $user_id')
-        //->andWhere('product_id = $wish')
-        ->getQuery()
-        ->execute();
-    */
-
-     //$Result = ProductWishlist::find("user_id="."'".$user_id."'and product_id="."'".$wish."'");
-
-     //$count = count($Result);
-
-     //echo $count;
-
-     //$previous_email = Admin::find('email=' . "'" . $email_add . "'" . ' and is_del=0');
-
-
-
-
+    
     }
 
     public function addtocartAction(){
@@ -158,63 +139,31 @@ class IndexController extends ControllerBase
       $number_of_days = 30 ;
       $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
 
-
-      // if(isset($_COOKIE[$product_id])){
-
-      //   echo "This product already exists in your cart";
-      // }
-
-      // else{
-       
-        //print_r(count($_COOKIE['product']));
-        //$array = array("person1" => array("name" => "Ted"));
-
-        //$date_of_expiry = time() - 60 ;
-        //setcookie('product', $product_id, $date_of_expiry, "/" );
-      //setcookie( 'product', '', $date_of_expiry, "/" );
-
-
-      
         $cookie_count = unserialize($_COOKIE['product']);
         if(!in_array($product_id, $cookie_count)){
             $cookie_count[] = $product_id;
             $value = serialize($cookie_count);
 
             setcookie( 'product', $value, $date_of_expiry, "/" );
+            echo count($cookie_count);
         }
-        //print_r($cookie_count);
+
+    }
+
+    public function updateCookieAction(){
+      $this->view->disable();
+
+      $product_id = $this->request->getPost('data1');
+
+      $number_of_days = 30 ;
+      $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
+
+        $cookie_count = unserialize($_COOKIE['product']);
+        $cookie_count = array_diff($cookie_count, array($product_id));
+        $value = serialize($cookie_count);
+
+        setcookie( 'product', $value, $date_of_expiry, "/" );
         echo count($cookie_count);
-
-       
-
-
-        
-        
-        //print_r($cookie_count);
-
-        
-        
-
-
-
-      // }
-
-      //setcookie( $product_id, $product_id, $date_of_expiry, "/" );
-
-      
-
-      
-      // $date_of_expiry = time() - 60 ;
-      // setcookie('product', $product_id, $date_of_expiry, "/" );
-
-      
-
-      //echo $product_id;
-
-      //echo '<br>';
-
-      //echo count($_COOKIE);
-
 
     }
 
@@ -269,6 +218,15 @@ class IndexController extends ControllerBase
 
     }
 
+    public function clearAction(){
+      $this->view->disable();
+      $date_of_expiry = time() - 60 ;
+        
+      setcookie( 'product', '', $date_of_expiry, "/" );
+
+
+    }
+
     public function shoppingcartAction(){
       //$this->view->disable();
 
@@ -283,9 +241,15 @@ class IndexController extends ControllerBase
         ->inWhere('Biz_mela\Models\ProductMaster.id', $cookie_count)
         ->getQuery()
         ->execute();
+      if(count($cookie_count) > 0){
+        $this->view->setVar(cResult,$cResult);
+      }
 
-      $this->view->setVar(cResult,$cResult);
+      else{
+        $this->view->disable();
+        echo "No products to show";
 
+      }
 
     }
 
@@ -326,10 +290,21 @@ class IndexController extends ControllerBase
           //echo $detailResult[0]->price;
           // echo $detailResult[0]->picture;
 
-      
+    }
 
-      
 
+    public function checkStockAction(){
+      $this->view->disable();
+
+      $product_id = $this->request->getPost('data1');
+
+      $Result = $this->modelsManager->createBuilder()
+        ->from('Biz_mela\Models\ProductMaster')
+        ->where('Biz_mela\Models\ProductMaster.id = :name:', array('name' => $product_id))
+        ->getQuery()
+        ->execute();
+
+      echo $Result[0]->in_stock;
 
     }
 

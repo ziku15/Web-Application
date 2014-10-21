@@ -30,9 +30,9 @@
 
 .text .top_text{margin-top: 35%;}
 
-.text .bottom_text{margin-top: 35%;}
+.text .bottom_text{margin-top: 40%;}
 
-.text .bottom_text2{margin-top: 40%;}
+.text .bottom_text2{margin-top: 20%;}
 
 .nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
 
@@ -40,11 +40,15 @@
 
 .nav-tabs {border-bottom: none;}
 
-.cart, .wish{background-color: #454545; border:none; }
+.cart, .wish, .wishB, .cartB{background-color: #454545; border:none; }
 
 .mid-menu .active .item{
 
   border: 2px solid #cc0001;
+}
+
+.modal-margin-top{
+  margin-top: 40%;
 }
 
 
@@ -63,14 +67,25 @@ function processWish(id){
         data: { data1 : id, },
         success: function(html)
         {
-            $('#'+find).html(html);
+            //$('#'+find).html(html);
             //document.getElementById('write_'+id).html(html);
             //location.reload();
 
             //console.log();
             console.log(find);
         }
-      });
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
 
     //alert(id);
 
@@ -89,6 +104,65 @@ $('.wish').on('click', function(e) {
   });
 });
 
+function processWishB(id){
+
+  var find1 = id.toString().concat(id.toString()); 
+  var find11 = find1.toString().concat(id.toString());
+
+    $.ajax({
+
+        type: "POST",
+        url:"/biz_mela/index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find11).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            //console.log(find);
+            //alert("result");
+           // console.log(result);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    
+
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wishB').on('click', function(e) {
+
+//subcategories();
+ var wishIdB = e.target.id;
+ var wishIdB1 = wishIdB.toString().split(":")[0]; 
+
+ //clicked(idClicked);
+ processWishB(wishIdB1);
+
+  });
+
+
+});
+
+
 
 function processCart(id){
 
@@ -99,18 +173,30 @@ function processCart(id){
     $.ajax({
 
         type: "POST",
-        url:"http://localhost/biz_mela/index/addtocart",
+        url:"/biz_mela/index/addtocart",
         data: { data1 : p_id, },
-        success: function(html)
+        success: function(result)
         {
-            $("#my_count").html(html);
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
             //document.getElementById('write_'+id).html(html);
             //location.reload();
 
             //console.log();
             console.log(p_id);
         }
-      });
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="") {$('#productExistCartModal').modal('show');}
+       else {$('#productAddedCartModal').modal('show');}
+ 
+    });
 
     //alert(id);
 
@@ -129,6 +215,57 @@ $('.cart').on('click', function(e) {
   });
 });
 
+function processCartB(id){
+
+  var p_idB = id.toString().split(":")[0]; 
+
+  var msgB = p_idB.toString().concat(p_idB.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url:"/biz_mela/index/addtocart",
+        data: { data1 : p_idB, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_idB);
+        }
+      })
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="") {$('#productExistCartModal').modal('show');}
+       else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cartB').on('click', function(e) {
+
+//subcategories();
+ var cartIdB = e.target.id;
+ //var cartIdB1 = cartIdB.toString().split(":")[0];
+ //var cartIdB = $(this).attr('href');
+ //clicked(idClicked);
+ processCart(cartIdB);
+
+  });
+});
 
 
 </script>
@@ -193,6 +330,7 @@ console.log(window.location.pathname);
     <div class="col-md-3 hover">
       <div class="item">
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
             <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
@@ -220,6 +358,7 @@ console.log(window.location.pathname);
     <div class="col-md-3 hover">
       <div class="item">
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
             <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
@@ -267,13 +406,14 @@ console.log(window.location.pathname);
         <div class="col-md-3 hover">
           <div class="item">
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".substr($row->product_description,0,19).'..'; ?></P>
-          <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
+          <div id="<?php echo $row->id.$row->id.$row->id; ?>"> </div>
           <div class="bottom_text2">
-            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
+            <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
               <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
             </button>
             &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
-            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+            <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
               <span class="glyphicon glyphicon-heart"></span>
             </button>
           </div>
@@ -297,5 +437,78 @@ console.log(window.location.pathname);
   </div>
 
   <!-- bottom item area ends here -->
+
+<!--Modals !-->
+
+<div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> You need to log in first. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productInWishlistModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> This product already exists in your wish list. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productAddedInWishlist" tabindex="-1" role="dialog" aria-labelledby="productAddedInWishlist" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Wish list updated successfully. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="productAddedCartModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Product successfully added to the cart</center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productExistCartModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> This product already exists in your cart. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
 
 
