@@ -139,6 +139,24 @@ class IndexController extends ControllerBase
       $number_of_days = 30 ;
       $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
 
+      $cookie_array = unserialize($_COOKIE['product']);
+
+      if (array_key_exists($product_id, $cookie_array))
+      {
+       $value = $cookie_array[$product_id];
+       $cookie_array[$product_id] = intval($value) + 1;
+       setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+
+      }
+
+      else{
+      $cookie_array[$product_id] = intval(1);
+      setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+      echo count($cookie_array);
+      }
+      
+
+      /*
         $cookie_count = unserialize($_COOKIE['product']);
         if(!in_array($product_id, $cookie_count)){
             $cookie_count[] = $product_id;
@@ -147,6 +165,7 @@ class IndexController extends ControllerBase
             setcookie( 'product', $value, $date_of_expiry, "/" );
             echo count($cookie_count);
         }
+      */
 
     }
 
@@ -158,31 +177,82 @@ class IndexController extends ControllerBase
       $number_of_days = 30 ;
       $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
 
-        $cookie_count = unserialize($_COOKIE['product']);
-        $cookie_count = array_diff($cookie_count, array($product_id));
-        $value = serialize($cookie_count);
+      $cookie_array = unserialize($_COOKIE['product']);
+        //$cookie_count = array_diff($cookie_count, array($product_id));
 
-        setcookie( 'product', $value, $date_of_expiry, "/" );
-        echo count($cookie_count);
 
+      
+      unset($cookie_array[$product_id]);
+       
+
+
+        //$value = serialize($cookie_count);
+
+      setcookie( 'product', serialize($cookie_array), $date_of_expiry, "/" );
+      echo count($cookie_array);
+
+    }
+
+    public function updateQuantCookieAction(){
+      $this->view->disable();
+
+      $product_id = $this->request->getPost('productID');
+      $quantity = $this->request->getPost('Quant');
+
+      $cookie_array = unserialize($_COOKIE['product']);
+
+      $cookie_array[$product_id] = $quantity;
+      setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+
+      //new code
+
+      $cookie_array = unserialize($_COOKIE['product']);
+      $mult = intval(0);
+      foreach ($cookie_array as $key => $value) {
+       $unitPrice = ProductMaster::findFirst("id="."'".$key."'")->price;
+       $mult += intval($unitPrice) * intval($value);  
+      } 
+
+      echo $mult;
+
+    }
+
+    public function calculateTotalAction(){
+      $this->view->disable();
+      //$unitPrice = ProductMaster::findFirst("id="."'".$wish."'");
+      $cookie_array = unserialize($_COOKIE['product']);
+      $mult = intval(0);
+      foreach ($cookie_array as $key => $value) {
+       $unitPrice = ProductMaster::findFirst("id="."'".$key."'")->price;
+       $mult += intval($unitPrice) * intval($value);  
+      } 
+
+      echo $mult;
     }
 
     public function displayAction(){
       $this->view->disable();
 
-      print_r($_COOKIE);
+      //print_r($_COOKIE);
 
-      $cookie_count = unserialize($_COOKIE['product']);
+      //$cookie_array = $_COOKIE['product'];
+      $cookie_array = unserialize($_COOKIE['product']);
+
+      echo count($cookie_array);
+
+      $keysHolder = array_keys($cookie_array);
 
       echo '<br>';
 
-      foreach ($cookie_count as $entry) {
+      foreach ($keysHolder as $entry) {
         # code...
         echo $entry;
         echo '<br>';
+        echo $cookie_array[$entry];
+        echo '<br>';
       }
 
-      print_r($cookie_count);
+      //print_r($cookie_array);
       /*
 
       $product_data = ProductMaster::findFirst("id="."'".$wish."'");
@@ -197,7 +267,7 @@ class IndexController extends ControllerBase
         ->from('Biz_mela\Models\ProductMaster')
         ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
         ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
-        ->inWhere('Biz_mela\Models\ProductMaster.id', $cookie_count)
+        ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
         ->getQuery()
         ->execute();
 
@@ -232,16 +302,22 @@ class IndexController extends ControllerBase
 
       $this->view->disableLevel(View::LEVEL_LAYOUT);
 
-      $cookie_count = unserialize($_COOKIE['product']);
+      //$cookie_count = unserialize($_COOKIE['product']);
+
+      $cookie_array = unserialize($_COOKIE['product']);
+
+      //echo count($cookie_array);
+
+      $keysHolder = array_keys($cookie_array);
 
       $cResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
         ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
         ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
-        ->inWhere('Biz_mela\Models\ProductMaster.id', $cookie_count)
+        ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
         ->getQuery()
         ->execute();
-      if(count($cookie_count) > 0){
+      if(count($cResult) > 0){
         $this->view->setVar(cResult,$cResult);
       }
 
@@ -252,6 +328,8 @@ class IndexController extends ControllerBase
       }
 
     }
+
+
 
     public function productdetailsAction($value){
       $this->view->disableLevel(View::LEVEL_LAYOUT);
