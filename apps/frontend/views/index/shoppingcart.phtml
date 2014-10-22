@@ -116,6 +116,42 @@ $.ajax({
       $(this).parent('div').parent('div').slideUp('slow');
   });
   */
+  console.log("Quantity");
+  console.log(quantity);
+  console.log("Produc ID");
+  console.log(pId);
+
+  $.ajax({
+
+        type: "POST",
+        url: "/biz_mela/index/updateQuantCookie",
+        data: { productID : pId, Quant: quantity },
+        success: function(html)
+        {
+            //console.log("Quantity Successfully updated in cookie");
+            $("#total").html(html);
+
+        }
+      });
+
+  /*
+
+  $.ajax({
+
+        type: "POST",
+        url: "/biz_mela/index/calculateTotal",
+        success: function(html)
+        {
+          $("#total").html(html);
+            
+        }
+      });
+
+  */
+
+
+
+
   
   });
 
@@ -129,6 +165,8 @@ $('.cart-delete').on('click', function() {
       var pId = $(this).attr('product_id');
       console.log(pId);
 
+      
+
       $.ajax({
 
         type: "POST",
@@ -141,7 +179,9 @@ $('.cart-delete').on('click', function() {
         }
       });
 
-      $(this).parent('div').parent('div').slideUp('slow');
+      //$(this).parent('div').parent('div').slideUp('slow');
+      var spin_area_id = pId.toString().concat("spin");
+      $('#'+spin_area_id).parent('div').parent('div').slideUp('slow');;
   
 
   });
@@ -213,7 +253,8 @@ $('.cart-delete').on('click', function() {
     </div>
 
     <div class="col-md-2 col-md-offset-1 top-padding cart">
-       <input type="text" class="form-control quant-changed" id="<?php echo $row->id.",".$row->price; ?>" value="1"> &ensp; 
+      <?php $cookie_array = unserialize($_COOKIE['product']);?>
+       <input type="text" class="form-control quant-changed" id="<?php echo $row->id.",".$row->price; ?>" value="<?php echo $cookie_array[$row->id];?>"> &ensp; 
        <span class="spin" id="<?php echo $row->id."spin"; ?>"></span>
 
     </div>
@@ -223,14 +264,36 @@ $('.cart-delete').on('click', function() {
     </div>
 
     <div class="col-md-1 col-md-offset-1 top-padding" id="<?php echo $row->id."sub"; ?>">
-      <?php echo $row->price; ?>
+      <?php echo intval($row->price)*intval($cookie_array[$row->id]); ?>
     </div>
 
     <div class="col-md-1 top-padding ">
-      <span class="glyphicon glyphicon-shopping-cart cart-delete" style="cursor:pointer" product_id="<?php echo $row->id; ?>"> </span>
+      <a href="" data-toggle="modal" data-target="#cartDeleteModal<?php echo $row->id; ?>" style="color:#000000;">
+      <span class="glyphicon glyphicon-shopping-cart" product_id="<?php echo $row->id; ?>"> </span>
+      </a>
     </div>
 
   </div>
+
+  <!-- modal !-->
+  <div class="modal fade" id="cartDeleteModal<?php echo $row->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal<?php echo $row->id; ?>" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            <div class="modal-body">
+                <p>
+                <center> Do you really want to delete this product from your cart ? </center> 
+                </p>
+            </div> 
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary cart-delete" product_id="<?php echo $row->id; ?>" data-dismiss="modal">Delete</button>
+            </div> 
+        </div>
+    </div>
+  </div>
+
+
+  <!--modal ends !-->
 
   <div class="seperator"></div>
 
@@ -287,8 +350,10 @@ $('.cart-delete').on('click', function() {
   </div>
 
   <div class="col-md-2 col-md-offset-1 top-padding">
-    Subtotal &ensp;&ensp; 9855 <br>
-    All total &ensp;&ensp; 9855<br>
+    
+    Total &ensp;&ensp; 
+    <span id="total">2300</span>
+    <br>
     <p></p>
     <button type="button" class="btn btn-default bg-button">Proceed to payment &ensp;<span class="glyphicon glyphicon-chevron-right"></span>
     </button> 
