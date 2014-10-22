@@ -2,7 +2,7 @@
 
 namespace Biz_mela\Models;
 
-class UserMaster extends \Phalcon\Mvc\Model
+class UserPoint extends \Phalcon\Mvc\Model
 {
 	public $id;
 	
