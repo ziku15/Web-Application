@@ -7,7 +7,7 @@ namespace Biz_mela\Frontend\Controllers;
 use Biz_mela\Models\UserMaster as UserMaster;
 use Biz_mela\Models\ShopMaster as ShopMaster;
 use Biz_mela\Models\UserBankInfo as UserBankInfo;
-use Biz_mela\Library\PHPMailer as PHPMailer;
+use Biz_mela\PHPMailer as PHPMailer ;
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
@@ -136,7 +136,7 @@ class SessionController extends ControllerBase
 	private function Send_Mail($to,$subject,$body)
 	{
 	//echo __DIR__; exit();
-	//require_once __DIR__ . '/../../../PHPMailer/class.phpmailer.php';
+	// require_once __DIR__ . '/../../../PHPMailer/class.phpmailer.php';
 	$from       = "info@optimaxbd.net";
 	$mail       = new PHPMailer();
 	$mail->IsSMTP(true);            // use SMTP
@@ -591,7 +591,7 @@ class SessionController extends ControllerBase
 	
 	private function Send_Mail_two($to,$subject,$body,$UserId)
 	{
-	require_once __DIR__ . '/../../PHPMailer/class.phpmailer.php';
+	// require_once __DIR__ . '/../../PHPMailer/class.phpmailer.php';
 	$from       = "info@optimaxbd.net";
 	$mail       = new PHPMailer();
 	$mail->IsSMTP(true);            // use SMTP
