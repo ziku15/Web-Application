@@ -48,6 +48,9 @@ class UserMaster extends \Phalcon\Mvc\Model
      * @var string
      */
     public $last_name;
+	
+	
+	public $point;
 
     /**
      *
