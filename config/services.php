@@ -8,6 +8,7 @@ use Phalcon\Mvc\Router;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Biz_mela\library\PHPMailer as PHPMailer;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
