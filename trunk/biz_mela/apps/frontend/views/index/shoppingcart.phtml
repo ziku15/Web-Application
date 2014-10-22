@@ -45,11 +45,18 @@
 </style>
 
 <script type="text/javascript">
+
+$( document ).ready(function() {
+//$('.quant-changed').val("1");
+  $('.quant-changed').mask("9?999",{placeholder:""});
+
+});
  
 $(function(){
 $('.quant-changed').on('change', function(e) {
 
 var quantId = e.target.id;
+//$(this).mask("9999");
 console.log(quantId);
 var pId = quantId.toString().split(",")[0];
 var priceUnit = quantId.toString().split(",")[1];
@@ -59,8 +66,10 @@ var quantity = $(this).val();
 
 
 console.log(quantity);
- var spin_area_id = pId.toString().concat("spin");
+
+var spin_area_id = pId.toString().concat("spin");
 $('#'+spin_area_id).html('<i class="fa fa-spin fa-refresh"></i>');
+
 $.ajax({
 
         type: "POST",
@@ -77,7 +86,9 @@ $.ajax({
         }
       });
 //checkStock(quantity);
- if(parseInt(quantity)>0){
+
+
+ if(parseInt(quantity)>=0){
   
   var subTotal = parseInt(quantity) * parseInt(priceUnit);
   console.log(subTotal);
@@ -90,10 +101,12 @@ $.ajax({
 
 }
 
-else{
-  //$('#'+sub_text_area_id).html("invalid quantity");
-  $('#negQuantModal').modal('show');
+ if(quantity==" "){
+  $('#'+sub_text_area_id).html("0");
+  //$('#negQuantModal').modal('show');
 }
+
+ 
 
  
 
