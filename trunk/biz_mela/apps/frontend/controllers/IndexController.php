@@ -210,6 +210,25 @@ class IndexController extends ControllerBase
       $mult = intval(0);
       foreach ($cookie_array as $key => $value) {
        $unitPrice = ProductMaster::findFirst("id="."'".$key."'")->price;
+       if($key!=$product_id)
+        $mult += intval($unitPrice) * intval($value);  
+       else
+        $mult += intval($unitPrice) * intval($quantity);
+
+
+      } 
+
+      echo $mult;
+
+    }
+
+    public function debugTotalAction(){
+      $this->view->disable();
+
+      $cookie_array = unserialize($_COOKIE['product']);
+      $mult = intval(0);
+      foreach ($cookie_array as $key => $value) {
+       $unitPrice = ProductMaster::findFirst("id="."'".$key."'")->price;
        $mult += intval($unitPrice) * intval($value);  
       } 
 
@@ -317,15 +336,18 @@ class IndexController extends ControllerBase
         ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
         ->getQuery()
         ->execute();
-      if(count($cResult) > 0){
-        $this->view->setVar(cResult,$cResult);
-      }
+      $data['cResult'] = $cResult;
 
-      else{
-        $this->view->disable();
-        echo "No products to show";
+      $cookie_array = unserialize($_COOKIE['product']);
+      $mult = intval(0);
+      foreach ($cookie_array as $key => $value) {
+       $unitPrice = ProductMaster::findFirst("id="."'".$key."'")->price;
+       $mult += intval($unitPrice) * intval($value);  
+      } 
 
-      }
+      $data['mult'] = $mult;
+      $this->view->setVar(data,$data);
+
 
     }
 
