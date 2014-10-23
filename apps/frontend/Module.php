@@ -16,8 +16,9 @@ class Module implements ModuleDefinitionInterface
      */
     public function registerAutoloaders()
     {
+        $config = include __DIR__ . "/config/config.php";
 
-//        $loader = new Loader();
+        $loader = new Loader();
 //
 //        $loader->registerNamespaces(array(
 //            'Biz_mela\Frontend\Controllers' => __DIR__ . '/controllers/',
@@ -25,6 +26,14 @@ class Module implements ModuleDefinitionInterface
 //        ));
 //
 //        $loader->register();
+
+        $loader->registerDirs(array(
+//            $config->application->pdf,
+            $config->application->libraryDir
+//            $config->application->pluginsDir
+        ));
+
+        $loader->register();
     }
 
     /**
