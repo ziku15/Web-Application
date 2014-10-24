@@ -71,7 +71,15 @@ class WalletController extends ControllerBase
 	
 	public function walletAction() {
 		
+		$username = $this->session->get('auth');
 		
+        $con=UserMaster::findFirst("username="."'".$username['name']."'");
+		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");
+		$userid=$con->id;
+		$a=UserBankInfo::findFirst("user_id="."'".$userid."'");
+		$data['value']=$a;
+		
+		$this->view->setVar('data',$data);
 		
 		
     }

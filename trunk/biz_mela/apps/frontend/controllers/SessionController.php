@@ -146,7 +146,7 @@ class SessionController extends ControllerBase
 
 
         	if (!$form->isValid($_POST)) {
-                $this->flash->error("Please solve the following error !!");
+                $this->flash->error("Please solve the following errors !!");
             }else{
             	//echo $this->request->getPost('email');exit();
 	            $firstname = $this->request->getPost('firstname', array('string', 'striptags'));
@@ -418,8 +418,8 @@ class SessionController extends ControllerBase
 				//return $this->forward('buy/index');
 					return $this->dispatcher->forward(
 					 	array(
-					 		'controller' => 'sell',
-					 		'action' => 'index',
+					 		'controller' => 'accdashboard',
+					 		'action' => 'dashinfo',
 					 		'param' => $userid
 					 		)
 					 	);
@@ -456,8 +456,8 @@ class SessionController extends ControllerBase
 				// return $this->dispatcher->forward('sell/index/'.$userid);
 					 return $this->dispatcher->forward(
 					 	array(
-					 		'controller' => 'sell',
-					 		'action' => 'index',
+					 		'controller' => 'accdashboard',
+					 		'action' => 'dashinfo',
 					 		'param' => $userid
 					 		)
 					 	);

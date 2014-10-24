@@ -4,6 +4,9 @@
 .panel-group > .panel panel-default {
     background-color: #FFFFFF;
 }
+.red{
+    background-color: red;
+}
 </style>
 <!-- main body part -->
 <div class="container">
@@ -13,126 +16,144 @@
 		<div class="title"><h3>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp;</h3></div>
 		<div class="panel-group row" id="accordion">
 		
-			<div class="panel panel-default">
-                            <div class="panel-heading">
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get().'accdashboard/dashinfo/'; ?>" >
+			     <div class="panel panel-default">
+                        <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
-                                        Home
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-			<div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get().'accdashboard/dashinfo/'; ?>">
+                                    
                                         Account Dashboard
-                                    </a>
+                                    
                                 </div>
-                            </div>
+                        </div>
 							
 					
-                        </div>
-						
-			<div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("accinfo/accinfo/") ?>">
-                                        Account Information
-                                    </a>
+                    </div>
+            </a>
+
+			 <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("accinfo/accinfo/") ?>">			
+    			<div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                       
+                                            Account Information
+                                       
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-						
-			<div class="panel panel-default">
+                     </a>
+
+			 <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("address/address/") ?>">			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("address/address/") ?>">
+                                   
                                         Address Book
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
-						
-			<div class="panel panel-default">
+                </a>
+
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("order/order/") ?>" >			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("order/order/") ?>">
+                                    
                                         My Orders
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
-						
-			<div class="panel panel-default">
+                </a>
+
+
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                    
                                         Billing Aggrements
-                                    </a>
+                                   
                                 </div>
                             </div>
                         </div>
-						
-			<div class="panel panel-default">
+                 </a>
+
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("inventory/list/") ?>">			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("inventory/list/") ?>">
+                                    
                                         My Inventory
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
-						
-			<div class="panel panel-default">
+                </a>
+
+
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wallet/pass/") ?>">			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wallet/pass/") ?>">
+                                    
                                         My Wallet
-                                    </a>
+                                   
                                 </div>
                             </div>
                         </div>
-						
-			<div class="panel panel-default">
+                 </a>
+
+
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wishlist/wish/") ?>">			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wishlist/wish/") ?>">
+                                    
                                         My Wishlists
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
-						
-			<div class="panel panel-default">
+                </a>
+
+
+			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">			
+			     <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>">
+                                    
                                         My Applications
-                                    </a>
+                                   
                                 </div>
                             </div>
                         </div>
+                 </a>
 
-            <div class="panel panel-default">
+            <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("refer/refer/") ?>">
+                <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("refer/refer/") ?>">
-                                        Refer Friends
-                                    </a>
+                                    
+                                        Referred Friends
+                                    
                                 </div>
                             </div>
                         </div>
+                </a>
 
-            <div class="panel panel-default">
+
+            <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("subscribe/subscription/") ?>">    
+                <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("subscribe/subscription/") ?>">
+                                    
                                         Newsletter Subscription
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
+                </a>
 		
 		</div>
 		
@@ -173,3 +194,4 @@
 
 
 <?php echo $this->partial('shared/ad'); ?>
+

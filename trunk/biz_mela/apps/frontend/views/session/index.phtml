@@ -12,8 +12,6 @@ p{
 	font-size: 16px;
 }
 h3{
-
-	color:#330000;
 	font-size: 32px;
 }
 h2{
@@ -67,8 +65,51 @@ a {
     
 }
 
+.item>a:hover{
+    color:#CD2027;
+    text-decoration: none;
+ 
+    
+}
+.forget{
+	font-size: 14px;
+	float:right;
+	color:#870415;
+	padding-left: 10px;
+}
+.forget>a:hover{
+	text-decoration: none;
+	color:#CD2027;
 
+}
 
+.col-md-5{
+	padding-top: 10px;
+
+}
+
+.top-menu .item {
+    border-right: 0px solid #c8c8c8;
+    color: #de3e3e;
+    float: left;
+    padding: 0 10px;
+}
+
+.top-menu .item:first-child {
+    border-left: 0px solid #c8c8c8;
+}
+
+.col-md-12{
+	padding:0px;
+}
+.bg-red{
+	background-color: #cc0001;
+	color:white;
+	font-size: 16px;
+}
+.col-md-2>.btn-group{
+	padding-top: 9px;
+}
 
 </style>
 </head>
@@ -85,13 +126,13 @@ a {
 					<h3>LogIn</h3>
 					<?php echo $this->getContent(); ?>
 				</div>
-			<form action="<?php echo $this->url->get('session/start/')?>" class="form-inline" method="post" autocomplete="off">
+			<form action="<?php echo $this->url->get('session/start/')?>" class="form-inline" method="post" autocomplete="on">
 				<fieldset>
 					<div class="control-group">
 
 						<label class="control-label" for="email">Username/Email</label>
 						<div class="controls">
-							<input type="text" id="email" name="email" class="form-control input-lg form-element" placeholder="example" pb-role="username">
+							<input type="text" id="email" name="email" class="form-control input-lg form-element" autocomplete="on" placeholder="example" pb-role="username">
 						</div>
 					</div>
 
@@ -102,14 +143,14 @@ a {
 							<input type="password" id="password" name="password" class="form-control input-lg form-element" placeholder="password" pb-role="password">
 						</div>
 					</div>
-
-
-					<div class="form-actions">
-						</br>
-						<input type="submit" value="Login" class="btn btn-primary btn-large" pb-role="submit">
-						<div class="btn-group">
-								<a href="<?php echo $this->url->get('session/forgetpassword/')?>" class="btn btn-primary btn-custom gray">Forgot Password</a>
+					<div class="col-md-5">
+								<p class="forget"><a href="<?php echo $this->url->get('session/forgetpassword/')?>" >  Forgot Password?</a></p>
 						</div>
+
+					<div class="col-md-12">
+						
+						<input type="submit" value="Login" class="btn btn-primary btn-large" pb-role="submit">
+						
 					</div>
 
 
@@ -133,6 +174,7 @@ a {
 						</br>
 						</br>
 						</br>
+						</br>
 
 					</ul>
 
@@ -146,13 +188,7 @@ a {
 
 </div>
 
-<footer>
-	<div class="col-md-6">
-	</br>
-	<h5>@bizmela.com</h5>
-	</div>
 
-</footer>
 
 </div>
 

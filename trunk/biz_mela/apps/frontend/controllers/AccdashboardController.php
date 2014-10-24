@@ -26,7 +26,7 @@ class AccdashboardController extends ControllerBase
             return $this->response->redirect('session/start/');
         }
 
-        $this->view->setVars(array('title' => 'Account Dashboard'));
+        $this->view->setVars(array('title' => 'MY DASHBOARD'));
         
         //Tag::setTitle('Account Information');
         //parent::initialize();

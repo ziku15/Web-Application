@@ -177,7 +177,7 @@ class InventoryController extends ControllerBase
 			$minimum_order_level = $this->request->getPost('minimum_order_level');
 
 			if (!$form->isValid($_POST)) {
-					$this->flash->error("Please solve the following error !!");
+					$this->flash->error("Please solve the following errors !!");
 				}else{
 		
 				$Product = new ProductMaster();

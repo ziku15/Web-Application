@@ -39,7 +39,7 @@ class NewsletterController extends ControllerBase
         if ($request->isPost()) {
         	$email = $request->getPost('email');
         	$previous_email = Newsletter::find('email=' . "'" . $email . "'" );
-          $msg="not set";
+          $msg="Input an email address";
         	if ($previous_email->count() > 0) {
                     $msg=" You are already subscribed to our newsletter";
                    
