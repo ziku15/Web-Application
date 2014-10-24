@@ -163,16 +163,24 @@
   <!-- subscription area -->
   <div class="subscribe">
     <div class="container">
-      
+      <form action="<?php echo $this->url->get("newsletter/subscription/") ?>" method="post">
       <div class="col-md-5">
         <div class="subs-text">Subscribe to our newsletter</div>
       </div>
+      
       <div class="col-md-5">
-        <input type="text" class="form-control input-lg" placeholder="Your mail address here..">        
+        <input type="text" id="email" name="email" class="form-control input-lg" placeholder="Your mail address here..">        
       </div>
       <div class="col-md-2">
-        <input type="submit" class="form-control input-lg btn bg-red">        
+          
+          <div class="btn-group btn-group-justified button-element">
+                      <div class="btn-group">
+                          <button type="submit" name="submit" value="publish" class="form-control input-lg btn bg-red">Submit</button>
+                      </div>        
+                  </div>
+              
       </div>
+    </form>
       
     </div>
   </div>
