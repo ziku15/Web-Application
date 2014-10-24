@@ -139,6 +139,15 @@ class IndexController extends ControllerBase
       $number_of_days = 30 ;
       $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
 
+      if (!isset($_COOKIE['product'])) {
+        # code...
+      $cookie_array[$product_id] = intval(1);
+      setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+      echo count($cookie_array);
+      }
+
+      else{
+
       $cookie_array = unserialize($_COOKIE['product']);
 
       if (array_key_exists($product_id, $cookie_array))
@@ -154,6 +163,7 @@ class IndexController extends ControllerBase
       setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
       echo count($cookie_array);
       }
+    }
       
 
       /*
@@ -181,6 +191,15 @@ class IndexController extends ControllerBase
       $number_of_days = 30 ;
       $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
 
+      if (!isset($_COOKIE['product'])) {
+        # code...
+      $cookie_array[$product_id] = intval(1);
+      setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+      echo count($cookie_array);
+      }
+
+      else{
+
       $cookie_array = unserialize($_COOKIE['product']);
 
       if (array_key_exists($product_id, $cookie_array))
@@ -196,6 +215,7 @@ class IndexController extends ControllerBase
       setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
       echo count($cookie_array);
       }
+    }
       
 
       /*
