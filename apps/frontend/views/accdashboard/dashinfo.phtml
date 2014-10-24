@@ -2,13 +2,13 @@
 
 h4 {
     color:#000000;
-
 }
+
 h4.padding{
 	padding-top: 25px;
     padding-right: 50px;
     padding-bottom: 25px;
-    padding-left: 50px;
+    padding-left: 30px;
 
 }
 .seperator-dotted{
@@ -19,54 +19,47 @@ h4.padding{
     padding-right: 10px;
 }
 
-
-
-h2{
-
-    font-size:25 px;
-    text-align: center;
-    padding-left: -10px;
+.seperator-dotted2{
+    width: 93%;
+    border-bottom: 1px solid #ECECEC;
+    margin: 0px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
 }
+
 
 .row-cell{
 
     border:1px solid #ECECEC ;
     border-radius: 4px;
-    height: 605px;
+    height: 464px;
     width: 95%;
-
-
 }
 
 .dash {
 
-    padding-left: 20px;
+    padding-left: 15px;
     font-size:20px;
     text-align: left;
-    padding-top: 5px;
+    padding-top: 10px;
+    height:42px;
 }
 
 h5{
 
     color: #870415;
-
 }
 
-.subscription{
-
-    font-size: 15px;
-
-}
 
 p{
 
     font-size: 15px;
-
 }
+
 a{
-    text-decoration: none;
     color:#870415;
     font-size: 15px;
+    text-decoration: none;
 }
 
 a:hover{
@@ -85,18 +78,52 @@ h4>a{
 }
 .title{
     padding:8px;
+
 }
 
 .panel-default > .panel-heading {
     background-color: #FFFFFF;
     border-color: #ddd;
     color: #333;
+    cursor:pointer;
+    height: 49px;
 }
+
+.panel-default > .panel-heading:hover{
+    background-color: #0264C0;
+    color: white;
+
+}
+
 .edt:hover{
     color:#72081D;
 }
 
+
+.start{
+    padding-left: 10px;
+    padding-top: 10px;
+    color:#000000;
+    font-size: 15px;
+    height:82px;
+}
+.row{
+    padding-left: 20px;
+}
+
+.main-menu-title>h2{
+    font-size: 20px;
+    text-align: left;
+    padding-top: 10px;
+
+}
+
 </style>
+
+<div class="row">
+    <div class="seperator-dotted2"></div>
+    <p class="start">Hello,<?php echo $data['value']->username;?>!</br>From your Account Dashboard you have the ability to view a snapshort of your recent activity and update your information.</br>Select a link below to view or edit information.</p>
+</div>
 
 <div class="row-cell">
 
@@ -107,7 +134,7 @@ h4>a{
     <div class="seperator-dotted"></div>
 
      <div class="col-md-6">
-        <h4>Contact Information &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 
+        <h4>Contact Information &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
             <a href="<?php echo $this->url->get("accdashboard/edit"); ?>" >
                 Edit
              </a>
@@ -151,6 +178,9 @@ h4>a{
 
         </div>
      </div>
+
+        </br>
+        </br>
 
      <div class="col-md-6">
         <p><strong>Default Billing Address</strong></p>
