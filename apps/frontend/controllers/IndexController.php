@@ -261,6 +261,9 @@ class IndexController extends ControllerBase
       $product_id = $this->request->getPost('productID');
       $quantity = $this->request->getPost('Quant');
 
+      $number_of_days = 30 ;
+      $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ;
+
       $cookie_array = unserialize($_COOKIE['product']);
 
       $cookie_array[$product_id] = $quantity;
