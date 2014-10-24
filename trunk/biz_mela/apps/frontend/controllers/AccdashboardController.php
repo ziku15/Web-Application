@@ -6,6 +6,8 @@ use Biz_mela\Models\UserBankInfo as UserBankInfo;
 use Biz_mela\Models\OrderMaster as OrderMaster;
 use Biz_mela\Models\OrderUserBillingInfo as OrderUserBillingInfo;
 use Biz_mela\Models\OrderUserShippinInfo as OrderUserShippinInfo;
+use Biz_mela\Models\Newsletter as Newsletter;
+
 
 use Phalcon\Tag as Tag,
 	Phalcon\Forms\Form,
@@ -46,6 +48,7 @@ class AccdashboardController extends ControllerBase
 		$data['value']=$con;
 		$this->view->setVar('data',$data);
 		$user_id=$con->id;
+		$user_email=$con->email;
 		$User=UserBankInfo::findFirst("user_id="."'".$user_id."'");
 		$record['value']=$User;
 		$this->view->setVar('record',$record);
@@ -62,6 +65,16 @@ class AccdashboardController extends ControllerBase
 		$ship_addr=OrderUserShippinInfo::findFirst("order_master_id="."'".$master."'");
 		$shipment['value']=$ship_addr;
 		$this->view->setVar('shipment',$shipment);
+
+		$news=Newsletter::findFirst("email="."'".$user_email."'");
+		$type=$news->shop_id;
+		$msg="";
+		if($type!=Null){
+			$msg="Subscribed to Full Subscription";
+		}
+		$subs['value']=$msg;
+		$this->view->setVar('subs',$subs);
+
 
 		
     }
@@ -288,6 +301,60 @@ class AccdashboardController extends ControllerBase
 					}
 	
 			}
+
+
+
+
+	}
+
+	public function editsubscriptionAction()
+	{
+
+		$username = $this->session->get('auth');
+        $con=UserMaster::findFirst("username="."'".$username['name']."'");
+        $user_email=$con->email;
+        $news=Newsletter::findFirst("email="."'".$user_email."'");
+
+        $form = new Form();
+        $email = new Text("email", array(
+            'class' => 'form-control input-lg form-element',
+			'id' => 'email',
+            'value' => $news->email,
+            'autocomplete' => 'off'
+        ));
+
+        $form->add($email);
+        $data['form'] = $form;
+        $this->view->setVars($data);
+
+        if ($this->request->isPost()) {
+			if ($this->request->getPost('submit') == 'cancel') {
+                return $this->response->redirect('accdashboard/dashinfo/');
+            }
+		
+			
+			
+			$email = $this->request->getPost('email');
+			//$dob = $this->request->getPost('dob');
+			//$accountno = $this->request->getPost('accountno');
+		
+			
+			$news->email = $email;
+			//$User->account_holder_name = $accountholder;
+			//$User->dob = $dob;
+			
+			if ($news->save()) {
+						$this->flash->success("Email  updated successfully!!");
+						$this->response->redirect('accdashboard/dashinfo/');
+					} else {
+						$this->flash->error("error occured,please try again later!!");
+					}
+	
+			}
+
+
+
+
 
 
 

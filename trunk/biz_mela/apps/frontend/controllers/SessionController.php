@@ -48,7 +48,7 @@ class SessionController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'firstname',
             'placeholder' => 'Firstname',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$firstname->addValidator(new PresenceOf(array(
             'message' => 'The First Name field is required'
@@ -58,7 +58,7 @@ class SessionController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'lastname',
             'placeholder' => 'Lastname',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$lastname->addValidator(new PresenceOf(array(
             'message' => 'The Last Name field is required'
@@ -68,7 +68,7 @@ class SessionController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'username',
             'placeholder' => 'Username',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$username->addValidator(new PresenceOf(array(
             'message' => 'The UserName field is required'
@@ -78,7 +78,7 @@ class SessionController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'cellphone',
             'placeholder' => 'Cell Phone',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$cellphone->addValidator(new PresenceOf(array(
             'message' => 'The Cell Phone field is required'
@@ -88,7 +88,7 @@ class SessionController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'email',
             'placeholder' => 'Email Address',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$email->addValidator(new PresenceOf(array(
             'message' => 'The email field is required'
@@ -116,14 +116,14 @@ class SessionController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'address',
             'placeholder' => 'Address',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 
         $dob = new Text("dob", array(
             'class' => 'form-control input-lg form-element',
             'id' => 'dob',
             'placeholder' => 'Date of Birth(YYYY-MM-DD Format)',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
         $dob->addValidator(new PresenceOf(array(
             'message' => 'The Date of Birth field is required'
@@ -244,90 +244,7 @@ class SessionController extends ControllerBase
 	
 	
 		
-        /*$request = $this->request;
-        if ($request->isPost()) {
-
-            $name = $request->getPost('name', array('string', 'striptags'));
-            $username = $request->getPost('username', 'alphanum');
-            $email = $request->getPost('email', 'email');
-            $password = $request->getPost('password');
-            $repeatPassword = $this->request->getPost('repeatPassword');
-			$type=$this->request->getPost('type');
-			$contact_no=$this->request->getPost('contact_no');
-			$address=$this->request->getPost('address');
-			$dob=$this->request->getPost('dob');
-			$previous_user = UserMaster::find('username=' . "'" . $username . "'" );
-			$previous_email = UserMaster::find('email=' . "'" . $email . "'" );
-			
-            
-			
-			if ($previous_email->count() > 0) {
-                    $this->flash->error(" Email already exists");
-                    return false;
-                }
-			if ($previous_user->count() > 0) {
-                    $this->flash->error(" Username already exists");
-                    return false;
-                }
-			if ($password != $repeatPassword) {
-                $this->flash->error('Passwords are diferent');
-                return false;
-            }
-			if (strlen($password)<8 ) {
-                $this->flash->error('Password too short');
-                return false;
-            }
-			
-			
-				
-			
-
-            $user = new UserMaster();
-            $user->username = $username;
-			//$new_password = $this->security->hash($password);
-					
-            //$user->password=$new_password;
-			//$user->password = $this->security->hash($new_password);
-            $user->password = sha1($password);
-            $user->name = $name;
-            //$user->email = $email;
-			$user->type = $type;
-			$user->contact_no =$contact_no ;
-			$user->address =$address ;
-			$user->dob=$dob ;
-            //$user->created_at = new Phalcon\Db\RawValue('now()');
-			$user->status = 0;
-            //$user->active = 'Y';
-            if ($user->save() == false) {
-                foreach ($user->getMessages() as $message) {
-                    $this->flash->error((string) $message);
-                }
-				
-			
-            } else {
-                Tag::setDefault('email', '');
-                Tag::setDefault('password', '');
-                $this->flash->success('Thanks for sign-up, please log-in to explore BizMela');
-						$userid=$user->id;
-						$to=$email;
-						
-						$subject="Email verification";
-						$body='Hi, <br/> <br/> Please verify your email and get started using your Website account.
-						<br/> <br/> <a href="http://localhost/biz_mela/session/status/'.$userid.'">Click Here To Confirm</a>' ;
-						//mail($to,$subject,$body);
-						//$this->Send_Mail($to,$subject,$body);	
-						//return $this->forward('session/index');
-						return $this->dispatcher->forward(
-					 	array(
-					 		'controller' => 'session',
-					 		'action' => 'index'
-					 		
-					 		)
-					 	);
-						
-						//return $this->forward('session/index');
-            }
-        }*/
+        
     }
 	
 	

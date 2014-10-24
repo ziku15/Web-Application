@@ -45,7 +45,7 @@ class RefregController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'firstname',
             'placeholder' => 'Firstname',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$firstname->addValidator(new PresenceOf(array(
             'message' => 'The First Name field is required'
@@ -55,7 +55,7 @@ class RefregController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'lastname',
             'placeholder' => 'Lastname',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$lastname->addValidator(new PresenceOf(array(
             'message' => 'The Last Name field is required'
@@ -65,7 +65,7 @@ class RefregController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'username',
             'placeholder' => 'Username',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$username->addValidator(new PresenceOf(array(
             'message' => 'The UserName field is required'
@@ -75,7 +75,7 @@ class RefregController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'cellphone',
             'placeholder' => 'Cell Phone',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$cellphone->addValidator(new PresenceOf(array(
             'message' => 'The Cell Phone field is required'
@@ -85,7 +85,7 @@ class RefregController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'email',
             'placeholder' => 'Email Address',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 		$email->addValidator(new PresenceOf(array(
             'message' => 'The email field is required'
@@ -113,14 +113,14 @@ class RefregController extends ControllerBase
             'class' => 'form-control input-lg form-element',
             'id' => 'address',
             'placeholder' => 'Address',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
 
         $dob = new Text("dob", array(
             'class' => 'form-control input-lg form-element',
             'id' => 'dob',
             'placeholder' => 'Date of Birth(YYYY-MM-DD Format)',
-            'autocomplete' => 'off'
+            'autocomplete' => 'on'
         ));
         $dob->addValidator(new PresenceOf(array(
             'message' => 'The Date of Birth field is required'
@@ -224,14 +224,14 @@ class RefregController extends ControllerBase
                 $a->save();
 
                 $this->flash->success('Thanks for sign-up, please log-in to explore BizMela');
-						/*$userid=$user->id;
+						$userid=$user->id;
 						$to=$email;
 						
 						$subject="Email verification";
 						$body='Hi, <br/> <br/> Please verify your email and get started using your Website account.
 						<br/> <br/> <a href="http://localhost/biz_mela/session/status/'.$userid.'">Click Here To Confirm</a>' ;
 						//mail($to,$subject,$body);
-						//$this->Send_Mail($to,$subject,$body);	
+						$this->Send_Mail($to,$subject,$body);	
 						//return $this->forward('session/index');
 						return $this->dispatcher->forward(
 					 	array(
@@ -239,22 +239,46 @@ class RefregController extends ControllerBase
 					 		'action' => 'index'
 					 		
 					 		)
-					 	);*/
+					 	);
 						
 						//return $this->forward('session/index');
             		}
 			
             	}
 
-
-
-
-
-
-
         }
 
 	}
+
+
+    private function Send_Mail($to,$subject,$body)
+    {
+    //echo __DIR__; exit();
+    // require_once __DIR__ . '/../../../PHPMailer/class.phpmailer.php';
+    $from       = "info@optimaxbd.net";
+    $mail       = new PHPMailer();
+    $mail->IsSMTP(true);            // use SMTP
+    $mail->IsHTML(true);
+    $mail->SMTPAuth   = true;                  // enable SMTP authentication
+    $mail->Host       = "smtp.optimaxbd.net"; // SMTP host
+    $mail->Port       =  25;                    // set the SMTP port
+    $mail->Username   = "";  // SMTP  username
+    $mail->Password   = "";  // SMTP password
+    $mail->SetFrom($from, 'Sidra Term');
+    $mail->AddReplyTo($from,'Sidra Term');
+    $mail->Subject    = $subject;
+    $mail->MsgHTML($body);
+    $address = $to;
+    $mail->AddAddress($address, $to);
+    $mail->Send();
+    if(!$mail->Send()) {
+        $this->flash->error("Mail not Sent!! Mailer error:". $mail->ErrorInfo);
+        
+        } else {
+        $this->flash->success("Mail Sent!!");
+        return $this->response->redirect('session/register/');
+        }
+    }
 
 	private function _registerSession($user)
     {
