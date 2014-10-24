@@ -4,6 +4,15 @@
   border: 1px solid #dadada;
   margin-top: 20px;
   padding: 5px 5px 0;
+  height: 370px;
+}
+
+.image-small{
+  width: 100%;
+  border: 1px solid #dadada;
+  margin-top: 20px;
+  padding: 5px 5px 0;
+  height: 110px;
 }
 
 .price-table{
@@ -18,15 +27,303 @@
   margin-top: 20px;
   padding: 5px 5px 0;
 }
+
+.bg-button, .bg-button:hover, .bg-button:focus {
+    background-color: #909090;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+}
+
+.modal-margin-top{
+  margin-top: 30%;
+}
+
+.modal-footer {
+    border-top: none;
+    margin-top: 0;
+    padding: 15px 25px;
+    text-align: right;
+}
+
+.modal-footer button{
+    width: 30%;
+}
 </style>
+
+<style type="text/css">
+/*****************************************************
+ * generic styling for ALS elements: outer container
+ ******************************************************/
+
+.als-container {
+  position: relative;
+  width: 100%;
+  margin: 0px auto;
+  z-index: 0;
+}
+
+/****************************************
+ * viewport styling
+ ***************************************/
+
+.als-viewport {
+  position: relative;
+  overflow: hidden;
+  margin: 0px auto;
+}
+
+/***************************************************
+ * wrapper styling
+ **************************************************/
+
+.als-wrapper {
+  position: relative;
+  /* if you are using a list with <ul> <li> */
+  
+}
+
+/*************************************
+ * item: single list element
+ ************************************/
+
+#my-als-list .als-item {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+  padding: 10px;
+}
+
+#up-list .als-item {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+  height: 115px;
+  width: 100%;
+ 
+}
+
+
+/***********************************************
+ * prev, next: buttons styling
+ **********************************************/
+ 
+.als-prev, .als-next {
+  position: absolute;
+  cursor: pointer;
+  clear: both;
+}
+
+
+</style>
+
+<style type="text/css">
+
+
+.price{
+  border:1px solid #DADADA;
+  height: 50px;
+  margin-top:10px; 
+  padding: 10px;
+  color: #717171;
+}
+</style>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    //$("#my-als-list").als();
+    $("#up-list").als({
+          visible_items: 3,
+          scrolling_items: 1,
+          orientation: "vertical",
+          circular: "yes",
+          autoscroll: "no",
+          speed: 200,
+          direction: "down"
+        });
+
+
+
+    $("#my-als-list").als({
+          visible_items: 4,
+          scrolling_items: 1,
+          orientation: "horizontal",
+          circular: "yes",
+          autoscroll: "no",
+          speed: 250
+        });
+
+    
+    
+  }); 
+</script>
+
+<script type="text/javascript">
+ function processWish(id){
+
+  var find = id.toString().concat(id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url:"/biz_mela/index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(find);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wish').on('click', function(e) {
+
+//subcategories();
+ var wishId = e.target.id;
+
+ //clicked(idClicked);
+ processWish(wishId);
+
+  });
+});
+</script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+//$('.quant-changed').val("1");
+  $('#quant').mask("9?999",{placeholder:""});
+
+});
+
+function processCart(id){
+
+var quantity = $("#quant").val();
+
+
+    $.ajax({
+
+        type: "POST",
+        url:"/biz_mela/index/addtocart2",
+        data: { data1 : id, data2: quantity},
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="") {$('#productExistCartModal').modal('show');}
+       else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+ 
+$(function(){
+$('.cart').on('click', function(e) {
+  var cartId = $(this).attr("product_id");
+  processCart(cartId);
+  console.log(cartId);
+
+  });
+});
+
+</script>
 
 
 <div class="container">
   <div class="col-md-1"> 
-        <img class="img-responsive image" src="<?php echo $this->url->get().$data['picture'];?>"></img>
-        <img class="img-responsive image" src="<?php echo $this->url->get().$data['picture'];?>"></img>
-        <img class="img-responsive image" src="<?php echo $this->url->get().$data['picture'];?>"></img>
+    <p><br></p>
+    <div>
+    
+    <div class="als-container" id="up-list">
+    <span class="als-prev" style="left: 20px;top: -32px;">
+      <img src="<?php echo $this->url->get().'main/images/';?>up.png" alt="prev" title="previous" />
+    </span>
+    <div class="als-viewport">
+    <div class="als-wrapper">
+
+      <div class="als-item">
+        <img class="img-responsive" src="<?php echo $this->url->get().$data['picture'];?>"></img>
+      </div>
+
+      <div class="als-item">
+        <img class="img-responsive" src="<?php echo $this->url->get().$data['picture'];?>"></img>
+      </div>
+
+      <div class="als-item">
+        <img class="img-responsive" src="<?php echo $this->url->get().$data['picture'];?>"></img>
+      </div>
+
+      <div class="als-item">
+        <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>dress1.jpg"></img>
+      </div>
+
+      <div class="als-item">
+         <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>dress2.jpg"></img>
+      </div>
+
+      <div class="als-item">
+        <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>dress3.jpg"></img>
+      </div>
+
+      <div class="als-item">
+        <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>dress4.jpg"></img>
+      </div>
+
+    </div> <!--wrapper -->
+    </div> <!--ais-viewport -->
+    <span class="als-next" style="top: 330px; left: 20px">
+      <img src="<?php echo $this->url->get().'main/images/';?>down.png" alt="next" title="next" />
+    </span> <!-- "next" button -->
+    </div> <!--als-container-->
+
+
+
+
   </div>
+
+  </div> <!--col-md-1 ends -->
     
   <div class="col-md-4">
     <img class="img-responsive image" src="<?php echo $this->url->get().$data['picture'];?>"></img>
@@ -38,6 +335,7 @@
   <div class="col-md-6 col-md-offset-1">
     <div class="row">
       <div class="col-md-12">
+      <p></p>
       <?php echo $data['product_name']; ?> <br>
       By <?php echo $data['shop_name']; ?>   
       </div>
@@ -46,45 +344,197 @@
     <div class="row">
       <div class="col-md-3 price-table">
         Original price<br>
-        <?php echo $data['price']; ?>
+        <strike><?php echo "Tk. ".$data['price']; ?><strike>
       </div>
 
       <div class="col-md-3 price-table">
         Special price<br>
-        Tk. 3720
+        <?php echo "Tk. ";echo intval($data['price'])-intval($data['discount']) * intval($data['price']) * 0.01;?>
       </div>
 
       <div class="col-md-3 price-table">
         Discount<br>
-        discount
+        <?php echo $data['discount']." %"; ?>
       </div>
 
       <div class="col-md-3 price-table">
         Save <br>
-        Tk. 280
+        <?php echo "Tk. ";echo intval($data['discount']) * intval($data['price']) * 0.01;?>
       </div>
 
     </div>
 
     <div class="row">
 
-    <div class="col-md-12 box">
+      <div class="col-md-12 box">
       Product description<br>
       <?php echo $data['description']; ?><br>
+      Category ID: <?php echo $data['category']; ?> &ensp;
+      Product ID : <?php echo $data['product_id']; ?>
+
+      <p></p>
 
       About product<br>
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+      </div>
+
     </div>
+
+    <div class="row" style="padding-top: 20px">
+      <div class="col-md-4">
+        Quantity: &ensp; <span><input type="text" class="form-control" id="quant" value="" size="5" style="width: 40%;display: inline;"></span>
+      </div>
+
+      <div class="col-md-4">
+        <button type="button" class="btn btn-primary bg-button cart" product_id="<?php echo $data['product_id']; ?>">Add to Cart </button> 
+      </div>
+
+      <div class="col-md-4 wish" id="<?php echo $data['product_id']; ?>" style="cursor:pointer">
+        <i class="fa fa-star" style="color: #D21E21"></i>
+        Add to Wish list
+      </div>
 
     </div>
 
     
   </div>
 
-
-
 </div>
+
+  <div class="container">
+      <div class="mid-menu">
+        <div class="item">Related Products</div>
+      </div>
+      <div class="red-joint"></div>
+    
+  </div>
+
+  <p><br></p>
+
+
+
+
+  <div>
+    
+    <div class="als-container" id="my-als-list">
+    <span class="als-prev" style="left: 250px;top: 150px">
+      <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
+    </span>
+    <div class="als-viewport">
+    <div class="als-wrapper">
+    <?php foreach ($data['related'] as $row){?>
+    
+    <div class="als-item">
+      <div>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+        <div class="price">Price: <?php echo $row->price; ?></div>
+      </div>
+    </div>
+    
+    <?php }?>
+    </div> <!--wrapper -->
+    </div> <!--ais-viewport -->
+    <span class="als-next" style="left: 1500px; top: 150px;">
+      <img src="<?php echo $this->url->get().'main/images/';?>right.png" alt="next" title="next" />
+    </span> <!-- "next" button -->
+    </div> <!--als-container-->
+
+    
+  </div>
+
+
+  <!--Modals !-->
+
+<div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> You need to log in first. </center> 
+                </p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+            
+        </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productInWishlistModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> This product already exists in your wish list. </center> 
+                </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+            
+        </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productAddedInWishlist" tabindex="-1" role="dialog" aria-labelledby="productAddedInWishlist" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Wish list updated successfully. </center> 
+                </p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+            
+        </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productAddedCartModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Product successfully added to the cart</center> 
+                </p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+            
+       </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productExistCartModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Quantity incremented for this product. </center> 
+                </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+            
+       </div>
+  </div>
+</div>
+ 
 
 
 
 <?php echo $this->partial('shared/ad'); ?>
+

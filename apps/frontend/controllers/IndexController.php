@@ -169,6 +169,48 @@ class IndexController extends ControllerBase
 
     }
 
+    public function addtocart2Action(){
+      $this->view->disable();
+
+      $product_id = $this->request->getPost('data1');
+
+      $quantity = $this->request->getPost('data2');
+
+      
+   
+      $number_of_days = 30 ;
+      $date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ; 
+
+      $cookie_array = unserialize($_COOKIE['product']);
+
+      if (array_key_exists($product_id, $cookie_array))
+      {
+       $value = $cookie_array[$product_id];
+       $cookie_array[$product_id] = intval($value) + intval($quantity);
+       setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+
+      }
+
+      else{
+      $cookie_array[$product_id] = intval($quantity);
+      setcookie('product', serialize($cookie_array), $date_of_expiry, "/" );
+      echo count($cookie_array);
+      }
+      
+
+      /*
+        $cookie_count = unserialize($_COOKIE['product']);
+        if(!in_array($product_id, $cookie_count)){
+            $cookie_count[] = $product_id;
+            $value = serialize($cookie_count);
+
+            setcookie( 'product', $value, $date_of_expiry, "/" );
+            echo count($cookie_count);
+        }
+      */
+
+    }
+
     public function updateCookieAction(){
       $this->view->disable();
 
@@ -360,7 +402,7 @@ class IndexController extends ControllerBase
       
       $detailResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
-        ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture, s.shop_name')
+        ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, Biz_mela\Models\ProductMaster.discount, Biz_mela\Models\ProductMaster.cat_id, p.picture, s.shop_name')
         ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
         ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
         ->where('Biz_mela\Models\ProductMaster.id = :name:', array('name' => $value))
@@ -381,6 +423,25 @@ class IndexController extends ControllerBase
         $data['price'] = $detailResult[0]->price;
         $data['description'] = $detailResult[0]->product_description;
         $data['picture'] = $detailResult[0]->picture;
+        $data['discount'] = $detailResult[0]->discount;
+        $data['category'] = $detailResult[0]->cat_id;
+        $data['product_id'] = $detailResult[0]->id;
+
+        $cat = $detailResult[0]->cat_id;
+
+        $relatedProducts = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->where('Biz_mela\Models\ProductMaster.cat_id = :name:', array('name' => $cat))
+                  ->andWhere('Biz_mela\Models\ProductMaster.id != :name1:', array('name1' => $value))
+                  ->limit(6)
+                  ->getQuery()
+                  ->execute();
+
+        $data['related'] = $relatedProducts;
+
+
         
         $this->view->setVar(data,$data);
 
