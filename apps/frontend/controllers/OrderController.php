@@ -85,6 +85,9 @@ class OrderController extends ControllerBase
 	{
 
 		$inventoryData = OrderDetails::findFirst('order_master_id = "' . $value . '"');
+		$product=$inventoryData->product_id;
+		$inventory=ProductMaster::findFirst('id = "' . $product .'"');
+		$data['product_name'] = $inventory->product_name;
 		$data['product_id'] = $inventoryData->product_id;
 		$data['price'] = $inventoryData->price;
 		$data['quantity'] = $inventoryData->quantity;
@@ -133,6 +136,9 @@ class OrderController extends ControllerBase
 	{
 
 		$inventoryData = OrderDetails::findFirst('order_master_id = "' . $value . '"');
+		$product=$inventoryData->product_id;
+		$inventory=ProductMaster::findFirst('id = "' . $product .'"');
+		$data['product_name'] = $inventory->product_name;
 		$data['product_id'] = $inventoryData->product_id;
 		$data['price'] = $inventoryData->price;
 		$data['quantity'] = $inventoryData->quantity;

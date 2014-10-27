@@ -137,7 +137,7 @@ class AccdashboardController extends ControllerBase
 			
 			if ($User->save()) {
 						$this->flash->success("Admin  updated successfully!!");
-						$this->response->redirect('sell/index/');
+						$this->response->redirect('accdashboard/dashinfo/');
 					} else {
 						$this->flash->error("error occured,please try again later!!");
 					}
@@ -414,7 +414,7 @@ class AccdashboardController extends ControllerBase
 
         if($this->request->isPost()){
             if (!$form->isValid($_POST)) {
-                $this->flash->error("Please solve the following error !!");
+                $this->flash->error("Please solve the following errors !!");
             }else{
                 //$id = $this->auth['id'];
                 $current_password = $this->request->getPost('current_pass');
@@ -453,8 +453,6 @@ class AccdashboardController extends ControllerBase
 					}
 					}
 
-                }else{
-                    $this->flash->error("");
                 }
                 //$data['form'] = $form;
        			// $this->view->setVars($data);
