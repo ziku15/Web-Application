@@ -6,6 +6,8 @@ use Biz_mela\Models\UserBankInfo as UserBankInfo;
 use Biz_mela\Models\PaymentTransaction as PaymentTransaction;
 use Biz_mela\Models\PaymentMethod as PaymentMethod;
 use Biz_mela\Models\OrderMaster as OrderMaster;
+use Phalcon\Paginator\Adapter\Model as Paginator;
+
 
 
 
@@ -105,6 +107,7 @@ class WalletController extends ControllerBase
         $con=UserMaster::findFirst("username="."'".$username['name']."'");
 		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");
 		$userid=$con->id;
+		$numberPage = $this->request->getQuery("page", "int", 1);
 
 		/*$paymentResult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\OrderMaster')
@@ -136,7 +139,17 @@ class WalletController extends ControllerBase
 		//$newresult = $query->execute();
 		//$data['value']=$newresult;
                  //print_r($data['value']);exit();
-         $this->view->setVar(newresult,$newresult);
+        // $this->view->setVar(newresult,$newresult);
+
+        $paginator = new Paginator(array(
+            "data" => $newresult,
+            "limit" => 3,
+            "page" => $numberPage
+        ));
+		
+        $page['Wallet'] = $paginator->getPaginate();
+        $page['value'] = $value;
+        $this->view->setVars($page);	
 
     }
 

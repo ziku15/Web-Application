@@ -666,7 +666,7 @@ class SessionController extends ControllerBase
                 return $this->response->redirect('session/index/');
             }
             if (!$form->isValid($_POST)) {
-                $this->flash->error("Please solve the following error !!");
+                $this->flash->error("Please solve the following errors !!");
             } else {
 				$email_add=$this->request->getPost('email');
 				$previous_email = UserMaster::find('email=' . "'" . $email_add . "'" );
