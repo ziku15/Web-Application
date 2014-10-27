@@ -8,6 +8,7 @@ use Biz_mela\Models\ProductImage as ProductImage;
 use Biz_mela\Models\ProductWishlist as ProductWishlist;
 use Biz_mela\Models\OrderDetails as OrderDetails;
 use Biz_mela\Models\ShopMaster as ShopMaster;
+use Phalcon\Paginator\Adapter\Model as Paginator;
 use Phalcon\Mvc\View;
 
 class IndexController extends ControllerBase
@@ -394,6 +395,8 @@ class IndexController extends ControllerBase
 
       $keysHolder = array_keys($cookie_array);
 
+      $numberPage = $this->request->getQuery("page", "int", 1);
+
       $cResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
         ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
@@ -401,7 +404,17 @@ class IndexController extends ControllerBase
         ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
         ->getQuery()
         ->execute();
-      $data['cResult'] = $cResult;
+      //$data['cResult'] = $cResult;
+
+        $paginator = new Paginator(array(
+            "data" => $cResult,
+            "limit" => 3,
+            "page" => $numberPage
+        ));
+
+        $page['Product'] = $paginator->getPaginate();
+        $page['value'] = $value;
+        $this->view->setVars($page);
 
       $cookie_array = unserialize($_COOKIE['product']);
       $mult = intval(0);
@@ -463,6 +476,24 @@ class IndexController extends ControllerBase
                   ->execute();
 
         $data['related'] = $relatedProducts;
+
+        //Quantity to display in the textbox
+
+        if (isset($_COOKIE['product'])){
+          $cookie_array = unserialize($_COOKIE['product']);
+
+          if (array_key_exists($value, $cookie_array)){
+            $quantity = $cookie_array[$value];
+            $data['quantity'] = $quantity;
+          }
+
+          else
+            $data['quantity'] = 1;
+
+        }
+
+
+
 
 
         

@@ -50,6 +50,39 @@
 .modal-footer button{
     width: 30%;
 }
+
+/**For hover effect **/
+.hover {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-decoration:none;
+  
+}
+.hover .text {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+    text-align:center;
+    left: 0;
+    top: 0;
+  
+   -webkit-transition: opacity 500ms;
+     -moz-transition: opacity 500ms;
+     -o-transition: opacity 500ms;
+     transition: opacity 500ms;
+}
+.hover:hover .text { display: block; opacity: 1;}
+
+.text .top_text{margin-top: 35%;}
+
+.text .bottom_text{margin-top: 70%;}
+.hover .cart, .hover .wish, .hover .cartB{background-color: #454545; border:none; }
 </style>
 
 <style type="text/css">
@@ -133,6 +166,7 @@
   color: #717171;
 }
 </style>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -268,6 +302,106 @@ $('.cart').on('click', function(e) {
   });
 });
 
+
+function processCartB(id){
+
+  var p_idB = id.toString().split(":")[0]; 
+
+  var msgB = p_idB.toString().concat(p_idB.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url:"/biz_mela/index/addtocart",
+        data: { data1 : p_idB, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_idB);
+        }
+      })
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       //if (result=="") {$('#productExistCartModal').modal('show');}
+       //else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+
+    //alert(id);
+
+   
+    }
+
+
+
+
+$(function(){
+$('.cartB').on('click', function(e) {
+
+//subcategories();
+ var cartIdB = e.target.id;
+ //var cartIdB1 = cartIdB.toString().split(":")[0];
+ //var cartIdB = $(this).attr('href');
+ //clicked(idClicked);
+ processCartB(cartIdB);
+
+
+  var cart = $('.shopping-cart .glyphicon-shopping-cart');
+        var imgtodrag = $(this).parent().parent().siblings(".img-responsive").eq(0);
+        //var src = imgtodrag.attr("src");
+        //console.log("fly");
+        //console.log(src);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '400px',
+                    'width': '250px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 250,
+                    'height': 400
+            }, 1000, 'easeInOutExpo');
+            
+            setTimeout(function () {
+                cart.parent().effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+    
+
+
+  });
+});
+
+
 </script>
 
 
@@ -313,7 +447,7 @@ $('.cart').on('click', function(e) {
 
     </div> <!--wrapper -->
     </div> <!--ais-viewport -->
-    <span class="als-next" style="top: 330px; left: 20px">
+    <span class="als-next" style="top: 340px; left: 20px">
       <img src="<?php echo $this->url->get().'main/images/';?>down.png" alt="next" title="next" />
     </span> <!-- "next" button -->
     </div> <!--als-container-->
@@ -370,7 +504,7 @@ $('.cart').on('click', function(e) {
       Product description<br>
       <?php echo $data['description']; ?><br>
       Category ID: <?php echo $data['category']; ?> &ensp;
-      Product ID : <?php echo $data['product_id']; ?>
+      Product ID : <?php echo $data['product_id']; echo " "; echo $data['quantity'];?>
 
       <p></p>
 
@@ -382,7 +516,7 @@ $('.cart').on('click', function(e) {
 
     <div class="row" style="padding-top: 20px">
       <div class="col-md-4">
-        Quantity: &ensp; <span><input type="text" class="form-control" id="quant" value="" size="5" style="width: 40%;display: inline;"></span>
+        Quantity: &ensp; <span><input type="text" class="form-control" id="quant" value="<?php echo $data['quantity'];?>" size="5" style="width: 40%;display: inline;"></span>
       </div>
 
       <div class="col-md-4">
@@ -417,7 +551,7 @@ $('.cart').on('click', function(e) {
   <div>
     
     <div class="als-container" id="my-als-list">
-    <span class="als-prev" style="left: 250px;top: 150px">
+    <span class="als-prev" style="left: 150px;top: 150px">
       <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
     </span>
     <div class="als-viewport">
@@ -425,7 +559,22 @@ $('.cart').on('click', function(e) {
     <?php foreach ($data['related'] as $row){?>
     
     <div class="als-item">
-      <div>
+      <div class="hover">
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
+          
+          <div class="bottom_text">
+            <button class="cartB add-to-cart" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>
+
+
         <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
         <div class="price">Price: <?php echo $row->price; ?></div>
       </div>
@@ -434,7 +583,7 @@ $('.cart').on('click', function(e) {
     <?php }?>
     </div> <!--wrapper -->
     </div> <!--ais-viewport -->
-    <span class="als-next" style="left: 1500px; top: 150px;">
+    <span class="als-next" style="right: 150px; top: 150px;">
       <img src="<?php echo $this->url->get().'main/images/';?>right.png" alt="next" title="next" />
     </span> <!-- "next" button -->
     </div> <!--als-container-->
@@ -537,4 +686,40 @@ $('.cart').on('click', function(e) {
 
 
 <?php echo $this->partial('shared/ad'); ?>
+
+<script type="text/javascript">
+$(function(){
+$('#up-list .als-item').on('click', function(e) {
+
+  console.log("Red");
+  console.log($(this).offset().top);
+
+  /*
+
+  if($(this).offset().top==375.1166687011719){
+    $(this).css("border", "solid 3px #B61026");
+    console.log("middle element clicked");
+    var getsrc = $(this).children(":first").attr("src");
+    console.log(getsrc);
+    $('.col-md-4 .image').attr('src',getsrc);
+  }
+  */
+
+  /*
+
+  $(this).filter(function() {
+    return ($(this).offset().top > 370) && (($(this).offset().top < 380));
+  }).css("border", "solid 3px #B61026");
+  */
+
+  var getsrc = $(this).children(":first").attr("src");
+    console.log(getsrc);
+    $('.col-md-4 .image').attr('src',getsrc);
+
+  });
+});
+
+
+
+</script>
 
