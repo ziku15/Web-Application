@@ -1,0 +1,82 @@
+<style>
+
+a>.glyphicon{
+    float:right;
+    color:#106E96;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.delete{
+    float: right;
+    color:#106E96;
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.glyphicon:hover{
+    color:#5B050B;
+}
+.delete:hover{
+    color:#5B050B;
+}
+
+.fa{
+    color: #106E96;
+}
+
+.product{
+    height:50px;
+    border:1px solid #ECECEC ;
+    border-radius: 4px;
+    
+    width: 95%;
+}
+
+strong>a{
+    font-size: 18px;
+}
+
+</style>
+
+
+<div class="row-cell">
+
+    <div class="col-md-12" id="shop">
+
+    <?php foreach ($Shop->items as $record){?>
+        <div class="product">
+
+            <strong> <a href="<?php echo $this->url->get("shop/details/" . $record->id); ?>"> <?php echo $record->shop_name; ?>
+            </a>
+            </strong>
+            <a href="<?php echo $this->url->get("shop/delete/" . $record->id); ?>"><i class="delete fa fa-trash-o fa-lg" ></i></a>
+            <a href="<?php echo $this->url->get("shop/edit/" . $record->id); ?>"><i class="glyphicon glyphicon-pencil" ></i></a>
+           
+
+        </div>
+    <?php }?>
+
+
+
+    <div class="col-md-4 col-md-offset-4">
+        <div class="text-center new-button">
+            <a href="<?php echo $this->url->get() . 'shop/new'; ?>"><i class="fa fa-plus-square-o fa-5x"></i></a>   
+                <h3>Add New Shop</h3>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+
+        <ul class="pager">
+                <li><?php echo "You are in page ", $Shop->current, " of ", $Shop->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("Shop/shop" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("Shop/shop?page=" . $Shop->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("Shop/shop?page=" . $Shop->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("Shop/shop?page=" . $Shop->last); ?>">Last</a></li>            
+        </ul>
+
+    </div>
+
+
+</div>

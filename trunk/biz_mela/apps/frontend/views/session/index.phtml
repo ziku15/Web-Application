@@ -12,18 +12,50 @@ p{
 	font-size: 16px;
 }
 h3{
-	font-size: 32px;
+	font-size: 25px;
+	padding-top:0px;
+	color: #000000;
+	padding-bottom: 10px;
 }
 h2{
 	color:#624949;
 }
-.page-header {
-    border-bottom: 1px solid #eee;
-    margin: 25px 0 20px;
-    padding-bottom: 9px;
+
+h4{
+	color:#870415;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 0px;
 }
-.col-md-6 {
-    width: 50%;
+.page-header {
+    border-bottom: 0px solid #eee;
+   
+    padding-bottom: 3px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+.page-header>h3{
+	border-bottom: 1px solid #eee;
+}
+#signin {
+    border:1px solid #ECECEC;
+	border-radius: 0px;
+	height:450px;
+	width:50%;
+	margin-top: 20px;
+	margin-bottom: 30px;
+
+	
+
+}
+
+.seperator-dotted{
+    width: 100%;
+    border-bottom: 1px solid #000000;
+    margin: 3px 0px 3px 0px;
+    padding-left: 20px;
+    padding-right: 10px;
 }
 .btn{
 
@@ -39,6 +71,7 @@ h2{
 	width:50%;
 	border:1px solid #ECECEC ;
     border-radius: 4px;
+    margin-left: 10px;
 
 }
 
@@ -78,11 +111,12 @@ a:hover{
  
     
 }
-.forget{
+.forget>a{
 	font-size: 14px;
-	float:right;
-	color:#870415;
-	padding-left: 10px;
+	float:left;
+	color:#000000;
+	padding-left: 2px;
+	margin-top: 10px;
 }
 .forget>a:hover{
 	text-decoration: none;
@@ -124,91 +158,116 @@ a:hover{
     text-decoration: underline;
 }
 
+
+.control-group{
+	width:100%;
+}
+
+.col-md-12{
+	width: 100%;
+	margin-left: 12px;
+}
+
+.col-md-12>p{
+	float:right;
+	margin-right: 80px;
+	color:black;
+	margin-top: 30px;
+}
+
+.red{
+     background-color: #CE2127;
+     color: #ffffff;
+
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    vertical-align: middle;
+    width: 85%;
+}
+
+.seperator-dotted{
+	visibility: hidden;
+}
+
+
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
 
-<div class="container">
-	<div class="logIn or signUp">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="page-header">
-					<h3>LogIn</h3>
-					<?php echo $this->getContent(); ?>
+
+
+		<div class="container">
+			
+				<div class="col-md-6" id="signin">
+					<div class="page-header">
+						<h3>Registered Customers</h3>
+						<div class="seperator-dotted"></div>
+						<h4>Username and Password are requried</h4>
+						<?php echo $this->getContent(); ?>
+					
+					</div>
+					<form action="<?php echo $this->url->get().'session/start/';?>" class="form-inline" method="post" autocomplete="on">
+						<fieldset>
+							<div class="col-md-12">
+								<div class="control-group">
+
+									
+									<div class="controls">
+										<input type="text" id="email" name="email" class="form-control input-lg form-element" autocomplete="on" placeholder="username/email" pb-role="username">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="col-md-12">
+								<div class="control-group">
+									</br>
+									
+									<div class="controls">
+										<input type="password" id="password" name="password" class="form-control input-lg form-element" placeholder="password" pb-role="password">
+									</div>
+								</div>
+							</div>
+
+							
+
+							<div class="col-md-12">
+						
+								<p>Don't have an account yet?</p>
+						
+							</div>
+
+							<div class="col-md-6">
+								
+								<input type="submit" value="LOG IN" class="btn btn-lg btn-custom red" pb-role="submit">
+								
+							</div>
+
+							<div class="col-md-6">
+								
+								<a href="<?php echo $this->url->get('session/register/')?>" class="btn btn-lg btn-custom red">SIGN UP</a>
+								
+							</div>
+
+							<div class="col-md-10">
+								<p class="forget"><a href="<?php echo $this->url->get('session/forgetpassword/')?>" >  Forgot Password?</a></p>
+							</div>
+
+
+						</fieldset>
+
+					</form>
+
 				</div>
-			<form action="<?php echo $this->url->get().'session/start/';?>" class="form-inline" method="post" autocomplete="on">
-				<fieldset>
-					<div class="control-group">
 
-						<label class="control-label" for="email">Username/Email</label>
-						<div class="controls">
-							<input type="text" id="email" name="email" class="form-control input-lg form-element" autocomplete="on" placeholder="example" pb-role="username">
-						</div>
-					</div>
-
-					<div class="control-group">
-						</br>
-						<label class="control-label" for="password">Password</label>
-						<div class="controls">
-							<input type="password" id="password" name="password" class="form-control input-lg form-element" placeholder="password" pb-role="password">
-						</div>
-					</div>
-					<div class="col-md-5">
-								<p class="forget"><a href="<?php echo $this->url->get('session/forgetpassword/')?>" >  Forgot Password</a></p>
-						</div>
-
-					<div class="col-md-12">
-						
-						<input type="submit" value="Login" class="btn btn-primary btn-large" pb-role="submit">
-						
-					</div>
-
-
-				</fieldset>
-
-			</form>
+			
 
 		</div>
 
-			<div class="col-md-6 ">
-				<div class="page-header">
-					<h3>Don't have an account yet?</h3>
-				</div>
-					<p><b>Create an account will provide many advantages..</b></p>
-					<ul>
-						<li>B2B,B2C and C2C eCommerce service</li>
-						</br>
-						<li>Its going to be g2c in near future</li>
-						</br>
-						<li>Save ur time by selling and buying from ur account</li>
-						</br>
-						</br>
-						</br>
-						</br>
-
-					</ul>
-
-				<div class="clearfix-center">
-					<a href="<?php echo $this->url->get('session/register/')?>" class="btn btn-primary btn-large btn-success">Sign Up</a>
-				</div>
-
-			</div>
-
-	</div>
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</div>
 </body>
 </html>

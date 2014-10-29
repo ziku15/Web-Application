@@ -251,6 +251,21 @@ li>a{
                             </div>
                      </a>
 
+
+                <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("shop/shop/") ?>" >           
+                     <div class="panel panel-default" id="shop">
+                                <div class="panel-heading">
+                                   
+                                    <div class="panel-title">
+                                            
+                                            My Shop
+                                           
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                     </a>
+
     			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("inventory/list/") ?>" >			
     			     <div class="panel panel-default" id="inventory">
                                 <div class="panel-heading">
@@ -415,6 +430,12 @@ li>a{
     {
         //$("#list").html("<font color="red"> View Order List </font>");
         $("#order").addClass("highlight");
+    }
+
+    else if(choice=='shop')
+    {
+        //$("#list").html("<font color="red"> View Order List </font>");
+        $("#shop").addClass("highlight");
     }
 
     else if(choice=='inventory')
