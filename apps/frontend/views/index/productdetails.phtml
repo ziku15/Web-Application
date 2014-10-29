@@ -199,13 +199,14 @@
 
 <script type="text/javascript">
  function processWish(id){
+  var base_url =<?php echo $this->url->get(); ?>;
 
   var find = id.toString().concat(id.toString()); 
 
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/wishlist",
+        url:base_url+"index/wishlist",
         data: { data1 : id, },
         success: function(html)
         {
@@ -255,6 +256,7 @@ $( document ).ready(function() {
 });
 
 function processCart(id){
+var base_url =<?php echo $this->url->get(); ?>;
 
 var quantity = $("#quant").val();
 
@@ -262,7 +264,7 @@ var quantity = $("#quant").val();
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/addtocart2",
+        url:base_url+"index/addtocart2",
         data: { data1 : id, data2: quantity},
         success: function(result)
         {
@@ -304,6 +306,7 @@ $('.cart').on('click', function(e) {
 
 
 function processCartB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
 
   var p_idB = id.toString().split(":")[0]; 
 
@@ -312,7 +315,7 @@ function processCartB(id){
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/addtocart",
+        url:base_url+"index/addtocart",
         data: { data1 : p_idB, },
         success: function(result)
         {
