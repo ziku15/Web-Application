@@ -46,6 +46,22 @@
     <?php echo \Phalcon\Tag::javascriptInclude("main/js/jquery.als-1.7.min.js"); ?>
     <?php echo \Phalcon\Tag::javascriptInclude("main/js/jquery-ui.min.js"); ?>
 
+    <!--CSS for range slider-->
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/jslider.css"); ?>
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/jslider.blue.css"); ?>
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/jslider.plastic.css"); ?>
+
+<!--Scripts for range slider -->
+
+
+
+<?php echo \Phalcon\Tag::javascriptInclude("main/js/jshashtable-2.1_src.js"); ?>
+<?php echo \Phalcon\Tag::javascriptInclude("main/js/jquery.numberformatter-1.2.3.js"); ?>
+<?php echo \Phalcon\Tag::javascriptInclude("main/js/tmpl.js"); ?>
+<?php echo \Phalcon\Tag::javascriptInclude("main/js/jquery.dependClass-0.1.js"); ?>
+<?php echo \Phalcon\Tag::javascriptInclude("main/js/draggable-0.1.js"); ?>
+<?php echo \Phalcon\Tag::javascriptInclude("main/js/jquery.slider.js"); ?>
+
 
   </head>
   <body>
@@ -140,12 +156,44 @@
     </div>
   </div>
   <!-- logo part ends -->
+
+  <script type="text/javascript">
+  
+    $(document).ready(function() {
+
+     $('.btn-group').hover(
+         function () {
+           //$(this).addClass("open");
+            $('.dropdown-menu').css({"display":"block"});
+         }, 
+         function () {
+           //$(this).removeClass("open");
+            $('.dropdown-menu').css({"display":"none"});
+         }
+     );
+   });
+  </script>
+
+  
   
 
   <!-- main menu part -->
   <div class="main-menu container container-custom">
     <div class="item best-celler"><span class="star">☆</span>Best Seller</div>
-    <div class="item"> Categories</div>
+    <div class="btn-group item">
+            <span data-toggle="dropdown" class="dropdown-toggle">Categories</span>
+            <ul class="dropdown-menu" style="width : 100%; margin: 0; padding-top: 5px;">
+              <?php 
+              use Biz_mela\Models\ProductCategory as ProductCategory;
+              $categories = ProductCategory::find();
+
+               foreach ($categories as $entry) {
+                echo '<li><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'</a></li>';
+               }
+
+              ?>
+            </ul>
+    </div>
     <div class="item">Brand</div>
     <div class="item">Discount Product</div>
     <div class="item">Gift Item</div>

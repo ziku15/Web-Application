@@ -54,6 +54,7 @@ $( document ).ready(function() {
  
 $(function(){
 $('.quant-changed').on('change', function(e) {
+var base_url =<?php echo $this->url->get(); ?>;
 
 var quantId = e.target.id;
 //$(this).mask("9999");
@@ -73,7 +74,7 @@ $('#'+spin_area_id).html('<i class="fa fa-spin fa-refresh"></i>');
 $.ajax({
 
         type: "POST",
-        url: "/biz_mela/index/checkStock",
+        url: base_url+"index/checkStock",
         data: { data1 : pId, },
         success: function(result)
         {
@@ -125,7 +126,7 @@ $.ajax({
   $.ajax({
 
         type: "POST",
-        url: "/biz_mela/index/updateQuantCookie",
+        url: base_url+"index/updateQuantCookie",
         data: { productID : pId, Quant: quantity },
         success: function(html)
         {
@@ -162,6 +163,7 @@ $.ajax({
 
 $(function(){
 $('.cart-delete').on('click', function() {
+    var base_url =<?php echo $this->url->get(); ?>;
 
       //$(this).parent('div').parent('div').slideUp('slow');
       var pId = $(this).attr('product_id');
@@ -172,7 +174,7 @@ $('.cart-delete').on('click', function() {
       $.ajax({
 
         type: "POST",
-        url: "/biz_mela/index/updateCookie",
+        url: base_url+"index/updateCookie",
         data: { data1 : pId, },
         success: function(html)
         {

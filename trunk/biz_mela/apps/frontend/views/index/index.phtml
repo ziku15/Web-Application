@@ -57,13 +57,14 @@
 <script type="text/javascript">
 
 function processWish(id){
+  var base_url =<?php echo $this->url->get(); ?>;
 
   var find = id.toString().concat(id.toString()); 
 
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/wishlist",
+        url: base_url+"index/wishlist",
         data: { data1 : id, },
         success: function(html)
         {
@@ -105,6 +106,7 @@ $('.wish').on('click', function(e) {
 });
 
 function processWishB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
 
   var find1 = id.toString().concat(id.toString()); 
   var find11 = find1.toString().concat(id.toString());
@@ -112,7 +114,7 @@ function processWishB(id){
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/wishlist",
+        url: base_url+"index/wishlist",
         data: { data1 : id, },
         success: function(html)
         {
@@ -165,6 +167,7 @@ $('.wishB').on('click', function(e) {
 
 
 function processCart(id){
+  var base_url =<?php echo $this->url->get(); ?>;
 
   var p_id = id.toString().split(":")[0]; 
 
@@ -173,7 +176,7 @@ function processCart(id){
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/addtocart",
+        url: base_url+"index/addtocart",
         data: { data1 : p_id, },
         success: function(result)
         {
@@ -234,8 +237,8 @@ $('.cart').on('click', function(e) {
                 .animate({
                 'top': cart.offset().top + 10,
                     'left': cart.offset().left + 10,
-                    'width': 75,
-                    'height': 75
+                    'width': 250,
+                    'height': 400
             }, 1000, 'easeInOutExpo');
             
             setTimeout(function () {
@@ -258,6 +261,7 @@ $('.cart').on('click', function(e) {
 });
 
 function processCartB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
 
   var p_idB = id.toString().split(":")[0]; 
 
@@ -266,7 +270,7 @@ function processCartB(id){
     $.ajax({
 
         type: "POST",
-        url:"/biz_mela/index/addtocart",
+        url: base_url+"index/addtocart",
         data: { data1 : p_idB, },
         success: function(result)
         {
@@ -330,8 +334,8 @@ $('.cartB').on('click', function(e) {
                 .animate({
                 'top': cart.offset().top + 10,
                     'left': cart.offset().left + 10,
-                    'width': 75,
-                    'height': 75
+                    'width': 250,
+                    'height': 400
             }, 1000, 'easeInOutExpo');
             
             setTimeout(function () {
@@ -354,15 +358,9 @@ $('.cartB').on('click', function(e) {
 
 </script>
 
-<script type="text/javascript">
 
-console.log(window.location.protocol);
-console.log(window.location.host);
-console.log(window.location.pathname);
 
-</script>
-
-  <div class="container">
+<div class="container">
 
   
   <div class="tabbable">
