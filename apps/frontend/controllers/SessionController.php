@@ -109,7 +109,7 @@ class SessionController extends ControllerBase
                 'placeholder' => 'Repeat Password'
             ));
         $repeatPassword->addValidator(new PresenceOf(array(
-            'message' => 'The Repeat Password field is required'
+            'message' => 'The Confirm Password field is required'
         )));
 
         $address = new Text("address", array(
@@ -118,16 +118,9 @@ class SessionController extends ControllerBase
             'placeholder' => 'Address',
             'autocomplete' => 'on'
         ));
+        
 
-        $dob = new Text("dob", array(
-            'class' => 'form-control input-lg form-element',
-            'id' => 'dob',
-            'placeholder' => 'Date of Birth(YYYY-MM-DD Format)',
-            'autocomplete' => 'on'
-        ));
-        $dob->addValidator(new PresenceOf(array(
-            'message' => 'The Date of Birth field is required'
-        )));
+        
 
         $form->add($firstname);
         $form->add($lastname);
@@ -137,7 +130,7 @@ class SessionController extends ControllerBase
         $form->add($password);
         $form->add($repeatPassword);
         $form->add($address);
-        $form->add($dob);
+        //$form->add($dob);
         
         $data['form'] = $form;
         $this->view->setVars($data);
@@ -158,7 +151,7 @@ class SessionController extends ControllerBase
 				//$type=$this->request->getPost('type');
 				$contact_no=$this->request->getPost('cellphone');
 				$address=$this->request->getPost('address');
-				$dob=$this->request->getPost('dob');
+				//$dob=$this->request->getPost('dob');
 				$previous_user = UserMaster::find('username=' . "'" . $username . "'" );
 				$previous_email = UserMaster::find('email=' . "'" . $email . "'" );
 
@@ -192,8 +185,8 @@ class SessionController extends ControllerBase
 	            
 				$user->contact_no =$contact_no ;
 				$user->address =$address ;
-				$user->dob=$dob ;
-	            //$user->created_at = new Phalcon\Db\RawValue('now()');
+				$user->point=0 ;
+	            $user->created_at = date("Y-m-d h:i:sa");
 				$user->status = 0;
 	            //$user->active = 'Y';
 	           

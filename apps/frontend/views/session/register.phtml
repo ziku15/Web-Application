@@ -8,20 +8,11 @@
 <script src="jquery-1.11.1.js">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <style>
-p{
-	color:#1BD8E9;
-	font-size: 16px;
-}
-
-.foo{
-	font-size: 16px;
-	color:#000000;
-}
 
 h2{
-	color:#624949;
-	font-size:40px;
-	weight:60%;
+	color:#000000;
+	font-size:30px;
+	padding-left: 15px;
 }
 
 option{
@@ -40,7 +31,7 @@ a{
 	font-size: 15px;
 	padding: 15px;
 	background-color: #f2dede;;
-	width:100%;
+	width:82%;
 	border:1px solid #ECECEC ;
     border-radius: 4px;
 
@@ -79,11 +70,62 @@ a{
 	font-size: 16px;
 }
 
-.green{
-     background-color: #339966;
+.red{
+     background-color: #CE2127;
+     color: #ffffff;
 
 }
 
+#register{
+	border:1px solid #ECECEC;
+	border-radius: 0px;
+	height:1100px;
+	width:100%;
+	margin-top: 20px;
+	margin-left: -13px;
+}
+
+h4{
+	padding-left: 17px;
+	margin-top: 0px;
+}
+
+.col-md-5{
+	border-radius: 0px;
+	margin-bottom: 15px;
+}
+
+.col-md-5>p{
+	font-size: 15px;
+	background-color: #FFFFFF;
+	margin-bottom: -5px;
+
+}
+
+.col-md-10>p{
+	font-size: 15px;
+	background-color: #FFFFFF;
+	margin-bottom: -5px;
+
+}
+
+.col-md-10>h4{
+	margin-top:30px;
+	margin-bottom: 30px;
+	font-size: 20px;
+	margin-left: -12px;
+}
+
+.glyphicon{
+	color: #870415;
+	font-size: 11px;
+}
+
+.alert-danger{
+	height:30px;
+	padding-top: 3px;
+
+}
 
 
 </style>
@@ -97,9 +139,10 @@ a{
 <div class="container">
 
 	<div class="container">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-12" id="register">
 			<div class="page-header">
-				<h2>Register For Bizmela</h2>
+				<h2>Create an Account</h2>
+				<h4>Personal Information</h4>
 				<?php  echo $this->getContent(); ?>
 
 			</div>
@@ -107,7 +150,8 @@ a{
 			<form action="" method="post">
                     <!-- <input class="form-control input-lg" type="text" name="username" placeholder="username" /> -->
 
-                
+                <div class="col-md-5">
+                	<p class="top">First Name <span class="glyphicon glyphicon-star"></span></p>
 				
 	                <?php
 	                $message = $form->getMessagesFor('firstname');
@@ -116,7 +160,10 @@ a{
 	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
 	                <?php } ?>
 	                <?php echo $form->render("firstname"); ?>
-				
+	            </div>
+
+	            <div class="col-md-5">
+					<p class="top">Last Name <span class="glyphicon glyphicon-star"></span></p>
 	                <?php
 	                $message = $form->getMessagesFor('lastname');
 	                foreach ($message as $m) {
@@ -125,8 +172,12 @@ a{
 	                <?php } ?>
 				
 					<?php echo $form->render("lastname"); ?>
+				</div>
 
-					
+				
+
+				<div class="col-md-5">
+					<p class="top">User Name <span class="glyphicon glyphicon-star"></span></p>
 	                <?php
 	                $message = $form->getMessagesFor('username');
 	                foreach ($message as $m) {
@@ -134,8 +185,10 @@ a{
 	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
 	                <?php } ?>
 	                <?php echo $form->render("username"); ?>
+	            </div>
 
-	                
+	             <div class="col-md-5">
+	              	<p class="top">Contact Number <span class="glyphicon glyphicon-star"></span></p>
 	                <?php
 	                $message = $form->getMessagesFor('cellphone');
 	                foreach ($message as $m) {
@@ -143,9 +196,11 @@ a{
 	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
 	                <?php } ?>
 	                <?php echo $form->render("cellphone"); ?>
+	            </div>
 
 
-	                
+	              <div class="col-md-10" id="mail">
+	               <p class="top">Email Address <span class="glyphicon glyphicon-star"></span></p>
 	                <?php
 	                $message = $form->getMessagesFor('email');
 	                foreach ($message as $m) {
@@ -154,7 +209,30 @@ a{
 	                <?php } ?>
 	                <?php echo $form->render("email"); ?>
 
-	                
+	             </div>
+
+	             <div class="col-md-10">
+	             	<h4 >Address Information</h4>
+	             </div>
+
+	             <div class="col-md-10">
+	             	<?php
+	                $message = $form->getMessagesFor('address');
+	                foreach ($message as $m) {
+	                    ?>
+	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
+	                <?php } ?>
+	                <?php echo $form->render("address"); ?>
+	             </div>
+
+	             <div class="col-md-10">
+	             	<h4 >LogIn Information</h4>
+	             </div>
+
+
+	             <div class="col-md-5">
+	              	<p class="top">Password <span class="glyphicon glyphicon-star"></span></p>
+
 	                <?php
 	                $message = $form->getMessagesFor('password');
 	                foreach ($message as $m) {
@@ -162,6 +240,11 @@ a{
 	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
 	                <?php } ?>
 	                <?php echo $form->render("password"); ?>
+	            </div>
+
+
+	            <div class="col-md-5">
+	              	<p class="top">Confirm Password <span class="glyphicon glyphicon-star"></span></p>
 
 	                
 	                <?php
@@ -172,32 +255,20 @@ a{
 	                <?php } ?>
 	                <?php echo $form->render("repeatPassword"); ?>
 
-	                
-	                <?php
-	                $message = $form->getMessagesFor('address');
-	                foreach ($message as $m) {
-	                    ?>
-	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
-	                <?php } ?>
-	                <?php echo $form->render("address"); ?>
-
-	                
-	                <?php
-	                $message = $form->getMessagesFor('dob');
-	                foreach ($message as $m) {
-	                    ?>
-	                    <div class="alert alert-danger form-element"><?php echo $m; ?></div>
-	                <?php } ?>
-	                <?php echo $form->render("dob"); ?>
+	            </div>
 
 
-	                </br>
 
-	                <div class="btn-group btn-group-justified button-element">
+	            <div class="col-md-3 col-md-offset-7">
+	            	<h6><span class="glyphicon glyphicon-star"></span>Requried Fields</h6>
+	            	<div class="btn-group btn-group-justified button-element">
 	                    <div class="btn-group">
-	                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Register</button>
+	                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom red">Submit</button>
 	                    </div>			  
 	                </div>
+	            </div>
+
+	                
             </form>
 
 		</div>

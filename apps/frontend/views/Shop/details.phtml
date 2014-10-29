@@ -1,0 +1,127 @@
+<style>
+
+
+#head{
+    border: 1px solid #ECECEC;
+    height:45px;
+    text-align: center;
+    font-size: 30px;
+    color:black;
+    
+
+}
+
+.sum{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+#descp{
+    height:248px;
+    border: 1px solid #ECECEC;
+    margin-top: 10px;
+    text-align: center;
+
+}
+
+.pro_name{
+    font-size: 25px;
+    padding-top:10px;
+    color:black;
+
+}
+
+.glyphicon:hover{
+    color:#5B050B;
+}
+.delete:hover{
+    color:#5B050B;
+}
+
+
+</style>
+
+<div class="row-cell">
+
+    <div class="col-md-12">
+        <div class="col-md-6" id="head">
+            <?php echo $holder;?>
+        </div>
+
+        <div class="col-md-6" id="head">
+            <p>Shop Holder::<?php echo $heading;?></p>
+        </div>
+
+        <div class="col-md-12">
+            <p class="sum">My Products</p>
+
+        </div>
+        
+        <?php $count = intval(0);
+        foreach ($Product->items as $record){
+            if(($count%2) == 0){?>
+        <div class="col-md-12">
+           <div class="col-md-6" id="descp">
+               <p class="pro_name"><?php echo $record->product_name;?></p>
+               <p class="pro_name">Price:<?php echo $record->price;?></p>
+               <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> <p>Product Details </p></a>  
+
+           </div>
+
+            <div class="col-md-6" id="descp">
+              
+                    <img src="<?php echo $this->url->get().$record->picture;?>" height="100%" width="100%" >
+
+            </div>
+
+       </div>
+        <?php  $count = $count+1;}else { ?>
+
+        <div class="col-md-12">
+
+            <div class="col-md-6" id="descp">
+              
+                    <img src="<?php echo $this->url->get().$record->picture;?>" height="100%" width="100%" >
+
+            </div>
+
+           <div class="col-md-6" id="descp">
+               <p class="pro_name"><?php echo $record->product_name;?></p>
+               <p class="pro_name">Price:<?php echo $record->price;?></p>
+               <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> <p>Product Details </p></a>  
+
+           </div>
+
+           
+
+       </div>
+
+        <?php  $count = $count+1;} 
+    
+    } ?>
+
+        <div class="col-md-12">
+
+            <ul class="pager">
+                <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("shop/details/". $value ); ?>">First</a></li>
+
+                <li><a href="<?php echo $this->url->get("shop/details/".$value."?page=" . $Product->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("shop/details/".$value."?page=" . $Product->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("shop/details/".$value."?page=" . $Product->last); ?>">Last</a></li>            
+            </ul>
+
+        </div>
+
+       
+
+       
+
+
+
+    </div>
+    
+
+</div>

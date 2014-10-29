@@ -6,6 +6,7 @@ namespace Biz_mela\Frontend\Controllers;
 use Biz_mela\Models\ShopMaster as ShopMaster;
 use Biz_mela\Models\UserMaster as UserMaster;
 use Biz_mela\Models\ProductMaster as ProductMaster;
+use Biz_mela\Models\ProductImage as ProductImage;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
 use Phalcon\Tag as Tag,
@@ -64,7 +65,7 @@ class InventoryController extends ControllerBase
 
 		$paginator = new Paginator(array(
             "data" => $newresult,
-            "limit" => 4,
+            "limit" => 6,
             "page" => $numberPage
         ));
 		
@@ -197,6 +198,7 @@ class InventoryController extends ControllerBase
 					//$User->status = 1;
 				$Product->created_at = date("Y-m-d h:i:s");
 				$Product->updated_at = date('Y-m-d h:i:s');
+				$Product->status=1;
 					//$User->is_del=0;
 					//$User->activation_code=0;
 					
@@ -217,6 +219,7 @@ class InventoryController extends ControllerBase
 
 	public function detailsAction($value = '') {
 			$inventoryData = ProductMaster::findFirst('id = "' . $value . '"');
+			$photo=ProductImage::findFirst('product_id = "' . $value . '"');
 			
 			$data['id'] = $inventoryData->id;
 			$data['heading'] = $inventoryData->product_name;
@@ -227,6 +230,7 @@ class InventoryController extends ControllerBase
 			$data['discount'] = $inventoryData->discount;
 			$data['created_at'] = $inventoryData->created_at;
 			$data['minimum_order_level'] = $inventoryData->minimum_order_level;
+			$data['picture'] = $photo->picture;
 			$data['action'] = "Product Details";
 			$this->view->setVars($data);
 		
