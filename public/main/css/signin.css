@@ -1,0 +1,185 @@
+p{
+	color:#45238E;
+	font-size: 14px;
+}
+.customers{
+	font-size: 25px;
+	padding-top:0px;
+	color: #000000;
+	padding-bottom: 10px;
+}
+h2{
+	color:#624949;
+}
+
+h4{
+	color:#870415;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 0px;
+}
+.page-header {
+    border-bottom: 0px solid #eee;  
+    padding-bottom: 3px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+.page-header>h3{
+	border-bottom: 1px solid #eee;
+}
+#signin {
+    border:1px solid #ECECEC;
+	border-radius: 0px;
+	height:450px;
+	width:50%;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+
+.btn{
+
+	font-size: 15px;
+
+}
+
+.btn-lg, .btn-group-lg > .btn {
+   
+    font-size: 14px;
+    line-height: 1.33;
+    padding: 10px 16px;
+    border-radius: 0px;
+}
+
+.errorMessage{
+	color:#a94442;
+	font-size: 15px;
+	padding: 15px;
+	background-color: #f2dede;;
+	width:50%;
+	border:1px solid #ECECEC ;
+    border-radius: 4px;
+    margin-left: 10px;
+
+}
+
+.successMessage{
+	color:#339966;
+	font-size: 18px;
+	padding: 15px;
+
+}
+
+.gray{
+	background-color: #52575F;
+	color: white;
+}
+
+.intro{
+    color:#870415;
+}
+
+a {
+    
+    color:#900000;
+	text-decoration: none;
+	font-size: 15px;
+    
+}
+
+a:hover{
+    color:#CD2027;
+    text-decoration: none;
+}
+
+
+.item>a:hover{
+    color:#CD2027;
+    text-decoration: none;
+ 
+    
+}
+.forget>a{
+	font-size: 14px;
+	float:left;
+	color:#000000;
+	padding-left: 2px;
+	margin-top: 10px;
+}
+.forget>a:hover{
+	text-decoration: none;
+	color:#CD2027;
+
+}
+
+.col-md-5{
+	padding-top: 10px;
+	padding-right: 0px;
+
+}
+
+.top-menu .item {
+    border-right: 0px solid #c8c8c8;
+    color: #de3e3e;
+    float: left;
+    padding: 0 10px;
+}
+
+.top-menu .item:first-child {
+    border-left: 0px solid #c8c8c8;
+}
+
+.col-md-12{
+	padding:0px;
+}
+.bg-red{
+	background-color: #cc0001;
+	color:white;
+	font-size: 16px;
+}
+.col-md-2>.btn-group{
+	padding-top: 9px;
+}
+
+.shopping-text>a{
+    color:#000000;
+    text-decoration: underline;
+}
+
+
+.control-group{
+	width:100%;
+}
+
+.col-md-12{
+	width: 100%;
+	margin-left: 12px;
+}
+
+.col-md-12>p{
+	float:right;
+	margin-right: 90px;
+	color:black;
+	margin-top: 30px;
+}
+
+.red{
+     background-color: #CE2127;
+     color: #ffffff;
+
+}
+
+.form-inline .form-control {
+    display: inline-block;
+    vertical-align: middle;
+    width: 85%;
+}
+
+.seperator-dotted{
+	visibility: hidden;
+}
+
+.input-lg{
+	font-size: 14px;
+}

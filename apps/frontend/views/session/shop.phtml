@@ -15,6 +15,8 @@
 		<!-- integrate common css -->
 		<?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
 
+		<?php echo \Phalcon\Tag::stylesheetLink("main/css/signin.css"); ?>
+
 </head>
 <style>
 .green{
@@ -26,6 +28,10 @@
 	 margin-bottom: 30px;
 	 margin-top: 40px;
 }
+
+.intro{
+	padding-top: -3px;
+}
 	
 </style>
 <body>
@@ -36,12 +42,12 @@
 	</div>
 
 
-<div class="row">
-    <div class="item-area">
-        <div class="form-area">
-			<?php echo $this->getContent(); ?>
+	<div class="row">
+    	<div class="item-area">
+        	<div class="form-area">
+				<?php echo $this->getContent(); ?>
 
-            <form action="" method="post">
+            	<form action="" method="post">
 		
 		
 				<?php echo $form->render("shopname"); ?>
@@ -53,12 +59,12 @@
                         <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Add Shop</button>
                     </div>			  
                 </div>
-		</form>
+				</form>
 		
-		</div>
+			</div>
 
 
-    </div>
-</div>
+    	</div>
+	</div>
 </div>
 </body>
