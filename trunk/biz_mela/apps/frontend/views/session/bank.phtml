@@ -15,68 +15,58 @@
 		<!-- integrate common css -->
 		<?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
 
-	</head>
-	<style>
-	.green{
+</head>
+<style>
+.green{
 	background-color: #00872A;
 	color: white;
-	}
+}
 	
-	.item-area {
+.item-area {
     margin-bottom: 20px;
     margin-top: 40px;
-	}
-	.input-lg {
+}
+.input-lg {
     border-radius: 8px;
     font-size: 18px;
     height: 56px;
     line-height: 1.33;
     padding: 10px;
-	}
+}
 	
-	</style>
-	<body>
+</style>
+<body>
 	<div class="container">
-	<div class="row">
-	    <div class="item-area">
-	        <div class="form-area">
-				<?php echo $this->getContent(); ?>
+		<div class="row">
+	    	<div class="item-area">
+	        	<div class="form-area">
+					<?php echo $this->getContent(); ?>
 
-	            <form action="" method="post">
+	            	<form action="" method="post">
 			
 			
-					<?php echo $form->render("bankname"); ?>
-					<?php echo $form->render("branchname"); ?>
-					<?php echo $form->render("account_holder"); ?>
-					<?php echo $form->render("swiftcode"); ?>
-					<?php echo $form->render("account_no"); ?>
-					<br>
+						<?php echo $form->render("bankname"); ?>
+						<?php echo $form->render("branchname"); ?>
+						<?php echo $form->render("account_holder"); ?>
+						<?php echo $form->render("swiftcode"); ?>
+						<?php echo $form->render("account_no"); ?>
+						<br>
+				
+				
+						<div class="btn-group btn-group-justified button-element">
+		                    <div class="btn-group">
+		                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Add Bank Account</button>
+		                    </div>			  
+		                </div>
 			
 			
-					<div class="btn-group btn-group-justified button-element">
-	                    <div class="btn-group">
-	                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Add Bank Account</button>
-	                    </div>			  
-	                </div>
+			        </form>
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</form>
-			
-			</div>
+				</div>
 
 
-	    </div>
-</div>
-</div>
+	    	</div>
+		</div>
+	</div>
 
 </body>

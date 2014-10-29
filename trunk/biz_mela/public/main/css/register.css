@@ -1,0 +1,124 @@
+h2{
+	color:#000000;
+	font-size:30px;
+	padding-left: 15px;
+}
+
+option{
+	padding-top: 16px;
+    padding-right: 0px;
+    padding-bottom: 16px;
+    padding-left: 0px;
+}
+
+a{
+	color:#870415;
+}
+
+.errorMessage{
+	color:#a94442;
+	font-size: 15px;
+	padding: 15px;
+	background-color: #f2dede;;
+	width:82%;
+	border:1px solid #ECECEC ;
+    border-radius: 4px;
+
+}
+.intro{
+	color:#870415;
+}
+.successMessage {
+    color: #339966;
+    font-size: 18px;
+    padding: 15px;
+}
+
+.input-lg{
+	font-size: 14px;
+}
+
+.btn-group-justified>.btn-custom {
+	border-radius: 6px;
+}
+
+.top-menu .item {
+    border-right: 0px solid #c8c8c8;
+    color: #de3e3e;
+    float: left;
+    padding: 0 10px;
+}
+
+.top-menu .item:first-child {
+    border-left: 0px solid #c8c8c8;
+}
+
+.bg-red{
+	background-color: #cc0001;
+	color:white;
+	font-size: 14px;
+}
+
+.red{
+     background-color: #CE2127;
+     color: #ffffff;
+
+}
+
+#register{
+	border:1px solid #ECECEC;
+	border-radius: 0px;
+	height:1100px;
+	width:100%;
+	margin-top: 20px;
+	margin-left: -13px;
+}
+
+h4{
+	padding-left: 17px;
+	margin-top: 0px;
+}
+
+.col-md-5{
+	border-radius: 0px;
+	margin-bottom: 15px;
+}
+
+.col-md-5>p{
+	font-size: 14px;
+	background-color: #FFFFFF;
+	margin-bottom: -5px;
+
+}
+
+.col-md-10>p{
+	font-size: 14px;
+	background-color: #FFFFFF;
+	margin-bottom: -5px;
+
+}
+
+.col-md-10>h4{
+	margin-top:30px;
+	margin-bottom: 30px;
+	font-size: 20px;
+	margin-left: -12px;
+}
+
+.glyphicon{
+	color: #870415;
+	font-size: 11px;
+}
+
+.alert-danger{
+	height:30px;
+	padding-top: 3px;
+
+}
+
+.btn-lg, .btn-group-lg > .btn {
+   
+    font-size: 14px;
+    line-height: 1.33;
+    padding: 10px 16px;
+}
