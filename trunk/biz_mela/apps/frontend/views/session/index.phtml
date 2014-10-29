@@ -9,9 +9,9 @@
 <style>
 p{
 	color:#45238E;
-	font-size: 16px;
+	font-size: 14px;
 }
-h3{
+.customers{
 	font-size: 25px;
 	padding-top:0px;
 	color: #000000;
@@ -59,8 +59,16 @@ h4{
 }
 .btn{
 
-	font-size: 18px;
+	font-size: 15px;
 
+}
+
+.btn-lg, .btn-group-lg > .btn {
+   
+    font-size: 15px;
+    line-height: 1.33;
+    padding: 10px 16px;
+    border-radius: 0px;
 }
 
 .errorMessage{
@@ -170,7 +178,7 @@ a:hover{
 
 .col-md-12>p{
 	float:right;
-	margin-right: 80px;
+	margin-right: 90px;
 	color:black;
 	margin-top: 30px;
 }
@@ -191,6 +199,10 @@ a:hover{
 	visibility: hidden;
 }
 
+.input-lg{
+	font-size: 14px;
+}
+
 
 
 </style>
@@ -205,7 +217,7 @@ a:hover{
 			
 				<div class="col-md-6" id="signin">
 					<div class="page-header">
-						<h3>Registered Customers</h3>
+						<h3 class="customers">Registered Customers</h3>
 						<div class="seperator-dotted"></div>
 						<h4>Username and Password are requried</h4>
 						<?php echo $this->getContent(); ?>
