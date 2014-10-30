@@ -209,17 +209,29 @@ $('.cartB').on('click', function(e) {
   margin-top: 20px;
   padding: 5px;
 }
+
+.search-box-text{
+  color: #595959;
+  font-size: 14px;
+}
+
+.bg-button {
+    background-color: #909090;
+    color: white;
+    font-size: 16px;
+}
 </style>
 
 
 <div class="container bottom-item-area">
 
-	<div class="col-md-3">
-      <div class="search-box">
-      	REFINE BY
-        <div class="seperator"></div>
-      	<form id='search-form' action="" mathod="get">
-      	 <p><br><span class="caret"></span>MAKE UP <br></p>
+	<div class="col-md-3">    
+       <div class="search-box">REFINE BY</div>
+      
+       <form id='search-form' action="" mathod="get">
+      	<p><br><span class="caret"></span>MAKE UP <br></p>
+
+        <div class="search-box search-box-text">
 
       	 <div style="overflow-y:scroll; height:210px;">
       	  
@@ -252,31 +264,47 @@ $('.cartB').on('click', function(e) {
 
          </div>
 
+        </div>
 
 
-         <p><br><span class="caret"></span>PRICE RANGE <br></p>
 
+        <p><br><span class="caret"></span>PRICE RANGE <br></p>
+
+        <div class="search-box" style="padding:10px;"> 
          
-         
-      <span style="display: inline-block; width: 100%; padding: 0 5px;"><input id="Slider1" type="slider" name="price" value="1000;10000" />    </span>
+         <span style="display: inline-block; width: 100%; padding: 0 5px;">
+          <input id="Slider1" type="slider" name="price"
+          <?php if(isset($range['low']) && isset($range['high'])) 
+                  $temp = $range['low'].";".$range['high'];
+
+                  else $temp = "1000;60000"; 
+          ?> 
+          value="<?php echo $temp; ?>" 
+          />  
+         </span>
     
         
-        <input type="hidden" id="limit_low" name="limit_low" value="">
-        <input type="hidden" id="limit_high" name="limit_high" value="">
+         <input type="hidden" id="limit_low" name="limit_low" value="">
+         <input type="hidden" id="limit_high" name="limit_high" value="">
 
-       <script type="text/javascript" charset="utf-8">
-      jQuery("#Slider1").slider({ from: 1000, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" ,  onstatechange: function( value ){
+         <script type="text/javascript" charset="utf-8">
+         jQuery("#Slider1").slider({ from: 1000, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" ,  onstatechange: function( value ){
           $('#limit_low').val(value.split(";")[0]);
           $('#limit_high').val(value.split(";")[1]);
           }
-      });
-     </script>
+          });
+          </script>
 
-     <input type="submit" value="submit">
+         <p></p>
 
+         <button class="btn btn-default bg-button form-control" type="submit" style="width:60%;"> Check </button>
+        </div>
+        
+        
 
+        <p><br><span class="caret"></span>BRAND <br></p>
 
-         <p><br><span class="caret"></span>BRAND <br></p>
+        <div class="search-box search-box-text">
          <div style="overflow-y:scroll; height:210px;">
       	  
       	  
@@ -307,12 +335,13 @@ $('.cartB').on('click', function(e) {
           <?php echo $form->render("the_balm"); ?>
           <label>the Balm</label> <br>
          </div>
+        </div>
 
 
 
-          <p><br><span class="caret"></span>COLOUR<br></p>
+        <p><br><span class="caret"></span>COLOUR<br></p>
       	  
-      	  
+      	<div class="search-box search-box-text">  
           <?php echo $form->render("beige"); ?>
           <label>Beige</label> <br>
 
@@ -327,18 +356,21 @@ $('.cartB').on('click', function(e) {
 
           <?php echo $form->render("green"); ?>
           <label>Green</label> <br>
+        </div>
 
-          <p><br><span class="caret"></span>STYLE<br></p>
-      	  
+        <p><br><span class="caret"></span>STYLE<br></p>
+
+      	<div class="search-box search-box-text">  
       	  
           <?php echo $form->render("beige"); ?>
           <label>Body & Face</label> <br>
 
           <?php echo $form->render("blue"); ?>
           <label>Cleanse & Tone</label> <br>
+        </div>
 
         </form>
-      </div>
+      
       
 
     </div>
@@ -374,6 +406,7 @@ $('.cartB').on('click', function(e) {
          
       </div> <!-- row ends !-->
       <div class="row">
+       <div class="col-md-10 col-md-offset-2">
       	<ul class="pager"  style="text-align: left; margin: 10px 0;">
             <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
             <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']); ?>">First</a></li>
@@ -381,6 +414,7 @@ $('.cartB').on('click', function(e) {
             <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']."?page=" . $Product->next); ?>">Next</a></li>
             <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']."?page=" . $Product->last); ?>">Last</a></li>   
        </ul>
+       </div>
       </div>
 
 
