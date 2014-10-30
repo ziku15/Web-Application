@@ -7,6 +7,8 @@ use Biz_mela\Models\ShopMaster as ShopMaster;
 use Biz_mela\Models\UserMaster as UserMaster;
 use Biz_mela\Models\ProductMaster as ProductMaster;
 use Biz_mela\Models\ProductImage as ProductImage;
+use Biz_mela\Models\OrderDetails as OrderDetails;
+
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
 use Phalcon\Tag as Tag,
@@ -52,28 +54,124 @@ class InventoryController extends ControllerBase
 		
 		
 		$user_id = $this->session->get('auth')['id'];
-		$numberPage = $this->request->getQuery("page", "int", 1);
-		$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description
-			FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster
-			WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
-			AND Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
-			AND Biz_mela\Models\UserMaster.id = $user_id
-			ORDER BY Biz_mela\Models\ProductMaster.id desc
-			LIMIT 0 , 30");
+            $numberPage = $this->request->getQuery("page", "int", 1);
+            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name
+                FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster, Biz_mela\Models\ProductImage
+                WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
+                AND Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
+                AND Biz_mela\Models\ProductImage.product_id = Biz_mela\Models\ProductMaster.id
+                AND Biz_mela\Models\UserMaster.id = $user_id
+                ORDER BY Biz_mela\Models\ProductMaster.id desc
+                LIMIT 0 , 30");
 
-		$newresult = $this->modelsManager->executeQuery($phql);
+            $newresult = $this->modelsManager->executeQuery($phql);
 
-		$paginator = new Paginator(array(
-            "data" => $newresult,
-            "limit" => 6,
-            "page" => $numberPage
-        ));
-		
-        $page['Product'] = $paginator->getPaginate();
-        $page['value'] = $value;
-        $this->view->setVars($page);	
+            $paginator = new Paginator(array(
+                "data" => $newresult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Product'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);    
         
     }
+
+
+    public function valuableAction()
+    {
+
+    		$user_id = $this->session->get('auth')['id'];
+            $numberPage = $this->request->getQuery("page", "int", 1);
+            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
+            	Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
+            	Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name
+                FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductImage
+                
+                Where Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
+                AND Biz_mela\Models\ProductImage.product_id = Biz_mela\Models\ProductMaster.id
+                AND Biz_mela\Models\ShopMaster.user_id = $user_id
+                ORDER BY CAST(Biz_mela\Models\ProductMaster.price AS SIGNED) desc
+
+                ");
+            //ORDER BY CAST(`type` AS SIGNED)
+
+            $valueresult = $this->modelsManager->executeQuery($phql);
+
+            $paginator = new Paginator(array(
+                "data" => $valueresult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Valuable'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+            /*$user_id = $this->session->get('auth')['id'];
+            $numberPage = $this->request->getQuery("page", "int", 1);
+            $valResult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture, s.shop_name')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->join('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's','right')
+                  ->where('s.user_id = :name:', array('name' => $user_id))
+                 
+                  ->orderBy('Biz_mela\Models\ProductMaster.price desc')
+                  
+                  ->getQuery()
+                  ->execute();
+        	
+    		$paginator = new Paginator(array(
+                "data" => $valResult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Valuable'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);*/
+
+
+
+    }
+
+    public function sellingAction()
+    {
+    	
+    	
+
+        $user_id = $this->session->get('auth')['id'];
+        $numberPage = $this->request->getQuery("page", "int", 1);
+
+        $bestResult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.status, s.shop_name, p.picture,o.product_id')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->join('Biz_mela\Models\OrderDetails', 'o.product_id = Biz_mela\Models\ProductMaster.id', 'o','right')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
+                  ->where('s.user_id = :name:', array('name' => $user_id))
+                  ->groupBy('o.product_id')
+                  ->orderBy('count(o.product_id) desc')
+                  ->limit(4)
+                  ->getQuery()
+                  ->execute();
+        
+
+        $paginator = new Paginator(array(
+                "data" => $bestResult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Valuable'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+
+
+    	
+    }
+
 	
 	
 	
@@ -231,7 +329,7 @@ class InventoryController extends ControllerBase
 			$data['created_at'] = $inventoryData->created_at;
 			$data['minimum_order_level'] = $inventoryData->minimum_order_level;
 			$data['picture'] = $photo->picture;
-			$data['action'] = "Product Details";
+			$data['action'] = $inventoryData->product_name;
 			$this->view->setVars($data);
 		
     }
@@ -243,6 +341,13 @@ class InventoryController extends ControllerBase
 			
 		
 		$form = new Form();
+
+		$product_name=new Text("product_name", array(
+            'class' => 'form-control input-lg form-element',
+			'id' => 'product_name',
+            'value' => $product->product_name,
+            'autocomplete' => 'off'
+        ));
 		$description = new Text("description", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'description',
@@ -255,6 +360,13 @@ class InventoryController extends ControllerBase
             'value' => $product->price,
             'autocomplete' => 'off'
         ));
+        $in_stock = new Text("in_stock", array(
+            'class' => 'form-control input-lg form-element',
+			'id' => 'in_stock',
+            'value' => $product->in_stock,
+            'autocomplete' => 'off'
+        ));
+        
 		$discount = new Text("discount", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'discount',
@@ -267,11 +379,21 @@ class InventoryController extends ControllerBase
             'value' => $product->minimum_order_level,
             'autocomplete' => 'off'
         ));
-	
+
+        $status = new Text("status", array(
+            'class' => 'form-control input-lg form-element',
+			'id' => 'status',
+            'value' => $product->status,
+            'autocomplete' => 'off'
+        ));
+
+		$form->add($product_name);
 		$form->add($description);
 		$form->add($price);
+		$form->add($in_stock);
 		$form->add($discount);
 		$form->add($minimum_order_level);
+		$form->add($status);
 		
 		$data['form'] = $form;
         $this->view->setVars($data);
@@ -280,18 +402,24 @@ class InventoryController extends ControllerBase
 			if ($this->request->getPost('submit') == 'cancel') {
                 return $this->response->redirect('inventory/list/');
             }
-		
+
+			$product_name = $this->request->getPost('product_name');
 			$description = $this->request->getPost('description');
 			$price = $this->request->getPost('price');
+			$in_stock = $this->request->getPost('in_stock');
 			$discount = $this->request->getPost('discount');
 			$minimum_order_level = $this->request->getPost('minimum_order_level');
+			$status = $this->request->getPost('status');
 			//$accountno = $this->request->getPost('accountno');
-		
+
+			$product->product_name = $product_name;
 			$product->description = $description;
 			$product->price = $price;
+			$product->in_stock = $in_stock;
 			$product->discount = $discount;
 			//$User->account_holder_name = $accountholder;
 			$product->minimum_order_level = $minimum_order_level;
+			$product->status = $status;
 			
 			if ($product->save()) {
 						$this->flash->success("Product updated successfully!!");

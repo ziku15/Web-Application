@@ -1,30 +1,11 @@
 <style>
 
-.form-element{
-	margin-top: 8px;
-}
-.input-lg{
-	height:50px;
-	font-size:18px;
-	line-height:1.33;
-	border-radius: 6px;
-	padding: 10px 16px;
-}
-
-
 .main-menu-title>h2{
     font-size: 25px;   
     padding-top: 6px;
 
 }
 
-.form-control{
-	width: 95%;
-}
-
-.btn-group-justified > .btn-group .btn {
-    width: 95%;
-}
 
 .errorMessage{
 	color:#a94442;
@@ -37,11 +18,22 @@
 }
 
 .alert-danger{
-	width:95%;
+	width:100%;
 }
 
 .form-area{
-	padding-left: 20px;
+	padding-left: 0px;
+}
+
+.input-lg {
+    border-radius: 4px;
+    font-size: 15px;
+    height: 46px;
+    line-height: 1.33;
+    padding: 10px 16px;
+}
+.form-element {
+    margin-top: 10px;
 }
 
 
@@ -56,7 +48,7 @@
 	
 	<form action="" method="post" >
 		<div class="row-cell">
-			<div class="col-md-12">
+			<div class="col-md-10 col-md-offset-1">
 		
 				<?php echo $form->render("shop_id"); ?>
 				<?php echo $form->render("product_name"); ?>

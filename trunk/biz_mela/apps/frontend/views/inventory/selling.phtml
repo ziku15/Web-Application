@@ -79,18 +79,6 @@ p{
     line-height: 1.42857;
     padding: 8px;
     vertical-align: top;
-
-}
-
-.table {
-    margin-bottom: 20px;
-    max-width: 100%;
-    width: 100%;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
 }
 </style>
 
@@ -103,7 +91,7 @@ table {
         <div class="col-md-4">
             <div class="btn-group">
                 <a href="<?php echo $this->url->get('inventory/list/')?>" class="btn btn-lg btn-custom gray" id="list">
-                    <p> &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; All  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;</p>
+                    <p>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;  All  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;</p>
                 </a>
             </div>
         </div>
@@ -146,7 +134,7 @@ table {
                                     </thead>
                                      <?php 
                                      $count=0;
-                                     foreach ($Product->items as $record) { 
+                                     foreach ($Valuable->items as $record) { 
                                             $count++;
                                         ?>
                                      <tbody>
@@ -163,7 +151,7 @@ table {
                                                 <img src="<?php echo $this->url->get().$record->picture;?>" height="30px" width="50px" >
                                             </td>
                                             <td>
-                                                 <a href="<?php echo $this->url->get("shop/details/" . $record->id); ?>">
+                                                <a href="<?php echo $this->url->get("inventory/shopdetails/" . $record->shop_name); ?>">
                                                  <?php echo $record->shop_name;?>
                                                 </a>
                                             </td>
@@ -193,20 +181,17 @@ table {
         </div>
     </div>
 
-    
-
-    
 
     
 
     <div class="col-md-12">
 
         <ul class="pager">
-                <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("inventory/list" ); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("inventory/list?page=" . $Product->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("inventory/list?page=" . $Product->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("inventory/list?page=" . $Product->last); ?>">Last</a></li>            
+                <li><?php echo "You are in page ", $Valuable->current, " of ", $Valuable->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("inventory/valuable" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("inventory/valuable?page=" . $Valuable->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("inventory/valuable?page=" . $Valuable->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("inventory/valuable?page=" . $Valuable->last); ?>">Last</a></li>            
         </ul>
 
     </div>
