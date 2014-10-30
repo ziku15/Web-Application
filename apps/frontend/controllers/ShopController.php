@@ -46,7 +46,7 @@ class ShopController extends ControllerBase
 		$numberPage = $this->request->getQuery("page", "int", 1);
 
 
-		$phql = ("SELECT Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id
+		$phql = ("SELECT Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id,  Biz_mela\Models\ShopMaster.shop_image,  Biz_mela\Models\ShopMaster.status
 			FROM Biz_mela\Models\ShopMaster,Biz_mela\Models\UserMaster
 			WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
 			AND Biz_mela\Models\UserMaster.id = $user_id
@@ -57,7 +57,7 @@ class ShopController extends ControllerBase
 
 		$paginator = new Paginator(array(
             "data" => $newresult,
-            "limit" => 4,
+            "limit" => 10,
             "page" => $numberPage
         ));
 		
@@ -170,6 +170,7 @@ class ShopController extends ControllerBase
 			
 			$data['id'] = $shop->id;
 			$data['holder']=$shop->shop_name;
+            $data['image']=$shop->shop_image;
 			$data['heading'] = $this->auth['name'];
 			
 			
@@ -177,7 +178,9 @@ class ShopController extends ControllerBase
 
             $user_id = $this->session->get('auth')['id'];
             $numberPage = $this->request->getQuery("page", "int", 1);
-            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock,Biz_mela\Models\ProductImage.picture
+            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
+                        Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock,
+                        Biz_mela\Models\ProductMaster.created_at, Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_image
                 FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster, Biz_mela\Models\ProductImage
                 WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
                 AND Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
@@ -199,6 +202,9 @@ class ShopController extends ControllerBase
             $this->view->setVars($page);    
     		
     }
+
+
+   
 
 
 
