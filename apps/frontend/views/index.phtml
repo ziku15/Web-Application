@@ -161,7 +161,7 @@
   
     $(document).ready(function() {
 
-     $('.btn-group').hover(
+     $('.cat-menu').hover(
          function () {
            //$(this).addClass("open");
             $('.dropdown-menu').css({"display":"block"});
@@ -174,22 +174,43 @@
    });
   </script>
 
+  <style type="text/css">
+  .cat-menu table a {
+    color: #000000;
+    text-decoration: none;
+  }
+  </style>
+
   
   
 
   <!-- main menu part -->
   <div class="main-menu container container-custom">
     <div class="item best-celler"><span class="star">☆</span>Best Seller</div>
-    <div class="btn-group item">
+    <div class="btn-group item cat-menu">
             <span data-toggle="dropdown" class="dropdown-toggle">Categories</span>
-            <ul class="dropdown-menu" style="width : 100%; margin: 0; padding-top: 5px;">
+            <ul class="dropdown-menu" style="width : 200%; margin: 0; padding-top: 5px;">
+              <table class="table"><tr>
               <?php 
               use Biz_mela\Models\ProductCategory as ProductCategory;
               $categories = ProductCategory::find();
 
-               foreach ($categories as $entry) {
-                echo '<li><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'</a></li>';
+               $count = 0;
+
+               //echo "<table><tr>";
+               foreach ($categories as $entry){
+                echo '<td><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'</a></td>';
+                $count++;
+                if ($count%3 == 0){
+                    if($count >= count($categories))
+                      echo "</tr>";
+
+                    else
+                      echo "</tr><tr>";
+                }
                }
+
+               echo "</tr></table>";
 
               ?>
             </ul>

@@ -90,6 +90,7 @@ class CategoryController extends ControllerBase
         //->andWhere('Biz_mela\Models\ProductMaster.price > '.$priceTo)
         //->andWhere('Biz_mela\Models\ProductMaster.price > '.$low)
         //->getQuery()->execute();
+        //CAST(`type` AS SIGNED) CAST('Biz_mela\Models\ProductMaster.price' AS SIGNED) CAST(PROD_CODE AS INT)
 
         if (($this->request->isGet()) && ($this->request->hasQuery('limit_low')) && ($this->request->hasQuery('limit_high')))
         {
@@ -100,9 +101,15 @@ class CategoryController extends ControllerBase
             //$low = $this->request->getQuery('limit_low');
            // $bottomResult =  $bottomResult->betweenWhere('Biz_mela\Models\ProductMaster.price', $low, $high);
             //->andWhere('Biz_mela\Models\ProductMaster.id != :name1:', array('name1' => $value))
-            $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price > '.$low);
-            $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price < '.$high);
+            $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price >= '.$low);
+            $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price <= '.$high);
+            //$bottomResult = $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price <= :name1:', array('name1' => $high));
+            //$bottomResult =  $bottomResult->betweenWhere(CAST('Biz_mela\Models\ProductMaster.price' AS INT), $low, $high);
             //$bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price < :high_value:', array('high_value' => $this->request->getQuery('limit_high')));
+            $range['low'] = $low;
+            $range['high'] = $high;
+            $this->view->setVar(range,$range);
+
 
         }
 
@@ -135,9 +142,10 @@ class CategoryController extends ControllerBase
         echo $MAX;
         */
 
-       // $max_price = ProductMaster::maximum(array("column" => "price"));
+        $max_price = ProductMaster::maximum(array("column" => "price"));
 
-        //echo $max_price;
+        echo $max_price;
+        /*
         
 
         $phql = ("SELECT MAX(Biz_mela\Models\ProductMaster.price) AS maximum, MIN(Biz_mela\Models\ProductMaster.price) AS minimum FROM Biz_mela\Models\ProductMaster");
@@ -146,6 +154,11 @@ class CategoryController extends ControllerBase
         {
            echo $row["maximum"], ' ', $row["minimum"], "\n";
         }
+        */
+
+        echo $this->router->getControllerName();
+        echo "<br>";
+        echo $this->router->getActionName();
     
     }
 
@@ -168,6 +181,36 @@ class CategoryController extends ControllerBase
             echo $high;
         }
     }
+
+
+    public function menuAction(){
+        $this->view->disable();
+
+        $categories = ProductCategory::find();
+
+        //echo count($categories);
+
+        //echo "<br>";
+
+        $count = 0;
+
+        echo "<table><tr>";
+        foreach ($categories as $entry) {
+                echo '<td><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'</a></td>';
+                $count++;
+                if ($count%3==0) {
+                    if($count >= count($categories))
+                     echo "</tr>";
+
+                    else
+                        echo "</tr><tr>";
+                }
+               }
+
+        echo "</tr></table>";
+    }
+
+
 
 
 
