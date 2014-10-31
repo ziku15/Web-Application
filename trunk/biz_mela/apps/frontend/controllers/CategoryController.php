@@ -22,11 +22,7 @@ class CategoryController extends ControllerBase
 {
 	public function initialize()
     {	
-        $this->auth = $auth = $this->session->get('auth');
-        if (!$auth) {
-            return $this->response->redirect('session/start/');
-        }
-		
+        	
     }
 
     public function indexAction($ID)
