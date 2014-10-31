@@ -538,6 +538,8 @@ $('.cartB').on('click', function(e) {
 
 </div>
 
+<?php if (count($data['related']) > 0) { ?>
+
   <div class="container">
       <div class="mid-menu">
         <div class="item">Related Products</div>
@@ -562,7 +564,7 @@ $('.cartB').on('click', function(e) {
     <?php foreach ($data['related'] as $row){?>
     
     <div class="als-item">
-      <div class="hover">
+      <div class="hover" style="height : 445px;">
         <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
           <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           
@@ -578,7 +580,7 @@ $('.cartB').on('click', function(e) {
         </div>
 
 
-        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>" style="width : 280px; height : 385px;"></img>
         <div class="price">Price: <?php echo $row->price; ?></div>
       </div>
     </div>
@@ -590,6 +592,10 @@ $('.cartB').on('click', function(e) {
       <img src="<?php echo $this->url->get().'main/images/';?>right.png" alt="next" title="next" />
     </span> <!-- "next" button -->
     </div> <!--als-container-->
+
+    <?php } ?>
+
+
 
     
   </div>
