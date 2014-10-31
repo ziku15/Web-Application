@@ -1,0 +1,805 @@
+<!-- mid menu part -->
+<style>
+
+.hover {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+  text-decoration:none;
+  
+}
+.hover .text {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+    text-align:center;
+    left: 0;
+    top: 0;
+  
+   -webkit-transition: opacity 500ms;
+     -moz-transition: opacity 500ms;
+     -o-transition: opacity 500ms;
+     transition: opacity 500ms;
+}
+.hover:hover .text { display: block; opacity: 1;}
+
+.text .top_text{margin-top: 35%;}
+
+.text .bottom_text{margin-top: 40%;}
+
+.text .bottom_text2{margin-top: 20%;}
+
+.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
+
+.nav-tabs> li > a, .nav-tabs> li > a:hover {border: none; background-color: #ffffff;}
+
+.nav-tabs {border-bottom: none;}
+
+.cart, .wish, .wishB, .cartB{background-color: #454545; border:none; }
+
+.mid-menu .active .item{
+
+  border: 2px solid #cc0001;
+}
+
+.modal-margin-top{
+  margin-top: 40%;
+}
+
+
+</style>
+
+<style type="text/css">
+.search-box{
+  border: 1px solid #dadada;
+  width: 100%;
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.search-box-text{
+  color: #595959;
+  font-size: 14px;
+}
+
+.bg-button {
+    background-color: #909090;
+    color: white;
+    font-size: 16px;
+}
+</style>
+
+
+<script type="text/javascript">
+
+function processWish(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var find = id.toString().concat(id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(find);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wish').on('click', function(e) {
+
+//subcategories();
+ var wishId = e.target.id;
+
+ //clicked(idClicked);
+ processWish(wishId);
+
+  });
+});
+
+function processWishB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var find1 = id.toString().concat(id.toString()); 
+  var find11 = find1.toString().concat(id.toString());
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find11).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            //console.log(find);
+            //alert("result");
+           // console.log(result);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    
+
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wishB').on('click', function(e) {
+
+//subcategories();
+ var wishIdB = e.target.id;
+ var wishIdB1 = wishIdB.toString().split(":")[0]; 
+
+ //clicked(idClicked);
+ processWishB(wishIdB1);
+
+  });
+
+
+});
+
+
+
+function processCart(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var p_id = id.toString().split(":")[0]; 
+
+  var msg = p_id.toString().concat(p_id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/addtocart",
+        data: { data1 : p_id, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_id);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       //if (result=="") {$('#productExistCartModal').modal('show');}
+       //else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cart').on('click', function(e) {
+
+//subcategories();
+ var cartId = e.target.id;
+
+ //clicked(idClicked);
+ processCart(cartId);
+ //Fly effect
+ var cart = $('.shopping-cart .glyphicon-shopping-cart');
+        var imgtodrag = $(this).parent().parent().siblings(".img-responsive").eq(0);
+        //var src = imgtodrag.attr("src");
+        //console.log("fly");
+        //console.log(src);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 250,
+                    'height': 400
+            }, 1000, 'easeInOutExpo');
+            
+            setTimeout(function () {
+                cart.parent().effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+
+
+
+  });
+});
+
+function processCartB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var p_idB = id.toString().split(":")[0]; 
+
+  var msgB = p_idB.toString().concat(p_idB.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/addtocart",
+        data: { data1 : p_idB, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_idB);
+        }
+      })
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       //if (result=="") {$('#productExistCartModal').modal('show');}
+       //else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cartB').on('click', function(e) {
+
+//subcategories();
+ var cartIdB = e.target.id;
+ //var cartIdB1 = cartIdB.toString().split(":")[0];
+ //var cartIdB = $(this).attr('href');
+ //clicked(idClicked);
+ processCart(cartIdB);
+
+ //Fly effect
+
+ var cart = $('.shopping-cart .glyphicon-shopping-cart');
+        var imgtodrag = $(this).parent().parent().siblings(".img-responsive").eq(0);
+        //var src = imgtodrag.attr("src");
+        //console.log("fly");
+        //console.log(src);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 250,
+                    'height': 400
+            }, 1000, 'easeInOutExpo');
+            
+            setTimeout(function () {
+                cart.parent().effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+
+  });
+});
+
+
+</script>
+
+
+
+<!-- slider part -->
+
+  <div id="carousel-example-generic" class="carousel slide container container-custom" data-ride="carousel">
+    <!-- Indicators -->
+    <!-- <ol class="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>      
+    </ol> -->
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+
+        <?php if (!isset($data['banner'])) { ?>
+  
+        <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="...">
+
+        <?php } else { ?>
+
+        <img src="<?php echo $this->url->get().$data['banner'];?>" class="img-responsive" alt="...">
+
+        <?php } ?>
+        <!-- <div class="carousel-caption">
+          ...
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Controls -->
+   <!--  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a> -->
+  </div>
+
+
+  <!-- slider part ends here -->
+
+
+  <div class="seperator"></div>
+
+  <div class="container">
+
+  
+  <div class="tabbable">
+  <div class="mid-menu">
+  <ul class="nav nav-tabs">
+    
+    <li><a href="#pane1" data-toggle="tab"><div class="item">ABOUT US</div></a></li>
+    <li class="active"><a href="#pane2" data-toggle="tab"><div class="item">COLLECTION</div></a></li>
+    <li><a href="#pane3" data-toggle="tab"><div class="item">FEEDBACK</div></a></li>
+    <li><a href="#pane4" data-toggle="tab"><div class="item">BLOG</div></a></li>
+  </ul>
+  </div>
+
+  <div class="red-joint"></div>
+   
+  <div class="tab-content">
+    <div id="pane1" class="tab-pane">
+    <div class="container item-area">
+      About us content coming soon
+
+    </div> <!---Container item-area !-->
+
+    </div> <!---pane1 !-->
+    <div id="pane2" class="tab-pane active">
+    <div class="container item-area">
+    <?php foreach ($collection as $row){?>
+  
+    <div class="col-md-3 hover">
+      <div class="item">
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
+          <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
+          <div class="bottom_text">
+            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+        <div class="price">Price: <?php echo $row->price; ?> </div>
+      </div>
+    </div>
+
+    <?php }?>
+
+    </div> <!---Container item-area !-->
+
+    <div class="seperator"></div>
+
+    <!--Bottom product area starts -->
+
+<div class="container bottom-item-area">
+
+  <div class="col-md-3">
+       <div class="search-box">Home <span class="glyphicon glyphicon-chevron-right"></span> Store Home</div>    
+       <div class="search-box">Refine</div>
+      
+       <form id='search-form' action="" mathod="get">
+        <p><br><span class="caret"></span> GENDER <br></p>
+
+        <div class="search-box search-box-text">
+
+          <?php echo $form->render("men"); ?>
+          <label>Men</label> <br>
+
+          <?php echo $form->render("women"); ?>
+          <label>Women</label> <br>
+
+        </div>
+
+
+        <p><br><span class="caret"></span>PRODUCT TYPE<br></p>
+
+        <div class="search-box search-box-text">
+         <div style="overflow-y:scroll; height:140px;">
+          
+          
+          <?php echo $form->render("sunglasses"); ?>
+          <label>Sunglasses</label> <br>
+
+          <?php echo $form->render("swimsuits"); ?>
+          <label>Swimsuits</label> <br>
+
+          <?php echo $form->render("tops"); ?>
+          <label>Tops</label> <br>
+
+          <?php echo $form->render("trainers"); ?>
+          <label>Trainers</label> <br>
+
+          <?php echo $form->render("trowsers"); ?>
+          <label>Trowsers</label> <br>
+
+          <?php echo $form->render("tshirts"); ?>
+          <label>T-shirts</label> <br>
+
+          <?php echo $form->render("vests"); ?>
+          <label>Vests</label> <br>
+          
+         </div>
+        </div>
+
+
+
+
+        <p><br><span class="caret"></span>PRICE RANGE <br></p>
+
+        <div class="search-box" style="padding:10px;"> 
+         
+         <span style="display: inline-block; width: 100%; padding: 0 5px;">
+          <input id="Slider1" type="slider" name="price"
+          <?php if(isset($range['low']) && isset($range['high'])) 
+                  $temp = $range['low'].";".$range['high'];
+
+                  else $temp = "0;60000"; 
+          ?> 
+          value="<?php echo $temp; ?>" 
+          />  
+         </span>
+    
+        
+         <input type="hidden" id="limit_low" name="limit_low" value="">
+         <input type="hidden" id="limit_high" name="limit_high" value="">
+
+         <script type="text/javascript" charset="utf-8">
+         jQuery("#Slider1").slider({ from: 0, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" ,  onstatechange: function( value ){
+          $('#limit_low').val(value.split(";")[0]);
+          $('#limit_high').val(value.split(";")[1]);
+          }
+          });
+          </script>
+
+         <p></p>
+
+         <button class="btn btn-default bg-button form-control" type="submit" style="width:60%;"> Check </button>
+        </div>
+
+
+        <p><br><span class="caret"></span> CONDITION <br></p>
+
+        <div class="search-box search-box-text">
+
+          <?php echo $form->render("new"); ?>
+          <label>New</label> <br>
+
+          <?php echo $form->render("pre_owned"); ?>
+          <label>Pre-owned</label> <br>
+
+          <?php echo $form->render("vintage"); ?>
+          <label>Vintage</label> <br>
+
+        </div>
+        
+        
+
+        <p><br><span class="caret"></span>BRAND <br></p>
+
+        <div class="search-box search-box-text">
+         <div style="overflow-y:scroll; height:210px;">
+          
+          
+          <?php echo $form->render("pop"); ?>
+          <label>Pop</label> <br>
+
+          <?php echo $form->render("ren"); ?>
+          <label>Ren</label> <br>
+
+          <?php echo $form->render("rimmel_london"); ?>
+          <label>Rimmel London</label> <br>
+
+          <?php echo $form->render("river_island"); ?>
+          <label>River Island</label> <br>
+
+          <?php echo $form->render("rodial"); ?>
+          <label>Eye Rodial</label> <br>
+
+          <?php echo $form->render("rose_and_co"); ?>
+          <label>Rose & Co</label> <br>
+
+          <?php echo $form->render("stilla"); ?>
+          <label>Stilla</label> <br>
+
+          <?php echo $form->render("ted_baker"); ?>
+          <label>Ted Baker </label> <br>
+
+          <?php echo $form->render("the_balm"); ?>
+          <label>the Balm</label> <br>
+         </div>
+        </div>
+
+
+
+        <p><br><span class="caret"></span>COLOUR<br></p>
+          
+        <div class="search-box search-box-text">  
+          <?php echo $form->render("beige"); ?>
+          <label>Beige</label> <br>
+
+          <?php echo $form->render("blue"); ?>
+          <label>Blue</label> <br>
+
+          <?php echo $form->render("clear"); ?>
+          <label>Clear</label> <br>
+
+          <?php echo $form->render("cream"); ?>
+          <label>Cream</label> <br>
+
+          <?php echo $form->render("green"); ?>
+          <label>Green</label> <br>
+        </div>
+
+        <p><br><span class="caret"></span>STYLE<br></p>
+
+        <div class="search-box search-box-text">  
+          
+          <?php echo $form->render("beige"); ?>
+          <label>Body & Face</label> <br>
+
+          <?php echo $form->render("blue"); ?>
+          <label>Cleanse & Tone</label> <br>
+        </div>
+
+        </form>
+      
+      
+
+    </div>
+
+
+
+    <div class="col-md-9">
+      <div class="row product">
+       <?php foreach ($Product->items as $row){?>
+        <div class="col-md-3 hover">
+          <div class="item">
+        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".substr($row->product_description,0,19).'..'; ?></P>
+          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
+          <div id="<?php echo $row->id.$row->id.$row->id; ?>"> </div>
+          <div class="bottom_text2">
+            <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+            </button>
+            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+            <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
+              <span class="glyphicon glyphicon-heart"></span>
+            </button>
+          </div>
+        </div>            
+
+
+            <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+            <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+            <div class="product-price">$<?php echo $row->price; ?></div>
+          </div>
+        </div>
+       <?php }?>
+         
+      </div> <!-- row ends !-->
+      <div class="row" style="padding-top: 50px;">
+       <div class="col-md-10 col-md-offset-2">
+        <ul class="pager"  style="text-align: left; margin: 10px 0;">
+            <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
+            <li><a href="<?php echo $this->url->get("shop/index/".$data['shop_id']); ?>">First</a></li>
+            <li><a href="<?php echo $this->url->get("shop/index/".$data['shop_id']."?page=" . $Product->before); ?>">Previous</a></li>
+            <li><a href="<?php echo $this->url->get("shop/index/".$data['shop_id']."?page=" . $Product->next); ?>">Next</a></li>
+            <li><a href="<?php echo $this->url->get("shop/index/".$data['shop_id']."?page=" . $Product->last); ?>">Last</a></li>   
+       </ul>
+       </div>
+      </div>
+
+
+
+    </div>
+    
+  </div>
+    <!--Bottom product area ends-->
+    </div> <!---pane2 !-->
+    <div id="pane3" class="tab-pane">
+    <div class="container item-area">
+      Give feedback
+    
+
+    </div> <!---Container item-area !-->
+    </div><!---pane3 !-->
+
+   <div id="pane4" class="tab-pane">
+    <div class="container item-area">
+      <iframe src="http://blog.atomixsystem.com" width="100%" height="600px">
+        
+      </iframe>
+    </div> <!---Container item-area !-->
+    </div><!---pane4 !-->
+     
+  </div><!-- /.tab-content -->
+
+  </div>
+</div> <!--Mid-menu ends here -->
+
+<!--Modals !-->
+
+<div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> You need to log in first. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productInWishlistModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> This product already exists in your wish list. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productAddedInWishlist" tabindex="-1" role="dialog" aria-labelledby="productAddedInWishlist" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Wish list updated successfully. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="productAddedCartModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Product successfully added to the cart</center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productExistCartModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> Quantity incremented for this product. </center> 
+                </p>
+            </div>
+            
+    </div>
+  </div>
+</div>
+
+
+
+
+
