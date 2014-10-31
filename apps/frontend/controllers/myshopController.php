@@ -46,12 +46,24 @@ class myshopController extends ControllerBase
 		$numberPage = $this->request->getQuery("page", "int", 1);
 
 
-		$phql = ("SELECT Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id,  Biz_mela\Models\ShopMaster.shop_image,  Biz_mela\Models\ShopMaster.status
+		$phql = ("SELECT Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id,  Biz_mela\Models\ShopMaster.shop_image,  Biz_mela\Models\ShopMaster.status 
 			FROM Biz_mela\Models\ShopMaster,Biz_mela\Models\UserMaster
 			WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
+
 			AND Biz_mela\Models\UserMaster.id = $user_id
 			ORDER BY Biz_mela\Models\ShopMaster.id desc
 			LIMIT 0 , 30");
+
+        /*$newresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ShopMaster')
+                  ->columns('Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id, Biz_mela\Models\ShopMaster.shop_image,  Biz_mela\Models\ShopMaster.status ,p.id as p_id,p.shop_id')
+                  ->Join('Biz_mela\Models\ProductMaster', 'p.shop_id = Biz_mela\Models\ShopMaster.id', 'p','right')
+                  
+                  
+                  ->where('Biz_mela\Models\ShopMaster.user_id = :name2:', array('name2' => $user_id))
+                  ->orderBy('Biz_mela\Models\ShopMaster.id desc')
+                  ->getQuery()
+                  ->execute();*/
 
 		$newresult = $this->modelsManager->executeQuery($phql);
 
@@ -178,7 +190,7 @@ class myshopController extends ControllerBase
 
             $user_id = $this->session->get('auth')['id'];
             $numberPage = $this->request->getQuery("page", "int", 1);
-            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
+            /*$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
                         Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock,
                         Biz_mela\Models\ProductMaster.created_at, Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_image
                 FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster, Biz_mela\Models\ProductImage
@@ -187,9 +199,23 @@ class myshopController extends ControllerBase
                 AND Biz_mela\Models\ProductImage.product_id = Biz_mela\Models\ProductMaster.id
                 AND Biz_mela\Models\ShopMaster.id = $value
                 ORDER BY Biz_mela\Models\ProductMaster.id desc
-                LIMIT 0 , 30");
+                LIMIT 0 , 30");*/
 
-            $newresult = $this->modelsManager->executeQuery($phql);
+            $newresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
+                    Biz_mela\Models\ProductMaster.price,Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock,
+                    Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductMaster.created_at,
+                    p.picture,s.shop_name, s.shop_image,s.user_id')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
+                  ->orderBy('Biz_mela\Models\ProductMaster.id desc')
+                  ->where('s.user_id = :name:', array('name' => $user_id))
+                  ->andWhere ('s.id = :name1:', array('name1' => $value))
+                  ->getQuery()
+                  ->execute();
+
+            //$newresult = $this->modelsManager->executeQuery($phql);
 
             $paginator = new Paginator(array(
                 "data" => $newresult,

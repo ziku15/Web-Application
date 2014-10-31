@@ -13,6 +13,7 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 
 use Phalcon\Tag as Tag,
 Phalcon\Forms\Element\Text,
+Phalcon\Forms\Element\Select,
 Phalcon\Validation\Validator\PresenceOf,
 
 Phalcon\Forms\Form;
@@ -40,20 +41,32 @@ class InventoryController extends ControllerBase
 	public function listAction() {
 		
 		
-		$user_id = $this->session->get('auth')['id'];
+			$user_id = $this->session->get('auth')['id'];
             
-            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price,
+            /*$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price,
             	Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
             	Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id as sid
-                FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster, Biz_mela\Models\ProductImage
-                WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
-                AND Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
+                FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductImage
+                Where Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
                 AND Biz_mela\Models\ProductImage.product_id = Biz_mela\Models\ProductMaster.id
-                AND Biz_mela\Models\UserMaster.id = $user_id
+                AND Biz_mela\Models\ShopMaster.user_id = $user_id
                 ORDER BY Biz_mela\Models\ProductMaster.id desc
-                LIMIT 0 , 30");
+                LIMIT 0 , 30");*/
+			$newresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price,
+            		Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
+            		p.picture,s.shop_name, s.id as sid,s.user_id')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
+                  ->orderBy('Biz_mela\Models\ProductMaster.id desc')
+                  ->where('s.user_id = :name:', array('name' => $user_id))
+                  ->getQuery()
+                  ->execute();
 
-            $newresult = $this->modelsManager->executeQuery($phql);
+       
+
+            //$newresult = $this->modelsManager->executeQuery($phql);
 
             $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
@@ -167,14 +180,40 @@ class InventoryController extends ControllerBase
 	
 	
 	public function newAction() {
-		$form = new Form();
+
 		
-		$shop_id = new Text("shop_id", array(
+        /*$user_id = $this->session->get('auth')['id'];
+        $shop=ShopMaster::find("user_id="."'".$user_id."'");*/
+		$form = new Form();
+
+		/*$index = 0;
+
+        foreach ($shop as $value) {
+        	# code...
+        	$index = $index + 1;
+        	//echo $value->shop_name;
+        	//echo "<br>";
+
+        	$container[$index] =  $value->shop_name;
+        }
+		
+		$shop_name = new Select("shop_name", array(
+            'class' => 'form-control input-lg form-element',
+			'id' => 'shop_name',
+			'autocomplete' => 'off',
+			'multiple'=>'yes'
+        ));
+
+        $shop_name->setOptions($container);*/
+
+        
+       $shop_id = new Text("shop_id", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'shop_id',
             'placeholder' => 'Shop_id',
 			'autocomplete' => 'off'
         ));
+		
 		$product_name = new Text("product_name", array(
             'class' => 'form-control input-lg form-element',
 			'id' => 'product_name',
@@ -269,8 +308,9 @@ class InventoryController extends ControllerBase
 			if (!$form->isValid($_POST)) {
 					$this->flash->error("Please solve the following errors !!");
 				}else{
-		
+				
 				$Product = new ProductMaster();
+				
 				$Product->shop_id= $shop_id;
 				$Product->product_name = $title;
 					
@@ -292,6 +332,7 @@ class InventoryController extends ControllerBase
 					//$User->activation_code=0;
 					
 				if ($Product->create()) {
+					
 					$this->flash->success("Product  added successfully!!");
 					return $this->response->redirect('inventory/list/');
 						//exit();
@@ -304,7 +345,7 @@ class InventoryController extends ControllerBase
 		}
         $data['form'] = $form;
         $this->view->setVars($data);
-}
+	}
 
 	public function detailsAction($value = '') {
 			$inventoryData = ProductMaster::findFirst('id = "' . $value . '"');
@@ -441,6 +482,26 @@ class InventoryController extends ControllerBase
 			    }
 			}
 
+	}
+
+	public function testAction(){
+		$this->view->disable();
+
+		$user_id = $this->session->get('auth')['id'];
+        $shop=ShopMaster::find("user_id="."'".$user_id."'");
+
+        $index = 0;
+
+        foreach ($shop as $value) {
+        	# code...
+        	$index = $index + 1;
+        	//echo $value->shop_name;
+        	//echo "<br>";
+
+        	$container[$index] =  $value->shop_name;
+        }
+
+        print_r($container);
 	}
 
 

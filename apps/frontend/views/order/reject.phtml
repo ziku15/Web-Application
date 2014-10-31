@@ -51,6 +51,15 @@ strong>p{
 
 }
 
+td{
+    font-size: 15px;
+}
+
+td>p{
+    font-size: 15px;
+    color:#9E0423;
+}
+
 
 </style>
 
@@ -93,18 +102,70 @@ strong>p{
     </nav>
 
 
-    <?php foreach ($Order->items as $record){?>
-    <div class="product">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="heading">
+                My Orders
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
 
-        <strong><p>Order Number:</p> <a href="<?php echo $this->url->get("order/orderdetails/" . $record->id); ?>"> 
-            <?php echo $record->order_no; ?>
-        </a>
-        </strong>
-        <p class="status">Status:</p><strong><?php echo $record->status_name; ?></strong>
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Order Number</th>
+                                            <th>Total</th>
+                                            
+                                            <th>Subtotal</th>
+                                            <th>Status</th>
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                     <?php 
+                                     $count=0;
+                                     foreach ($Order->items as $record) { 
+                                            $count++;
+                                        ?>
+                                     <tbody>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>
+                                                
+                                                <?php echo $record->order_no; ?>
+                                                    
+                                            </td>
+                                            <td>
+                                                <?php echo $record->total; ?>
+                                            </td>
+                                            <td>
+                                                 <?php echo $record->subtotal;?>
+                                            </td>
+                                            <td>
+                                                 <p><?php echo $record->status_name; ?></p>
+                                            </td>
+
+                                           
 
 
-    </div>
-    <?php }?>
+
+                                             
+                                            
+                                            
+                                            
+                                        </tr>
+                                    </tbody>
+                                     <?php } ?>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</div> 
 
     <div class="col-md-12">
 
