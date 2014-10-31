@@ -1,100 +1,8 @@
 <style>
 
-h3{
-    text-align:center;
-}
-
-.row-cell{
-
-    border:1px solid #ECECEC ;
-    border-radius: 4px;
-    height: 642px;
-    width: 95%;
-}
-
-strong > a{
-    padding-left: 0px;
-}
-
-.product{
-
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px; 
-    border:1px solid #ECECEC ;
-    border-radius: 4px;   
-
-}
-.product>p{
-
-    font-size: 15px;
-    padding-left: 1px;
-
-}
-
-.glyphicon{
-    float:left;
-    color:#106E96;
-    padding-top: 4px;
-}
-.delete{
-    float: left;
-    color:#106E96;
-    padding-top: 4px;
-}
-
-.glyphicon:hover{
-    color:#5B050B;
-}
-.delete:hover{
-    color:#5B050B;
-}
-
-.fa{
-    color: #106E96;
-}
-.fa-5x:hover{
-    color:#5B050B;
-}
-
-.seperator-dotted{
-    width: 100%;
-    border-bottom: 1px solid #ECECEC;
-    margin: 0px 0px 3px 0px;
-    padding-left: 20px;
-    padding-right: 10px;
-}
-
-p{
-    font-size: 15px;
-}
-
-.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-    border: 1px solid #ddd;
-}
-
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    border-top: 1px solid #ddd;
-    line-height: 1.42857;
-    padding: 8px;
-    vertical-align: top;
-
-}
-
-.table {
-    margin-bottom: 20px;
-    max-width: 100%;
-    width: 100%;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
 </style>
 
-
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
 <div class="row-cell">
     <nav class="navbar navbar-default" role="navigation">
         
@@ -127,11 +35,16 @@ table {
     </nav>
 
 </br>
+<div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="heading">
+                My Products
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
 
-    <div class="table-responsive">
-
-        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -176,7 +89,7 @@ table {
                                             </td>
                                              <td>
                                                 <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
-                                                    <i class="glyphicon glyphicon-pencil" ></i>
+                                                    <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
                                                 </a>
                                                 <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
                                                     <i class="delete fa fa-trash-o fa-lg" ></i>
@@ -188,10 +101,14 @@ table {
                                         </tr>
                                     </tbody>
                                      <?php } ?>
-                </table>
+                        </table>
 
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
+</div>
 
     
 

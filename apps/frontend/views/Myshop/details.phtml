@@ -1,0 +1,172 @@
+<style>
+
+
+#head{
+    border: 1px solid #ECECEC;
+    height:45px;
+    text-align: center;
+    font-size: 30px;
+    color:black;
+    
+
+}
+
+.sum{
+    text-align: center;
+    font-size: 25px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+#descp{
+    height:248px;
+    border: 1px solid #ECECEC;
+    margin-top: 10px;
+    text-align: center;
+
+}
+
+.pro_name{
+    font-size: 25px;
+    padding-top:10px;
+    color:black;
+
+}
+
+#pencil{
+    float:left;
+    color:#106E96;
+    padding-top: 4px;
+}
+.delete{
+    float: left;
+    color:#106E96;
+    padding-top: 4px;
+}
+
+.glyphicon:hover{
+    color:#5B050B;
+}
+.delete:hover{
+    color:#5B050B;
+}
+
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: top;
+
+}
+
+.table {
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.edit{
+    padding-top: -5px;
+}
+
+
+</style>
+
+<div class="row-cell">
+
+    <div class="col-md-12">
+        <img src="<?php echo $this->url->get().$image;?>" height="200px" width="800px" >
+     </div>  
+
+
+     <div class="col-md-12">
+            <div class="panel panel-default"> 
+                <div class="panel-heading">
+                    My Products
+                </div>
+
+                <div class="panel-body">
+                     <div class="table-responsive">
+                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Product Name</th>
+                                            <th>Image</th>
+                                            <th>Price</th>
+                                            <th>Creation</th>
+                                            <th>Status</th>
+                                            <th>More</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                     <?php 
+                                     $count=0;
+                                     foreach ($Product->items as $record) { 
+                                            $count++;
+                                        ?>
+                                     <tbody>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td><?php echo $record->product_name;?></td>
+                                            <td>
+                                                 <img src="<?php echo $this->url->get().$record->picture;?>" height="30px" width="50px" >
+
+                                            </td>
+                                            <td><?php echo $record->price;?></td>
+                                            <td><?php echo $record->created_at;?></td>
+                                            <td><?php echo $record->status;?></td>
+                                            <td>
+                                                <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> 
+                                                    <p> Details </p>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                
+                                                <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
+                                                    <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
+                                                </a>
+                                            </td>
+                                            
+                                            
+                                            
+                                        </tr>
+                                    </tbody>
+                                     <?php } ?>
+                                </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+        
+
+        <div class="col-md-12">
+
+            <ul class="pager">
+                <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
+                <li><a href="<?php echo $this->url->get("myshop/details/". $value ); ?>">First</a></li>
+
+                <li><a href="<?php echo $this->url->get("myshop/details/".$value."?page=" . $Product->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("myshop/details/".$value."?page=" . $Product->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("myshop/details/".$value."?page=" . $Product->last); ?>">Last</a></li>            
+            </ul>
+
+        </div>
+
+    </div>
+    
+
