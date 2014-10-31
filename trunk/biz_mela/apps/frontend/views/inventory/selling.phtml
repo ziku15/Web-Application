@@ -116,70 +116,79 @@ p{
 
 </br>
 
-    <div class="table-responsive">
+    <div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading" id="heading">
+            Most Selling Products
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
 
-        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Image</th>
-                                            
-                                            <th>Shop</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                     <?php 
-                                     $count=0;
-                                     foreach ($Valuable->items as $record) { 
-                                            $count++;
-                                        ?>
-                                     <tbody>
-                                        <tr>
-                                            <td><?php echo $count; ?></td>
-                                            <td>
-                                                <strong> 
-                                                    <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>">
-                                                        <?php echo $record->product_name; ?>
-                                                    </a>
-                                                </strong>
-                                            </td>
-                                            <td>
-                                                <img src="<?php echo $this->url->get().$record->picture;?>" height="30px" width="50px" >
-                                            </td>
-                                            <td>
-                                                <a href="<?php echo $this->url->get("inventory/shopdetails/" . $record->shop_name); ?>">
-                                                 <?php echo $record->shop_name;?>
-                                                </a>
-                                            </td>
+                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name</th>
+                                                    <th>Image</th>
+                                                    
+                                                    <th>Shop</th>
+                                                    <th>Price</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                             <?php 
+                                             $count=0;
+                                             foreach ($Valuable->items as $record) { 
+                                                    $count++;
+                                                ?>
+                                             <tbody>
+                                                <tr>
+                                                    <td><?php echo $count; ?></td>
+                                                    <td>
+                                                        <strong> 
+                                                            <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>">
+                                                                <?php echo $record->product_name; ?>
+                                                            </a>
+                                                        </strong>
+                                                    </td>
+                                                    <td>
+                                                        <img src="<?php echo $this->url->get().$record->picture;?>" height="30px" width="50px" >
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?php echo $this->url->get("myshop/details/" . $record->sid); ?>">
+                                                         <?php echo $record->shop_name;?>
+                                                        </a>
+                                                    </td>
 
-                                             <td>
-                                                 <?php echo $record->price;?>
-                                            </td>
-                                            <td>
-                                                <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>"><p>Status</p></a>
-                                            </td>
-                                             <td>
-                                                <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
-                                                    <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
-                                                </a>
-                                                <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
-                                                    <i class="delete fa fa-trash-o fa-lg" ></i>
-                                                </a>
+                                                     <td>
+                                                         <?php echo $record->price;?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>"><p>Status</p></a>
+                                                    </td>
+                                                     <td>
+                                                        <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
+                                                            <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
+                                                        </a>
+                                                        <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
+                                                            <i class="delete fa fa-trash-o fa-lg" ></i>
+                                                        </a>
 
-                                            </td>
-                                            
-                                            
-                                        </tr>
-                                    </tbody>
-                                     <?php } ?>
-                </table>
+                                                    </td>
+                                                    
+                                                    
+                                                </tr>
+                                            </tbody>
+                                             <?php } ?>
+                        </table>
 
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
 
     
