@@ -38,24 +38,13 @@ class InventoryController extends ControllerBase
 	}
 	
 	public function listAction() {
-
-		
-        
-		/*$username = $this->session->get('auth');
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-		$user_id=$con->id;
-		$User=ShopMaster::findFirst("user_id="."'".$user_id."'");
-		$a=$User->id;
-		$shop=ProductMaster::find("shop_id="."'".$a."'");
-		$data['value']=$shop;
-		$data['action']="My Products";
-		$this->view->setVar(data,$data);*/
-		/*******************************************************************************************************/
 		
 		
 		$user_id = $this->session->get('auth')['id'];
             
-            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name
+            $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price,
+            	Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
+            	Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id as sid
                 FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster, Biz_mela\Models\ProductImage
                 WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
                 AND Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
@@ -87,7 +76,7 @@ class InventoryController extends ControllerBase
             $numberPage = $this->request->getQuery("page", "int", 1);
             $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
             	Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
-            	Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name
+            	Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id as sid
                 FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductImage
                 
                 Where Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
@@ -147,7 +136,8 @@ class InventoryController extends ControllerBase
 
         $bestResult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\ProductMaster')
-                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.status, s.shop_name, p.picture,o.product_id')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name,
+                  	Biz_mela\Models\ProductMaster.status, s.shop_name, s.id as sid, p.picture,o.product_id')
                   ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
                   ->join('Biz_mela\Models\OrderDetails', 'o.product_id = Biz_mela\Models\ProductMaster.id', 'o','right')
                   ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')

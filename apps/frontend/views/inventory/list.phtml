@@ -1,5 +1,7 @@
 <style>
-
+td{
+    font-size: 15px;
+}
 </style>
 
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
@@ -76,7 +78,7 @@
                                                 <img src="<?php echo $this->url->get().$record->picture;?>" height="30px" width="50px" >
                                             </td>
                                             <td>
-                                                 <a href="<?php echo $this->url->get("shop/details/" . $record->id); ?>">
+                                                 <a href="<?php echo $this->url->get("myshop/details/" . $record->sid); ?>">
                                                  <?php echo $record->shop_name;?>
                                                 </a>
                                             </td>
