@@ -277,7 +277,7 @@ $('.cartB').on('click', function(e) {
           <?php if(isset($range['low']) && isset($range['high'])) 
                   $temp = $range['low'].";".$range['high'];
 
-                  else $temp = "1000;60000"; 
+                  else $temp = "0;60000"; 
           ?> 
           value="<?php echo $temp; ?>" 
           />  
@@ -288,7 +288,7 @@ $('.cartB').on('click', function(e) {
          <input type="hidden" id="limit_high" name="limit_high" value="">
 
          <script type="text/javascript" charset="utf-8">
-         jQuery("#Slider1").slider({ from: 1000, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" ,  onstatechange: function( value ){
+         jQuery("#Slider1").slider({ from: 0, to: 100000, step: 500, smooth: true, round: 0, dimension: "&nbsp;$", skin: "plastic" ,  onstatechange: function( value ){
           $('#limit_low').val(value.split(";")[0]);
           $('#limit_high').val(value.split(";")[1]);
           }
@@ -405,7 +405,7 @@ $('.cartB').on('click', function(e) {
        <?php }?>
          
       </div> <!-- row ends !-->
-      <div class="row">
+      <div class="row" style="padding-top: 50px;">
        <div class="col-md-10 col-md-offset-2">
       	<ul class="pager"  style="text-align: left; margin: 10px 0;">
             <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
