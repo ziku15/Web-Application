@@ -193,13 +193,15 @@
               <table class="table"><tr>
               <?php 
               use Biz_mela\Models\ProductCategory as ProductCategory;
+              use Biz_mela\Models\ProductMaster as ProductMaster;
               $categories = ProductCategory::find();
 
                $count = 0;
 
                //echo "<table><tr>";
                foreach ($categories as $entry){
-                echo '<td><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'</a></td>';
+                $product_data = ProductMaster::find("cat_id="."'".$entry->id."'");
+                echo '<td><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'&ensp;<span class="badge">'.count($product_data).'</span>'.'</a></td>';
                 $count++;
                 if ($count%3 == 0){
                     if($count >= count($categories))
