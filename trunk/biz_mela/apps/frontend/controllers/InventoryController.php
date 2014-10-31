@@ -54,7 +54,7 @@ class InventoryController extends ControllerBase
 		
 		
 		$user_id = $this->session->get('auth')['id'];
-            $numberPage = $this->request->getQuery("page", "int", 1);
+            
             $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name
                 FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\UserMaster, Biz_mela\Models\ProductImage
                 WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
@@ -66,6 +66,7 @@ class InventoryController extends ControllerBase
 
             $newresult = $this->modelsManager->executeQuery($phql);
 
+            $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $newresult,
                 "limit" => 4,

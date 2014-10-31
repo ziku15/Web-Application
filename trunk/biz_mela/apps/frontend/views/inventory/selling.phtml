@@ -33,7 +33,7 @@ strong > a{
 
 }
 
-.glyphicon{
+#pencil{
     float:left;
     color:#106E96;
     padding-top: 4px;
@@ -164,7 +164,7 @@ p{
                                             </td>
                                              <td>
                                                 <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
-                                                    <i class="glyphicon glyphicon-pencil" ></i>
+                                                    <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
                                                 </a>
                                                 <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
                                                     <i class="delete fa fa-trash-o fa-lg" ></i>
