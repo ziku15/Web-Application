@@ -68,6 +68,16 @@ class IndexController extends ControllerBase
 
     }
 
+
+
+    public function testAction()
+    {
+      # code...
+      $this->view->disable();
+      echo 'ok';
+
+    }
+
     public function wishlistAction()
     {
       $this->view->disable();
@@ -438,7 +448,7 @@ class IndexController extends ControllerBase
       
       $detailResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
-        ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, Biz_mela\Models\ProductMaster.discount, Biz_mela\Models\ProductMaster.cat_id, p.picture, s.shop_name')
+        ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, Biz_mela\Models\ProductMaster.discount, Biz_mela\Models\ProductMaster.cat_id, p.picture, s.shop_name, s.id as shopID')
         ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
         ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
         ->where('Biz_mela\Models\ProductMaster.id = :name:', array('name' => $value))
@@ -462,6 +472,7 @@ class IndexController extends ControllerBase
         $data['discount'] = $detailResult[0]->discount;
         $data['category'] = $detailResult[0]->cat_id;
         $data['product_id'] = $detailResult[0]->id;
+        $data['shop_id'] = $detailResult[0]->shopID;
 
         $cat = $detailResult[0]->cat_id;
 
