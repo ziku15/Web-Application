@@ -28,12 +28,11 @@ a>.glyphicon{
     height:50px;
     border:1px solid #ECECEC ;
     border-radius: 4px;
-    
     width: 95%;
 }
 
 strong>a{
-    font-size: 18px;
+    font-size: 15px;
 }
 
 
@@ -79,11 +78,16 @@ table {
 
 
 </style>
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading" id="heading">
+            My Shops
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
 
-    <div class="table-responsive">
-
-        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -115,10 +119,12 @@ table {
                                             <td>
                                                 <img src="<?php echo $this->url->get().$record->shop_image;?>" height="40px" width="60px" >
                                             </td>
-                                            <td>
-                                                 
-                                            </td>
 
+
+                                            <td>
+                                                  
+                                            </td>
+                                        
                                              <td>
                                                <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>"><p>Status</p></a>
                                             </td>
@@ -137,10 +143,13 @@ table {
                                         </tr>
                                     </tbody>
                                      <?php } ?>
-                </table>
+                    </table>
 
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
 
 
