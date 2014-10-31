@@ -474,7 +474,9 @@ $('.cartB').on('click', function(e) {
       <div class="col-md-12">
       <p></p>
       <?php echo $data['product_name']; ?> <br>
-      By <?php echo $data['shop_name']; ?>   
+      By <a style="text-decoration: none;" href="<?php echo $this->url->get().'shop/index/'.$data['shop_id'];?>"> <font color="blue"> <?php echo $data['shop_name']; ?> </font> </a> &ensp;
+      
+      Shop ID: <?php echo $data['shop_id']; ?>
       </div>
     </div>
 
