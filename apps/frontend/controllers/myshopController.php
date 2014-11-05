@@ -67,14 +67,6 @@ class myshopController extends ControllerBase
                   ->execute();*/
 
 		$newresult = $this->modelsManager->executeQuery($phql);
-        $product_data = ProductMaster::find("shop_id="."'".$newresult->id."'");
-        $a=$product_data->count();
-        $newresult['total']=$a;
-
-        
-
-        
-        
 
 		$paginator = new Paginator(array(
             "data" => $newresult,
