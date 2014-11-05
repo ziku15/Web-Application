@@ -43,24 +43,6 @@ class OrderController extends ControllerBase
 	public function listAction()
 	{
 		
-	
-
-		/*$username = $this->session->get('auth');
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-		$user_id=$con->id;
-		$numberPage = $this->request->getQuery("page", "int", 1);
-		$order=OrderMaster::find("user_id="."'".$user_id."'");
-		
-		
-		$paginator = new Paginator(array(
-            "data" => $order,
-            "limit" => 3,
-            "page" => $numberPage
-        ));
-		
-        $page['Order'] = $paginator->getPaginate();
-        $page['value'] = $value;
-        $this->view->setVars($page);*/
 
         $user_id = $this->session->get('auth')['id'];
         $newresult = $this->modelsManager->createBuilder()

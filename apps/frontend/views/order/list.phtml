@@ -12,6 +12,19 @@
     color: #fff;
     cursor: default;
 }
+
+.successful>p{
+    color:#0A962D;
+}
+.reject>p{
+    color:#7C0408;
+}
+.waiting>p{
+    color:#2282CC;
+}
+table{
+    border-collapse: separate;
+}
 </style>
 
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
@@ -84,7 +97,7 @@
                                                                  <?php echo $record->total; ?>
                                                             </td>
 
-                                                            <td>
+                                                            <td class="all">
                                                                  <?php echo $record->status; ?>
                                                             </td>
                                                         </tr>
@@ -156,7 +169,7 @@
                                                 <td>
                                                      <?php echo $record->subtotal;?>
                                                 </td>
-                                                <td>
+                                                <td class="successful">
                                                      <p><?php echo $record->status_name; ?></p>
                                                 </td>
 
@@ -231,7 +244,7 @@
                                                 <td>
                                                      <?php echo $record->subtotal;?>
                                                 </td>
-                                                <td>
+                                                <td class="waiting">
                                                      <p><?php echo $record->status_name; ?></p>
                                                 </td>
 
@@ -307,7 +320,7 @@
                                                 <td>
                                                      <?php echo $record->subtotal;?>
                                                 </td>
-                                                <td>
+                                                <td class="reject">
                                                      <p><?php echo $record->status_name; ?></p>
                                                 </td>
 

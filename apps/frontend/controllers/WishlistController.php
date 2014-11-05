@@ -36,34 +36,6 @@ class WishlistController extends ControllerBase
 	public function wishAction()
 	{
 
-		
-
-		/*$username = $this->session->get('auth');
-		
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-		
-		$userid=$con->id;
-		$numberPage = $this->request->getQuery("page", "int", 1);
-		$phql = ("SELECT Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductWishlist.product_id
-			FROM Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductWishlist, Biz_mela\Models\UserMaster
-			WHERE Biz_mela\Models\ProductMaster.id = Biz_mela\Models\ProductWishlist.product_id
-			AND Biz_mela\Models\UserMaster.id = Biz_mela\Models\ProductWishlist.user_id
-			AND Biz_mela\Models\ProductWishlist.user_id = $userid
-			LIMIT 0 , 30");
-
-		$newresult = $this->modelsManager->executeQuery($phql);
-
-		$paginator = new Paginator(array(
-            "data" => $newresult,
-            "limit" => 5,
-            "page" => $numberPage
-        ));
-		
-        $page['Wish'] = $paginator->getPaginate();
-        $page['value'] = $value;
-        $this->view->setVars($page);*/
-
-		
          $user_id = $this->session->get('auth')['id'];
             
             

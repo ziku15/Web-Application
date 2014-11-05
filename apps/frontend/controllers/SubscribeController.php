@@ -119,7 +119,7 @@ class SubscribeController extends ControllerBase
                 }
           } else {
               echo "Unsubscription Successful!";
-              //return $this->response->redirect('subscribe/subscription/');
+              return $this->response->redirect('subscribe/subscription/');
           }
       }
 
