@@ -69,8 +69,8 @@ class AccdashboardController extends ControllerBase
 		$news=Newsletter::findFirst("email="."'".$user_email."'");
 		$type=$news->shop_id;
 		$msg="";
-		if($type!=Null){
-			$msg="Subscribed to Full Subscription";
+		if($type==0){
+			$msg="Subscribed to General Subscription";
 		}
 		$subs['value']=$msg;
 		$this->view->setVar('subs',$subs);

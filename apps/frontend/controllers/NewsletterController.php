@@ -30,103 +30,78 @@ class NewsletterController extends ControllerBase
 	  }
 
 
-	 public function subscriptionAction($id)
+	 public function subscriptionAction()
 	 {
-
-      $name= $this->router->getControllerName();
-      $action=$this->router->getActionName();
-
-      print_r($name);exit();
-
-      if($name=='shop' and ($id!=Null)){
-        $request = $this->request;
+      $url= $_SERVER['HTTP_REFERER'];
+      $prev=explode("/", $url);
+      $action=$prev[4];
+      $method=$prev[5];
+      $id=$prev[6];
+      
+      $request = $this->request;
         if ($request->isPost()) {
-        $email = $request->getPost('email');
-        $previous_email = Newsletter::find('email=' . "'" . $email . "'" );
-        $msg="Input an email address";
-          $user = new Newsletter();
-          $user->email=$email;
-          $user->shop_id=$value;
-          $user->status=1;
-          $user->save();
+          $email = $request->getPost('email');
+          //$previous_email = Newsletter::find('email=' . "'" . $email . "'" );
 
-          if ($user->save() == True) {
+           $previous = Newsletter::find("email="."'".$email."'and shop_id="."'".$id."'");
+           $general=  Newsletter::find("email="."'".$email."'and shop_id="."0");
+          
+          $msg="Input an email address";
+
+          if($action=='shop' && $method=='index'){
+            if ($previous->count()>0 ) {
+                    $msg=" You are already subscribed ";
+                   
+                } else {
+                  $user = new Newsletter();
+                  $user->email=$email;
+                  $user->shop_id=$id;
+                  $user->status=1;
+                  $user->save();
+
+                  if ($user->save() == True) {
                     //$this->flash->success('You have successfully subscribed to our newsletter');
                   $msg="You have successfully subscribed to our newsletter";    
                   }
+             
+                }
 
-                  $data['value']=$msg;
+          }
 
-        $this->view->setVar(data,$data);
-        }
 
-        
-      }
+          else {
+            if ($general->count()>0 ) {
+                    $msg=" You are already subscribed to general subscription";
+                   
+                } else {
+                  $user = new Newsletter();
+                  $user->email=$email;
+                  $user->shop_id=intval(0);
+                  $user->status=1;
+                  $user->save();
+
+                  if ($user->save() == True) {
+                    //$this->flash->success('You have successfully subscribed to our newsletter');
+                  $msg="General Subscription Successful";    
+                  }
+             
+                }
+          }
+
+          
+
+                 $data['value']=$msg;
+
+                 $this->view->setVar(data,$data);
+
+
+       }
     }
 
-
-		    /*$request = $this->request;
-        if ($request->isPost()) {
-        $email = $request->getPost('email');
-        $previous_email = Newsletter::find('email=' . "'" . $email . "'" );
-        $msg="Input an email address";
+  }
 
 
-        
-
-        if($name=='shop' and !isNull($value)){
-
-          $user = new Newsletter();
-          $user->email=$email;
-          $user->shop_id=$value;
-          $user->status=1;
-          $user->save();
-
-          if ($user->save() == True) {
-                    //$this->flash->success('You have successfully subscribed to our newsletter');
-                  $msg="You have successfully subscribed to our newsletter";    
-                  }
-                }
-                  $data['value']=$msg;
-
-                 $this->view->setVar(data,$data);
-
-
-        }
-
-      }
-
-
-        /*if ($previous_email->count() > 0) {
-            $msg=" You are already subscribed to our newsletter";
-                   
-            } else {
-
-            $subs=UserMaster::findFirst("email="."'".$email."'");
-            $userid=$subs->id;
-            $shop=ShopMaster::findFirst("user_id="."'".$userid."'");
-            $data=$shop->id;
-            $user = new Newsletter();
-            $user->email=$email;
-            $user->shop_id=$data;
-            $user->status=1;
-            $user->save();
-             
-
-            if ($user->save() == True) {
-	                	//$this->flash->success('You have successfully subscribed to our newsletter');
-                  $msg="You have successfully subscribed to our newsletter";   	
-	                }
-                }
-                  $data['value']=$msg;
-
-                 $this->view->setVar(data,$data);
-
-
-
-
-       }*/
-
+		    
 
 
   
@@ -134,4 +109,3 @@ class NewsletterController extends ControllerBase
 
 
 
-}
