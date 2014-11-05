@@ -6,6 +6,8 @@ use Biz_mela\Models\UserMaster as UserMaster;
 use Biz_mela\Models\Newsletter as Newsletter;
 use Biz_mela\Models\ShopMaster as ShopMaster;
 
+use Phalcon\Paginator\Adapter\Model as Paginator;
+
 
 use Phalcon\Tag as Tag,
 Phalcon\Forms\Element\Text,
@@ -37,25 +39,63 @@ class SubscribeController extends ControllerBase
 
 	 public function subscriptionAction()
 	 {
-	 	$username = $this->session->get('auth');
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-		$user_email=$con->email;
+    	 	   $user_id = $this->session->get('auth')['id'];
+            $user=UserMaster::findFirst("id="."'".$user_id."'");
+            $email=$user->email;
 
-		$prev_email=Newsletter::find("email="."'".$user_email."'");
+            
+            
+            $subscribeTo = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\Newsletter')
+                  ->columns('Biz_mela\Models\Newsletter.shop_id,Biz_mela\Models\Newsletter.id,Biz_mela\Models\Newsletter.status,
+                    s.shop_name , s.shop_image')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\Newsletter.shop_id', 's')
+                  
+                  ->orderBy('Biz_mela\Models\Newsletter.shop_id ')
+                  ->where('Biz_mela\Models\Newsletter.email = :name:', array('name' => $email))
+                  ->getQuery()
+                  ->execute();
 
-        $msg="";
+       
 
-		if ($prev_email->count() > 0) {
-                   $msg="You are already subscribed to newsletter";
+            //$newresult = $this->modelsManager->executeQuery($phql);
 
-                   
-                    
-                } else  {
-                	$msg="You are not Subscribed to newsletter.";
-                }
+            $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $subscribeTo,
+                "limit" => 5,
+                "page" => $numberPage
+            ));
+            
+            $page['Subscription'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
 
-        $data['value']=$msg;
-        $this->view->setVar(data,$data);
+
+
+            $user_id = $this->session->get('auth')['id'];
+            $subscribedBy= $this->modelsManager->createBuilder()
+
+            ->from('Biz_mela\Models\Newsletter')
+                  ->columns('Biz_mela\Models\Newsletter.shop_id,Biz_mela\Models\Newsletter.email,Biz_mela\Models\Newsletter.status,s.shop_name ,
+                   s.shop_image')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\Newsletter.shop_id', 's')
+                  
+                  ->orderBy('Biz_mela\Models\Newsletter.shop_id ')
+                  ->where('s.user_id = :name:', array('name' => $user_id))
+                  ->getQuery()
+                  ->execute();
+
+            $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $subscribedBy,
+                "limit" => 5,
+                "page" => $numberPage
+            ));
+            
+            $page['News'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
 
 
 
@@ -64,23 +104,25 @@ class SubscribeController extends ControllerBase
 
 
 
-     public function unsubscribeAction()
+     public function unsubscribeAction($value='')
      {
-        $username = $this->session->get('auth');
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-        $user_email=$con->email;
-        $record=Newsletter::find("email="."'".$user_email."'");
-        if ($record != false) {
-            if ($record->delete() == false) {
+        
+
+
+      $dump = Newsletter::findFirst('id = "' . $value . '"');
+      
+      if ($dump != false) {
+          if ($dump->delete() == false) {
                 echo "Sorry, we can't delete the robot right now: \n";
-                foreach ($record->getMessages() as $message) {
+                foreach ($dump->getMessages() as $message) {
                     echo $message, "\n";
                 }
-            } else {
-                $record->save();
-                echo "You are successfully unsubscribed Now!";
-            }
-        }
+          } else {
+              echo "Unsubscription Successful!";
+              //return $this->response->redirect('subscribe/subscription/');
+          }
+      }
+
 
 
      }

@@ -46,7 +46,8 @@ class myshopController extends ControllerBase
 		$numberPage = $this->request->getQuery("page", "int", 1);
 
 
-		$phql = ("SELECT Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id,  Biz_mela\Models\ShopMaster.shop_image,  Biz_mela\Models\ShopMaster.status 
+		$phql = ("SELECT Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id,  Biz_mela\Models\ShopMaster.shop_image, 
+            Biz_mela\Models\ShopMaster.status 
 			FROM Biz_mela\Models\ShopMaster,Biz_mela\Models\UserMaster
 			WHERE Biz_mela\Models\UserMaster.id = Biz_mela\Models\ShopMaster.user_id
 
@@ -66,6 +67,9 @@ class myshopController extends ControllerBase
                   ->execute();*/
 
 		$newresult = $this->modelsManager->executeQuery($phql);
+        $product_data = ProductMaster::find("shop_id="."'".$newresult->id."'");
+        $a=$product_data->count();
+        $newresult['total']=$a;
 
         
 
@@ -91,6 +95,7 @@ class myshopController extends ControllerBase
                //echo "<table><tr>";
        
         $product_data = ProductMaster::find("shop_id="."'".$newresult->id."'");
+
 
        
        

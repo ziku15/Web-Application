@@ -1,8 +1,18 @@
 <style>
 .info2{
-    height:435px;
+    height:835px;
 }
-.info{
+td{
+    font-size: 18px;
+    text-align: left;
+    height:60px;
+}
+table{
+    border:1px solid #000;
+    border-style: solid;
+}
+.data{
+    text-align: center;
     font-size: 15px;
 }
 
@@ -11,48 +21,94 @@
 
     <div class="item-area">
        <div class="col-md-12"> 
-            <div class="col-md-6 col-md-offset-1">
-                <div class="info">
-                    <Strong> Product Name: </strong><?php echo $heading;?>
-                </div>
-                <div class="info">
-                    <Strong> Description: </strong><?php echo $description;?>
-                </div>
+            <div class="col-md-8 ">
+                <table border="1" width="400" height="150">
+                <tr>
+                    <td>
+                        <Strong> Product Name: </strong>
+                    </td>
+                    <td class="data">
+                        <?php echo $heading;?>
+                    </td>
+                </tr>
 
-                <div class="info">
-                    <Strong> Price: </strong><?php echo $price;?>
-                </div>
+                <tr>
+                    <td>
+                        <Strong> Description: </strong>
+                    </td>
+                     <td class="data">
+                        <?php echo $description;?>
+                    </td>
+                </tr>
 
-                <div class="info">
-                    <Strong> Creation: </strong><?php echo $created_at;?>
-                </div>
+                <tr>
+                    <td>
+                        <Strong> Price: </strong>
+                    </td>
+                     <td class="data">
+                        <?php echo $price;?>
+                    </td>
+                </tr>
 
-                <div class="info">
-                    <Strong> Stock Quantity: </strong><?php echo $in_stock;?>
-                </div>
+                <tr>
+                    <td>
+                        <Strong> Creation: </strong>
+                    </td>
+                     <td class="data">
+                        <?php echo $created_at;?>
+                    </td>
+                </tr>
 
-                <div class="info">
-                    <Strong> Discount Rate: </strong><?php echo $discount;?>
-                </div>
-                <div class="info">
-                    <Strong>Least Orders To be served:</strong> <?php echo $minimum_order_level; ?>
-                </div>
-                <div class="info">
-                <a href="<?php echo $this->url->get("inventory/edit/".$id); ?>" class="edit" >
-                    Edit Product 
-                </a>
-                </div>
-            </div>
+                <tr>
+                    <td>
+                        <Strong> Stock: </strong>
+                    </td>
+                     <td class="data">
+                        <?php echo $in_stock;?>
+                    </td>
+                </tr>
 
-            <div class="col-md-5">
+                <tr>
+                    <td>
+                        <Strong> Discount: </strong>
+                    </td>
+                     <td class="data">
+                        <?php echo $discount;?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <Strong> Least Orders: </strong>
+                    </td>
+                     <td class="data">
+                        <?php echo $minimum_order_level; ?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <a href="<?php echo $this->url->get("inventory/edit/".$id); ?>" class="edit" >
+                            Edit Product 
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+                
+
+           
+
+            <div class="col-md-4">
                 <div class="info2">
                     <?php if (!isset($picture)) { ?>
   
-                                                    <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..." height="100%" width="100%">
+                                                    <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..." height="200%" width="100%">
 
                                                     <?php } else { ?>
 
-                                                    <img src="<?php echo $this->url->get().$picture;?>" class="img-responsive" alt="..." height="100%" width="100%">
+                                                    <img src="<?php echo $this->url->get().$picture;?>" class="img-responsive" alt="..." height="200%" width="100%">
 
                                                     <?php } ?>
                 </div>
