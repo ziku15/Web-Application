@@ -54,7 +54,7 @@ class myshopController extends ControllerBase
 			ORDER BY Biz_mela\Models\ShopMaster.id desc
 			LIMIT 0 , 30");
 
-        /*$newresult = $this->modelsManager->createBuilder()
+      /*$newresult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\ShopMaster')
                   ->columns('Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id, Biz_mela\Models\ShopMaster.shop_image,  Biz_mela\Models\ShopMaster.status ,p.id as p_id,p.shop_id')
                   ->Join('Biz_mela\Models\ProductMaster', 'p.shop_id = Biz_mela\Models\ShopMaster.id', 'p','right')
@@ -67,6 +67,11 @@ class myshopController extends ControllerBase
 
 		$newresult = $this->modelsManager->executeQuery($phql);
 
+        
+
+        
+        
+
 		$paginator = new Paginator(array(
             "data" => $newresult,
             "limit" => 10,
@@ -75,9 +80,31 @@ class myshopController extends ControllerBase
 		
         $page['Shop'] = $paginator->getPaginate();
         $page['value'] = $value;
-        $this->view->setVars($page);	
+        $this->view->setVars($page);
 
+      
+              
+              
 
+       
+
+               //echo "<table><tr>";
+       
+        $product_data = ProductMaster::find("shop_id="."'".$newresult->id."'");
+
+       
+       
+
+                
+       
+       
+
+        $data['value']=$product_data;
+        $this->view->setVar(data,$data);
+
+        
+
+        
 
 		
 	}
@@ -215,6 +242,9 @@ class myshopController extends ControllerBase
                   ->getQuery()
                   ->execute();
 
+
+            
+
             //$newresult = $this->modelsManager->executeQuery($phql);
 
             $paginator = new Paginator(array(
@@ -225,7 +255,9 @@ class myshopController extends ControllerBase
             
             $page['Product'] = $paginator->getPaginate();
             $page['value'] = $value;
-            $this->view->setVars($page);    
+            $this->view->setVars($page);
+
+
     		
     }
 

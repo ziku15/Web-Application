@@ -1,187 +1,345 @@
 <style>
-
-.row-cell{
-
-    border:1px solid #ECECEC ;
-    border-radius: 4px;
-    height: 558px;
-    width: 95%;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #fff;
+    border-color: #fff #fff transparent;
+   
+    border-style: solid;
+    border-width: 0px;
+    color: #fff;
+    cursor: default;
 }
-
-.product{
-
-    padding-top: 0px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px; 
-    border:1px solid #ECECEC ; 
-
-}
-
-.col-md-3{
-    position: inherit;
-}
-
-p{
-    font-size: 18px;
-}
-
-
-strong>p{
-    font-size: 15px;
-}
-
-.order>h2{
-    padding-left: 5px;
-    color: #106E96;
-}
-
-
-.red{
-    color: #9e0423;
-
-}
-td{
-    font-size: 15px;
-}
-
 </style>
 
-<?php echo \Phalcon\Tag::stylesheetLink("main/css/order.css"); ?>
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
 <div class="row-cell">
     
-    <nav class="navbar navbar-default" role="navigation">
-        
+    <div class="tabbable">
+        <div class="mid-menu">
             
-        
-        <div class="col-md-3">
-            <div class="btn-group">
-                <a href="<?php echo $this->url->get('order/list/')?>" class="btn btn-lg btn-custom gray" id="list"><p>View Order List</p></a>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="btn-group">
-                <a href="<?php echo $this->url->get('order/purchase/')?>" class="btn btn-lg btn-custom gray" id="purchase"><p>Purchase History</p></a>
-            </div>
+          <ul class="nav nav-tabs">
             
+            <li class="active"><a href="#pane1" data-toggle="tab"><div class="item">All</div></a></li>
+            <li><a href="#pane2" data-toggle="tab"><div class="item">Purchase</div></a></li>
+            <li><a href="#pane3" data-toggle="tab"><div class="item">Pending</div></a></li>
+            <li><a href="#pane4" data-toggle="tab"><div class="item">Reject</div></a></li>
+          </ul>
+      
         </div>
-        <div class="col-md-3">
-            <div class="btn-group">
-                <a href="<?php echo $this->url->get('order/pending/')?>" class="btn btn-lg btn-custom gray" id="pending"><p>&ensp; Pending List &ensp;</p></a>
-            </div>
-            
-        </div>
-        <div class="col-md-3">
-            <div class="btn-group">
-                <a href="<?php echo $this->url->get('order/reject/')?>" class="btn btn-lg btn-custom gray" id="reject"><p>Reject History &ensp; </p></a>
-            </div>
-            
-        </div>
-    
-    </nav>
 
-    
+        <div class="red-joint"></div>
+        <div class="tab-content">
+            <div id="pane1" class="tab-pane active">
+                <div class="container item-area">
+                    <div class="col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" id="heading">
+                                Order List
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
 
-   <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading" id="heading">
-                My Orders
-            </div>
-            <div class="panel-body">
-                <div class="table-responsive">
+                                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Order Number</th>
+                                                            <th>Product Name</th>
+                                                            
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Total</th>
+                                                            <th>Status</th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                     <?php 
+                                                     $count=0;
+                                                     foreach ($Order->items as $record) { 
+                                                            $count++;
+                                                        ?>
+                                                     <tbody>
+                                                        <tr>
+                                                            <td><?php echo $count; ?></td>
+                                                            <td>
+                                                                
+                                                                <?php echo $record->order_no; ?>
+                                                                    
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $record->product_name; ?>
+                                                            </td>
+                                                            <td>
+                                                                 <?php echo $record->price;?>
+                                                            </td>
+                                                            <td>
+                                                                 <?php echo $record->quantity; ?>
+                                                            </td>
 
-                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Order Number</th>
-                                            <th>Product Name</th>
-                                            
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                             <th>Status</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                     <?php 
-                                     $count=0;
-                                     foreach ($Order->items as $record) { 
-                                            $count++;
-                                        ?>
-                                     <tbody>
-                                        <tr>
-                                            <td><?php echo $count; ?></td>
-                                            <td>
-                                                
-                                                <?php echo $record->order_no; ?>
-                                                    
-                                            </td>
-                                            <td>
-                                                <?php echo $record->product_name; ?>
-                                            </td>
-                                            <td>
-                                                 <?php echo $record->price;?>
-                                            </td>
-                                            <td>
-                                                 <?php echo $record->quantity; ?>
-                                            </td>
+                                                            <td>
+                                                                 <?php echo $record->total; ?>
+                                                            </td>
 
-                                            <td>
-                                                 <?php echo $record->total; ?>
-                                            </td>
+                                                            <td>
+                                                                 <?php echo $record->status; ?>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                     <?php } ?>
+                                        </table>
 
-                                            <td>
-                                                 <?php echo $record->status; ?>
-                                            </td>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                </div> 
 
+                <div class="col-md-8">
 
-                                             
-                                            
-                                            
-                                            
-                                        </tr>
-                                    </tbody>
-                                     <?php } ?>
-                        </table>
+                    <ul class="pager">
+                            <li><?php echo "You are in page ", $Order->current, " of ", $Order->total_pages; ?></li>
+                            <li><a href="<?php echo $this->url->get("Order/list" ); ?>">First</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->before); ?>">Previous</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->next); ?>">Next</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Order->last); ?>">Last</a></li>            
+                    </ul>
 
-                    </div>
                 </div>
-
             </div>
         </div>
-</div> 
 
-    <div class="col-md-12">
+        <div id="pane2" class="tab-pane">
+            <div class="container item-area">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="heading">
+                           Purchase History
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
 
-        <ul class="pager">
-                <li><?php echo "You are in page ", $Order->current, " of ", $Order->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("Order/order" ); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("Order/order?page=" . $Order->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("Order/order?page=" . $Order->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("Order/order?page=" . $Order->last); ?>">Last</a></li>            
-        </ul>
+                                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Order Number</th>
+                                                <th>Total</th>
+                                                
+                                                <th>Subtotal</th>
+                                                <th>Status</th>
+                                                
+                                                
+                                            </tr>
+                                        </thead>
+                                         <?php 
+                                         $count=0;
+                                         foreach ($Purchase->items as $record) { 
+                                                $count++;
+                                            ?>
+                                         <tbody>
+                                            <tr>
+                                                <td><?php echo $count; ?></td>
+                                                <td>
+                                                    
+                                                    <?php echo $record->order_no; ?>
+                                                        
+                                                </td>
+                                                <td>
+                                                    <?php echo $record->total; ?>
+                                                </td>
+                                                <td>
+                                                     <?php echo $record->subtotal;?>
+                                                </td>
+                                                <td>
+                                                     <p><?php echo $record->status_name; ?></p>
+                                                </td>
+
+        
+                                                
+                                            </tr>
+                                        </tbody>
+                                         <?php } ?>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="col-md-8">
+
+                    <ul class="pager">
+                            <li><?php echo "You are in page ", $Purchase->current, " of ", $Purchase->total_pages; ?></li>
+                            <li><a href="<?php echo $this->url->get("Order/list" ); ?>">First</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Purchase->before); ?>">Previous</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Purchase->next); ?>">Next</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Purchase->last); ?>">Last</a></li>            
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="pane3" class="tab-pane">
+            <div class="container item-area">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="heading">
+                           Pending List
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
+                                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Order Number</th>
+                                                <th>Total</th>
+                                                
+                                                <th>Subtotal</th>
+                                                <th>Status</th>
+                                                
+                                                
+                                            </tr>
+                                        </thead>
+                                         <?php 
+                                         $count=0;
+                                         foreach ($Pending->items as $record) { 
+                                                $count++;
+                                            ?>
+                                         <tbody>
+                                            <tr>
+                                                <td><?php echo $count; ?></td>
+                                                <td>
+                                                    
+                                                    <?php echo $record->order_no; ?>
+                                                        
+                                                </td>
+                                                <td>
+                                                    <?php echo $record->total; ?>
+                                                </td>
+                                                <td>
+                                                     <?php echo $record->subtotal;?>
+                                                </td>
+                                                <td>
+                                                     <p><?php echo $record->status_name; ?></p>
+                                                </td>
+
+        
+                                                
+                                            </tr>
+                                        </tbody>
+                                         <?php } ?>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="col-md-8">
+
+                    <ul class="pager">
+                            <li><?php echo "You are in page ", $Pending->current, " of ", $Pending->total_pages; ?></li>
+                            <li><a href="<?php echo $this->url->get("Order/list" ); ?>">First</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Pending->before); ?>">Previous</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Pending->next); ?>">Next</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Pending->last); ?>">Last</a></li>            
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div id="pane4" class="tab-pane ">
+            <div class="container item-area">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="heading">
+                           Reject List
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
+                                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Order Number</th>
+                                                <th>Total</th>
+                                                
+                                                <th>Subtotal</th>
+                                                <th>Status</th>
+                                                
+                                                
+                                            </tr>
+                                        </thead>
+                                         <?php 
+                                         $count=0;
+                                         foreach ($Reject->items as $record) { 
+                                                $count++;
+                                            ?>
+                                         <tbody>
+                                            <tr>
+                                                <td><?php echo $count; ?></td>
+                                                <td>
+                                                    
+                                                    <?php echo $record->order_no; ?>
+                                                        
+                                                </td>
+                                                <td>
+                                                    <?php echo $record->total; ?>
+                                                </td>
+                                                <td>
+                                                     <?php echo $record->subtotal;?>
+                                                </td>
+                                                <td>
+                                                     <p><?php echo $record->status_name; ?></p>
+                                                </td>
+
+        
+                                                
+                                            </tr>
+                                        </tbody>
+                                         <?php } ?>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="col-md-8">
+
+                    <ul class="pager">
+                            <li><?php echo "You are in page ", $Reject->current, " of ", $Reject->total_pages; ?></li>
+                            <li><a href="<?php echo $this->url->get("Order/list" ); ?>">First</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Reject->before); ?>">Previous</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Reject->next); ?>">Next</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/list?page=" . $Reject->last); ?>">Last</a></li>            
+                    </ul>
+
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
 
-
-<script type="text/javascript">
-    var pathname = window.location.pathname;
-    var patharray = pathname.split("/");
-    console.log("path arrray ");
-    console.log(patharray);
-
-    var choice=patharray[3];
-
-    console.log(choice);
-
-    if(choice=='list')
-    {
-        //$("#list").html("<font color="red"> View Order List </font>");
-        $("#list").addClass("red");
-    }
-
-    </script>
+</div>

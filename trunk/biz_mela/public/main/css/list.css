@@ -6,7 +6,7 @@ h3{
 
     border:1px solid #ECECEC ;
     border-radius: 4px;
-    height: 672px;
+    height: 772px;
     width: 95%;
 }
 
@@ -98,4 +98,92 @@ p{
 
 .highlight{
     border:1px solid red ;
+}
+
+td{
+    font-size: 15px;
+    text-align: left;
+}
+
+.mid-menu .active .item {
+    border: 2px solid #cc0001;
+}
+
+.mid-menu .item{
+    background-color: white;
+    color: #717171;
+    cursor: pointer;
+    float: left;
+    font-size: 15px;
+    margin-left: 20px;
+    padding: 8px 30px;
+    text-decoration: uppercase;
+}
+
+
+
+.row-cell{
+   
+   padding-left: 15px;
+   padding-right: 15px;
+
+}
+
+.red-joint{
+    border-bottom: 1px solid #cc0001;
+    margin-top: -30px;
+    width:100%;
+}
+.mid-menu{
+    display: table;
+    height: auto;
+    margin: 40px auto 10px;
+    width:auto;
+}
+
+.lis-group-item,.active{
+    border:0px;
+}
+
+.item-area{
+    margin-top: 30px;
+    text-align: left;
+}
+.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
+
+.nav-tabs> li > a, .nav-tabs> li > a:hover {border: none; background-color: #ffffff;}
+
+.nav-tabs {border-bottom: none;}
+
+#heading{
+    border:1px  #a8a8a8;
+    background-color: #fff;
+}
+
+.main-area{
+    margin-top: 0px;
+}
+
+.panel-body{
+    padding: 0px;
+}
+
+.table{
+    margin-bottom: 0px;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #ffffff;
+}
+
+.table-bordered{
+    border: 1px solid #ddd;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
+}
+
+strong>a{
+    color:#a8a8a8;
 }

@@ -46,7 +46,15 @@
 
             <div class="col-md-5">
                 <div class="info2">
-                    <img src="<?php echo $this->url->get().$picture;?>" height="100%" width="100%">
+                    <?php if (!isset($picture)) { ?>
+  
+                                                    <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..." height="100%" width="100%">
+
+                                                    <?php } else { ?>
+
+                                                    <img src="<?php echo $this->url->get().$picture;?>" class="img-responsive" alt="..." height="100%" width="100%">
+
+                                                    <?php } ?>
                 </div>
 
             </div>

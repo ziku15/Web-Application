@@ -38,7 +38,7 @@ class WishlistController extends ControllerBase
 
 		
 
-		$username = $this->session->get('auth');
+		/*$username = $this->session->get('auth');
 		
         $con=UserMaster::findFirst("username="."'".$username['name']."'");
 		
@@ -61,10 +61,34 @@ class WishlistController extends ControllerBase
 		
         $page['Wish'] = $paginator->getPaginate();
         $page['value'] = $value;
-        $this->view->setVars($page);
+        $this->view->setVars($page);*/
 
 		
-         //$this->view->setVar(newresult,$newresult);
+         $user_id = $this->session->get('auth')['id'];
+            
+            
+			$newresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price,
+            		  Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
+            		  w.status as wish,p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->leftJoin('Biz_mela\Models\ProductWishlist', 'w.product_id = Biz_mela\Models\ProductMaster.id', 'w')
+                  ->orderBy('Biz_mela\Models\ProductMaster.id desc')
+                  ->where('w.user_id = :name:', array('name' => $user_id))
+                  ->getQuery()
+                  ->execute();
+
+            $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $newresult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Wish'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
 		
 
 

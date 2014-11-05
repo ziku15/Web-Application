@@ -1,79 +1,198 @@
 <style>
 
-h3{
-    text-align:center;
+a>.glyphicon{
+    float:left;
+    color:#106E96;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.delete{
+    float: left;
+    color:#106E96;
+    font-size: 22px;
+    margin-top: 10px;
 }
 
+.glyphicon:hover{
+    color:#5B050B;
+}
+.delete:hover{
+    color:#5B050B;
+}
 
-.row-cell{
+.fa{
+    color: #106E96;
+}
 
+.product{
+    height:50px;
     border:1px solid #ECECEC ;
     border-radius: 4px;
-    height: 559px;
     width: 95%;
 }
 
-
-
-.product{
-
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px; 
-    border:1px solid #ECECEC ;
-    border-radius: 4px;   
-
-}
-p{
-
-    font-size: 15px;
-
-}
-
-.product > a{
-    
-    color: #585858;
+strong>a{
     font-size: 15px;
 }
 
-a>i{
-    float: right;
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
 }
 
-.delete{
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: top;
+
+}
+
+.table {
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+#pencil{
+    float:left;
     color:#106E96;
+    padding-top: 0px;
+    margin-top: -1px;
+    
+}
+.delete{
+    float: left;
+    color:#106E96;
+    padding-top: 0px;
+    margin-top: -1px;
+}
+#heading{
+    border: 0px;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #fff;
+}
+.panel-body{
+    padding: 0px;
+}
+
+.table{
+    margin-bottom: 0px;
+}
+td{
+    font-size: 15px;
 }
 
 </style>
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading" id="heading">
+            My Wishlist
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+
+                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Product Name</th>
+                                            <th>Image</th>
+                                            <th>Price</th>
+                                            <th>Discount</th>
+                                            
+                                            
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                     <?php 
+                                     $count=0;
+                                     foreach ($Wish->items as $record) { 
+                                            $count++;
+                                        ?>
+                                     <tbody>
+                                        <tr>
+                                            <td><?php echo $count; ?></td>
+                                            <td>
+                                                <strong> 
+                                                     <a href="<?php echo $this->url->get("myshop/details/" . $record->id); ?>"> 
+                                                        <?php echo $record->product_name; ?>
+                                                    </a>
+                                                   
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <?php if (!isset($record->picture)) { ?>
+  
+                                                    <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..." height="40px" width="60px">
+
+                                                    <?php } else { ?>
+
+                                                    <img src="<?php echo $this->url->get().$record->picture;?>" class="img-responsive" alt="..." height="40px" width="60px">
+
+                                                    <?php } ?>
+                                            </td>
 
 
-<div class="row-cell">
+                                            <td>
+                                                <?php echo $record->price; ?>
+                                            </td>
+                                        
+                                             <td>
+                                               <?php echo $record->discount; ?>
+                                            </td>
 
-    <?php foreach ($Wish->items as $record){?>
-    <div class="product">
+                                            <td>
+                                               <?php echo $record->wish; ?>
+                                            </td>
+                                            
+                                             <td>
+                                                <a href="<?php echo $this->url->get("wishlist/delete/" . $record->product_name); ?>">
+                                                    <i class="delete fa fa-trash-o fa-lg" ></i>
+                                                </a>
 
-        <a href="<?php echo $this->url->get("wishlist/details/" . $record->product_name); ?>">
-            <?php echo $record->product_name; ?>
-        </a>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                    </tbody>
+                                     <?php } ?>
+                    </table>
 
-        <a href="<?php echo $this->url->get("wishlist/delete/" . $record->product_name); ?>">
-            <i class="delete fa fa-trash-o fa-lg" ></i>
-        </a>
-        
+                </div>
+            </div>
+        </div>
     </div>
-    <?php }?>
+</div>
+
+
 
     <div class="col-md-12">
 
         <ul class="pager">
                 <li><?php echo "You are in page ", $Wish->current, " of ", $Wish->total_pages; ?></li>
-                <li><a href="<?php echo $this->url->get("Wishlist/wish" ); ?>">First</a></li>
-                <li><a href="<?php echo $this->url->get("Wishlist/wish?page=" . $Wish->before); ?>">Previous</a></li>
-                <li><a href="<?php echo $this->url->get("Wishlist/wish?page=" . $Wish->next); ?>">Next</a></li>
-                <li><a href="<?php echo $this->url->get("Wishlist/wish?page=" . $Wish->last); ?>">Last</a></li>            
+                <li><a href="<?php echo $this->url->get("wishlist/wish" ); ?>">First</a></li>
+                <li><a href="<?php echo $this->url->get("wishlist/wish?page=" . $Wish->before); ?>">Previous</a></li>
+                <li><a href="<?php echo $this->url->get("wishlist/wish?page=" . $Wish->next); ?>">Next</a></li>
+                <li><a href="<?php echo $this->url->get("wishlist/wish?page=" . $Wish->last); ?>">Last</a></li>            
         </ul>
 
     </div>
+
+    
+
 
 </div>
