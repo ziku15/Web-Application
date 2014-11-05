@@ -34,32 +34,10 @@ class OrderController extends ControllerBase
         
     }
 	
-	public function orderAction()
-	{
-		$user_id = $this->session->get('auth')['id'];
-        $newresult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\OrderMaster')
-                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.status,
-                  	d.price,d.quantity,p.id,p.product_name')
-                  ->leftJoin('Biz_mela\Models\OrderDetails', 'd.order_master_id = Biz_mela\Models\OrderMaster.id', 'd')
-                  ->leftJoin('Biz_mela\Models\ProductMaster', 'p.id = d.product_id', 'p')
-                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
-                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
-                  ->getQuery()
-                  ->execute();
-
-        $numberPage = $this->request->getQuery("page", "int", 1);
-            $paginator = new Paginator(array(
-                "data" => $newresult,
-                "limit" => 4,
-                "page" => $numberPage
-            ));
-            
-            $page['Order'] = $paginator->getPaginate();
-            $page['value'] = $value;
-            $this->view->setVars($page);   
-		
-	}
+	public function indexAction()
+    {
+    
+    }
 
 
 	public function listAction()
@@ -105,7 +83,86 @@ class OrderController extends ControllerBase
             
             $page['Order'] = $paginator->getPaginate();
             $page['value'] = $value;
-            $this->view->setVars($page);   
+            $this->view->setVars($page);
+
+
+
+        $user_id = $this->session->get('auth')['id'];
+
+        $successresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.subtotal,
+                    s.status_name')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
+                  ->andWhere ('h.status_code = 1')
+                  ->getQuery()
+                  ->execute();
+
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $successresult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Purchase'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+
+        $user_id = $this->session->get('auth')['id'];
+
+        $pendingresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.subtotal,
+                    s.status_name')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
+                  ->andWhere ('h.status_code = 2')
+                  ->getQuery()
+                  ->execute();
+
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $pendingresult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Pending'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+
+        $user_id = $this->session->get('auth')['id'];
+
+        $rejectresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.subtotal,
+                    s.status_name')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
+                  ->andWhere ('h.status_code = 3')
+                  ->getQuery()
+                  ->execute();
+
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $rejectresult,
+                "limit" => 4,
+                "page" => $numberPage
+            ));
+            
+            $page['Reject'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);  
+
+
 		
 	
 	}
@@ -128,35 +185,7 @@ class OrderController extends ControllerBase
 	}
 
 
-	public function pendingAction()
-	{
-
-		$user_id = $this->session->get('auth')['id'];
-
-        $newresult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\OrderMaster')
-                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.subtotal,
-                  	s.status_name')
-                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
-                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
-                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
-                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
-                  ->andWhere ('h.status_code = 2')
-                  ->getQuery()
-                  ->execute();
-
-        $numberPage = $this->request->getQuery("page", "int", 1);
-            $paginator = new Paginator(array(
-                "data" => $newresult,
-                "limit" => 4,
-                "page" => $numberPage
-            ));
-            
-            $page['Order'] = $paginator->getPaginate();
-            $page['value'] = $value;
-            $this->view->setVars($page);  
-
-	}
+	
 
 
 	public function orderdetailsAction($value = '')
@@ -173,114 +202,6 @@ class OrderController extends ControllerBase
 		$this->view->setVars($data);
 
 	}
-
-
-	public function rejectAction()
-	{
-
-		$user_id = $this->session->get('auth')['id'];
-
-        $newresult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\OrderMaster')
-                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.subtotal,
-                  	s.status_name')
-                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
-                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
-                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
-                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
-                  ->andWhere ('h.status_code = 3')
-                  ->getQuery()
-                  ->execute();
-
-        $numberPage = $this->request->getQuery("page", "int", 1);
-            $paginator = new Paginator(array(
-                "data" => $newresult,
-                "limit" => 4,
-                "page" => $numberPage
-            ));
-            
-            $page['Order'] = $paginator->getPaginate();
-            $page['value'] = $value;
-            $this->view->setVars($page);  
-
-		
-         //$this->view->setVar(newresult,$newresult);
-
-
-	}
-
-
-	public function purchaseAction()
-	{
-		/*$username = $this->session->get('auth');
-		
-        $con=UserMaster::findFirst("username="."'".$username['name']."'");
-		
-		$userid=$con->id;
-		$numberPage = $this->request->getQuery("page", "int", 1);
-		$phql = ("SELECT Biz_mela\Models\OrderMaster.order_no, Biz_mela\Models\OrderStatus.status_name,Biz_mela\Models\OrderMaster.id
-			FROM Biz_mela\Models\OrderMaster, Biz_mela\Models\OrderStatus, Biz_mela\Models\OrderHistory
-			WHERE Biz_mela\Models\OrderMaster.id = Biz_mela\Models\OrderHistory.order_master_id
-			AND Biz_mela\Models\OrderStatus.status_code = Biz_mela\Models\OrderHistory.status_code
-			AND Biz_mela\Models\OrderMaster.user_id = $userid
-			AND Biz_mela\Models\OrderHistory.status_code = 1
-			LIMIT 0 , 30");
-
-
-		$newresult = $this->modelsManager->executeQuery($phql);
-		$newresult = $this->modelsManager->executeQuery($phql);
-		$paginator = new Paginator(array(
-            "data" => $newresult,
-            "limit" => 3,
-            "page" => $numberPage
-        ));
-		
-        $page['Order'] = $paginator->getPaginate();
-        $page['value'] = $value;
-        $this->view->setVars($page);*/
-
-        $user_id = $this->session->get('auth')['id'];
-
-        $newresult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\OrderMaster')
-                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.subtotal,
-                  	s.status_name')
-                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
-                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
-                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
-                  ->where('Biz_mela\Models\OrderMaster.user_id = :name:', array('name' => $user_id))
-                  ->andWhere ('h.status_code = 1')
-                  ->getQuery()
-                  ->execute();
-
-        $numberPage = $this->request->getQuery("page", "int", 1);
-            $paginator = new Paginator(array(
-                "data" => $newresult,
-                "limit" => 4,
-                "page" => $numberPage
-            ));
-            
-            $page['Order'] = $paginator->getPaginate();
-            $page['value'] = $value;
-            $this->view->setVars($page);  
-
-
-		
-         
-
-	}
-	
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
