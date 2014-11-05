@@ -66,11 +66,16 @@ class AccdashboardController extends ControllerBase
 		$shipment['value']=$ship_addr;
 		$this->view->setVar('shipment',$shipment);
 
-		$news=Newsletter::findFirst("email="."'".$user_email."'");
-		$type=$news->shop_id;
+		//$news=Newsletter::findFirst("email="."'".$user_email."'");
+		$general=  Newsletter::find("email="."'".$user_email."'and shop_id="."0");
+		//$type=$news->shop_id;
 		$msg="";
-		if($type==0){
+		if($general->count() > 0){
 			$msg="Subscribed to General Subscription";
+		}
+
+		if($general->count()==0){
+			$msg="Not Subscribed to General Subscription";
 		}
 		$subs['value']=$msg;
 		$this->view->setVar('subs',$subs);

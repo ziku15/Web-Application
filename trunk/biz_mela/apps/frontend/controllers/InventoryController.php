@@ -269,9 +269,9 @@ class InventoryController extends ControllerBase
 				$Product = new ProductMaster();
 				
 				$Product->shop_id= $shop_id;
-				//$con=shopMaster::findFirst("shop_name="."'".$shop_name."'");
-				//$shop_id=$con->id;
-				//$Product->shop_id= $shop_id;
+				/*$con=shopMaster::findFirst("shop_name="."'".$shop_name."'");
+				$shop_id=$con->id;
+				$Product->shop_id= intval($shop_id);*/
 				$Product->product_name = $title;
 					
                 $Product->type=$type;
