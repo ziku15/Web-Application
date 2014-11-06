@@ -222,22 +222,9 @@ class SessionController extends ControllerBase
 			
             	}
 
-
-
-
-
-
-
         }
 
-
-
-
-
-	
-	
-		
-        
+      
     }
 	
 	

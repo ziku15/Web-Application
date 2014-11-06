@@ -1,5 +1,8 @@
 <style>
-
+#shopname{
+    font-size: 25px;
+    text-align: center;
+}
 </style>
 
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/myshopdetails.css"); ?>
@@ -8,7 +11,12 @@
 
     <div class="col-md-12">
         <img src="<?php echo $this->url->get().$image;?>" height="200px" width="800px" >
-     </div>  
+     </div>
+
+     <div class="col-md-12" id="shopname">
+        <p>  <?php echo $holder;?></p>
+     </div>
+
 
 
      <div class="col-md-12">
