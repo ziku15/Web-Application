@@ -1,0 +1,58 @@
+<style>
+.abc{
+	font-size: 18px;
+	padding-top: 20px;
+	padding-left: 140px;
+	padding-right: 50px;
+}
+
+.button-group{
+	padding-left: 220px;
+}
+
+.red{
+
+     background-color: #CE2127;
+     color: #ffffff;
+
+
+}
+
+#no {
+    margin-top: -15px;
+}
+
+.col-md-offset-2 {
+    margin-left: 20.6667%;
+}
+</style>
+
+<div>
+	<div class="col-md-10 col-md-offset-2">
+
+	  <h3 class="abc"><?php  echo $data['value']; ?></h3>
+		  <?php 
+		        if($data['value']=="Do you want to reject the order?")  {                                           
+		  ?>
+	  	<form action="<?php echo $this->url->get("order/change/" );?>" method="post">
+	  		<div class="col-md-6 col-md-offset-2">
+	  			<div class="col-md-4">
+		  <div class="btn-group btn-group-justified button-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="publish" class="btn btn-lg btn-custom green">Yes</button>
+                    </div>			  
+                </div>
+            </div>
+            <div class="col-md-4" id="no">
+				<div class="btn-group btn-group-justified form-element">
+                    <div class="btn-group">
+                        <button type="submit" name="submit" value="cancel" class="btn btn-lg btn-custom btn-danger">No</button>
+                    </div>		  
+                </div>
+            </div>
+            </div>
+		</form>
+	  	<?php } ?>
+	</div>
+
+</div>

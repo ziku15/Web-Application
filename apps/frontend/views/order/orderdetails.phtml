@@ -7,7 +7,7 @@ h3{
 
     border:1px solid #ECECEC ;
     border-radius: 4px;
-    height: 805px;
+    height: 615px;
     width: 95%;
 }
 
@@ -41,26 +41,117 @@ h2{
     text-align: center;
 }
 
+.ash-bg {
+    background-color: #f1f1f1;
+   
+    width:65%;
+}
+
+#show{
+    width:65%;
+}
+.col-md-3,.col-md-2,.col-md-1{
+    font-size: 15px;
+}
+
+#contain{
+    padding-left: 0px;
+}
 </style>
 
 
 <div class="row-cell">
- 
-    <div class="col-md-8 col-md-offset-2">
+    <div class="container">
+        <div class="col-md-12 ">
+            <div class="container" id="contain">
+              <div class="row ash-bg">
+                <div class="col-md-3 col-md-offset-2 ">
+                  Product Name
+                </div>
 
-        <div class="info">
-            <Strong> Product Id.: </strong><?php echo $product_id;?>
-        </div>
+                <div class="col-md-2 ">
+                  Quantity
+                </div>
+
+                <div class="col-md-2">
+                  Price
+                </div>
+
+                <div class="col-md-1">
+                  Value
+                </div>
+
+                <div class="col-md-2">
+                  Status
+                </div>
+              </div>
+            </div>
+
+            <div class="container" id="contain">
+
+                <?php foreach ($Order->items as $record) {?>
+                   <div class="row" id="show">
+                        <div class="col-md-2">
+                            <img src="<?php echo $this->url->get().$record->picture;?>" width="100px" style="height:150px;" >
+
+                        </div>
+
+                        <div class="col-md-3">
+                           <?php echo $record->product_name;?>
+
+                        </div>
+
+                        <div class="col-md-2 ">
+                           <?php echo $record->quantity;?>
+                        </div>
+
+                        <div class="col-md-2 ">
+                           <?php echo $record->price;?>
+                        </div>
+
+                        <div class="col-md-1 ">
+                           <?php echo $record->quantity * $record->price;?>
+                        </div>
+                        <div class="col-md-2">
+                            <?php echo $record->status_name;?>
+                        </div>
+
+                         <div class="seperator"></div>
+
+                   </div>
+                   <?php }?>
+                
+
+            </div>
             
-        <div class="info">
-            <Strong> Product Name: </strong><?php echo $product_name;?>
-        </div>
-        <div class="info">
-            <Strong> Price: </strong><?php echo $price;?>
-        </div>
+            <div class="col-md-3 col-md-offset-6">
 
-        <div class="info">
-            <Strong> Quantity: </strong><?php echo $quantity;?>
+                Subtotal: &ensp;&ensp; 
+                <span id="subtotal"><?php echo $record->subtotal; ?></span>
+                <br>
+                
+                Total: &ensp;&ensp;&ensp;&ensp;&nbsp;  
+                <span id="total"><?php echo $record->total; ?></span>
+                <br>
+                <p></p>
+                
+
+                
+            </div>
+           
+
+            <div class="col-md-9">
+
+                    <ul class="pager">
+                            <li><?php echo "You are in page ", $Order->current, " of ", $Order->total_pages; ?></li>
+                            <li><a href="<?php echo $this->url->get("Order/orderdetails" ); ?>">First</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/orderdetails?page=" . $Order->before); ?>">Previous</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/orderdetails?page=" . $Order->next); ?>">Next</a></li>
+                            <li><a href="<?php echo $this->url->get("Order/orderdetails?page=" . $Order->last); ?>">Last</a></li>            
+                    </ul>
+
+                </div>
+
         </div>
     </div>
     
