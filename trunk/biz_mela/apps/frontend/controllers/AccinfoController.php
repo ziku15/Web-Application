@@ -132,9 +132,7 @@ class AccinfoController extends ControllerBase
 	public function editbankAction(){
 
 
-    	//$username = $this->session->get('auth');
-		//$user=UserMaster::findFirst("username="."'".$username['name']."'");
-		//$this->view->setVar('data',$data);
+    	
 		$username = $this->session->get('auth');
 		$con=UserMaster::findFirst("username="."'".$username['name']."'");
 		//$con=UserMaster::findFirst("username="."'".$user['name']."'" AND "email="."'".$user['email']."'");

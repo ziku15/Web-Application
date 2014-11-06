@@ -1,97 +1,8 @@
 <style>
 
-a>.glyphicon{
-    float:left;
-    color:#106E96;
-    font-size: 18px;
-    margin-top: 10px;
-}
-.delete{
-    float: left;
-    color:#106E96;
-    font-size: 22px;
-    margin-top: 10px;
-}
-
-.glyphicon:hover{
-    color:#5B050B;
-}
-.delete:hover{
-    color:#5B050B;
-}
-
-.fa{
-    color: #106E96;
-}
-
-.product{
-    height:50px;
-    border:1px solid #ECECEC ;
-    border-radius: 4px;
-    width: 95%;
-}
-
-strong>a{
-    font-size: 15px;
-}
-
-
-.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-    border: 1px solid #ddd;
-}
-
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    border-top: 1px solid #ddd;
-    line-height: 1.42857;
-    padding: 8px;
-    vertical-align: top;
-
-}
-
-.table {
-    margin-bottom: 20px;
-    max-width: 100%;
-    width: 100%;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-.table-bordered {
-    border: 1px solid #ddd;
-}
-
-#pencil{
-    float:left;
-    color:#106E96;
-    padding-top: 0px;
-    margin-top: -1px;
-    
-}
-.delete{
-    float: left;
-    color:#106E96;
-    padding-top: 0px;
-    margin-top: -1px;
-}
-#heading{
-    border: 0px;
-}
-
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #fff;
-}
-.panel-body{
-    padding: 0px;
-}
-
-.table{
-    margin-bottom: 0px;
-}
-
 </style>
+
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/myshop.css"); ?>
 <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading" id="heading">
@@ -136,7 +47,7 @@ table {
 
                                                 
                                             <td>
-                                                  
+                                                  <?php echo $temp[$record->id]; ?>
                                             </td>
                                         
                                              <td>

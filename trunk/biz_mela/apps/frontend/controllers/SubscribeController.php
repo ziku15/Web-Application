@@ -77,8 +77,8 @@ class SubscribeController extends ControllerBase
             $subscribedBy= $this->modelsManager->createBuilder()
 
             ->from('Biz_mela\Models\Newsletter')
-                  ->columns('Biz_mela\Models\Newsletter.shop_id,Biz_mela\Models\Newsletter.email,Biz_mela\Models\Newsletter.status,s.shop_name ,
-                   s.shop_image')
+                  ->columns('Biz_mela\Models\Newsletter.shop_id,Biz_mela\Models\Newsletter.email,Biz_mela\Models\Newsletter.id,
+                    Biz_mela\Models\Newsletter.status,s.shop_name ,s.shop_image')
                   ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\Newsletter.shop_id', 's')
                   
                   ->orderBy('Biz_mela\Models\Newsletter.shop_id ')

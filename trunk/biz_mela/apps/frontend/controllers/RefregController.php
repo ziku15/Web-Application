@@ -41,13 +41,13 @@ class RefregController extends ControllerBase
 
     	$form = new Form();
 
-    	$firstname = new Text("firstname", array(
+    	       $firstname = new Text("firstname", array(
             'class' => 'form-control input-lg form-element',
             'id' => 'firstname',
             'placeholder' => 'Firstname',
             'autocomplete' => 'on'
         ));
-		$firstname->addValidator(new PresenceOf(array(
+        $firstname->addValidator(new PresenceOf(array(
             'message' => 'The First Name field is required'
         )));
 
@@ -57,7 +57,7 @@ class RefregController extends ControllerBase
             'placeholder' => 'Lastname',
             'autocomplete' => 'on'
         ));
-		$lastname->addValidator(new PresenceOf(array(
+        $lastname->addValidator(new PresenceOf(array(
             'message' => 'The Last Name field is required'
         )));
 
@@ -67,7 +67,7 @@ class RefregController extends ControllerBase
             'placeholder' => 'Username',
             'autocomplete' => 'on'
         ));
-		$username->addValidator(new PresenceOf(array(
+        $username->addValidator(new PresenceOf(array(
             'message' => 'The UserName field is required'
         )));
 
@@ -77,7 +77,7 @@ class RefregController extends ControllerBase
             'placeholder' => 'Cell Phone',
             'autocomplete' => 'on'
         ));
-		$cellphone->addValidator(new PresenceOf(array(
+        $cellphone->addValidator(new PresenceOf(array(
             'message' => 'The Cell Phone field is required'
         )));
 
@@ -87,13 +87,13 @@ class RefregController extends ControllerBase
             'placeholder' => 'Email Address',
             'autocomplete' => 'on'
         ));
-		$email->addValidator(new PresenceOf(array(
+        $email->addValidator(new PresenceOf(array(
             'message' => 'The email field is required'
         )));
 
         $password = new Password("password", array(
                 'class' => 'form-control input-lg form-element',
-				'id' => 'password',
+                'id' => 'password',
                 'placeholder' => 'password'
             ));
         $password->addValidator(new PresenceOf(array(
@@ -102,11 +102,11 @@ class RefregController extends ControllerBase
 
         $repeatPassword = new Password("repeatPassword", array(
                 'class' => 'form-control input-lg form-element',
-				'id' => 'repeatPassword',
+                'id' => 'repeatPassword',
                 'placeholder' => 'Repeat Password'
             ));
         $repeatPassword->addValidator(new PresenceOf(array(
-            'message' => 'The Repeat Password field is required'
+            'message' => 'The Confirm Password field is required'
         )));
 
         $address = new Text("address", array(
@@ -116,15 +116,6 @@ class RefregController extends ControllerBase
             'autocomplete' => 'on'
         ));
 
-        $dob = new Text("dob", array(
-            'class' => 'form-control input-lg form-element',
-            'id' => 'dob',
-            'placeholder' => 'Date of Birth(YYYY-MM-DD Format)',
-            'autocomplete' => 'on'
-        ));
-        $dob->addValidator(new PresenceOf(array(
-            'message' => 'The Date of Birth field is required'
-        )));
 
         $form->add($firstname);
         $form->add($lastname);
@@ -134,7 +125,7 @@ class RefregController extends ControllerBase
         $form->add($password);
         $form->add($repeatPassword);
         $form->add($address);
-        $form->add($dob);
+        //$form->add($dob);
         
         $data['form'] = $form;
         $this->view->setVars($data);
@@ -144,19 +135,18 @@ class RefregController extends ControllerBase
 
 
         	if (!$form->isValid($_POST)) {
-                $this->flash->error("Please solve the following error !!");
+                $this->flash->error("Please solve the following errors !!");
             }else{
             	//echo $this->request->getPost('email');exit();
 	            $firstname = $this->request->getPost('firstname', array('string', 'striptags'));
-	            $lastname = $this->request->getPost('lastname', array('string', 'striptags'));
-	            $username = $this->request->getPost('username', 'alphanum');
-	            $email = $this->request->getPost('email');
-	            $password = $this->request->getPost('password');
-	            $repeatPassword = $this->request->getPost('repeatPassword');
-				//$type=$this->request->getPost('type');
-				$contact_no=$this->request->getPost('cellphone');
-				$address=$this->request->getPost('address');
-				$dob=$this->request->getPost('dob');
+                $lastname = $this->request->getPost('lastname', array('string', 'striptags'));
+                $username = $this->request->getPost('username', 'alphanum');
+                $email = $this->request->getPost('email');
+                $password = $this->request->getPost('password');
+                $repeatPassword = $this->request->getPost('repeatPassword');
+                //$type=$this->request->getPost('type');
+                $contact_no=$this->request->getPost('cellphone');
+                $address=$this->request->getPost('address');
 				$previous_user = UserMaster::find('username=' . "'" . $username . "'" );
 				$previous_email = UserMaster::find('email=' . "'" . $email . "'" );
 
@@ -187,10 +177,10 @@ class RefregController extends ControllerBase
 				$user->email = $email;
 	            $user->password = sha1($password);
 	            
-	            
+	            $user->created_at = date("Y-m-d h:i:sa");
 				$user->contact_no =$contact_no ;
 				$user->address =$address ;
-				$user->dob=$dob ;
+				//$user->dob=$dob ;
 				$user->point=0;
 	            //$user->created_at = new Phalcon\Db\RawValue('now()');
 				$user->status = 0;

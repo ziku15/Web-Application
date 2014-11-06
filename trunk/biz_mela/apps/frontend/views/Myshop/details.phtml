@@ -1,102 +1,8 @@
 <style>
 
-
-#head{
-    border: 1px solid #ECECEC;
-    height:45px;
-    text-align: center;
-    font-size: 30px;
-    color:black;
-    
-
-}
-
-.sum{
-    text-align: center;
-    font-size: 25px;
-    margin-top: 8px;
-    margin-bottom: 0px;
-}
-
-#descp{
-    height:248px;
-    border: 1px solid #ECECEC;
-    margin-top: 10px;
-    text-align: center;
-
-}
-
-.pro_name{
-    font-size: 25px;
-    padding-top:10px;
-    color:black;
-
-}
-
-#pencil{
-    float:left;
-    color:#106E96;
-    padding-top: 4px;
-}
-.delete{
-    float: left;
-    color:#106E96;
-    padding-top: 4px;
-}
-
-.glyphicon:hover{
-    color:#5B050B;
-}
-.delete:hover{
-    color:#5B050B;
-}
-
-
-.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-    border: 1px solid #ddd;
-}
-
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    border-top: 1px solid #ddd;
-    line-height: 1.42857;
-    padding: 8px;
-    vertical-align: top;
-
-}
-
-.table {
-    margin-bottom: 20px;
-    max-width: 100%;
-    width: 100%;
-}
-
-table {
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-.edit{
-    padding-top: -5px;
-}
-
-td{
-    font-size: 15px;
-}
-
-.panel-body{
-    padding: 0px;
-}
-
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #fff;
-}
-
-#dataTables-example{
-    margin-bottom: 0px;
-}
-
-
 </style>
+
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/myshopdetails.css"); ?>
 
 <div class="row-cell">
 
@@ -141,11 +47,11 @@ td{
 
                                                 <?php if (!isset($record->picture)) { ?>
   
-                                                    <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..." height="40px" width="40px">
+                                                    <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..." height="40px" width="50px">
 
                                                     <?php } else { ?>
 
-                                                    <img src="<?php echo $this->url->get().$record->picture;?>" class="img-responsive" alt="..." height="40px" width="40px">
+                                                    <img src="<?php echo $this->url->get().$record->picture;?>" class="img-responsive" alt="..." height="40px" width="50px">
 
                                                     <?php } ?>
                                             </td>
