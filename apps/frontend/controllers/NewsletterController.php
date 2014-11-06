@@ -57,6 +57,8 @@ class NewsletterController extends ControllerBase
                   $user->email=$email;
                   $user->shop_id=$id;
                   $user->status=1;
+                  $user->created_at = date("Y-m-d h:i:s");
+                  $user->updated_at = date('Y-m-d h:i:s');
                   $user->save();
 
                   if ($user->save() == True) {
@@ -78,6 +80,8 @@ class NewsletterController extends ControllerBase
                   $user->email=$email;
                   $user->shop_id=intval(0);
                   $user->status=1;
+                  $user->created_at = date("Y-m-d h:i:s");
+                  $user->updated_at = date('Y-m-d h:i:s');
                   $user->save();
 
                   if ($user->save() == True) {
@@ -86,7 +90,7 @@ class NewsletterController extends ControllerBase
                   }
              
                 }
-          }
+              }
 
           
 

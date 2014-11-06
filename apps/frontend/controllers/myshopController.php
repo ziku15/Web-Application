@@ -60,6 +60,15 @@ class myshopController extends ControllerBase
         
 		$newresult = $this->modelsManager->executeQuery($phql);
 
+        foreach ($newresult as $value) {
+            $product_data=ProductMaster::find("shop_id="."'".$value->id."'");
+            $temp[$value->id]=count($product_data);
+
+            
+        }
+        
+        $this->view->setVar(temp,$temp);
+
 		$paginator = new Paginator(array(
             "data" => $newresult,
             "limit" => 10,

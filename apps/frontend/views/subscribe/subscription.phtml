@@ -22,6 +22,8 @@ table{
 
 
 
+
+
 </style>
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
 
@@ -98,7 +100,7 @@ table{
                                                 </td>
                                                 
 
-                                                 <td>
+                                                 <td class="status">
                                                      <?php echo $record->status;?>
                                                 </td>
                                                 <td>
@@ -156,6 +158,7 @@ table{
                                                     <th>Subscriber</th>
                                                     
                                                     <th>Status</th>
+                                                    <th>Action</th>
                                                     
                                                 </tr>
                                             </thead>
@@ -172,7 +175,7 @@ table{
                                                     <td>
                                                         
                                                         <strong>
-                                                            <a href="<?php echo $this->url->get("shop/index/" . $record->shop_id); ?>" >
+                                                            <a href="<?php echo $this->url->get("myshop/details/" . $record->shop_id); ?>" >
                                                                 <?php echo $record->shop_name; ?>
                                                             </a>
                                                         </strong>
@@ -197,6 +200,11 @@ table{
 
                                                      <td>
                                                          <?php echo $record->status;?>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="<?php echo $this->url->get("subscribe/unsubscribe/" . $record->id); ?>">Unsubscribe
+                                                        </a>
                                                     </td>
                                                     
                                                     
