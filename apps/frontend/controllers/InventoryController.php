@@ -8,6 +8,8 @@ use Biz_mela\Models\UserMaster as UserMaster;
 use Biz_mela\Models\ProductMaster as ProductMaster;
 use Biz_mela\Models\ProductImage as ProductImage;
 use Biz_mela\Models\OrderDetails as OrderDetails;
+use Biz_mela\Models\OrderHistory as OrderHistory;
+use Biz_mela\Models\OrderMaster as OrderMaster;
 
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
@@ -271,7 +273,7 @@ class InventoryController extends ControllerBase
 				$Product->shop_id= $shop_id;
 				/*$con=shopMaster::findFirst("shop_name="."'".$shop_name."'");
 				$shop_id=$con->id;
-				$Product->shop_id= intval($shop_id);*/
+				$Product->shop_id= $shop_id;*/
 				$Product->product_name = $title;
 					
                 $Product->type=$type;
@@ -307,6 +309,9 @@ class InventoryController extends ControllerBase
         $this->view->setVars($data);
 	}
 
+
+
+	
 	public function detailsAction($value = '') {
 			$inventoryData = ProductMaster::findFirst('id = "' . $value . '"');
 			$photo=ProductImage::findFirst('product_id = "' . $value . '"');
@@ -323,6 +328,56 @@ class InventoryController extends ControllerBase
 			$data['picture'] = $photo->picture;
 			$data['action'] = $inventoryData->product_name;
 			$this->view->setVars($data);
+
+
+
+			$newresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderDetails')
+                  ->columns('Biz_mela\Models\OrderDetails.price,Biz_mela\Models\OrderDetails.quantity,
+                  	Biz_mela\Models\OrderDetails.product_id,h.status_code')
+                  
+                  
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderDetails.order_master_id', 'h')
+                  
+                  ->where('Biz_mela\Models\OrderDetails.product_id = :name:', array('name' => $value))
+                  ->andWhere ('h.status_code = :name1:', array('name1' => 1))
+                  ->getQuery()
+                  ->execute();
+
+            $sales['value']=$newresult;
+            $this->view->setVar(sales,$sales);
+
+            $sum = intval(0);
+
+            foreach ($newresult as $value) {
+            
+            $sum = $sum + $value-> quantity;
+            
+
+  
+        	}
+
+        	
+
+
+        	$this->view->setVar(sum,$sum);
+
+
+
+             
+
+          
+            /*foreach ($newresult as $value) {
+            $product_data=OrderDetails::find("product_id="."'".$value->product_id."'");
+            $temp[$value->quantity]=count($product_data);
+
+            
+        	}
+        
+        	$this->view->setVar(temp,$temp);*/
+
+            //$sales['value']=$newresult;
+            //$this->view->setVar(sales,$sales);
 		
     }
 	
@@ -415,7 +470,13 @@ class InventoryController extends ControllerBase
 			
 			if ($product->save()) {
 						$this->flash->success("Product updated successfully!!");
-						$this->response->redirect('inventory/list/');
+						return $this->dispatcher->forward(
+					 	array(
+					 		'controller' => 'inventory',
+					 		'action' => 'details',
+					 		'param' => $value
+					 		)
+					 	);
 					} else {
 						$this->flash->error("error occured,please try again later!!");
 					}
