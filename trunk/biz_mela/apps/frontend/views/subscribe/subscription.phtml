@@ -74,15 +74,16 @@ table{
                                                 <td><?php echo $count; ?></td>
                                                 <td>
                                                    
-                                                       
-                                                    <?php echo $record->shop_id; ?>
+                                                     <?php if($record->shop_id!=0)
+                                                     echo $record->shop_id; ?>
                                                        
                                                     
                                                 </td>
                                                 <td>
                                                     <strong>
+                                                        <?php if($record->shop_id==0) echo "General Subscribtion"; else {?>
                                                         <a href="<?php echo $this->url->get("shop/index/" . $record->shop_id); ?>" >
-                                                            <?php echo $record->shop_name; ?>
+                                                            <?php echo $record->shop_name; }?>
                                                         </a>
                                                     </strong>
                                                     

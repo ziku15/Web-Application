@@ -33,110 +33,121 @@ tr{
     border: 1px transparent #a8a8a8;
 }
 
+.item-area{
+    margin-top: 10px;
+}
 
+#productdesc{
+    padding-left: 5px;
+}
+
+.info{
+    font-size: 15px;
+    height:45px;
+    text-align: left;
+    width:100%;
+}
+
+.info2{
+    font-size: 15px;
+    height:45px;
+    text-align: center;
+   margin-top: 0px;
+    border: 1px solid #ececec;
+    width:65%;
+}
+
+strong{
+    font-weight: 500;
+    color:#a8a8a8;
+}
+
+#salesdetails{
+    font-size: 15px;
+    border: 1px solid #a8a8a8;
+}
+
+#md6{
+    padding-left: -25px;
+    border: 1px transparent #a8a8a8;
+    font-size: 22px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+#salesdetails>p{
+    text-align: left;
+}
 
 </style>
 <div class="row-cell">
 
     <div class="item-area">
-       <div class="col-md-12"> 
-            <div class="col-md-6" id="topic">
-                <table border="1" width="400" height="150">
-                    <tr>
-                        <td>
-                            <Strong> Product Name: </strong>
-                        </td>
-                        <td class="data">
-                            <?php echo $heading;?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Strong> Description: </strong>
-                        </td>
-                         <td class="data">
-                            <?php echo $description;?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Strong> Price: </strong>
-                        </td>
-                         <td class="data">
-                            <?php echo $price;?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Strong> Creation: </strong>
-                        </td>
-                         <td class="data">
-                            <?php echo $created_at;?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Strong> Stock: </strong>
-                        </td>
-                         <td class="data">
-                            <?php echo $in_stock;?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Strong> Discount: </strong>
-                        </td>
-                         <td class="data">
-                            <?php echo $discount;?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <Strong> Least Orders: </strong>
-                        </td>
-                         <td class="data">
-                            <?php echo $minimum_order_level; ?>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <a href="<?php echo $this->url->get("inventory/edit/".$id); ?>" class="edit" >
-                                Edit Product 
-                            </a>
-                        </td>
-                        <td>
-                           
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-                
-
-           
-
-            <div class="col-md-6">
-                
-                    <?php if (!isset($picture)) { ?>
+       <div class="col-md-12">
+        <?php if (!isset($picture)) { ?>
   
-                        <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..."  width="100%" style="height:500px;">
+            <img src="<?php echo $this->url->get().'main/images/';?>shop_banner.jpg" class="img-responsive" alt="..."  width="100%" style="height:200px;">
 
-                        <?php } else { ?>
+            <?php } else { ?>
 
-                        <img src="<?php echo $this->url->get().$picture;?>" class="img-responsive" alt="..."  width="100%" style="height:500px;">
+            <img src="<?php echo $this->url->get().$picture;?>" class="img-responsive" alt="..."  width="100%" style="height:200px;">
 
-                        <?php } ?>
-                
+            <?php } ?>
+            
 
+        </div>
+
+        <div class="col-md-6" id="productdesc">
+            <div class="info">
+                    <Strong> Product Name: </strong><?php echo $heading;?>
+            </div>
+            <div class="info">
+                <Strong> Description: </strong><?php echo $description;?>
             </div>
 
+            <div class="info">
+                <Strong> Price: </strong><?php echo $price;?>
+            </div>
+
+            <div class="info">
+                <Strong> Creation: </strong><?php echo $created_at;?>
+            </div>
+
+            <div class="info">
+                <Strong> Stock Quantity: </strong><?php echo $in_stock;?>
+            </div>
+
+            <div class="info">
+                <Strong> Discount Rate: </strong><?php echo $discount;?>
+            </div>
+            <div class="info">
+                <Strong>Least Orders To be served:</strong> <?php echo $minimum_order_level; ?>
+            </div>
+            <div class="info">
+                <a href="<?php echo $this->url->get("inventory/edit/".$id); ?>" class="edit" >
+                    Edit Product 
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6" id="md6">
+            <div class="info2">
+                <p>Price:<?php echo $price; ?></p>
+            </div>
+            <div class="info2">
+                <p>Total Sales:<?php echo $sum; ?><p>
+            </div>
+            <div class="info2">
+                <p>Total:<?php echo $sum * $price; ?></p>
+            </div>
+        </br>
+        </br>
+        </br>
+        </br>
+        
+
+
+            
 
         </div>
     
