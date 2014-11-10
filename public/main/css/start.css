@@ -1,0 +1,33 @@
+.top-date{
+	font-size: 15px;
+}
+
+a {
+    color: #870415;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+a:hover{
+	color: #cd2027;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.shopping-text > a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.shopping-text > a :hover {
+    color: #cd2027;
+    text-decoration: underline;
+}
+
+.about{
+	color:#fff;
+	text-decoration: none;
+}
+.about:hover{
+	color:#cd2027;
+}
