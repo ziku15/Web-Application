@@ -16,6 +16,7 @@
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/main.css"); ?>
 	
 	  <?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
+    <?php echo \Phalcon\Tag::stylesheetLink("main/css/start.css"); ?>
 
     
 
@@ -49,6 +50,7 @@
     <!--CSS for range slider-->
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/jslider.css"); ?>
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/jslider.blue.css"); ?>
+
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/jslider.plastic.css"); ?>
 
 <!--Scripts for range slider -->
@@ -72,7 +74,9 @@
     <div class="container container-custom">    
       <div class="row">
         <div class="col-md-6 top-date top-pad bottom-pad">
-          monday,11th june 2014
+          <?php $today = date("F j, Y, g:i a"); 
+            echo "$today";
+          ?>
         </div>
         <div class="col-md-6">
           <div class="top-menu">
@@ -151,7 +155,9 @@
   <div class="logo container container-custom">
     <div class="row">
       <div class="col-md-3">
-        <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>icon.png"></img>
+        <a href=<?php echo $this->url->get("index/"); ?>>
+          <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>icon.png"></img>
+        </a>
       </div>
     </div>
   </div>
@@ -278,11 +284,12 @@
     <div class="container">
       <div class="col-md-3 item">
         <h3>Links</h3>
-        <div>Site Map</div>
-        <div>About Us</div>
+        <div><a href="<?php echo $this->url->get("sitemap/index/"); ?>" class="about">Site Map</a></div>
+        <div><a href="<?php echo $this->url->get("footer/index/"); ?>" class="about">About Us</a></div>
         <div>Advanced Search</div>
-        <div>Orders and Returns</div>
-        <div>Contact Us</div>
+        <div><a href="<?php echo $this->url->get("policy/index/"); ?>" class="about">Order and Return</a></div>
+        <div><a href="<?php echo $this->url->get("contact/contact/"); ?>" class="about">Contact Us</a></div>
+        
       </div>
       <div class="col-md-2 item">
         <h3>Information</h3>
