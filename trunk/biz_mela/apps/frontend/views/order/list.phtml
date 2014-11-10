@@ -110,10 +110,49 @@ table{
                                                             </td>
 
                                                             <td class="all">
-                                                                <a href="<?php echo $this->url->get("order/modify/" . $record->o_id); ?>">
-                                                                    <?php echo $record->status_name; ?>
-                                                                </a>
+                                                                <?php if($record->status_code==1)
+                                                                    echo "Successful";
+                                                                else if ($record->status_code==3)
+                                                                    echo "Rejected"; 
+                                                                else if ($record->status_code==2) {?>
+                                                                    <a href=""  data-toggle="modal" data-target="#basicModal<?php echo $record->o_id; ?>">
+                                                                        <?php echo $record->status_name; ?>
+                                                                    </a>
+
+
+                                                                    <div class="modal fade" id="basicModal<?php echo $record->o_id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                                        &times;
+                                                                                    </button>
+                                                                                    <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                     Do You Want to reject the Order？
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                   <div class="top-tabs1">
+                                                                                        <button type="button" class="item btn" data-dismiss="modal"> No 
+                                                                                        </button> &ensp;
+                                                                                        <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("order/change/" . $record->o_id); ?>'"> 
+                                                                                            Yes
+                                                                                        </button> 
+                                                                                   </div> 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>
+
+
+    
+                                                                <?php } ?>
                                                             </td>
+
+
+
+                                                            
                                                         </tr>
                                                     </tbody>
                                                      <?php } ?>
@@ -263,9 +302,37 @@ table{
                                                      <?php echo $record->subtotal;?>
                                                 </td>
                                                 <td class="waiting">
-                                                     <a href="<?php echo $this->url->get("order/modify/" . $record->id); ?>">
-                                                                    <?php echo $record->status_name; ?>
-                                                    </a>
+                                                             <a href=""  data-toggle="modal" data-target="#basicModal2<?php echo $record->id; ?>">
+                                                                        <?php echo $record->status_name; ?>
+                                                             </a>
+
+                                                                    
+
+   
+    
+    
+
+                                                                    <div class="modal fade" id="basicModal2<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                            <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                 Do You Want to reject the Order？
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                               <div class="top-tabs1">
+                                                                                <button type="button" class="item btn" data-dismiss="modal"> No </button> &ensp;
+                                                                                <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("order/change/" . $record->id); ?>'"> Yes
+                                                                                </button> 
+                                                                               </div> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                 </td>
 
         

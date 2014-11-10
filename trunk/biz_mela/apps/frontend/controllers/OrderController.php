@@ -48,7 +48,7 @@ class OrderController extends ControllerBase
         $newresult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\OrderMaster')
                   ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.id as o_id,Biz_mela\Models\OrderMaster.total,
-                    Biz_mela\Models\OrderMaster.subtotal,Biz_mela\Models\OrderMaster.status,d.price,d.quantity,p.id,
+                    Biz_mela\Models\OrderMaster.subtotal,Biz_mela\Models\OrderMaster.status,d.price,d.quantity,p.id,h.status_code,
                     p.product_name,s.status_name')
                   ->leftJoin('Biz_mela\Models\OrderDetails', 'd.order_master_id = Biz_mela\Models\OrderMaster.id', 'd')
                   ->leftJoin('Biz_mela\Models\ProductMaster', 'p.id = d.product_id', 'p')
@@ -60,6 +60,16 @@ class OrderController extends ControllerBase
                   ->getQuery()
                   ->execute();
 
+
+        /*foreach ($newresult as $value) {
+            $present = OrderHistory::findFirst('order_master_id = "' . $value->o_id . '"');
+            $temp[$value->status_code]=$present->status_code;
+
+            
+        }
+
+        $this->view->setVar(temp,$temp);*/
+        //$present = OrderHistory::findFirst('order_master_id = "' . $value->o_id . '"');
         $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $newresult,
@@ -103,7 +113,7 @@ class OrderController extends ControllerBase
         $pendingresult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\OrderMaster')
                   ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.total,Biz_mela\Models\OrderMaster.id,
-                    Biz_mela\Models\OrderMaster.subtotal,s.status_name')
+                    Biz_mela\Models\OrderMaster.subtotal,s.status_name,h.status_code')
                   ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
                   ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
                   ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
@@ -214,27 +224,8 @@ class OrderController extends ControllerBase
   {
 
     $present = OrderHistory::findFirst('order_master_id = "' . $value . '"');
-    $msg="";
 
-    if($present->status_code==1)
-    {
-      $msg="Product Successfully Purchased Already";
-    }
-
-    else if($present->status_code==3)
-    {
-      $msg="You Have Already Rejected The order";
-    }
-
-    else if($present->status_code==2)
-    {
-      
-      $msg="Do you want to reject the order?";
-      
-
-    }
-
-    $data['value']=$msg;
+    $data['value']=$present;
 
     $this->view->setVar(data,$data);
 
@@ -242,10 +233,10 @@ class OrderController extends ControllerBase
   }
 
 
-  public function changeAction()
+  public function changeAction($value = '')
   {
 
-      $url= $_SERVER['HTTP_REFERER'];
+      /*$url= $_SERVER['HTTP_REFERER'];
       $prev=explode("/", $url);
       
       $id=$prev[6];
@@ -253,9 +244,9 @@ class OrderController extends ControllerBase
       if ($this->request->isPost()) {
       if ($this->request->getPost('submit') == 'cancel') {
                 return $this->response->redirect('order/list/');
-            }
+            }*/
 
-      $product=OrderHistory::findFirst('order_master_id = "' . $id . '"');
+      $product=OrderHistory::findFirst('order_master_id = "' . $value . '"');
       $product->status_code=3;
       $product->save();
 
@@ -266,12 +257,6 @@ class OrderController extends ControllerBase
               
               )
             );
-
-     
-
-    }
-
-
 
   }
 
