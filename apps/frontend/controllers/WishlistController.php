@@ -54,7 +54,7 @@ class WishlistController extends ControllerBase
             $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $newresult,
-                "limit" => 4,
+                "limit" => 5,
                 "page" => $numberPage
             ));
             
@@ -87,9 +87,9 @@ class WishlistController extends ControllerBase
 
 	public function deleteAction($value = '')
 	{
-			$find = ProductMaster::findFirst('product_name = "' . $value . '"');
-			$out=$find->id;
-			$dump= ProductWishlist::findFirst('product_id = ' . $out );
+			//$find = ProductMaster::findFirst('product_name = "' . $value . '"');
+			//$out=$find->id;
+			$dump= ProductWishlist::findFirst('product_id = ' . $value );
 			if ($dump != false) {
     			if ($dump->delete() == false) {
 				        echo "Sorry, we can't delete the robot right now: \n";

@@ -100,9 +100,35 @@ table{
                                                     <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
                                                         <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
                                                     </a>
-                                                    <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
+                                                    
+                                                    <a href=""  data-toggle="modal" data-target="#basicModal3<?php echo $record->id; ?>">
                                                         <i class="delete fa fa-trash-o fa-lg" ></i>
                                                     </a>
+                                                    <div class="modal fade" id="basicModal3<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                        &times;
+                                                                    </button>
+                                                                    <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Delete Product？
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <div class="top-tabs1">
+                                                                        <button type="button" class="item btn" data-dismiss="modal">
+                                                                             No 
+                                                                        </button> &ensp;
+                                                                        <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("inventory/delete/" . $record->id); ?>'"> 
+                                                                            Yes
+                                                                        </button> 
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </td>
                                                 
@@ -201,9 +227,35 @@ table{
                                                         <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
                                                             <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
                                                         </a>
-                                                        <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
+                                                        
+                                                        <a href=""  data-toggle="modal" data-target="#basicModal5<?php echo $record->id; ?>">
                                                             <i class="delete fa fa-trash-o fa-lg" ></i>
                                                         </a>
+                                                        <div class="modal fade" id="basicModal5<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                            &times;
+                                                                        </button>
+                                                                        <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Delete Product？
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="top-tabs1">
+                                                                            <button type="button" class="item btn" data-dismiss="modal">
+                                                                                 No 
+                                                                            </button> &ensp;
+                                                                            <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("inventory/delete/" . $record->id); ?>'"> 
+                                                                                Yes
+                                                                            </button> 
+                                                                        </div> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </td>
                                                     
@@ -300,9 +352,35 @@ table{
                                                         <a href="<?php echo $this->url->get("inventory/edit/" . $record->id); ?>">
                                                             <i class="glyphicon glyphicon-pencil" id="pencil" ></i>
                                                         </a>
-                                                        <a href="<?php echo $this->url->get("inventory/delete/" . $record->id); ?>">
+                                                        <a href=""  data-toggle="modal" data-target="#basicModal4<?php echo $record->id; ?>">
                                                             <i class="delete fa fa-trash-o fa-lg" ></i>
                                                         </a>
+                                                        <div class="modal fade" id="basicModal4<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                            &times;
+                                                                        </button>
+                                                                        <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Delete Product？
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <div class="top-tabs1">
+                                                                            <button type="button" class="item btn" data-dismiss="modal">
+                                                                                 No 
+                                                                            </button> &ensp;
+                                                                            <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("inventory/delete/" . $record->id); ?>'"> 
+                                                                                Yes
+                                                                            </button> 
+                                                                        </div> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
 
                                                     </td>
                                                     
