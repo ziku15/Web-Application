@@ -105,7 +105,35 @@ table{
                                                      <?php echo $record->status;?>
                                                 </td>
                                                 <td>
-                                                   <a href="<?php echo $this->url->get("subscribe/unsubscribe/" . $record->id); ?>">Unsubscribe</a>
+                                                   <a href=""  data-toggle="modal" data-target="#basicModal<?php echo $record->id; ?>">
+                                                        Unsubscribe
+                                                    </a>
+
+                                                    <div class="modal fade" id="basicModal<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                    &times;
+                                                                </button>
+                                                                <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                               Unsubscribe？
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <div class="top-tabs1">
+                                                                    <button type="button" class="item btn" data-dismiss="modal">
+                                                                         No 
+                                                                    </button> &ensp;
+                                                                    <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("subscribe/unsubscribe/" . $record->id); ?>'"> 
+                                                                        Yes
+                                                                    </button> 
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                 </td>
                                                  
                                                 
@@ -204,8 +232,35 @@ table{
                                                     </td>
 
                                                     <td>
-                                                        <a href="<?php echo $this->url->get("subscribe/unsubscribe/" . $record->id); ?>">Unsubscribe
+                                                        <a href=""  data-toggle="modal" data-target="#basicModal2<?php echo $record->id; ?>">
+                                                            Unsubscribe
                                                         </a>
+
+                                                        <div class="modal fade" id="basicModal2<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                        &times;
+                                                                    </button>
+                                                                    <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                   Unsubscribe？
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <div class="top-tabs1">
+                                                                        <button type="button" class="item btn" data-dismiss="modal">
+                                                                             No 
+                                                                        </button> &ensp;
+                                                                        <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("subscribe/unsubscribe/" . $record->id); ?>'"> 
+                                                                            Yes
+                                                                        </button> 
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
                                                     </td>
                                                     
                                                     

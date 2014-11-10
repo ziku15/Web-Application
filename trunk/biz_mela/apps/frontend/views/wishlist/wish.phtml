@@ -36,7 +36,7 @@
                                             <td><?php echo $count; ?></td>
                                             <td>
                                                 <strong> 
-                                                     <a href="<?php echo $this->url->get("inventory/details/" . $record->id); ?>"> 
+                                                     <a href="<?php echo $this->url->get("index/productdetails/" . $record->id); ?>"> 
                                                         <?php echo $record->product_name; ?>
                                                     </a>
                                                    
@@ -68,9 +68,34 @@
                                             </td>
                                             
                                              <td>
-                                                <a href="<?php echo $this->url->get("wishlist/delete/" . $record->product_name); ?>">
-                                                    <i class="delete fa fa-trash-o fa-lg" ></i>
+                                                <a href=""  data-toggle="modal" data-target="#basicModal<?php echo $record->id; ?>">
+                                                        <i class="delete fa fa-trash-o fa-lg" ></i>
                                                 </a>
+                                                <div class="modal fade" id="basicModal<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                    &times;
+                                                                </button>
+                                                                <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Delete Item from Wishlist？
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <div class="top-tabs1">
+                                                                    <button type="button" class="item btn" data-dismiss="modal">
+                                                                         No 
+                                                                    </button> &ensp;
+                                                                    <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("wishlist/delete/" . $record->id); ?>'"> 
+                                                                        Yes
+                                                                    </button> 
+                                                                </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </td>
                                             
