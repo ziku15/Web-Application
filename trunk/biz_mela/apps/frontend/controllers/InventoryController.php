@@ -141,19 +141,16 @@ class InventoryController extends ControllerBase
 	public function newAction() {
 
 		
-        /*$user_id = $this->session->get('auth')['id'];
-        $shop=ShopMaster::find("user_id="."'".$user_id."'");*/
+        $user_id = $this->session->get('auth')['id'];
+        $shop=ShopMaster::find("user_id="."'".$user_id."'");
 		$form = new Form();
 
-		/*$index = 0;
+		
 
         foreach ($shop as $value) {
-        	# code...
-        	$index = $index + 1;
-        	//echo $value->shop_name;
-        	//echo "<br>";
+        	
 
-        	$container[$index] =  $value->shop_name;
+        	$container[$value->id] =  $value->shop_name;
         }
 		
 		$shop_name = new Select("shop_name", array(
@@ -163,15 +160,7 @@ class InventoryController extends ControllerBase
 			'multiple'=>'yes'
         ));
 
-        $shop_name->setOptions($container);*/
-
-        
-       $shop_id = new Text("shop_id", array(
-            'class' => 'form-control input-lg form-element',
-			'id' => 'shop_id',
-            'placeholder' => 'Shop_id',
-			'autocomplete' => 'off'
-        ));
+        $shop_name->setOptions($container);
 		
 		$product_name = new Text("product_name", array(
             'class' => 'form-control input-lg form-element',
@@ -238,7 +227,7 @@ class InventoryController extends ControllerBase
             'message' => 'The Order Quantity is required'
         )));
 		
-		$form->add($shop_id);
+		$form->add($shop_name);
 		$form->add($product_name);
 		$form->add($type);
 		$form->add($product_description);
@@ -255,7 +244,7 @@ class InventoryController extends ControllerBase
             if ($this->request->getPost('submit') == 'cancel') {
                 return $this->response->redirect('inventory/list');
             }
-			$shop_id=$this->request->getPost('shop_id');
+			$shop_id=$this->request->getPost('shop_name');
 			$title = $this->request->getPost('product_name');
 			$type = $this->request->getPost('type');
 			$product_description = $this->request->getPost('product_description');
@@ -271,13 +260,11 @@ class InventoryController extends ControllerBase
 				$Product = new ProductMaster();
 				
 				$Product->shop_id= $shop_id;
-				/*$con=shopMaster::findFirst("shop_name="."'".$shop_name."'");
-				$shop_id=$con->id;
-				$Product->shop_id= $shop_id;*/
+				
 				$Product->product_name = $title;
 					
                 $Product->type=$type;
-					//$User->password = $this->security->hash($password);
+					
 				$Product->product_description=$product_description;
 				$Product->price=$price;
 				$Product->discount=$discount;
@@ -286,12 +273,11 @@ class InventoryController extends ControllerBase
 					
 				$Product->created_by = $this->auth['id'];
 				$Product->updated_by = $this->auth['id'];
-					//$User->status = 1;
+					
 				$Product->created_at = date("Y-m-d h:i:s");
 				$Product->updated_at = date('Y-m-d h:i:s');
 				$Product->status=1;
-					//$User->is_del=0;
-					//$User->activation_code=0;
+					
 					
 				if ($Product->create()) {
 					
