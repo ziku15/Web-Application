@@ -36,6 +36,18 @@
     margin-top: 10px;
 }
 
+select{
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 12px;
+	padding-left: 12px;
+	padding-right: 555px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 15px;
+	color:#555;
+}
+
 
 </style>
 
@@ -50,7 +62,7 @@
 		<div class="row-cell">
 			<div class="col-md-10 col-md-offset-1">
 		
-				<?php echo $form->render("shop_id"); ?>
+				<?php echo $form->render("shop_name"); ?>
 				<?php echo $form->render("product_name"); ?>
 					<?php
 					$message = $form->getMessagesFor('product_name');
