@@ -65,7 +65,7 @@ class InventoryController extends ControllerBase
             $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $newresult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             
@@ -92,9 +92,22 @@ class InventoryController extends ControllerBase
 
             $valueresult = $this->modelsManager->executeQuery($phql);
 
+            /*$valueResult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name,
+                  	Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock,
+                  	 s.shop_name, s.id as sid, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
+                  ->where('s.user_id = :name:', array('name' => $user_id))
+                  ->orderBy (CAST 'Biz_mela\Models\ProductMaster.price AS SIGNED' desc)
+                  ->limit(4)
+                  ->getQuery()
+                  ->execute();*/
+
             $paginator = new Paginator(array(
                 "data" => $valueresult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             
@@ -123,7 +136,7 @@ class InventoryController extends ControllerBase
 
         $paginator = new Paginator(array(
                 "data" => $bestResult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             

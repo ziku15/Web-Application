@@ -405,7 +405,7 @@ class IndexController extends ControllerBase
 
       $keysHolder = array_keys($cookie_array);
 
-      $numberPage = $this->request->getQuery("page", "int", 1);
+      //$numberPage = $this->request->getQuery("page", "int", 1);
 
       $cResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
@@ -414,17 +414,17 @@ class IndexController extends ControllerBase
         ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
         ->getQuery()
         ->execute();
-      //$data['cResult'] = $cResult;
+      $shop['cResult'] = $cResult;
 
-        $paginator = new Paginator(array(
+        /*$paginator = new Paginator(array(
             "data" => $cResult,
             "limit" => 3,
             "page" => $numberPage
         ));
 
         $page['Product'] = $paginator->getPaginate();
-        $page['value'] = $value;
-        $this->view->setVars($page);
+        $page['value'] = $value;*/
+        $this->view->setVar(shop,$shop);
 
       $cookie_array = unserialize($_COOKIE['product']);
       $mult = intval(0);

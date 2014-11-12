@@ -71,7 +71,7 @@ class myshopController extends ControllerBase
 
 		$paginator = new Paginator(array(
             "data" => $newresult,
-            "limit" => 10,
+            "limit" => 8,
             "page" => $numberPage
         ));
 		
@@ -222,7 +222,7 @@ class myshopController extends ControllerBase
 
             $paginator = new Paginator(array(
                 "data" => $newresult,
-                "limit" => 3,
+                "limit" => 5,
                 "page" => $numberPage
             ));
             

@@ -32,6 +32,7 @@
     <script type="text/javascript">
 	    var baseUrl = "<?php echo $this->url->get(); ?>"
 	    // alert(baseUrl);
+
     </script>
 
     <!-- jquery integration -->
@@ -122,29 +123,130 @@
     <div class="row"> 
       <div class="col-md-5 col-md-offset-4">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Enter keyword or product number">
+          <input type="text" class="form-control" placeholder="Enter keyword ">
           <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
         </div>
       </div>
       <div class="col-md-3 text-right shopping-cart">
-        <span class="glyphicon glyphicon-shopping-cart"></span> 
-         <span class="shopping-text">
-          <a href="<?php echo $this->url->get().'index/shoppingcart/';?>">Shopping Cart</a>
-         </span>  
-        <span class="shopping-count arrow_box" id="my_count">
-          <?php 
-          if (!isset($_COOKIE['product'])) {
+        <div class="dropdown cartMenu" >
+          <a class="six dropdown-toggle" data-toggle="dropdown" href="#" >
+            <span class="glyphicon glyphicon-shopping-cart"></span> 
+            <span class="shopping-text">
+              Shopping Cart
+            </span>  
+            <span class="shopping-count arrow_box" id="my_count">
+            <?php 
+            if (!isset($_COOKIE['product'])) {
             # code...
             echo "0";
-          }
-          else{
+            }
+            else{
             $cookie_count = unserialize($_COOKIE['product']); 
             //print_r($cookie_count);
             echo count($cookie_count); 
-          }
+            }
           
-          ?>  
-        </span>
+            ?>  
+          </span>
+          <b class="caret"></b>
+          </a>
+
+          <div class="dropdown-menu six-menu" style="width : 200%; margin: 0; padding-top: 0px;">
+            <?php
+              $cookie_array = unserialize($_COOKIE['product']);
+
+      //echo count($cookie_array);
+
+              $keysHolder = array_keys($cookie_array);
+              $cResult = $this->modelsManager->createBuilder()
+              ->from('Biz_mela\Models\ProductMaster')
+              ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+              ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+              ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
+              ->getQuery()
+              ->execute();
+
+            foreach ($cResult as $cart) {?>
+
+            <div class="col-md-12" id="cart_data">
+              <div class="col-md-2" id="checkout">
+
+                <img  src="<?php echo $this->url->get().$cart->picture;?>" width="80px" style="height:80px;" ></img>
+
+              </div>
+              
+               
+              
+              <div class="col-md-4" id="cart_name" >
+
+                <?php echo '<a href="'.$this->url->get()."index/productdetails/".$cart->id.'">'.$cart->product_name.'</a>'?>
+
+              </div>
+              <div class="col-md-2" id="cart_price" >
+
+               <?php echo $cart->price;?>
+
+              </div>
+
+              <div class="col-md-1" id="cart_quan" >
+
+               <?php echo $cookie_array[$cart->id];?>
+
+              </div>
+
+              <div class="col-md-2" id="cart_total">
+
+               <?php echo intval($cart->price)*intval($cookie_array[$cart->id]); ?>
+
+              </div>
+
+              <div class="col-md-1" id="cart_gla">
+
+                <a href="" data-toggle="modal" data-target="#cartDeleteModal2<?php echo $cart->id; ?>" style="color:#000000;">
+                  <span class="glyphicon glyphicon-shopping-cart" product_id="<?php echo $cart->id; ?>"> </span>
+                </a>
+
+              </div>
+          </div>
+
+          <div class="modal fade" id="cartDeleteModal2<?php echo $cart->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal2<?php echo $cart->id; ?>" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                      <p>
+                      <center> Do you really want to delete this product from your cart ? </center> 
+                      </p>
+                  </div> 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary cart-delete" product_id="<?php echo $cart->id; ?>" data-dismiss="modal">
+                        Delete
+                    </button>
+                  </div> 
+                </div>
+              </div>
+          </div>
+
+
+
+            <?php } ?>
+
+
+            
+            <div class="col-md-4 col-md-offset-4">
+              <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'index/shoppingcart/';?>">
+
+                Checkout
+              </a>
+
+
+          </div>
+          </div>
+
+
+
+
+        </div>
       </div>
     </div>
   </div>
@@ -167,24 +269,226 @@
   
     $(document).ready(function() {
 
-     $('.cat-menu').hover(
+     $('.five').hover(
          function () {
            //$(this).addClass("open");
-            $('.dropdown-menu').css({"display":"block"});
+            $('.five-menu').css({"display":"block"});
          }, 
          function () {
            //$(this).removeClass("open");
-            $('.dropdown-menu').css({"display":"none"});
+            $('.five-menu').css({"display":"none"});
          }
      );
+
+     $('.cartMenu').hover(
+         function () {
+           //$(this).addClass("open");
+            $('.six-menu').css({"display":"block"});
+         }, 
+         function () {
+           //$(this).removeClass("open");
+            $('.six-menu').css({"display":"none"});
+         }
+     );
+
+     $('.one').hover(
+         function () {
+           //$(this).addClass("open");
+            $('.one-menu').css({"display":"block"});
+         }, 
+         function () {
+           //$(this).removeClass("open");
+            $('.one-menu').css({"display":"none"});
+         }
+     );
+
+     $('.two').hover(
+         function () {
+           //$(this).addClass("open");
+            $('.two-menu').css({"display":"block"});
+         },
+         function () {
+           //$(this).addClass("open");
+            $('.two-menu').css({"display":"none"});
+         }
+         
+     );
+     $('.three').hover(
+         function () {
+           //$(this).addClass("open");
+            $('.three-menu').css({"display":"block"});
+         }, 
+         function () {
+           //$(this).removeClass("open");
+            $('.three-menu').css({"display":"none"});
+         }
+     );
+
+     $('.four').hover(
+         function () {
+           //$(this).addClass("open");
+            $('.four-menu').css({"display":"block"});
+         }, 
+         function () {
+           //$(this).removeClass("open");
+            $('.four-menu').css({"display":"none"});
+         }
+     );
+
+
+
    });
+
+   
   </script>
 
   <style type="text/css">
-  .cat-menu table a {
+  .five table a {
     color: #000000;
     text-decoration: none;
   }
+
+  .one table a {
+    color: #000000;
+    font-size: 15px;
+    text-align: left;
+    text-decoration: none;
+    margin-top: 0px;
+  }
+  .two table a {
+    color: #000000;
+    font-size: 15px;
+    text-decoration: none;
+    
+  }
+  .three table a {
+    color: #000000;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .four table a {
+    color: #000000;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  td{
+    text-align: left;
+    text-transform: none;
+    padding-left: 10px;
+    padding-top: 7px;
+    margin-top: 0px;
+  }
+  td>a:hover{
+    padding-left: 5px;
+    color:#cd2017;
+  }
+
+
+
+  #single_pic{
+    padding-left: 15px;
+  }
+
+.table> tbody > tr >th {
+  border-top: 0px;
+}
+
+.hover {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+  text-decoration:none;
+  
+}
+.hover .text {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+    text-align:center;
+    left: 0;
+    top: 0;
+  
+   -webkit-transition: opacity 500ms;
+     -moz-transition: opacity 500ms;
+     -o-transition: opacity 500ms;
+     transition: opacity 500ms;
+}
+
+
+.hover:hover .text { display: block; opacity: 1;}
+
+.text .top_text{margin-top: 35%;}
+.text a{margin-top: 35%;}
+
+#single_pic>.hover{
+  margin-top: 25px;
+
+}
+
+table{
+  height:auto;
+}
+
+#checkout{
+  width:25%;
+  height:100px;
+  text-align: left;
+  padding-top: 10px;
+
+}
+
+.btn-primary{
+  background-color: #4ec67f;
+  border: 1px solid #fff;
+}
+
+.btn-primary:hover{
+  background-color:#cd2027;
+  border: 1px solid #fff;
+}
+
+#cart_data{
+  margin-top: 15px;
+}
+
+#cart_gla, #cart_quan, #cart_price, #cart_total{
+  padding-top: 15px;
+  text-align: left;
+}
+
+#cart_name{
+  width:25%;
+  height:100px;
+  padding-top: 15px;
+  text-align: left;
+}
+
+#prod_pic{
+  width:25%;
+}
+
+#all_cat{
+  padding-top: 10px;
+}
+
+.price{
+  border: 1px solid #dadada;
+  color:#717171;
+  display:table;
+  height:20px;
+  margin: 1px auto auto;
+  padding: 5px 5px;
+  font-size: 12px;
+  width:30px;
+  
+}
+
+
   </style>
 
   
@@ -192,14 +496,279 @@
 
   <!-- main menu part -->
   <div class="main-menu container container-custom">
-    <div class="item best-celler"><span class="star">☆</span>Best Seller</div>
-    <div class="btn-group item cat-menu">
-            <span data-toggle="dropdown" class="dropdown-toggle">Categories</span>
-            <ul class="dropdown-menu" style="width : 200%; margin: 0; padding-top: 5px;">
-              <table class="table"><tr>
+    <div class="btn-group one">
+        <span data-toggle="dropdown" class="dropdown-toggle">Category 1</span>
+            <ul class="one-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12">
+              
+               
               <?php 
               use Biz_mela\Models\ProductCategory as ProductCategory;
               use Biz_mela\Models\ProductMaster as ProductMaster;
+              use Biz_mela\Models\ProductImage as ProductImage;
+              
+              $categories = ProductCategory::findFirst(1);
+              $cat_id=$categories->id;
+              //$product_data = ProductMaster::find("cat_id="."'".$cat_id."'");
+
+               //echo "<table><tr>";
+               //foreach ($product_data as $entry){
+
+                $relatedProducts = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->where('Biz_mela\Models\ProductMaster.cat_id = :name:', array('name' => $cat_id))
+                 
+                  ->limit(4)
+                  ->getQuery()
+                  ->execute();
+
+                foreach ($relatedProducts as $product) {?>
+                  <div class="col-md-3 hover" id="prod_pic">
+                    <div class="item">
+                      <div class="text">
+                        <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
+                        <p style="color:#fff;">Price:<?php echo $product->price?></p>
+                          <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
+                            Details
+                          </font>
+                          </a>
+                    
+          
+                      </div>
+                    </div>
+              
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px; "></img>
+                 <div class="price">Price:<?php echo $product->price; ?> </div>
+                  </div>
+
+             <?php } ?>
+
+            </div>
+
+            <div class="col-md-5 col-md-offset-7" id="all_cat">
+
+              <?php
+              $categories = ProductCategory::findFirst(1);
+              $cat_id=$categories->id;
+              ?>
+                <a href="<?php echo $this->url->get().'category/index/'.$cat_id;?>">
+                  <font color="#cd2027" size="2px" float="right">
+                           Related Products
+                  </font>
+                </a>
+
+
+            </div>
+            
+          </ul>
+    </div>
+
+    <div class="btn-group two">
+        <span data-toggle="dropdown" class="dropdown-toggle">Category 2</span>
+            <ul class="two-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12">
+              
+               
+              <?php 
+              
+              
+              $categories = ProductCategory::findFirst(2);
+              $cat_id=$categories->id;
+              //$product_data = ProductMaster::find("cat_id="."'".$cat_id."'");
+
+               //echo "<table><tr>";
+               //foreach ($product_data as $entry){
+
+                $relatedProducts = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->where('Biz_mela\Models\ProductMaster.cat_id = :name:', array('name' => $cat_id))
+                 
+                  ->limit(4)
+                  ->getQuery()
+                  ->execute();
+
+                foreach ($relatedProducts as $product) {?>
+                  <div class="col-md-3 hover" id="prod_pic">
+                    <div class="item">
+                      <div class="text">
+                        <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
+                        <p style="color:#fff;">Price:<?php echo $product->price?></p>
+                          <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
+                            Details
+                          </font>
+                          </a>
+                    
+          
+                      </div>
+                    </div>
+              
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px;"></img>
+                <div class="price" style="color:#000">Price:<?php echo $product->price; ?> </div>
+                  </div>
+
+             <?php } ?>
+
+            </div>
+            <div class="col-md-5 col-md-offset-7" id="all_cat">
+
+              <?php
+              $categories = ProductCategory::findFirst(2);
+              $cat_id=$categories->id;
+              ?>
+                <a href="<?php echo $this->url->get().'category/index/'.$cat_id;?>">
+                  <font color="#cd2027" size="2px" float="right">
+                           Related Products
+                  </font>
+                </a>
+
+
+            </div>
+          </ul>
+    </div>
+
+    <div class="btn-group three">
+        <span data-toggle="dropdown" class="dropdown-toggle">Category 3</span>
+            <ul class="three-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12">
+              
+               
+              <?php 
+              
+              
+              $categories = ProductCategory::findFirst(3);
+              $cat_id=$categories->id;
+              //$product_data = ProductMaster::find("cat_id="."'".$cat_id."'");
+
+               //echo "<table><tr>";
+               //foreach ($product_data as $entry){
+
+                $relatedProducts = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->where('Biz_mela\Models\ProductMaster.cat_id = :name:', array('name' => $cat_id))
+                 
+                  ->limit(4)
+                  ->getQuery()
+                  ->execute();
+
+                foreach ($relatedProducts as $product) {?>
+                  <div class="col-md-3 hover" id="prod_pic">
+                    <div class="item">
+                      <div class="text">
+                        <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
+                        <p style="color:#fff;">Price:<?php echo $product->price?></p>
+                          <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
+                            Details
+                          </font>
+                          </a>
+                    
+          
+                      </div>
+                    </div>
+              
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px;"></img>
+                <div class="price" style="color:#000">Price:<?php echo $product->price; ?> </div>
+                  </div>
+
+             <?php } ?>
+
+            </div>
+
+            <div class="col-md-5 col-md-offset-7" id="all_cat">
+
+              <?php
+              $categories = ProductCategory::findFirst(3);
+              $cat_id=$categories->id;
+              ?>
+                <a href="<?php echo $this->url->get().'category/index/'.$cat_id;?>">
+                  <font color="#cd2027" size="2px" float="right">
+                            Related Products
+                  </font>
+                </a>
+
+
+            </div>
+            
+          </ul>
+    </div>
+     <div class="btn-group four">
+        <span data-toggle="dropdown" class="dropdown-toggle">Category 4</span>
+            <ul class="four-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12">
+              
+               
+              <?php 
+              
+              
+              $categories = ProductCategory::findFirst(4);
+              $cat_id=$categories->id;
+              //$product_data = ProductMaster::find("cat_id="."'".$cat_id."'");
+
+               //echo "<table><tr>";
+               //foreach ($product_data as $entry){
+
+                $relatedProducts = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->where('Biz_mela\Models\ProductMaster.cat_id = :name:', array('name' => $cat_id))
+                 
+                  ->limit(4)
+                  ->getQuery()
+                  ->execute();
+
+                foreach ($relatedProducts as $product) {?>
+                  <div class="col-md-3 hover" id="prod_pic">
+                    <div class="item">
+                      <div class="text">
+                        <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
+                        <p style="color:#fff;">Price:<?php echo $product->price?></p>
+                          <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
+                            Details
+                          </font>
+                          </a>
+                    
+          
+                      </div>
+                    </div>
+              
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px;"></img>
+                <div class="price" style="color:#000">Price:<?php echo $product->price; ?> </div>
+                  </div>
+
+             <?php } ?>
+
+            </div>
+
+            <div class="col-md-5 col-md-offset-7" id="all_cat">
+
+              <?php
+              $categories = ProductCategory::findFirst(4);
+              $cat_id=$categories->id;
+              ?>
+                <a href="<?php echo $this->url->get().'category/index/'.$cat_id;?>">
+                  <font color="#cd2027" size="2px" float="right">
+                            Related Products
+                  </font>
+                </a>
+
+
+            </div>
+            
+          </ul>
+    </div>
+    <div class="btn-group five">
+            <span data-toggle="dropdown" class="dropdown-toggle">All</span>
+            <ul class="dropdown-menu five-menu" style="width : 200%; margin: 0; padding-top: 5px;">
+              
+              <table class="table"><tr>
+              <?php 
+              
               $categories = ProductCategory::find();
 
                $count = 0;
@@ -221,11 +790,12 @@
                echo "</tr></table>";
 
               ?>
+           
             </ul>
     </div>
-    <div class="item">Brand</div>
-    <div class="item">Discount Product</div>
-    <div class="item">Gift Item</div>
+    
+    
+    
   </div>
   <!-- main menu part ends here -->
 

@@ -73,7 +73,7 @@ class OrderController extends ControllerBase
         $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $newresult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             
@@ -100,7 +100,7 @@ class OrderController extends ControllerBase
         $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $successresult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             
@@ -125,7 +125,7 @@ class OrderController extends ControllerBase
         $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $pendingresult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             
@@ -150,7 +150,7 @@ class OrderController extends ControllerBase
         $numberPage = $this->request->getQuery("page", "int", 1);
             $paginator = new Paginator(array(
                 "data" => $rejectresult,
-                "limit" => 4,
+                "limit" => 8,
                 "page" => $numberPage
             ));
             
