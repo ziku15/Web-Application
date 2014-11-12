@@ -95,7 +95,7 @@ body{
 .main-menu{
 	margin-top: 5px;
 }
-.main-menu .item{
+.main-menu .five{
 	cursor: pointer;
 	float: left;
 	margin-left: .2%;
@@ -108,12 +108,30 @@ body{
 	text-transform: uppercase;
 	font-size: 16px;
 }
-.main-menu .item:hover{
+.main-menu .five:hover{
 	background-color: #CD2027;
 	color: white;
 }
 
-.main-menu .item:first-child{
+.main-menu .one, .main-menu .two, .main-menu .three, .main-menu .four {
+	cursor: pointer;
+	float: left;
+	margin-left: .2%;
+	background-color: #DCDCDC;
+	border-radius: 2px;
+	width: 20%;
+	padding:10px 0 10px 0;
+	text-align: center;
+	color: #686360;
+	text-transform: uppercase;
+	font-size: 16px;
+}
+.main-menu .one:hover, .main-menu .two:hover, .main-menu .three:hover, .main-menu .four:hover{
+	background-color: #CD2027;
+	color: white;
+}
+
+.main-menu .one:first-child{
 	color: black;
 	position: relative;
 	margin-left: 0;
@@ -191,6 +209,8 @@ body{
 	border:2px solid #CC0001;
 
 }
+
+
 
 .item-area{
 	margin-top: 60px;
