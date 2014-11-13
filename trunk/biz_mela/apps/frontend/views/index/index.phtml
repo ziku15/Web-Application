@@ -51,6 +51,10 @@
   margin-top: 40%;
 }
 
+.portal{
+  border:0px;
+}
+
 
 </style>
 
@@ -512,8 +516,13 @@ $('.cartB').on('click', function(e) {
       </div> <!-- row ends !-->
     </div>
     <div class="col-md-3">
-      <div class="portal"></div>
-      <div class="portal"></div>
+      <div class="portal">
+        <img src="<?php echo $this->url->get().'main/images/';?>job.jpg" class="img-responsive" alt="..." width="100%" style="height:100%;">
+      </div>
+      <div class="portal">
+        <img src="<?php echo $this->url->get().'main/images/';?>travel.jpg" class="img-responsive" alt="..." width="100%" style="height:100%;">
+
+      </div>
 
     </div>
   </div>

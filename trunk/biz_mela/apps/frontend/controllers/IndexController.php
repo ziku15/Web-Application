@@ -59,8 +59,10 @@ class IndexController extends ControllerBase
         ->from('Biz_mela\Models\ProductMaster')
         ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
         ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+        ->orderBy('Biz_mela\Models\ProductMaster.price desc')
         ->limit(16)
         ->getQuery()
+
         ->execute();
         $this->view->setVar(bottomResult,$bottomResult);
 

@@ -1,105 +1,135 @@
 <style>
 
-h3.a{
-	color:#000033;
-	padding-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
+h4.padding{
+	padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 30px;
+
 }
 
 .row-cell{
 
     border:1px solid #ECECEC ;
     border-radius: 4px;
-    height: 558px;
-    width: 67.5%;
+    height: 515px;
+    width: 95%;
+    margin-top:23px; 
 }
 
-b{
-	color:#606060;
+.dash {
+
+    padding-left: 15px;
+    font-size:20px;
+    text-align: left;
+    padding-top: 10px;
+    height:42px;
+}
+
+h5{
+
+    color: #870415;
+}
+
+p{
+
+    font-size: 15px;
 }
 
 h4>a{
-	font-size: 15px;
-	color:#870415;
+    color:#870415;
 }
 
 
-p{
-	font-size: 15px;
-}
+.main-menu-title>h2{
+    font-size: 20px;
+    text-align: left;
+    padding-top: 10px;
 
-.col-md-3{
-	width:25%;
 }
 
 </style>
 
-<div class="container">
-</hr>
-	<div class="row-cell">
-		<div class="col-md-6">
-        	<h4>Contact Information &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
-		        <a href="<?php echo $this->url->get("accinfo/editcontact"); ?>">
-		            Edit
-		        </a>
-	        	
-         	</h4>   
+<div class="row-cell">
+
+    <div >
+        <p class="dash">ACCOUNT  INFORMATION</p>
+    </div>
+
+    <div class="seperator-dotted"></div>
+
+     <div class="col-md-6">
+        <h4>Contact Information &ensp; &ensp; &ensp; &ensp;  &ensp;  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
+            <a href="<?php echo $this->url->get("accinfo/edit"); ?>" >
+                Edit
+             </a>
+         </h4>   
         
-	        <div class="seperator-dotted">
+        <div class="seperator-dotted">
 
-	        </div>
-
-
-     	</div>
+        </div>
 
 
+     </div>
 
-     	<div class="col-md-6">
-        	<h4>
-        		Bank Account Information  &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
-		            <a href="<?php echo $this->url->get("accinfo/editbank"); ?>">
-		                Edit
-		            </a>
+     <div class="col-md-6">
+        <h4>Newsletter Subscription</h4>
+        <div class="seperator-dotted">
 
-         	</h4>   
+        </div>
+     </div> 
+
+ 
+
+     <div class="col-md-6">
+        <p><?php echo $data['value']->username;?></p>
+        <p><?php echo $data['value']->email;?></p>
+        <p><?php echo $data['value']->contact_no;?></p>
+            <a href="<?php echo $this->url->get("accinfo/changepassword"); ?>">
+                <h5>Change Password</h5>
+            </a>
+            </br>
+     </div>
+
+     <div class="col-md-6">
+        <p><?php  echo $subs['value']; ?></p>
+        </br>
+        </br>
+     </div>
+
+
+     <div class="col-md-12">
+        <p class="address"> <b>Address Book </b></p>
+        <div class="seperator-dotted">
+
+        </div>
+     </div>
+
+        </br>
+        </br>
+
+     <div class="col-md-6">
+        <p><strong>Default Billing Address</strong></p>
+        <p><?php echo $data['value']->username;?></p>
+        <p><?php echo $address['value']->billing_address;?></p>
+        <p><?php echo $address['value']->country;?></p>
+        <p><?php echo $address['value']->zip_code;?></p>
         
-	        <div class="seperator-dotted">
+        <a href="<?php echo $this->url->get("accinfo/editaddress"); ?>">
+                <h5>Edit Address</h5>
+        </a>
 
-	        </div>
+     </div>
 
-
-     	</div>
-
-		
-		<div class="col-md-6">
-
-			
-			<p ><b>User Name</b>       : <?php echo $data['value']->username;?></p>
-			<p ><b>Email Address</b>   : <?php echo $data['value']->email;?></p>
-			<p ><b>Cell Phone</b>    : <?php echo $data['value']->contact_no;?></p>
-			<p ><b>Address</b>        : <?php echo $data['value']->address;?></p>
-			<p ><b>Profile Picture</b> : <?php echo $data['value']->picture;?></p>
-
-			</br>
-			</br>
-		</div>
-
-		<div class="col-md-6">
-
-			
-			
-			<p ><b>Account Holder</b>   : <?php echo $record['value']->account_holder_name;?></p>
-			<p ><b>Account No.</b>       : <?php echo $record['value']->account_no;?></p>
-			<p ><b>Bank</b>       : <?php echo $record['value']->bank_name;?></p>
-			<p><b>Branch</b>   : <?php echo $record['value']->branch_name;?></p>
-			<p ><b>Swift Code</b> : <?php echo $record['value']->swift_code;?></p>
-
-			</br>
-			</br>
-		</div>
-
-	</div>
-
+     <div class="col-md-6">
+        <p ><strong>Default Shipping Address</strong></p>
+        <p><?php echo $data['value']->username;?></p>
+        <p><?php echo $shipment['value']->shipping_address;?></p>
+        <p><?php echo $shipment['value']->country;?></p>
+        <p><?php echo $shipment['value']->zip_code;?></p>
+        
+        <a href="<?php echo $this->url->get("accinfo/editshipment"); ?>">
+                <h5>Edit Address</h5>
+        </a>
+     </div>
 </div>
