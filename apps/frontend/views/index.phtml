@@ -17,6 +17,7 @@
 	
 	  <?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/start.css"); ?>
+    <?php echo \Phalcon\Tag::stylesheetLink("main/css/cart.css"); ?>
 
     
 
@@ -345,161 +346,11 @@
   </script>
 
   <style type="text/css">
-  .five table a {
-    color: #000000;
-    text-decoration: none;
-  }
-
-  .one table a {
-    color: #000000;
-    font-size: 15px;
-    text-align: left;
-    text-decoration: none;
-    margin-top: 0px;
-  }
-  .two table a {
-    color: #000000;
-    font-size: 15px;
-    text-decoration: none;
-    
-  }
-  .three table a {
-    color: #000000;
-    font-size: 15px;
-    text-decoration: none;
-  }
-  .four table a {
-    color: #000000;
-    font-size: 15px;
-    text-decoration: none;
-  }
-  td{
-    text-align: left;
-    text-transform: none;
-    padding-left: 10px;
-    padding-top: 7px;
-    margin-top: 0px;
-  }
-  td>a:hover{
-    padding-left: 5px;
-    color:#cd2017;
-  }
-
-.scrollable{
-   overflow: auto;
-   width: 500px; /* adjust this width depending to amount of text to display */
-   height: 400px; /* adjust height depending on number of options to display */
-   border: 1px silver solid;
- }
-
-  #single_pic{
-    padding-left: 15px;
-  }
-
-.table> tbody > tr >th {
-  border-top: 0px;
-}
-
-.hover {
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-  text-decoration:none;
-  
-}
-.hover .text {
-    display: none;
-    background: rgba(0,0,0,0.5);
-  
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height:100%;
-    color: #ffffff;
-    text-align:center;
-    left: 0;
-    top: 0;
-  
-   -webkit-transition: opacity 500ms;
-     -moz-transition: opacity 500ms;
-     -o-transition: opacity 500ms;
-     transition: opacity 500ms;
-}
-
-
-.hover:hover .text { display: block; opacity: 1;}
-
-.text .top_text{margin-top: 35%;}
-.text a{margin-top: 35%;}
-
-#single_pic>.hover{
-  margin-top: 25px;
-
-}
-
-table{
-  height:auto;
-}
-
-#checkout{
-  width:25%;
-  height:100px;
-  text-align: left;
-  padding-top: 10px;
-
-}
-
-.btn-primary{
-  background-color: #4ec67f;
-  border: 1px solid #fff;
-}
-
-.btn-primary:hover{
-  background-color:#cd2027;
-  border: 1px solid #fff;
-}
-
-#cart_data{
-  margin-top: 15px;
-}
-
-#cart_gla, #cart_quan, #cart_price, #cart_total{
-  padding-top: 15px;
-  text-align: left;
-}
-
-#cart_name{
-  width:25%;
-  height:100px;
-  padding-top: 15px;
-  text-align: left;
-}
-
-#prod_pic{
-  width:25%;
-}
-
-#all_cat{
-  padding-top: 10px;
-}
-
-.price{
-  border: 1px solid #dadada;
-  color:#717171;
-  display:table;
-  height:20px;
-  margin: 1px auto auto;
-  padding: 5px 5px;
-  font-size: 12px;
-  width:30px;
-  
-}
-
-
+    .top-menu .item:first-child{
+      border: 0px;
+    }
   </style>
-
-  
-  
+ 
 
   <!-- main menu part -->
   <div class="main-menu container container-custom">
