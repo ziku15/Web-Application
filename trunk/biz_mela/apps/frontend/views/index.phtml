@@ -122,12 +122,14 @@
   <!-- search part -->
   <div class="top-search container container-custom">
     <div class="row"> 
-      <div class="col-md-5 col-md-offset-4">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Enter keyword ">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+      <form action="<?php echo $this->url->get().'search/search/';?>" method="post">
+        <div class="col-md-5 col-md-offset-4">
+          <div class="input-group">
+            <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword ">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+          </div>
         </div>
-      </div>
+      </form>
       <div class="col-md-3 text-right shopping-cart">
         <div class="dropdown cartMenu" >
           <a class="six dropdown-toggle" data-toggle="dropdown" href="#" >
@@ -155,11 +157,17 @@
           <div class="dropdown-menu six-menu" style="width : 200%; margin: 0; padding-top: 0px;">
             <div class="scrollable">
             <?php
+
+             if (isset($_COOKIE['product'])) {
               $cookie_array = unserialize($_COOKIE['product']);
 
-      //echo count($cookie_array);
+      //echo count($cookie_array); 
+              if (count($cookie_array) > 0) {
+               
+              
 
               $keysHolder = array_keys($cookie_array);
+
               $cResult = $this->modelsManager->createBuilder()
               ->from('Biz_mela\Models\ProductMaster')
               ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
@@ -231,7 +239,8 @@
 
 
 
-            <?php } ?>
+            <?php }  ?>
+
 
 
             
@@ -242,11 +251,11 @@
               </a>
 
 
-          </div>
-        </div>
+          </div>  <?php } ?>
+        </div><?php } ?>
           </div>
 
-
+        
 
 
         </div>

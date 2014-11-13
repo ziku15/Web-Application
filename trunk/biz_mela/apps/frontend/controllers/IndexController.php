@@ -398,10 +398,20 @@ class IndexController extends ControllerBase
       $this->view->disableLevel(View::LEVEL_LAYOUT);
 
       //$cookie_count = unserialize($_COOKIE['product']);
-
+      if (isset($_COOKIE['product']))
       $cookie_array = unserialize($_COOKIE['product']);
 
       //echo count($cookie_array);
+
+      if(count($cookie_array) == 0){
+        return $this->dispatcher->forward(
+            array(
+             
+              'action' => 'index'
+              
+              )
+            );
+      }
 
       $keysHolder = array_keys($cookie_array);
 
