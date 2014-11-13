@@ -43,6 +43,8 @@ class AccinfoController extends ControllerBase
 		$record['value']=$user;
 		$this->view->setVar('record',$record);
 
+           
+
     }
 
 

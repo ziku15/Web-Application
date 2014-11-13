@@ -1,0 +1,362 @@
+<style>
+
+.cart, .wish, .wishB, .cartB {
+    background-color: #454545;
+    border: medium none;
+    margin-bottom: 0px;
+    margin-top: 130px;
+}
+
+.product-name, .product-price{
+	text-align: center;
+
+}
+
+#search{
+	margin-bottom: 15px;
+}
+
+.zero_product{
+  text-align: center;
+}
+
+</style>
+
+<script type="text/javascript">
+
+function processWish(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var find = id.toString().concat(id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(find);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wish').on('click', function(e) {
+
+//subcategories();
+ var wishId = e.target.id;
+
+ //clicked(idClicked);
+ processWish(wishId);
+
+  });
+});
+
+function processWishB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var find1 = id.toString().concat(id.toString()); 
+  var find11 = find1.toString().concat(id.toString());
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find11).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            //console.log(find);
+            //alert("result");
+           // console.log(result);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    
+
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wishB').on('click', function(e) {
+
+//subcategories();
+ var wishIdB = e.target.id;
+ var wishIdB1 = wishIdB.toString().split(":")[0]; 
+
+ //clicked(idClicked);
+ processWishB(wishIdB1);
+
+  });
+
+
+});
+
+
+
+function processCart(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var p_id = id.toString().split(":")[0]; 
+
+  var msg = p_id.toString().concat(p_id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/addtocart",
+        data: { data1 : p_id, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_id);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       //if (result=="") {$('#productExistCartModal').modal('show');}
+       //else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cart').on('click', function(e) {
+
+//subcategories();
+ var cartId = e.target.id;
+
+ //clicked(idClicked);
+ processCart(cartId);
+ //Fly effect
+ var cart = $('.shopping-cart .glyphicon-shopping-cart');
+        var imgtodrag = $(this).parent().parent().siblings(".img-responsive").eq(0);
+        //var src = imgtodrag.attr("src");
+        //console.log("fly");
+        //console.log(src);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 250,
+                    'height': 400
+            }, 1000, 'easeInOutExpo');
+            
+            setTimeout(function () {
+                cart.parent().effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+
+
+
+  });
+});
+
+function processCartB(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var p_idB = id.toString().split(":")[0]; 
+
+  var msgB = p_idB.toString().concat(p_idB.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/addtocart",
+        data: { data1 : p_idB, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_idB);
+        }
+      })
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       //if (result=="") {$('#productExistCartModal').modal('show');}
+       //else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cartB').on('click', function(e) {
+
+//subcategories();
+ var cartIdB = e.target.id;
+ //var cartIdB1 = cartIdB.toString().split(":")[0];
+ //var cartIdB = $(this).attr('href');
+ //clicked(idClicked);
+ processCart(cartIdB);
+
+ //Fly effect
+
+ var cart = $('.shopping-cart .glyphicon-shopping-cart');
+        var imgtodrag = $(this).parent().parent().siblings(".img-responsive").eq(0);
+        //var src = imgtodrag.attr("src");
+        //console.log("fly");
+        //console.log(src);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 250,
+                    'height': 400
+            }, 1000, 'easeInOutExpo');
+            
+            setTimeout(function () {
+                cart.parent().effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+
+  });
+});
+
+
+</script>
+<div class="container item-area">
+
+	<div class="col-md-12">
+		<div class="row product">
+      
+			<?php foreach ($data['value'] as $row){?>
+			<div class="col-md-3 hover" id="search">
+				<div class="item">
+				 	<div class="text">
+				 		<p class="top_text">
+				 			<?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".substr($row->product_description,0,19).'..'; ?>
+				 		</P>
+          				<a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
+          				<div id="<?php echo $row->id.$row->id.$row->id; ?>"> </div>
+          				<div class="bottom_text2">
+				            <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
+				              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+				            </button>
+	            			&ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
+				            <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
+				              <span class="glyphicon glyphicon-heart"></span>
+				            </button>
+          				</div>
+        			</div>            
+
+
+		            <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+		            <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+		            <div class="product-price"><?php echo $row->price; ?></div>
+				</div>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</div>
