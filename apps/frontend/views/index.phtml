@@ -152,6 +152,7 @@
           </a>
 
           <div class="dropdown-menu six-menu" style="width : 200%; margin: 0; padding-top: 0px;">
+            <div class="scrollable">
             <?php
               $cookie_array = unserialize($_COOKIE['product']);
 
@@ -241,6 +242,7 @@
 
 
           </div>
+        </div>
           </div>
 
 
@@ -383,7 +385,12 @@
     color:#cd2017;
   }
 
-
+.scrollable{
+   overflow: auto;
+   width: 500px; /* adjust this width depending to amount of text to display */
+   height: 400px; /* adjust height depending on number of options to display */
+   border: 1px silver solid;
+ }
 
   #single_pic{
     padding-left: 15px;
