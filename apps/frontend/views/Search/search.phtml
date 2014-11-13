@@ -16,8 +16,10 @@
 	margin-bottom: 15px;
 }
 
-.zero_product{
+.zero_found{
   text-align: center;
+  color:#cd2027;
+  margin-top:-40px;
 }
 
 </style>
@@ -329,8 +331,10 @@ $('.cartB').on('click', function(e) {
 
 	<div class="col-md-12">
 		<div class="row product">
-      
-			<?php foreach ($data['value'] as $row){?>
+      <?php if($data['value']->count()==0){?>
+       <p class="zero_found"><?php echo "Your search  did not match any products. ";?></p>
+     <?php } else {
+			 foreach ($data['value'] as $row){?>
 			<div class="col-md-3 hover" id="search">
 				<div class="item">
 				 	<div class="text">
@@ -356,7 +360,7 @@ $('.cartB').on('click', function(e) {
 		            <div class="product-price"><?php echo $row->price; ?></div>
 				</div>
 			</div>
-			<?php } ?>
+			<?php } }?>
 		</div>
 	</div>
 </div>

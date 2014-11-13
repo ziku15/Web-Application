@@ -175,8 +175,7 @@
               ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
               ->getQuery()
               ->execute();
-
-            foreach ($cResult as $cart) {?>
+             foreach ($cResult as $cart) {?>
 
             <div class="col-md-12" id="cart_data">
               <div class="col-md-2" id="checkout">
@@ -219,7 +218,7 @@
               </div>
           </div>
 
-          <div class="modal fade" id="cartDeleteModal2<?php echo $cart->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal2<?php echo $cart->id; ?>" aria-hidden="true">
+          <div class="modal fade" id="cartDeleteModal2<?php echo $cart->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal2" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-body">
@@ -241,7 +240,7 @@
 
             <?php }  ?>
 
-
+          
 
             
             <div class="col-md-4 col-md-offset-4">
@@ -351,6 +350,9 @@
 
    });
 
+
+
+
    
   </script>
 
@@ -386,6 +388,7 @@
                   ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
                   ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
                   ->where('Biz_mela\Models\ProductMaster.cat_id = :name:', array('name' => $cat_id))
+                  ->orderBy('Biz_mela\Models\ProductMaster.id desc')
                  
                   ->limit(4)
                   ->getQuery()
