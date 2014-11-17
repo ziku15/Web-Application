@@ -26,7 +26,10 @@
   border: 1px solid #dadada;
   margin-top: 20px;
   padding: 5px 5px 0;
+  font-size: 15px;
 }
+
+
 
 .bg-button, .bg-button:hover, .bg-button:focus {
     background-color: #909090;
@@ -469,7 +472,7 @@ $('.cartB').on('click', function(e) {
     
   
 
-  <div class="col-md-6 col-md-offset-1">
+  <div class="col-md-6 col-md-offset-1" id="full_details">
     <div class="row">
       <div class="col-md-12">
       <p></p>
@@ -507,9 +510,7 @@ $('.cartB').on('click', function(e) {
 
       <div class="col-md-12 box">
       Product description<br>
-      <?php echo $data['description']; ?><br>
-      Category ID: <?php echo $data['category']; ?> &ensp;
-      Product ID : <?php echo $data['product_id']; echo " "; echo $data['quantity'];?>
+     
 
       <p></p>
 
@@ -529,7 +530,11 @@ $('.cartB').on('click', function(e) {
       </div>
 
       <div class="col-md-4 wish" id="<?php echo $data['product_id']; ?>" style="cursor:pointer">
-        <i class="fa fa-star" style="color: #D21E21"></i>
+        <?php if($data['color']==0) {?>
+          <i class="fa fa-star" style="color: #D21E21"></i>
+        <?php } else { ?>
+          <i class="fa fa-star" style="color: #000"></i>
+        <?php } ?>
         Add to Wish list
       </div>
 
@@ -626,6 +631,12 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="productInWishlistModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             
             <div class="modal-body">
                 <p>
@@ -633,7 +644,10 @@ $('.cartB').on('click', function(e) {
                 </p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
+
+                Checkout
+              </a>
             </div>
             
         </div>
@@ -643,6 +657,12 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="productAddedInWishlist" tabindex="-1" role="dialog" aria-labelledby="productAddedInWishlist" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             
             <div class="modal-body">
                 <p>
@@ -651,7 +671,10 @@ $('.cartB').on('click', function(e) {
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
+
+                Checkout
+              </a>
             </div>
             
         </div>
@@ -661,6 +684,12 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="productAddedCartModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             
             <div class="modal-body">
                 <p>
@@ -669,7 +698,10 @@ $('.cartB').on('click', function(e) {
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'index/shoppingcart/';?>">
+
+                Checkout
+              </a>
             </div>
             
        </div>
@@ -679,14 +711,24 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="productExistCartModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
+           <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             
             <div class="modal-body">
+
                 <p>
                 <center> Quantity incremented for this product. </center> 
                 </p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+              <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'index/shoppingcart/';?>">
+
+                Checkout
+              </a>
             </div>
             
        </div>

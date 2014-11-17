@@ -54,11 +54,9 @@ table{
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>ShopId</th>
                                                 <th>Shop</th>
-                                                
                                                 <th>Image</th>
-                                               
+                                                
                                                 <th>Status</th>
                                                 <th>Action</th>
 
@@ -72,13 +70,7 @@ table{
                                          <tbody>
                                             <tr>
                                                 <td><?php echo $count; ?></td>
-                                                <td>
-                                                   
-                                                     <?php if($record->shop_id!=0)
-                                                     echo $record->shop_id; ?>
-                                                       
-                                                    
-                                                </td>
+                                                
                                                 <td>
                                                     <strong>
                                                         <?php if($record->shop_id==0) echo "General Subscribtion"; else {?>
