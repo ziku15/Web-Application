@@ -69,11 +69,11 @@
 
   </head>
   <body>
-    <style>
+<style>
 
-      #logo{
-        width:25%;
-      }
+#logo{
+  width:25%;
+}
 
 .sticky {
     position:fixed;
@@ -82,6 +82,7 @@
     z-index: 100;
     width:100%;
     background-color: #fff;
+    box-shadow: 0 3px 6px gray;
 }
 
     </style>
@@ -204,6 +205,7 @@
           </a>
 
           <div class="dropdown-menu six-menu" style="width : 200%; margin: 0; padding-top: 0px;">
+
             <div class="scrollable">
             <?php
 
@@ -227,44 +229,42 @@
              foreach ($cResult as $cart) {?>
 
             <div class="col-md-12" id="cart_data">
-              <div class="col-md-2" id="checkout">
 
-                <img  src="<?php echo $this->url->get().$cart->picture;?>" width="80px" style="height:80px;" ></img>
+
+              <div class="col-md-4" id="checkout" style="width:25%;">
+
+                <img  src="<?php echo $this->url->get().$cart->picture;?>" width="100%" style="height:120px;" ></img>
 
               </div>
               
                
               
-              <div class="col-md-4" id="cart_name" >
-
+              <div class="col-md-6" id="cart_name" style="width:55%;">
+                <div>
                 <?php echo '<a href="'.$this->url->get()."index/productdetails/".$cart->id.'">'.$cart->product_name.'</a>'?>
-
-              </div>
-              <div class="col-md-2" id="cart_price" >
-
-               <?php echo $cart->price;?>
-
-              </div>
-
-              <div class="col-md-1" id="cart_quan" >
-
-               <?php echo $cookie_array[$cart->id];?>
-
-              </div>
-
-              <div class="col-md-2" id="cart_total">
-
-               <?php echo intval($cart->price)*intval($cookie_array[$cart->id]); ?>
-
-              </div>
-
-              <div class="col-md-1" id="cart_gla">
-
-                <a href="" data-toggle="modal" data-target="#cartDeleteModal2<?php echo $cart->id; ?>" style="color:#000000;">
-                  <span class="glyphicon glyphicon-shopping-cart" product_id="<?php echo $cart->id; ?>"> </span>
+                </div>
+                <div>
+                  <?php echo $cart->product_description;?>
+                </div>
+                <div>
+                  <p>Quantity:<?php echo $cookie_array[$cart->id];?></p>
+                  
+                  <a href="" data-toggle="modal" data-target="#cartDeleteModal2<?php echo $cart->id; ?>" style="color:#000000;">
+                  <span class="glyphicon glyphicon-remove-circle" product_id="<?php echo $cart->id; ?>"> </span>
                 </a>
+                </div>
+                
+
 
               </div>
+              <div class="col-md-2" id="cart_price"style="width:20%;">
+
+               <p>Price:<?php echo $cart->price;?></p>
+               <p>Total:<?php echo intval($cart->price)*intval($cookie_array[$cart->id]); ?></p>
+
+              </div>
+
+              
           </div>
 
           <div class="modal fade" id="cartDeleteModal2<?php echo $cart->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal2" aria-hidden="true">
