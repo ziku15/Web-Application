@@ -115,6 +115,24 @@
 
 .als-wrapper {
   position: relative;
+  width:1920px;
+  height:393px;
+  /* if you are using a list with <ul> <li> */
+  
+}
+
+#als-wrapper-hot {
+  position: relative;
+  width:1920px;
+  height:393px;
+  /* if you are using a list with <ul> <li> */
+  
+}
+
+.als-wrapper-best {
+  position: relative;
+  width:1920px;
+  height:393px;
   /* if you are using a list with <ul> <li> */
   
 }
@@ -173,6 +191,12 @@
   cursor: pointer;
   clear: both;
 }
+
+
+
+
+
+
 
 
 </style>
@@ -486,7 +510,7 @@ $('.cartB').on('click', function(e) {
           orientation: "horizontal",
           circular: "yes",
           autoscroll: "no",
-          speed: 250,
+          speed: 250
 
         });
 
@@ -497,6 +521,7 @@ $('.cartB').on('click', function(e) {
           circular: "yes",
           autoscroll: "no",
           speed: 250
+          
         });
 
  $("#my-als-list-best").als({
@@ -506,6 +531,7 @@ $('.cartB').on('click', function(e) {
           circular: "yes",
           autoscroll: "no",
           speed: 250
+          
         });
 
 
@@ -540,7 +566,7 @@ $('.cartB').on('click', function(e) {
  <div class="tab-content">
   <div id="pane1" class="tab-pane active ">
     <div class="als-container" id="my-als-list">
-      <span class="als-prev" style="left: 150px;top: 150px">
+      <span class="als-prev" style="left: 150px;top: 150px;">
         <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
       </span>
       <div class="als-viewport">
@@ -550,7 +576,7 @@ $('.cartB').on('click', function(e) {
     <?php foreach ($newResult as $row){?>
     
    
-    <div class=" als-item ">
+    <div class="als-item ">
       <div class="hover">
 
       <div class="item" id="top_item">
@@ -591,17 +617,17 @@ $('.cartB').on('click', function(e) {
 
     <div id="pane2" class="tab-pane  ">
     <div class="als-container" id="my-als-list-hot">
-      <span class="als-prev" style="left: 150px;top: 150px">
+      <span class="als-prev" style="left: 150px;top: 150px;">
         <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
       </span>
-      <div class="als-viewport-hot">
-        <div class="als-wrapper">
+      <div class="als-viewport-hot" >
+        <div class="als-wrapper-hot" >
       
      
     <?php foreach ($hotResult as $row){?>
     
    
-    <div class=" als-item ">
+    <div class="als-item">
       <div class="hover">
 
       <div class="item" id="top_item">
@@ -644,13 +670,13 @@ $('.cartB').on('click', function(e) {
         <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
       </span>
       <div class="als-viewport-best" >
-        <div class="als-wrapper">
+        <div class="als-wrapper-best">
       
      
     <?php foreach ($bestResult as $row){?>
     
    
-    <div class=" als-item ">
+    <div class=" als-item">
       <div class="hover">
 
       <div class="item" id="top_item">
