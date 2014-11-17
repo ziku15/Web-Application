@@ -69,33 +69,33 @@
 
   </head>
   <body>
-    
+    <style>
+
+      #logo{
+        width:25%;
+      }
+
+.sticky {
+    position:fixed;
+    top:-1px;
+    left:300px;
+    z-index: 100;
+}
+
+    </style>
 
   <!-- upper part -->
   <div class="top">
     <div class="container container-custom">    
       <div class="row">
-        <div class="col-md-6 top-date top-pad bottom-pad">
+        <div class="col-md-8 top-date top-pad bottom-pad">
           <?php $today = date("F j, Y, g:i a"); 
             echo "$today";
           ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="top-menu">
-            <div class="item top-pad bottom-pad">
-
-              <?php
-                            $auth = $this->session->get('auth');
-                            if(!$auth){?>
-                      
-                            <?php }
-                            else { ?>
-
-                              <div class="intro">Welcome <?php echo $auth['name'];?></div>
-                           <?php } ?>
-
-
-            </div>
+            
             <div class="item top-pad bottom-pad">
                             <?php
                             $auth = $this->session->get('auth');
@@ -104,12 +104,54 @@
                             <?php }
                             else { ?>
 
-                              <a href="<?php echo $this->url->get().'home/logout/';?>">Logout</a>
+                              
                            <?php } ?>
                             
             </div>
-            <div class="item top-pad bottom-pad"><a href="/bizmela/help/index">Help & Support</a></div>
-            <div class="item top-pad bottom-pad"><a>US</a></div>
+            <div class="item top-pad bottom-pad">
+              
+
+              <?php
+                            $auth = $this->session->get('auth');
+                            if(!$auth){?>
+                              <a href="<?php echo $this->url->get().'help/index/';?>">Help & Support</a>
+                            <?php }
+                            else { ?>
+
+                              <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle text-right" data-toggle="dropdown" style="border:0px;">
+
+                                  <div>
+                                    <?php
+                                      $auth = $this->session->get('auth');
+                                      ?>
+                                      Welcome 
+
+
+                                     <i class="fa fa-user"> <span class="caret"></span></i></div>
+                                  
+                                   
+                                   
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+
+
+                                  <li><a href="<?php echo $this->url->get("accdashboard/dashinfo"); ?>">Profile</a></li>
+
+                                  
+                                  <li><a href="<?php echo $this->url->get("home/logout"); ?>">Logout</a></li>
+                                  <li><a href="<?php echo $this->url->get("help/index"); ?>">Help & Support</a></li>
+                                </ul>
+                              </div>
+                            
+
+                              
+                           <?php } ?>
+
+
+
+            </div>
+            
           </div>
         </div>
       </div>
@@ -122,8 +164,13 @@
   <!-- search part -->
   <div class="top-search container container-custom">
     <div class="row"> 
+      <div class="col-md-3" id="logo">
+        <a href=<?php echo $this->url->get("index/"); ?>>
+          <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>icon.png" ></img>
+        </a>
+      </div>
       <form action="<?php echo $this->url->get().'search/search/';?>" method="post">
-        <div class="col-md-5 col-md-offset-4">
+        <div class="col-md-6 ">
           <div class="input-group">
             <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword ">
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
@@ -265,15 +312,7 @@
   
 
   <!-- logo part -->
-  <div class="logo container container-custom">
-    <div class="row">
-      <div class="col-md-3">
-        <a href=<?php echo $this->url->get("index/"); ?>>
-          <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>icon.png"></img>
-        </a>
-      </div>
-    </div>
-  </div>
+  
   <!-- logo part ends -->
 
   <script type="text/javascript">
@@ -301,6 +340,8 @@
             $('.six-menu').css({"display":"none"});
          }
      );
+
+     
 
      $('.one').hover(
          function () {
@@ -348,7 +389,32 @@
 
 
 
+
+
+
    });
+
+
+$(document).ready(function () {
+
+    var menu = $('.main-menu');
+    var origOffsetY = menu.offset().top;
+
+    function scroll() {
+        if ($(window).scrollTop() >= origOffsetY) {
+            $('.main-menu').addClass('sticky');
+            
+        } else {
+            $('.main-menu').removeClass('sticky');
+           
+        }
+
+
+    }
+
+    document.onscroll = scroll;
+
+});
 
 
 

@@ -35,12 +35,13 @@ class IndexController extends ControllerBase
 
 
         $hotResult = $this->modelsManager->createBuilder()
-        ->from('Biz_mela\Models\ProductMaster')
-        ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
-        ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
-        ->where('is_hot = 1')
-        ->getQuery()
-        ->execute();
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->where('is_hot = 1')
+                  ->limit(8)
+                  ->getQuery()
+                  ->execute();
         $this->view->setVar(hotResult,$hotResult);
 
         $bestResult = $this->modelsManager->createBuilder()
