@@ -26,7 +26,12 @@ class SessionController extends ControllerBase
     {	
         //$this->view->setTemplateAfter('main');
         Tag::setTitle('Sign Up/Sign In');
+        $this->auth = $auth = $this->session->get('auth');
+        if ($auth) {
+            return $this->response->redirect('accdashboard/dashinfo/');
+        }
         parent::initialize();
+
 		
     }
 
@@ -34,6 +39,7 @@ class SessionController extends ControllerBase
     {	
 		
         //echo $this->security->hash('1234');
+
     }
 	
 	

@@ -27,7 +27,7 @@ class IndexController extends ControllerBase
                   ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
                   ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
                   ->orderBy('Biz_mela\Models\ProductMaster.created_at desc')
-                  ->limit(4)
+                  ->limit(8)
                   ->getQuery()
                   ->execute();
 
@@ -50,7 +50,7 @@ class IndexController extends ControllerBase
                   ->join('Biz_mela\Models\OrderDetails', 'o.product_id = Biz_mela\Models\ProductMaster.id', 'o','right')
                   ->groupBy('o.product_id')
                   ->orderBy('count(o.product_id) desc')
-                  ->limit(4)
+                  ->limit(8)
                   ->getQuery()
                   ->execute();
         $this->view->setVar(bestResult,$bestResult);
@@ -58,8 +58,8 @@ class IndexController extends ControllerBase
         $bottomResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
         ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
-        ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
-        ->orderBy('Biz_mela\Models\ProductMaster.price desc')
+        ->join('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+        
         ->limit(16)
         ->getQuery()
 
@@ -454,9 +454,14 @@ class IndexController extends ControllerBase
 
 
     public function productdetailsAction($value){
+      
+      $user_id = $this->session->get('auth')['id'];
       $this->view->disableLevel(View::LEVEL_LAYOUT);
       //$this->view->disable();
       //echo $value;
+      $my_wish = ProductWishlist::find("user_id='$user_id' AND product_id='$value'");
+      $check=count($my_wish);
+      $data['color']=$check;
       
       $detailResult = $this->modelsManager->createBuilder()
         ->from('Biz_mela\Models\ProductMaster')
