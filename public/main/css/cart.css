@@ -41,7 +41,7 @@
 .scrollable{
    overflow: auto;
    width: 500px; /* adjust this width depending to amount of text to display */
-   height: 400px; /* adjust height depending on number of options to display */
+   height: 500px; /* adjust height depending on number of options to display */
    border: 1px silver solid;
  }
 
@@ -117,15 +117,17 @@ table{
 }
 
 #cart_gla, #cart_quan, #cart_price, #cart_total{
-  padding-top: 15px;
+  padding-top: 5px;
   text-align: left;
+  font-size: 12px;
 }
 
 #cart_name{
   width:25%;
-  height:100px;
-  padding-top: 15px;
+  height:140px;
+  padding-top: 5px;
   text-align: left;
+  font-size: 12px;
 }
 
 #cart_name>a{
@@ -155,4 +157,13 @@ table{
   font-size: 12px;
   width:30px;
   
+}
+
+#checkout>img{
+  border:3px solid #edeeef;
+}
+
+.glyphicon:hover {
+  color:#cd2027;
+  width: 10px;
 }
