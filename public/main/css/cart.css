@@ -40,9 +40,9 @@
 
 .scrollable{
    overflow: auto;
-   width: 500px; /* adjust this width depending to amount of text to display */
-   height: 500px; /* adjust height depending on number of options to display */
-   border: 1px silver solid;
+   width: 320px; /* adjust this width depending to amount of text to display */
+   height: auto; /* adjust height depending on number of options to display */
+  
  }
 
   #single_pic{
@@ -57,7 +57,7 @@
     display: inline-block;
     overflow: hidden;
     position: relative;
-  text-decoration:none;
+    text-decoration:none;
   
 }
 .hover .text {
@@ -130,11 +130,11 @@ table{
   font-size: 12px;
 }
 
-#cart_name>a{
+.cart_prod{
   color:#000;
 }
 
-#cart_name>a:hover{
+.cart_prod:hover{
   color:#cd2027;
   
 }
@@ -163,7 +163,3 @@ table{
   border:3px solid #edeeef;
 }
 
-.glyphicon:hover {
-  color:#cd2027;
-  width: 10px;
-}
