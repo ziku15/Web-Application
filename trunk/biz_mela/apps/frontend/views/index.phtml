@@ -80,10 +80,62 @@
     top:-5px;
     
     z-index: 100;
-    width:100%;
+    margin-left: 250px;
+     margin-right: 20px;
     background-color: #fff;
     box-shadow: 0 3px 6px gray;
 }
+
+
+
+.shopping-cart-button{
+    background-color: #cd2027;
+    color: black;
+    opacity: 1;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    
+    z-index: 100;
+    margin-right: -350px;
+    margin-top: 186px;
+    font-size: 12px;
+    border-radius-left:16px;
+
+}
+
+
+.shopping-cart-button:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.shopping-cart-details{
+  width:450px;
+}
+
+.shopping-cart-details{
+  background-color: #fff;
+    color: #000;
+    padding: 5px;
+    position: absolute;
+    z-index: 100;
+   margin-right: -350px;
+    margin-top: 186px;
+    font-size: 12px;
+    overflow: scroll;
+
+    max-height: 490px;
+    width:345px;
+
+}
+
+.fa-user{
+  color:#106e96;
+}
+
+
+
 
     </style>
 
@@ -128,7 +180,7 @@
                                     <?php
                                       $auth = $this->session->get('auth');
                                       ?>
-                                      Welcome 
+                                     <?php echo $auth['name'];?>
 
 
                                      <i class="fa fa-user"> <span class="caret"></span></i></div>
@@ -154,40 +206,11 @@
 
 
             </div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- upper part end -->
-  
 
+            <div class="shopping-cart-button" style="right:0px;opacity:1;">
 
-  <!-- search part -->
-  <div class="top-search container container-custom">
-    <div class="row"> 
-      <div class="col-md-3" id="logo">
-        <a href=<?php echo $this->url->get("index/"); ?>>
-          <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>icon.png" ></img>
-        </a>
-      </div>
-      <form action="<?php echo $this->url->get().'search/search/';?>" method="post">
-        <div class="col-md-6 ">
-          <div class="input-group">
-            <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword ">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-          </div>
-        </div>
-      </form>
-      <div class="col-md-3 text-right shopping-cart">
-        <div class="dropdown cartMenu" >
-          <a class="six dropdown-toggle" data-toggle="dropdown" href="#" >
-            <span class="glyphicon glyphicon-shopping-cart"></span> 
-            <span class="shopping-text">
-              Shopping Cart
-            </span>  
-            <span class="shopping-count arrow_box" id="my_count">
+              <span class="glyphicon glyphicon-shopping-cart"></span> 
+              <span class="shopping-count arrow_box" id="my_count">
             <?php 
             if (!isset($_COOKIE['product'])) {
             # code...
@@ -201,10 +224,13 @@
           
             ?>  
           </span>
-          <b class="caret"></b>
-          </a>
 
-          <div class="dropdown-menu six-menu" style="width : 200%; margin: 0; padding-top: 0px;">
+
+            </div>
+
+            <div class="shopping-cart-details"  style="right:-350px;opacity:1;" >
+
+              
 
             <div class="scrollable">
             <?php
@@ -231,7 +257,7 @@
             <div class="col-md-12" id="cart_data">
 
 
-              <div class="col-md-4" id="checkout" style="width:25%;">
+              <div class="col-md-4" id="checkout" style="width:30%;">
 
                 <img  src="<?php echo $this->url->get().$cart->picture;?>" width="100%" style="height:120px;" ></img>
 
@@ -239,9 +265,9 @@
               
                
               
-              <div class="col-md-6" id="cart_name" style="width:55%;">
+              <div class="col-md-6" id="cart_name" style="width:40%;">
                 <div>
-                <?php echo '<a href="'.$this->url->get()."index/productdetails/".$cart->id.'">'.$cart->product_name.'</a>'?>
+                <?php echo '<a href="'.$this->url->get()."index/productdetails/".$cart->id.'" class="cart_prod">'.$cart->product_name.'</a>'?>
                 </div>
                 <div>
                   <?php echo $cart->product_description;?>
@@ -257,7 +283,7 @@
 
 
               </div>
-              <div class="col-md-2" id="cart_price"style="width:20%;">
+              <div class="col-md-2" id="cart_price"style="width:30%;">
 
                <p>Price:<?php echo $cart->price;?></p>
                <p>Total:<?php echo intval($cart->price)*intval($cookie_array[$cart->id]); ?></p>
@@ -301,13 +327,50 @@
 
           </div>  <?php } ?>
         </div><?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+            
           </div>
-
-        
-
-
         </div>
       </div>
+    </div>
+  </div>
+  <!-- upper part end -->
+  
+
+
+  <!-- search part -->
+  <div class="top-search container container-custom">
+    <div class="row"> 
+      <div class="col-md-3" id="logo">
+        <a href=<?php echo $this->url->get("index/"); ?>>
+          <img class="img-responsive" src="<?php echo $this->url->get().'main/images/';?>icon.png" ></img>
+        </a>
+      </div>
+      <form action="<?php echo $this->url->get().'search/search/';?>" method="post">
+        <div class="col-md-6 ">
+          <div class="input-group">
+            <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword ">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+          </div>
+        </div>
+      </form>
+      
     </div>
   </div>
   <!-- search part end -->
@@ -401,15 +464,22 @@ $(document).ready(function () {
 
     var menu = $('.main-menu');
     var origOffsetY = menu.offset().top;
+    
 
     function scroll() {
         if ($(window).scrollTop() >= origOffsetY) {
             $('.main-menu').addClass('sticky');
+           
+
+           
+            
             
         } else {
             $('.main-menu').removeClass('sticky');
            
         }
+
+        
 
 
     }
@@ -417,6 +487,59 @@ $(document).ready(function () {
     document.onscroll = scroll;
 
 });
+
+
+
+
+$(document).ready(function(){
+
+  $('.shopping-cart-button').click(function(){
+  
+        
+           //$(this).addClass("open");
+              console.log($(this).css('right'));
+             if($(this).css('right')=='345px'){
+
+                $(this).animate({'right':'0px'});
+                $(".shopping-cart-details").animate({
+                  'right':'-345px',
+                });
+             }else{
+                   $(".shopping-cart-button").animate({
+                  'right':'345px',
+                });
+
+                $(".shopping-cart-details").animate({
+                  'right':'0px',
+                });
+
+             }
+
+           
+  }
+
+  
+
+
+
+   
+
+
+  
+
+
+
+  );
+});
+      
+             
+            // $(".shopping-cart-details").animate({
+            //   'right': .shopping-cart-details.offset().right + 450,
+            // });
+            
+             
+
+        
 
 
 
