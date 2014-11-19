@@ -1,17 +1,17 @@
 <?php
 namespace Biz_mela\Backend\Controllers;
 use Biz_mela\Models\Productcategory as Productcategory;
-use Phalcon\Mvc\View,
-    Phalcon\Forms\Form,
-    Phalcon\Forms\Element\Text,
-    Phalcon\Forms\Element\Textarea,
-    Phalcon\Forms\Element\Select,
-    Phalcon\Forms\Element\Password,
-    Phalcon\Validation\Validator\PresenceOf,
-	Phalcon\Validation\Validator\StringLength,
-	Phalcon\Mvc\Model\Validator\Email,
-    Phalcon\Paginator\Adapter\QueryBuilder;
-    use Phalcon\Paginator\Adapter\Model as Paginator;
+use Phalcon\Forms\Element\Password;
+use Phalcon\Forms\Element\Select;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Textarea;
+use Phalcon\Forms\Form;
+use Phalcon\Mvc\Model\Validator\Email;
+use Phalcon\Mvc\View;
+use Phalcon\Paginator\Adapter\Model as Paginator;
+use Phalcon\Paginator\Adapter\QueryBuilder;
+use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\StringLength;
 
 class ProductcategoryController extends \Phalcon\Mvc\Controller {
 
@@ -41,9 +41,9 @@ public function initialize() {
             "limit" => 10,
             "page" => $numberPage
         ));
-        $page['productcategory'] = $paginator->getPaginate();
-       // $page['productcategory'] = $newResult;
-        
+        $page['product-category'] = $paginator->getPaginate();
+        // $page['product-category'] = $newResult;
+
         // $page['value'] = $value;
 
         $this->view->setVars(array('sub_title' => 'ProductCategoryManagement'));
@@ -87,7 +87,7 @@ public function initialize() {
         $form->add($cat_name);
         $form->add($parent_id);
         $data['form'] = $form;
-        $data['productcategory'] = $newResult;
+        $data['product-category'] = $newResult;
         $this->view->setVars($data);
         if ($this->request->isPost()) {
             
@@ -163,8 +163,8 @@ public function initialize() {
         $form->add($cat_name);
         $form->add($parent_id);
         $data['form'] = $form;
-        $data['productcategory'] = $productcategory;
-        $data['productcategories'] = $newResult;
+            $data['product-category'] = $productcategory;
+            $data['productcategories'] = $newResult;
         $this->view->setVars($data);
         if ($this->request->isPost()) {
             if (!$form->isValid($_POST)) {
