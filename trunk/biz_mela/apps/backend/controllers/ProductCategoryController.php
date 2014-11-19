@@ -163,7 +163,7 @@ public function initialize() {
         $form->add($cat_name);
         $form->add($parent_id);
         $data['form'] = $form;
-            $data['product-category'] = $productcategory;
+            $data['product-category1'] = $productcategory;
             $data['productcategories'] = $newResult;
         $this->view->setVars($data);
         if ($this->request->isPost()) {
