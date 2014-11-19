@@ -13,7 +13,7 @@ use Phalcon\Mvc\View,
     Phalcon\Paginator\Adapter\QueryBuilder;
     use Phalcon\Paginator\Adapter\Model as Paginator;
 
-class ProductCategoryController extends \Phalcon\Mvc\Controller {
+class ProductcategoryController extends \Phalcon\Mvc\Controller {
 
 public function initialize() {
     $this->auth = $auth = $this->session->get('auth');
