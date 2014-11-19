@@ -41,7 +41,7 @@ public function initialize() {
             "limit" => 10,
             "page" => $numberPage
         ));
-        $page['product-category'] = $paginator->getPaginate();
+        $page['productcategory'] = $paginator->getPaginate();
         // $page['product-category'] = $newResult;
 
         // $page['value'] = $value;
