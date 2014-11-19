@@ -112,7 +112,7 @@ public function initialize() {
                     if ($ProductCategory->create()) {
                         $this->flash->success("Product Category  added successfully!!");
                                 
-                        return $this->response->redirect('admin/productcategory/index/');
+                        return $this->response->redirect('admin/product-category/index/');
                                 
                         //return $this->response->redirect('user/passwordconfirm/');
                         //exit();
@@ -180,7 +180,7 @@ public function initialize() {
                     $ProductCategory->updated_at = date("Y-m-d h:i:s");
                     if ($ProductCategory->save()) {
                         $this->flash->success("Product Category  updated successfully!!");
-                        return $this->response->redirect('admin/productcategory/index/');
+                        return $this->response->redirect('admin/product-category/index/');
                     } else {
                         $this->flash->error("error occured,please try again later!!");
                     }
@@ -192,7 +192,7 @@ public function initialize() {
 public function deleteAction($value) {
     $ProductCategory = ProductCategory::findFirst('id=' . $value);
     $ProductCategory->delete();
-    $this->response->redirect('admin/productcategory');
+    $this->response->redirect('admin/product-category');
  }
 
  public function changestatusAction($value) {
@@ -207,7 +207,7 @@ public function deleteAction($value) {
         $ProductCategory->status=1;
     }
     $ProductCategory->save();
-    $this->response->redirect('admin/productcategory');
+    $this->response->redirect('admin/product-category');
  }
  
 }
