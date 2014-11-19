@@ -1,6 +1,6 @@
 <?php
 namespace Biz_mela\Backend\Controllers;
-use Biz_mela\Models\ProductCategory as ProductCategory;
+use Biz_mela\Models\Productcategory as Productcategory;
 use Phalcon\Mvc\View,
     Phalcon\Forms\Form,
     Phalcon\Forms\Element\Text,
