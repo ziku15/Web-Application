@@ -17,24 +17,24 @@ class Module implements ModuleDefinitionInterface
     public function registerAutoloaders()
     {
 
-//        $loader = new Loader();
-//
-//        $loader->registerNamespaces(array(
-//            'Biz_mela\Backend\Controllers' => __DIR__ . '/controllers/',
-//            'Biz_mela\Backend\Models' => __DIR__ . '/models/',
-////            'Biz_mela\Frontend\Models' => __DIR__ . '/models/',
-//        ));
-//
-//        $loader->register();
+        $config = include __DIR__ . "/config/config.php";
 
-
+        $loader = new Loader();
+//
 //        $loader->registerNamespaces(array(
 //            'Biz_mela\Frontend\Controllers' => __DIR__ . '/controllers/',
-////            'Biz_mela\Backend\Models' => __DIR__ . '/models/',
 //            'Biz_mela\Frontend\Models' => __DIR__ . '/models/',
 //        ));
 //
 //        $loader->register();
+
+        $loader->registerDirs(array(
+//            $config->application->pdf,
+            $config->application->libraryDir
+//            $config->application->pluginsDir
+        ));
+
+        $loader->register();
     }
 
     /**
