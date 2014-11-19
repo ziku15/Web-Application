@@ -10,6 +10,6 @@ $application->registerModules(array(
     ),
     'backend' => array(
         'className' => 'Biz_mela\Backend\Module',
-        'path' => __DIR__ . '/../apps/Backend/Module.php'
+        'path' => __DIR__ . '/../apps/backend/Module.php'
     )
 ));
