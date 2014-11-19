@@ -72,21 +72,21 @@ print_r($productcategory->items);
                                     <td><?php echo $aa->cat_name; ?></td>
                                     <td><?php echo date('M d , Y H:i', strtotime($aa->created_at)); ?></td>
                                     <td>
-                                        <a href="<?php echo $this->url->get('admin/product-category1/update/' . $aa->id); ?>"><i
+                                        <a href="<?php echo $this->url->get('admin/product-category/update/' . $aa->id); ?>"><i
                                                 class="fa fa-pencil fa-lg "
                                                 element_id="<?php echo $aa->id; ?>"></i></a></td>
                                     <td>
-                                        <a href="<?php echo $this->url->get('admin/product-category1/delete/' . $aa->id); ?>"><i
+                                        <a href="<?php echo $this->url->get('admin/product-category/delete/' . $aa->id); ?>"><i
                                                 class="fa fa-trash-o fa-lg delete"
                                                 element_id="<?php echo $aa->id; ?>"></i></a></td>
                                     <?php if ($aa->status == 1) { ?>
                                         <td>
-                                            <a href="<?php echo $this->url->get('admin/product-category1/changestatus/' . $aa->id); ?>"><img
+                                            <a href="<?php echo $this->url->get('admin/product-category/changestatus/' . $aa->id); ?>"><img
                                                     src="<?php echo $this->url->get('main/admin/img/OK.png') ?>"></a>
                                         </td>
                                     <?php } else { ?>
                                         <td>
-                                            <a href="<?php echo $this->url->get('admin/product-category1/changestatus/' . $aa->id); ?>"><img
+                                            <a href="<?php echo $this->url->get('admin/product-category/changestatus/' . $aa->id); ?>"><img
                                                     src="<?php echo $this->url->get('main/admin/img/cancel-icon.png') ?>"></a>
                                         </td>
                                     <?php } ?>
@@ -97,16 +97,16 @@ print_r($productcategory->items);
                         <div>
                             <ul class="pager">
                                 <li><?php echo "You are in page ", $productcategory->current, " of ", $productcategory->total_pages; ?></li>
-                                <li><a href="<?php echo $this->url->get("admin/product-category1"); ?>">First</a>
+                                <li><a href="<?php echo $this->url->get("admin/product-category"); ?>">First</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->url->get("admin/product-category1?page=" . $productcategory->before); ?>">Previous</a>
+                                    <a href="<?php echo $this->url->get("admin/product-category?page=" . $productcategory->before); ?>">Previous</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->url->get("admin/product-category1?page=" . $productcategory->next); ?>">Next</a>
+                                    <a href="<?php echo $this->url->get("admin/product-category?page=" . $productcategory->next); ?>">Next</a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo $this->url->get("admin/product-category1?page=" . $productcategory->last); ?>">Last</a>
+                                    <a href="<?php echo $this->url->get("admin/product-category?page=" . $productcategory->last); ?>">Last</a>
                                 </li>
                             </ul>
                         </div>
@@ -115,7 +115,7 @@ print_r($productcategory->items);
 
 
                 <div class="text-center new-button">
-                    <a href="<?php echo $this->url->get('admin/product-category1/new/') ?>"><i
+                    <a href="<?php echo $this->url->get('admin/product-category/new/') ?>"><i
                             class="fa fa-plus-square-o fa-5x"></i></a>
 
                     <h3>New Product Category</h3>
