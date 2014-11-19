@@ -34,8 +34,8 @@ public function initialize() {
                   ->execute();
          $numberPage = $this->request->getQuery("page", "int", 1);
 
-        print_r($newResult);
-        exit();
+//        print_r($newResult);
+//        exit();
         $paginator = new Paginator(array(
             "data" => $newResult,
             "limit" => 10,
