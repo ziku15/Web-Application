@@ -22,10 +22,7 @@ a{
     text-decoration: none;
 }
 
-a:hover{
-    color:#CD2027;
-    text-decoration: none;
-}
+
 
 .intro{
     color:#870415;
@@ -74,9 +71,9 @@ a:hover{
 }
 
 .panel-default > .panel-heading:hover{
-    border:1px solid red ;
-    background-color: #FFFFFF;
-    color: #333;
+   
+    background-color: #cd2027;
+    color: white;
 
 }
 
@@ -93,7 +90,7 @@ a:hover{
     margin-right: -15px;
 }
 
-.main-menu-title>h2{
+.main-menu-title > h2{
     font-size: 25px;   
     padding-top: 6px;
 
@@ -138,7 +135,7 @@ strong > a:hover{
 
 
 
-.shopping-text>a{
+.shopping-text > a{
     color:#000000;
     text-decoration: underline;
 }
@@ -168,6 +165,44 @@ li>a{
     color: #106E96;
 }
 
+.submenu .item {
+    cursor: pointer;
+    padding: 5px;
+    text-align: right;
+    width: 95%;
+}
+
+.collapse.in {
+    display: block;
+}
+
+.panel-body{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.me_buy{
+    color:black;
+}
+.me_sell{
+    color:black;
+}
+
+.sub_select{
+    
+    color:#cd2027;
+}
+
+
+.shopping-cart-button{
+    margin-top: 194px;
+}
+
+.panel-group .panel{
+    border-radius: 0px;
+}
+
+
 </style>
 <!-- main body part -->
 <div class="container">
@@ -179,8 +214,8 @@ li>a{
                 
     		
     			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get().'accdashboard/dashinfo/'; ?>"  >
-    			     <div class="panel panel-default" id="accdashboard">
-                            <div class="panel-heading">
+    			     <div class="panel panel-default"  >
+                            <div class="panel-heading" id="accdashboard">
                                    
                                     <div class="panel-title">
                                         
@@ -195,8 +230,8 @@ li>a{
                 </a>
 
     			 <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("accinfo/accinfo/") ?>" >			
-        			<div class="panel panel-default" id="accinfo">
-                                    <div class="panel-heading">
+        			<div class="panel panel-default" >
+                                    <div class="panel-heading" id="accinfo">
                                        
                                         <div class="panel-title">
                                            
@@ -206,28 +241,47 @@ li>a{
                                        
                                     </div>
                                 </div>
-                         </a>
+                </a>
 
     			 
 
-    			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("order/list/") ?>" >			
-    			     <div class="panel panel-default" id="order">
-                                <div class="panel-heading">
+    						
+    			     <div class="panel panel-default" >
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" id="order">
                                    
-                                    <div class="panel-title">
-                                            
+                                    <div class="panel-title" >
+                                        <a href="#">    
                                             My Orders
-                                            
+                                         </a>   
                                     </div>
                                     
                                 </div>
-                            </div>
-                    </a>
+
+
+                                <div id="collapseOne" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="submenu row">
+                                            <a href="<?php echo $this->url->get("order/list"); ?>" class="me_buy" id="list">
+                                                <div class="item" >
+                                                    Purchase
+                                                </div>
+                                            </a>
+                                            <a href="<?php echo $this->url->get("order/delivery"); ?>" class="me_sell" id="delivery">
+                                                <div class="item" >
+                                                    Delivery
+                                                </div>
+                                            </a>                                         
+                                        </div>
+
+                                    </div>
+                                </div>
+                    </div>
+                    
 
 
     			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("index/index/") ?>" >			
-    			     <div class="panel panel-default" id="bill">
-                                <div class="panel-heading">
+    			     <div class="panel panel-default" >
+                                <div class="panel-heading" id="bill">
                                    
                                     <div class="panel-title">
                                             
@@ -241,10 +295,10 @@ li>a{
 
 
                 <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("myshop/myshop/") ?>" >           
-                     <div class="panel panel-default" id="shop">
-                                <div class="panel-heading">
+                     <div class="panel panel-default" >
+                                <div class="panel-heading" id="shop">
                                    
-                                    <div class="panel-title">
+                                    <div class="panel-title" >
                                             
                                             My Shop
                                            
@@ -255,8 +309,8 @@ li>a{
                      </a>
 
     			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("inventory/list/") ?>" >			
-    			     <div class="panel panel-default" id="inventory">
-                                <div class="panel-heading">
+    			     <div class="panel panel-default" >
+                                <div class="panel-heading" id="inventory">
                                     
                                     <div class="panel-title">
                                             
@@ -270,8 +324,8 @@ li>a{
 
 
     			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wallet/pass/") ?>" >			
-    			     <div class="panel panel-default" id="wallet">
-                                <div class="panel-heading">
+    			     <div class="panel panel-default" >
+                                <div class="panel-heading" id="wallet">
                                    
                                     <div class="panel-title">
                                             
@@ -285,8 +339,8 @@ li>a{
 
 
     			<a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("wishlist/wish/") ?>" >			
-    			     <div class="panel panel-default" id="wishlist">
-                                <div class="panel-heading">
+    			     <div class="panel panel-default" >
+                                <div class="panel-heading" id="wishlist">
                                    
                                     <div class="panel-title">
                                             
@@ -314,8 +368,8 @@ li>a{
                      </a>
 
                 <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("refer/refer/") ?>" >
-                    <div class="panel panel-default" id="refer">
-                                <div class="panel-heading">
+                    <div class="panel panel-default" >
+                                <div class="panel-heading" id="refer">
                                    
                                     <div class="panel-title">
                                             
@@ -329,8 +383,8 @@ li>a{
 
 
                 <a data-toggle="" data-parent="#accordion" href="<?php echo $this->url->get("subscribe/subscription/") ?>" >    
-                    <div class="panel panel-default" id="subscribe">
-                                <div class="panel-heading">
+                    <div class="panel panel-default" >
+                                <div class="panel-heading" id="subscribe">
                                     
                                     <div class="panel-title">
                                             
@@ -399,65 +453,134 @@ li>a{
     if(choice=='accdashboard')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#accdashboard").addClass("highlight");
+        $("#accdashboard").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='accinfo')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#accinfo").addClass("highlight");
+        $("#accinfo").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='address')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#address").addClass("highlight");
+        $("#address").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='order')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#order").addClass("highlight");
+        $("#order").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='myshop')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#shop").addClass("highlight");
+        $("#shop").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='inventory')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#inventory").addClass("highlight");
+        $("#inventory").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='wallet')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#wallet").addClass("highlight");
+        $("#wallet").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='wishlist')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#wishlist").addClass("highlight");
+        $("#wishlist").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='refer')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#refer").addClass("highlight");
+        $("#refer").css('background-color','#cd2027').css('color','white');
     }
 
     else if(choice=='subscribe')
     {
         //$("#list").html("<font color="red"> View Order List </font>");
-        $("#subscribe").addClass("highlight");
+        $("#subscribe").css('background-color','#cd2027').css('color','white');
     }
     else if(choice=='session')
     {
-        $("#accdashboard").addClass("highlight");
+        $("#accdashboard").css('background-color','#cd2027').css('color','white');
+    }
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+            var pathname = window.location.pathname;
+            //alert(pathname);
+            var patharray = pathname.split("/");
+            console.log("path arrray ");
+            console.log(patharray);
+            $(".panel a").each(function() {
+                var href = $(this).attr("href");
+                //alert(href);
+
+                var urlArray = href.split("/");
+                
+                if (urlArray[2] === patharray[2] && urlArray[3] === patharray[3]) {
+                    var div = $(this).closest('.collapse');
+                    div.addClass('in');
+
+
+                    
+                    
+
+
+                }
+
+
+
+                if (urlArray[2] === patharray[2]) {
+                    var div = $(this).closest('.collapse');
+                    div.addClass('in');
+                }
+                
+
+                //alert(urlArray[2]+urlArray[3]);
+            });
+
+            
+
+
+
+</script>
+
+
+<script type="text/javascript">
+    var pathname = window.location.pathname;
+    var patharray = pathname.split("/");
+    console.log("path arrray ");
+    console.log(patharray);
+
+    var choice=patharray[3];
+
+    console.log(choice);
+
+    if(choice=='list')
+    {
+        //$("#list").html("<font color="red"> View Order List </font>");
+        $("#list").addClass("sub_select");
+    }
+
+    else if(choice=='delivery')
+    {
+        //$("#list").html("<font color="red"> View Order List </font>");
+        $("#delivery").addClass("sub_select");
     }
 
 </script>

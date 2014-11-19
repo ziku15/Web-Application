@@ -8,6 +8,7 @@ use Biz_mela\Models\OrderDetails as OrderDetails;
 use Biz_mela\Models\ProductMaster as ProductMaster;
 use Biz_mela\Models\OrderHistory as OrderHistory;
 use Biz_mela\Models\OrderStatus as OrderStatus;
+use Biz_mela\Models\ShopMaster as ShopMaster;
 
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
@@ -258,6 +259,163 @@ class OrderController extends ControllerBase
               )
             );
 
+  }
+
+
+  public function deliveryAction()
+  {
+    
+
+        $user_id = $this->session->get('auth')['id'];
+        $newresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.id as o_id,Biz_mela\Models\OrderMaster.total,
+                    Biz_mela\Models\OrderMaster.subtotal,Biz_mela\Models\OrderMaster.status,d.price,d.quantity,p.id,h.status_code,
+                    p.product_name,s.status_name,k.id,u.username')
+                  
+                  ->leftJoin('Biz_mela\Models\OrderDetails', 'd.order_master_id = Biz_mela\Models\OrderMaster.id ', 'd')
+                  ->leftJoin('Biz_mela\Models\ProductMaster', 'p.id = d.product_id', 'p')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 'k.id = p.shop_id', 'k')
+
+                  ->leftJoin('Biz_mela\Models\UserMaster', 'u.id = Biz_mela\Models\OrderMaster.user_id', 'u')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->groupBy('Biz_mela\Models\OrderMaster.order_no')
+                  ->where('k.user_id = :name:', array('name' => $user_id))
+                  ->getQuery()
+                  ->execute();
+
+
+        /*foreach ($newresult as $value) {
+            $present = OrderHistory::findFirst('order_master_id = "' . $value->o_id . '"');
+            $temp[$value->status_code]=$present->status_code;
+
+            
+        }
+
+        $this->view->setVar(temp,$temp);*/
+        //$present = OrderHistory::findFirst('order_master_id = "' . $value->o_id . '"');
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $newresult,
+                "limit" => 8,
+                "page" => $numberPage
+            ));
+            
+            $page['Order'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+
+
+
+        $user_id = $this->session->get('auth')['id'];
+
+        $successresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.id as o_id,Biz_mela\Models\OrderMaster.total,
+                    Biz_mela\Models\OrderMaster.subtotal,Biz_mela\Models\OrderMaster.status,d.price,d.quantity,p.id,h.status_code,
+                    p.product_name,s.status_name,k.id,u.username')
+                  
+                  ->leftJoin('Biz_mela\Models\OrderDetails', 'd.order_master_id = Biz_mela\Models\OrderMaster.id ', 'd')
+                  ->leftJoin('Biz_mela\Models\ProductMaster', 'p.id = d.product_id', 'p')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 'k.id = p.shop_id', 'k')
+
+                  ->leftJoin('Biz_mela\Models\UserMaster', 'u.id = Biz_mela\Models\OrderMaster.user_id', 'u')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->groupBy('Biz_mela\Models\OrderMaster.order_no')
+                  ->where('k.user_id = :name:', array('name' => $user_id))
+                  ->andWhere ('h.status_code = 1')
+
+                  ->getQuery()
+                  ->execute();
+
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $successresult,
+                "limit" => 8,
+                "page" => $numberPage
+            ));
+            
+            $page['Purchase'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+
+        $user_id = $this->session->get('auth')['id'];
+
+        $pendingresult = $this->modelsManager->createBuilder()
+                  ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.id as o_id,Biz_mela\Models\OrderMaster.total,
+                    Biz_mela\Models\OrderMaster.subtotal,Biz_mela\Models\OrderMaster.status,d.price,d.quantity,p.id,h.status_code,
+                    p.product_name,s.status_name,k.id,u.username')
+                  
+                  ->leftJoin('Biz_mela\Models\OrderDetails', 'd.order_master_id = Biz_mela\Models\OrderMaster.id ', 'd')
+                  ->leftJoin('Biz_mela\Models\ProductMaster', 'p.id = d.product_id', 'p')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 'k.id = p.shop_id', 'k')
+
+                  ->leftJoin('Biz_mela\Models\UserMaster', 'u.id = Biz_mela\Models\OrderMaster.user_id', 'u')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->groupBy('Biz_mela\Models\OrderMaster.order_no')
+                  ->where('k.user_id = :name:', array('name' => $user_id))
+                   ->andWhere ('h.status_code = 2')
+                  ->getQuery()
+                  ->execute();
+
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $pendingresult,
+                "limit" => 8,
+                "page" => $numberPage
+            ));
+            
+            $page['Pending'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);
+
+        $user_id = $this->session->get('auth')['id'];
+
+        $rejectresult = $this->modelsManager->createBuilder()
+                 ->from('Biz_mela\Models\OrderMaster')
+                  ->columns('Biz_mela\Models\OrderMaster.order_no,Biz_mela\Models\OrderMaster.id as o_id,Biz_mela\Models\OrderMaster.total,
+                    Biz_mela\Models\OrderMaster.subtotal,Biz_mela\Models\OrderMaster.status,d.price,d.quantity,p.id,h.status_code,
+                    p.product_name,s.status_name,k.id,u.username')
+                  
+                  ->leftJoin('Biz_mela\Models\OrderDetails', 'd.order_master_id = Biz_mela\Models\OrderMaster.id ', 'd')
+                  ->leftJoin('Biz_mela\Models\ProductMaster', 'p.id = d.product_id', 'p')
+                  ->leftJoin('Biz_mela\Models\OrderHistory', 'h.order_master_id = Biz_mela\Models\OrderMaster.id', 'h')
+
+                  ->leftJoin('Biz_mela\Models\OrderStatus', 's.status_code = h.status_code', 's')
+                  ->leftJoin('Biz_mela\Models\ShopMaster', 'k.id = p.shop_id', 'k')
+
+                  ->leftJoin('Biz_mela\Models\UserMaster', 'u.id = Biz_mela\Models\OrderMaster.user_id', 'u')
+                  ->orderBy('Biz_mela\Models\OrderMaster.order_no desc')
+                  ->groupBy('Biz_mela\Models\OrderMaster.order_no')
+                  ->where('k.user_id = :name:', array('name' => $user_id))
+                   ->andWhere ('h.status_code = 3')
+                  ->getQuery()
+                  ->execute();
+
+        $numberPage = $this->request->getQuery("page", "int", 1);
+            $paginator = new Paginator(array(
+                "data" => $rejectresult,
+                "limit" => 8,
+                "page" => $numberPage
+            ));
+            
+            $page['Reject'] = $paginator->getPaginate();
+            $page['value'] = $value;
+            $this->view->setVars($page);  
+
+
+    
+  
   }
 
 
