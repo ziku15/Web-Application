@@ -1,21 +1,23 @@
 <?php
 namespace Biz_mela\Backend\Controllers;
-use Biz_mela\Models\DeliveryArea as DeliveryArea;
-use Phalcon\Mvc\View,
-    Phalcon\Forms\Form,
-    Phalcon\Forms\Element\Text,
-    Phalcon\Forms\Element\Textarea,
-    Phalcon\Forms\Element\Select,
-    Phalcon\Forms\Element\Password,
-    Phalcon\Validation\Validator\PresenceOf,
-	Phalcon\Validation\Validator\StringLength,
-	Phalcon\Mvc\Model\Validator\Email,
-    Phalcon\Paginator\Adapter\QueryBuilder;
-    use Phalcon\Paginator\Adapter\Model as Paginator;
 
-class DeliveryAreaController extends \Phalcon\Mvc\Controller {
+use Biz_mela\Models\Deliveryarea as Deliveryarea;
+use Phalcon\Forms\Element\Password;
+use Phalcon\Forms\Element\Select;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Textarea;
+use Phalcon\Forms\Form;
+use Phalcon\Mvc\Model\Validator\Email;
+use Phalcon\Mvc\View;
+use Phalcon\Paginator\Adapter\Model as Paginator;
+use Phalcon\Paginator\Adapter\QueryBuilder;
+use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation\Validator\StringLength;
 
-public function initialize() {
+class DeliveryareaController extends \Phalcon\Mvc\Controller
+{
+
+    public function initialize() {
     $this->auth = $auth = $this->session->get('auth');
     if (!$auth) {
         $this->response->redirect('admin/auth/login/');
