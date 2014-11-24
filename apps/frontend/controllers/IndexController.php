@@ -8,6 +8,9 @@ use Biz_mela\Models\ProductImage as ProductImage;
 use Biz_mela\Models\ProductWishlist as ProductWishlist;
 use Biz_mela\Models\OrderDetails as OrderDetails;
 use Biz_mela\Models\ShopMaster as ShopMaster;
+use Biz_mela\Models\ProductReview as ProductReview;
+
+use Biz_mela\Models\ProductQuery as ProductQuery;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 use Phalcon\Mvc\View;
 
@@ -522,6 +525,27 @@ class IndexController extends ControllerBase
         }
 
 
+        $allcomments = $this->modelsManager->createBuilder()
+              ->from('Biz_mela\Models\ProductReview')
+              ->columns('Biz_mela\Models\ProductReview.text, Biz_mela\Models\ProductReview.user_id, Biz_mela\Models\ProductReview.created_at')
+              ->where('Biz_mela\Models\ProductReview.product_id = :name:', array('name' => $value))
+               ->orderBy('Biz_mela\Models\ProductReview.created_at desc')
+              ->getQuery()
+              ->execute();
+        $temp = array();
+
+        foreach ($allcomments as $value) {
+            $user=UserMaster::findFirst("id="."'".$value->user_id."'");
+            $temp[$value->user_id]=$user->username;
+
+            
+        }
+
+        $data['comments'] = $allcomments;
+
+
+        $this->view->setVar(temp,$temp);
+
 
 
 
@@ -536,6 +560,116 @@ class IndexController extends ControllerBase
 
     }
 
+
+    public function askAction($value){
+        
+          $request = $this->request;
+          if ($request->isPost()) {
+
+          $email = $request->getPost('email');
+          $msg = $request->getPost('message');
+
+
+        
+
+
+           $query = new ProductQuery();
+           $query->product_id=$value;
+           $query->email=$email;
+           $query->text=$msg;
+           $query->created_at = date("Y-m-d h:i:sa");
+           $query->updated_at = date("Y-m-d h:i:sa");
+           $query->status =1;
+
+            if ($query->save() == True) {
+                    //$this->flash->success('You have successfully subscribed to our newsletter');
+                  //$msg="You have successfully subscribed to our newsletter";
+              return $this->dispatcher->forward(
+                  array(
+                    'controller' => 'index',
+                    'action' => 'productdetails',
+                    'param' => $value
+                    )
+                  );
+                   
+                  }
+
+
+       }
+
+    }
+
+    public function commentAction($value){
+       $this->view->disable();
+      $this->auth = $auth = $this->session->get('auth');
+        if (!$auth) {
+           echo "1";
+        }
+
+        else {
+          $request = $this->request;
+          if ($request->isPost()) {
+
+            $text = $request->getPost('comment');
+
+            
+            $userid = $this->session->get('auth')['id'];
+            $review=new ProductReview();
+            $review->product_id=$value;
+            $review->user_id=$userid;
+            $review->text=$text;
+            $review->status=1;
+
+            $review->created_at = date("Y-m-d h:i:s");
+            $review->updated_at = date('Y-m-d h:i:s');
+            $review->save();
+
+            if ($review->save() == True) {
+                        //$this->flash->success('You have successfully subscribed to our newsletter');
+                      //$msg="You have successfully subscribed to our newsletter";
+              echo "2"; 
+            } else {
+              echo "3";
+            }
+
+
+          } else {
+            echo "4";
+          }
+
+
+        }
+
+
+      
+
+
+
+
+
+
+
+    }
+
+
+
+    public function allcommentsAction(){
+
+      $this->view->disable();
+
+      $product_id = $this->request->getPost('data1');
+
+      $result = $this->modelsManager->createBuilder()
+
+        ->from('Biz_mela\Models\ProductReview')
+         ->columns('Biz_mela\Models\ProductReview.text,Biz_mela\Models\ProductReview.status')
+        ->where('Biz_mela\Models\ProductReview.product_id = :name:', array('name' => $product_id))
+        ->getQuery()
+        ->execute();
+
+        echo "1";
+
+    }
 
     public function checkStockAction(){
       $this->view->disable();
