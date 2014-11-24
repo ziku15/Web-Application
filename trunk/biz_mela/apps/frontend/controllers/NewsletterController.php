@@ -32,15 +32,22 @@ class NewsletterController extends ControllerBase
 
 	 public function subscriptionAction()
 	 {
+
+      $this->view->disable();
       $url= $_SERVER['HTTP_REFERER'];
       $prev=explode("/", $url);
-      $action=$prev[4];
-      $method=$prev[5];
-      $id=$prev[6];
+      
+      if (count($prev)>=6){
+        $action=$prev[4];
+        $method=$prev[5];
+        $id=$prev[6];
+      }
+
+
       
       $request = $this->request;
         if ($request->isPost()) {
-          $email = $request->getPost('email');
+          $email = $request->getPost('news_email');
           //$previous_email = Newsletter::find('email=' . "'" . $email . "'" );
 
            $previous = Newsletter::find("email="."'".$email."'and shop_id="."'".$id."'");
@@ -48,11 +55,15 @@ class NewsletterController extends ControllerBase
           
           $msg="Input an email address";
 
+          
+
           if($action=='shop' && $method=='index'){
             if ($previous->count()>0 ) {
-                    $msg=" You are already subscribed ";
+                    //$msg=" You are already subscribed ";
+                  echo "1";
                    
-                } else {
+            }
+                else {
                   $user = new Newsletter();
                   $user->email=$email;
                   $user->shop_id=$id;
@@ -63,8 +74,11 @@ class NewsletterController extends ControllerBase
 
                   if ($user->save() == True) {
                     //$this->flash->success('You have successfully subscribed to our newsletter');
-                  $msg="You have successfully subscribed to our newsletter";    
+                  //$msg="You have successfully subscribed to our newsletter";
+                   echo "2"; 
                   }
+
+                  else echo "10";
              
                 }
 
@@ -73,7 +87,8 @@ class NewsletterController extends ControllerBase
 
           else {
             if ($general->count()>0 ) {
-                    $msg=" You are already subscribed to general subscription";
+                    //$msg=" You are already subscribed to general subscription";
+               echo "3";
                    
                 } else {
                   $user = new Newsletter();
@@ -86,17 +101,20 @@ class NewsletterController extends ControllerBase
 
                   if ($user->save() == True) {
                     //$this->flash->success('You have successfully subscribed to our newsletter');
-                  $msg="General Subscription Successful";    
+                  //$msg="General Subscription Successful";
+                   echo "4";  
                   }
+
+                   else echo "11";
              
                 }
               }
 
           
 
-                 $data['value']=$msg;
+                 //$data['value']=$msg;
 
-                 $this->view->setVar(data,$data);
+                 //$this->view->setVar(data,$data);
 
 
        }
