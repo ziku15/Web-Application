@@ -151,6 +151,24 @@
 
 }
 
+
+
+.rate_widget {
+    border:     1px solid #CCC;
+    overflow:   visible;
+    padding:    10px;
+    position:   relative;
+    width:      180px;
+    height:     32px;
+}
+.ratings_stars {
+    
+    float:      left;
+    height:     28px;
+    padding:    2px;
+    width:      28px;
+}
+
 </style>
 
 <style type="text/css">
@@ -690,6 +708,31 @@ $('.cartB').on('click', function(e) {
                   </br>
                   <p>Your Rating</p>
 
+                  <div class='product_ratings'>
+   
+                    <div class="rate_widget">
+                        <div id="1" class="star_1 ratings_stars">
+                          <img src="<?php echo $this->url->get().'main/images/';?>star.jpg" class="img-responsive" alt="..." >
+                        </div>
+                        <div id="2" class="star_2 ratings_stars">
+
+                          <img src="<?php echo $this->url->get().'main/images/';?>star.jpg" class="img-responsive" alt="..." >
+                        </div>
+                        <div id="3" class="star_3 ratings_stars">
+                          <img src="<?php echo $this->url->get().'main/images/';?>star.jpg" class="img-responsive" alt="..." >
+
+                        </div>
+                        <div id="4" class="star_4 ratings_stars">
+                          <img src="<?php echo $this->url->get().'main/images/';?>star.jpg" class="img-responsive" alt="..." >
+                        </div>
+                        <div id="5" class="star_5 ratings_stars">
+                          <img src="<?php echo $this->url->get().'main/images/';?>star.jpg" class="img-responsive" alt="..." >
+                        </div>
+                       
+                    </div>
+
+                  </div>
+
                  </div>
                 </div>
 
@@ -713,7 +756,7 @@ $('.cartB').on('click', function(e) {
 
                   <div class="comment_section">
 
-                     <a href="#" id="show_comments" name="show_comments"value="publish" ><p>Show All Comments</p></a>
+                     <a href="#" id="show_comments" name="show_comments" ><p>Show All Comments</p></a>
                   </div>
                   </br>
 
@@ -727,7 +770,7 @@ $('.cartB').on('click', function(e) {
                       <div class="col-md-3">
                        Posted By:<?php echo $temp[$record->user_id];?>
                       </div>
-                      <div class="col-md-9">
+                      <div class="col-md-9" style="text-align:right;">
                        <?php echo $record->created_at;?>
                       </div>
 
@@ -846,15 +889,11 @@ $('.cartB').on('click', function(e) {
 <script type="text/javascript">
     $('.all_comments').hide();
     $(document).ready(function(){
-       $('[name="show_comments"]').click(function (e) {
-          $( "#shocomments> p" ).html( "Hide All Comments");
+       $('[name="show_comments"]').click(function () {
+          $( "#show_comments>p" ).text("Hide All Comments");
           $('.all_comments').show();
 
-          
-
-
        });
-
     })
 
 </script>
