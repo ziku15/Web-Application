@@ -9,6 +9,8 @@ use Biz_mela\Models\ProductWishlist as ProductWishlist;
 use Biz_mela\Models\OrderDetails as OrderDetails;
 use Biz_mela\Models\ShopMaster as ShopMaster;
 use Biz_mela\Models\ProductReview as ProductReview;
+use Biz_mela\Models\ProductRating as ProductRating;
+
 
 use Biz_mela\Models\ProductQuery as ProductQuery;
 use Phalcon\Paginator\Adapter\Model as Paginator;
@@ -517,6 +519,7 @@ class IndexController extends ControllerBase
           if (array_key_exists($value, $cookie_array)){
             $quantity = $cookie_array[$value];
             $data['quantity'] = $quantity;
+
           }
 
           else
@@ -524,33 +527,56 @@ class IndexController extends ControllerBase
 
         }
 
+        $cookie_array = unserialize($_COOKIE['product']);
+        if (array_key_exists($value, $cookie_array)) {
+          $data['cart']=1;
+          } else if (!array_key_exists($value, $cookie_array)) {
+            $data['cart']=2;
+          }
+
 
         $allcomments = $this->modelsManager->createBuilder()
               ->from('Biz_mela\Models\ProductReview')
               ->columns('Biz_mela\Models\ProductReview.text, Biz_mela\Models\ProductReview.user_id, Biz_mela\Models\ProductReview.created_at')
               ->where('Biz_mela\Models\ProductReview.product_id = :name:', array('name' => $value))
-               ->orderBy('Biz_mela\Models\ProductReview.created_at desc')
+              ->orderBy('Biz_mela\Models\ProductReview.created_at desc')
               ->getQuery()
               ->execute();
         $temp = array();
 
-        foreach ($allcomments as $value) {
-            $user=UserMaster::findFirst("id="."'".$value->user_id."'");
-            $temp[$value->user_id]=$user->username;
+        foreach ($allcomments as $info) {
+            $user=UserMaster::findFirst("id="."'".$info->user_id."'");
+            $temp[$info->user_id]=$user->username;
 
             
         }
 
+        
+
         $data['comments'] = $allcomments;
 
 
-        $this->view->setVar(temp,$temp);
+         $allratings = $this->modelsManager->createBuilder()
+             ->from('Biz_mela\Models\ProductRating')
+             ->columns('Biz_mela\Models\ProductRating.rating, Biz_mela\Models\ProductRating.user_id as uid, Biz_mela\Models\ProductRating.created_at')
+             ->where('Biz_mela\Models\ProductRating.product_id = :name1:', array('name1' => $value))
+             ->orderBy('Biz_mela\Models\ProductRating.created_at desc')
+             ->getQuery()
+             ->execute();
 
+        //$total=intval(count($allratings));
+        $total=intval($allratings->count());
 
-
+       
+        $data['average']=$avg;
+        $data['total']=$total;
 
         
+
+
+        $this->view->setVar(temp,$temp);
         $this->view->setVar(data,$data);
+
 
         //echo $detailResult[0]->shop_name;
         //echo $detailResult[0]->product_name;
@@ -640,16 +666,67 @@ class IndexController extends ControllerBase
 
         }
 
-
-      
-
-
-
-
-
-
-
     }
+
+       public function ratingAction($value){
+
+        $this->view->disable();
+        $this->auth = $auth = $this->session->get('auth');
+        if (!$auth) {
+           echo "1";
+        }
+
+         else{
+
+           $request = $this->request;
+
+           if ($request->isPost()) {
+
+             $rating = $request->getPost('id');
+
+             $userid = $this->session->get('auth')['id'];
+
+             $prev=ProductRating::findFirst("user_id='$userid' AND product_id='$value'");
+
+             if ($prev){
+              
+              $prev->rating=$rating;
+              $prev->save();
+
+              echo "2";
+
+
+
+             } else if (!$prev) {
+              $rate=new ProductRating();
+
+              $rate->product_id=$value;
+              $rate->user_id=$userid;
+              $rate->rating=$rating;
+              $rate->status=1;
+
+              $rate->created_at = date("Y-m-d h:i:s");
+              $rate->updated_at = date('Y-m-d h:i:s');
+              $rate->save();
+
+              if ($rate->save() == True) {
+                        
+              echo "3"; 
+              } else {
+              echo "4";
+              }
+             }
+
+           }
+
+           else {
+            echo "5";
+          }
+
+         }
+
+       }
+
 
 
 

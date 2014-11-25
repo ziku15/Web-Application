@@ -93,12 +93,12 @@
     color: black;
     opacity: 1;
     padding: 10px;
-    position: absolute;
+    position: fixed;
     right: 0;
     
     z-index: 100;
     /*margin-right: -350px;*/
-    margin-top: 186px;
+    margin-top: 194px;
     font-size: 12px;
     border-radius-left:16px;
 
@@ -107,7 +107,7 @@
 
 .shopping-cart-button:hover{
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .shopping-cart-details{
@@ -118,10 +118,10 @@
   background-color: #fff;
     color: #000;
     padding: 5px;
-    position: absolute;
+    position: fixed;
     z-index: 100;
    /*margin-right: -350px;*/
-    margin-top: 186px;
+    margin-top: 194px;
     font-size: 12px;
     overflow: scroll;
 
@@ -133,11 +133,43 @@
 .fa-user{
   color:#106e96;
 }
+</style>
+
+<script>
+
+$(function(){
+$('.glyphicon-remove-circle').on('click', function() {
+    var base_url =<?php echo $this->url->get(); ?>;
+
+      //$(this).parent('div').parent('div').slideUp('slow');
+      var pId = $(this).attr('product_id');
+      console.log(pId);
+
+      
+
+      $.ajax({
+
+        type: "POST",
+        url: base_url+"index/updateCookie",
+        data: { data1 : pId, },
+        success: function(html)
+        {
+            //$("#sub_cat_id").html(html);
+            $("#my_count").html(html);
+        }
+      });
+
+      //$(this).parent('div').parent('div').slideUp('slow');
+      var pace_area_id = pId.toString().concat("pace");
+      $('#'+pace_area_id).parent('div').parent('div').slideUp('slow');;
+  
+
+  });
+});
 
 
 
-
-    </style>
+</script>
 
   <!-- upper part -->
   <div class="top" >
@@ -209,7 +241,7 @@
                   <div>
                     <p>Quantity:<?php echo $cookie_array[$cart->id];?></p>
                     
-                    <a href="" data-toggle="modal" data-target="#cartDeleteModal2<?php echo $cart->id; ?>" style="color:#000000;">
+                    <a href="#" data-toggle="modal" style="color:#000000;">
                       <span class="glyphicon glyphicon-remove-circle" product_id="<?php echo $cart->id; ?>"> </span>
                     </a>
                   </div>
@@ -222,30 +254,14 @@
 
                  <p>Price:<?php echo $cart->price;?></p>
                  <p>Total:<?php echo intval($cart->price)*intval($cookie_array[$cart->id]); ?></p>
+                 <span class="pace" id="<?php echo $cart->id."pace"; ?>"></span>
 
                 </div>
 
                 
             </div>        <!-- col-md-12  Ends Here -->
 
-          <div class="modal fade" id="cartDeleteModal2<?php echo $cart->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal2" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-body">
-                      <p>
-                      <center> Do you really want to delete this product from your cart ? </center> 
-                      </p>
-                  </div> 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary cart-delete" product_id="<?php echo $cart->id; ?>" data-dismiss="modal">
-                        Delete
-                    </button>
-                  </div> 
-                </div>
-              </div>
-          </div>
-
+          
 
 
             <?php }  ?>
