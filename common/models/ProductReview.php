@@ -28,6 +28,10 @@ class ProductReview extends \Phalcon\Mvc\Model
      * @var string
      */
     public $text;
+	
+	
+	
+	
 
     /**
      *
