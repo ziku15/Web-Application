@@ -1,3 +1,5 @@
+
+
 <style type="text/css">
 .image{
   width: 100%;
@@ -191,6 +193,9 @@
 a:hover, a:focus {
    border:0px;
 }
+
+
+
 
 </style>
 
@@ -538,6 +543,7 @@ $('.cartB').on('click', function(e) {
 </script>
 
 
+
 <div class="container">
   <div class="col-md-1"> 
     <p><br></p>
@@ -593,8 +599,9 @@ $('.cartB').on('click', function(e) {
   </div> <!--col-md-1 ends -->
     
   <div class="col-md-4">
-    <img class="img-responsive image" src="<?php echo $this->url->get().$data['picture'];?>"></img>
-      
+    
+      <img  class="img-responsive image" src="<?php echo $this->url->get().$data['picture'];?>"  data-imagezoom="true">
+    
   </div>
     
   

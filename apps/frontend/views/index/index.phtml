@@ -23,10 +23,14 @@
     top: 0;
   
    -webkit-transition: opacity 500ms;
-     -moz-transition: opacity 500ms;
-     -o-transition: opacity 500ms;
-     transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
+    transition: opacity 500ms;
 }
+
+
+
+
 .hover:hover .text { display: block; opacity: 1;}
 
 .text .top_text{margin-top: 35%;}
@@ -594,7 +598,9 @@ $('.cartB').on('click', function(e) {
             </button>
           </div>
         </div>
+        
         <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>" style="width : 200px; height : 250px;"></img>
+      
       </br>
         <div class="price">Price: <?php echo $row->price; ?> </div>
       </div>
