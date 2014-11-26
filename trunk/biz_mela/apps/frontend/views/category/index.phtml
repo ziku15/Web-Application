@@ -220,6 +220,22 @@ $('.cartB').on('click', function(e) {
     color: white;
     font-size: 16px;
 }
+
+.mg-image img {
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -o-transition: all 1s ease; /* IE 9 */
+    -ms-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+        max-width: 100%;
+}
+.mg-image:hover img {
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+    transform:scale(1.25);
+}
 </style>
 
 
@@ -396,8 +412,9 @@ $('.cartB').on('click', function(e) {
           </div>
         </div>            
 
-
-            <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+            <div class="mg-image">
+              <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+            </div>
             <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
             <div class="product-price">$<?php echo $row->price; ?></div>
           </div>
