@@ -6,7 +6,7 @@
   border: 1px solid #dadada;
   margin-top: 20px;
   padding: 5px 5px 0;
-  height: 370px;
+  height: 450px;
 }
 
 .image-small{
@@ -47,9 +47,9 @@
 
 .modal-footer {
     border-top: none;
-    margin-top: 0;
-    padding: 15px 25px;
-    text-align: right;
+    margin-top: -25px;
+    padding: 0px;
+    text-align: center;
 }
 
 .modal-footer button{
@@ -194,7 +194,16 @@ a:hover, a:focus {
    border:0px;
 }
 
+#cart_add1{
+  background-color: blue;
+}
+#cart_add2{
+  background-color: green;
+}
 
+#cart_add1:hover, #cart_add2:hover{
+  background-color: red;
+}
 
 
 </style>
@@ -290,7 +299,7 @@ a:hover, a:focus {
   $(document).ready(function(){
     //$("#my-als-list").als();
     $("#up-list").als({
-          visible_items: 3,
+          visible_items: 4,
           scrolling_items: 1,
           orientation: "vertical",
           circular: "yes",
@@ -316,6 +325,7 @@ a:hover, a:focus {
 </script>
 
 <script type="text/javascript">
+
  function processWish(id){
   var base_url =<?php echo $this->url->get(); ?>;
 
@@ -414,7 +424,6 @@ var quantity = $("#quant").val();
        if (result=="") {
         $('#productExistCartModal').modal('show');
         setTimeout( "jQuery('#productExistCartModal').modal('hide');",3000 );
-
       }
        else {
         $('#productAddedCartModal').modal('show');
@@ -452,6 +461,7 @@ function processCartB(id){
         type: "POST",
         url:base_url+"index/addtocart",
         data: { data1 : p_idB, },
+        dataType: 'json',
         success: function(result)
         {
             //$("#my_count").html(html);
@@ -469,10 +479,14 @@ function processCartB(id){
        console.log("test successful");
        console.log(result);
 
+       
+
        //if (result=="") {$('#productExistCartModal').modal('show');}
        //else {$('#productAddedCartModal').modal('show');}
  
     });
+
+
 
 
     //alert(id);
@@ -533,16 +547,54 @@ $('.cartB').on('click', function(e) {
                 $(this).detach()
             });
         }
+
+
     
 
 
   });
+
+
 });
 
 
 </script>
 
+<script>
 
+$('[data-imagezoom]')({
+ 
+// image magnifier background color
+cursorcolor:'255,255,255',
+ 
+// opacity
+opacity:0.5,
+ 
+// cursor type
+cursor:'crosshair',
+ 
+// z-index
+zindex:2147483647,
+ 
+// zoom view size
+zoomviewsize:[500,500],
+ 
+// zoom view position. left or right
+zoomviewposition:'right',
+ 
+// zoom view margin
+zoomviewmargin:10,
+ 
+// zoom view border
+zoomviewborder:'1px solid #000',
+ 
+// zoom level
+magnification:3
+ 
+});
+
+
+</script>
 
 <div class="container">
   <div class="col-md-1"> 
@@ -586,7 +638,7 @@ $('.cartB').on('click', function(e) {
 
     </div> <!--wrapper -->
     </div> <!--ais-viewport -->
-    <span class="als-next" style="top: 340px; left: 20px">
+    <span class="als-next" style="top: 445px; left: 20px">
       <img src="<?php echo $this->url->get().'main/images/';?>down.png" alt="next" title="next" />
     </span> <!-- "next" button -->
     </div> <!--als-container-->
@@ -663,9 +715,9 @@ $('.cartB').on('click', function(e) {
 
         <?php if ($data['cart']==1) {?>
        
-        <button type="button" class="btn btn-primary bg-button cart" product_id="<?php echo $data['product_id']; ?>" style="background-color:black;" >Add to Cart </button>
+        <button type="button" id="cart_add1" class="btn btn-primary bg-button cart" product_id="<?php echo $data['product_id']; ?>"  >Add to Cart </button>
         <?php } else if ($data['cart']==2) { ?>
-        <button type="button" class="btn btn-primary bg-button cart" product_id="<?php echo $data['product_id']; ?>" style="background-color:red;" >Add to Cart </button>
+        <button type="button" id="cart_add2" class="btn btn-primary bg-button cart" product_id="<?php echo $data['product_id']; ?>"  >Add to Cart </button>
         <?php } ?>
         
         
@@ -1135,7 +1187,13 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
-            
+            <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             <div class="modal-body">
                 <p>
                 <center> You need to log in first. </center> 
@@ -1143,7 +1201,12 @@ $('.cartB').on('click', function(e) {
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+              
+
+              <a href="<?php echo $this->url->get().'session/index/';?>" class="btn btn-md btn-primary">
+
+                Sign In
+              </a>
             </div>
             
         </div>
@@ -1155,7 +1218,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1181,7 +1245,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1208,7 +1273,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1235,7 +1301,9 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
            <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true">
+                  <img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                  <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1263,7 +1331,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1271,6 +1340,15 @@ $('.cartB').on('click', function(e) {
                 <p>
                 <center> You Need To logIn first. </center> 
                 </p>
+            </div>
+
+            <div class="modal-footer">
+              
+
+              <a href="<?php echo $this->url->get().'session/index/';?>" class="btn btn-md btn-primary">
+
+                Sign In
+              </a>
             </div>
             
     </div>
@@ -1283,7 +1361,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1302,7 +1381,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1322,7 +1402,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1342,7 +1423,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1362,7 +1444,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1382,7 +1465,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1402,7 +1486,8 @@ $('.cartB').on('click', function(e) {
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>

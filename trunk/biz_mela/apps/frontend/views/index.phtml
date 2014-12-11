@@ -18,6 +18,7 @@
 	  <?php echo \Phalcon\Tag::stylesheetLink("main/css/common.css"); ?>
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/start.css"); ?>
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/cart.css"); ?>
+    <?php echo \Phalcon\Tag::stylesheetLink("main/css/modal.css"); ?>
 
     
 
@@ -118,13 +119,13 @@
 .shopping-cart-details{
   background-color: #fff;
     color: #000;
-    padding: 5px;
+    padding: 0px;
     position: fixed;
     z-index: 100;
    /*margin-right: -350px;*/
     margin-top: 194px;
     font-size: 12px;
-    overflow: scroll;
+    overflow-y: scroll;
 
     max-height: 490px;
     width:345px;
@@ -134,6 +135,9 @@
 .fa-user{
   color:#106e96;
 }
+
+
+
 </style>
 
 <script>
@@ -199,7 +203,7 @@ $('.glyphicon-remove-circle').on('click', function() {
 
 
       <div class="shopping-cart-details"  style="right:-350px;opacity:1;" >
-          <div class="scrollable">
+          <div class="scrollable" id="scroll_cart">
             <?php
 
              if (isset($_COOKIE['product'])) {
@@ -219,6 +223,7 @@ $('.glyphicon-remove-circle').on('click', function() {
               ->inWhere('Biz_mela\Models\ProductMaster.id', $keysHolder)
               ->getQuery()
               ->execute();
+              
              foreach ($cResult as $cart) {?>
 
               <div class="col-md-12" id="cart_data">
@@ -226,7 +231,7 @@ $('.glyphicon-remove-circle').on('click', function() {
 
                 <div class="col-md-4" id="checkout" style="width:30%;">
 
-                  <img  src="<?php echo $this->url->get().$cart->picture;?>" width="100%" style="height:120px;" ></img>
+                  <img  src="<?php echo $this->url->get().$cart->picture;?>" width="100%" style="height:120px; width:75px;" ></img>
 
                 </div>
                 
@@ -277,8 +282,9 @@ $('.glyphicon-remove-circle').on('click', function() {
               </a>
 
 
-          </div>  <?php } ?>
-        </div><?php } ?>          <!-- Scroll Ends Here -->
+          </div>  <?php } else if (count($cookie_array) == 0) {echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There is No item in Your Bag";} ?>
+        </div><?php } ?>
+                <!-- Scroll Ends Here -->
     </div> 
       <div class="row">
         <div class="col-md-8 top-date top-pad bottom-pad">
@@ -490,16 +496,17 @@ $(document).ready(function(){
 
   $('.shopping-cart-button').click(function(){
   
-        
+            
            //$(this).addClass("open");
-              console.log($(this).css('right'));
+              //console.log($(this).css('right'));
              if($(this).css('right')=='345px'){
-
+                
                 $(this).animate({'right':'0px'});
                 $(".shopping-cart-details").animate({
                   'right':'-345px',
                 });
              }else{
+
                    $(".shopping-cart-button").animate({
                   'right':'345px',
                 });
@@ -585,8 +592,8 @@ $(document).ready(function(){
                       </div>
                     </div>
               
-                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px; "></img>
-                 <div class="price">Price:<?php echo $product->price; ?> </div>
+                    <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px; "></img>
+                    <div class="price" id="ind_price" >Price:<?php echo $product->price; ?> </div>
                   </div>
 
              <?php } ?>
@@ -970,7 +977,7 @@ $(document).ready(function(){
 
     });
     } else {
-         
+         alert("Type Your Mail");
     }
   });
 
@@ -1055,13 +1062,14 @@ tempor incididunt ut labore et dolore magna aliqua</div>
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
             <div class="modal-body">
                 <p>
-                <center> General Subscribetion Successful. </center> 
+                <center> General Subscriptions Successful. </center> 
                 </p>
             </div>
             
@@ -1074,7 +1082,8 @@ tempor incididunt ut labore et dolore magna aliqua</div>
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1093,7 +1102,8 @@ tempor incididunt ut labore et dolore magna aliqua</div>
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1112,7 +1122,8 @@ tempor incididunt ut labore et dolore magna aliqua</div>
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -1131,7 +1142,8 @@ tempor incididunt ut labore et dolore magna aliqua</div>
         <div class="modal-content modal-margin-top">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
