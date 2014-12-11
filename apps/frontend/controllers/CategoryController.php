@@ -29,7 +29,33 @@ class CategoryController extends ControllerBase
     {
         $data['category_id'] = $ID;
 
+       /* $phql = ("SELECT Biz_mela\Models\ShopMaster.id,Biz_mela\Models\ShopMaster.shop_name,Biz_mela\Models\ShopMaster.user_id
+                
+                FROM Biz_mela\Models\ShopMaster
+                
+                ORDER BY Biz_mela\Models\ShopMaster.id 
+                LIMIT 0 , 100");
+
+        $shop = $this->modelsManager->executeQuery($phql);*/
+
+        
+
         $form = new Form();
+
+        /* foreach ($shop as $value) {
+            
+
+            $container[$value->id] =  $value->shop_name;
+        }
+
+        $shop_name = new Select("shop_name", array(
+            'class' => 'form-control input-lg form-element',
+            'id' => 'shop_name',
+            'autocomplete' => 'off',
+            'multiple'=>'yes'
+        ));
+
+        $shop_name->setOptions($container);*/
 
         $form->add(new Check("accessories"));
         $form->add(new Check("bronzers_and_blushers"));

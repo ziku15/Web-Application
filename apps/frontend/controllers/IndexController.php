@@ -67,6 +67,7 @@ class IndexController extends ControllerBase
         ->join('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
         
         ->limit(16)
+        
         ->getQuery()
 
         ->execute();
@@ -93,11 +94,12 @@ class IndexController extends ControllerBase
       $wish = $this->request->getPost('data1');
 
       //echo $wish;
-      
+      $auth = $this->session->get('auth');
+      if($auth){
       $username = $this->session->get('auth');
       $con=UserMaster::findFirst("username="."'".$username['name']."'");
       $user_id=$con->id;
-
+    
       
       $product_data = ProductMaster::findFirst("id="."'".$wish."'");
       $product_name= $product_data->product_name;
@@ -110,8 +112,9 @@ class IndexController extends ControllerBase
      $Result = ProductWishlist::find("user_id="."'".$user_id."'and product_id="."'".$wish."'");
 
      $count = count($Result);
+    }
 
-     $auth = $this->session->get('auth');
+     
      if(!$auth){
 
       echo "1";
@@ -183,18 +186,54 @@ class IndexController extends ControllerBase
       echo count($cookie_array);
       }
     }
+
+
+      /*$cResult = $this->modelsManager->createBuilder()
+              ->from('Biz_mela\Models\ProductMaster')
+              ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+              ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+              ->inWhere('Biz_mela\Models\ProductMaster.id', $product_id)
+              ->getQuery()
+              ->execute();
+
+      $pro_id= $cResult[0]->id;
+      $pro_price= $cResult[0]->price;
+      $pro_name=$cResult[0]->product_name;
+      $pro_describe=$cResult[0]->product_description;
+      $pro_pic=$cResult[0]->picture;
+
+      $response = array(
+                'id' => $pro_id,
+                'price'    => $pro_price,
+                'name' => $pro_name,
+                'description' => $pro_describe,
+                'picture' => $pro_pic,
+                'count'=>count($cookie_array)
+            );
+      $response = json_encode($response);
+      print_r($response);*/
+
+
+
+
+
+
+     //$cookie_array = unserialize($_COOKIE['product']);
+     //$keysHolder = array_keys($cookie_array);
+
+
       
 
-      /*
-        $cookie_count = unserialize($_COOKIE['product']);
+      
+       /* $cookie_count = unserialize($_COOKIE['product']);
         if(!in_array($product_id, $cookie_count)){
             $cookie_count[] = $product_id;
             $value = serialize($cookie_count);
 
             setcookie( 'product', $value, $date_of_expiry, "/" );
             echo count($cookie_count);
-        }
-      */
+        }*/
+      
 
     }
 
@@ -453,6 +492,9 @@ class IndexController extends ControllerBase
 
       $data['mult'] = $mult;
       $this->view->setVar(data,$data);
+
+
+      
 
 
     }

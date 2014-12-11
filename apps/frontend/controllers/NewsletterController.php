@@ -36,12 +36,15 @@ class NewsletterController extends ControllerBase
       $this->view->disable();
       $url= $_SERVER['HTTP_REFERER'];
       $prev=explode("/", $url);
-      
+     
+
       if (count($prev)>=6){
         $action=$prev[4];
         $method=$prev[5];
         $id=$prev[6];
       }
+      
+      
 
 
       

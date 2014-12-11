@@ -23,7 +23,7 @@
 .form-box{
 
     border: 1px solid #dadada;
-    height: 600px;
+    height: 570px;
     width: 100%;
     padding: 10px;
 
@@ -53,9 +53,113 @@
   padding-bottom: 10px;
 }
 
+#shop_pic{
+  padding-left: 0px;
+}
 
+.modal-footer {
+    border-top: 0px solid #e5e5e5;
+    margin-top: 15px;
+    padding: 19px 20px 20px;
+    text-align: right;
+}
+
+#proceed{
+  margin-top: 65px;
+  font-size: 18px;
+}
+
+#procd_pay{
+  margin-top: 27px;
+}
+
+
+#shopping_des{
+  margin-left:-12px;
+  margin-top: 3px;
+}
+
+#bag_price{
+  margin-top: 3px;
+}
+
+
+#remove_bag{
+  margin-top: -7px;
+}
+
+#separator{
+  border-top: 1px solid black;
+}
+
+.modal-footer {
+    border-top: none;
+    margin-top: -25px;
+    padding: 0px;
+    text-align: center;
+}
 
 </style>
+
+<script type="text/javascript">
+ function processWish(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var find = id.toString().concat(id.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url:base_url+"index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(find);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {
+        $('#notLoggedInModal').modal('show');
+         setTimeout( "jQuery('#notLoggedInModal').modal('hide');",3000 );
+      }
+       else if (result=="2") {
+        $('#productInWishlistModal').modal('show');
+        setTimeout( "jQuery('#productInWishlistModal').modal('hide');",3000 );
+      }
+       else if (result=="3") {
+        $('#productAddedInWishlist').modal('show');
+        setTimeout( "jQuery('#productAddedInWishlist').modal('hide');",3000 );
+      }
+ 
+    });
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wish').on('click', function(e) {
+
+//subcategories();
+ var wishId = e.target.id;
+
+ //clicked(idClicked);
+ processWish(wishId);
+
+  });
+});
+</script>
 
 <script type="text/javascript">
 
@@ -175,7 +279,7 @@ $.ajax({
 });
 
 $(function(){
-$('.cart-delete').on('click', function() {
+$('.glyphicon-remove-circle').on('click', function() {
     var base_url =<?php echo $this->url->get(); ?>;
 
       //$(this).parent('div').parent('div').slideUp('slow');
@@ -231,22 +335,22 @@ $('.cart-delete').on('click', function() {
          <div  class="col-md-12" id="prod_set">
         
           
-              <div class="col-md-3">
+              <div class="col-md-3" id="shop_pic">
                 <div class="image">
-                  <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>" style="width:100%;height:100px;"></img>
+                  <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>" style="width:100%;height:125px;"></img>
                 </div>
               </div>
 
               <div class="col-md-9" >
-                <div class="col-md-9" >
+                <div class="col-md-9" id="shopping_des" >
                   <a href="<?php echo $this->url->get("index/productdetails/" . $row->id); ?>" >
                       <?php echo $row->product_name; ?>
                   </a>
 
                    <div><?php echo $row->product_description; ?></div>
 
-                   <div class="pro_qty" style="width:25%">
-                    Quantity:
+                   <div class="pro_qty" style="width:25%" >
+                    Qty:
                     <?php $cookie_array = unserialize($_COOKIE['product']);?>
                      <input type="text" class="form-control quant-changed" id="<?php echo $row->id.",".$row->price; ?>" value="<?php echo $cookie_array[$row->id];?>"> &ensp; 
                      <span class="spin" id="<?php echo $row->id."spin"; ?>"></span>
@@ -254,25 +358,35 @@ $('.cart-delete').on('click', function() {
                 </div>
 
 
-                <div class="col-md-3" style="text_align:right;">
-                  <div ><b>Price:<?php echo $row->price; ?></b></div>
+                <div class="col-md-3" id="bag_price"style="text_align:right;">
+                  <div >BDT. <?php echo $row->price; ?></div>
                   <div  id="<?php echo $row->id."sub"; ?>" >
                     <?php $cookie_array = unserialize($_COOKIE['product']);?>
-                    <b>SubTotal:<?php echo intval($row->price)*intval($cookie_array[$row->id]); ?></b>
+                    BDT. <?php echo intval($row->price)*intval($cookie_array[$row->id]); ?>
                   </div>
-                </br>
+                  </br>
               
-                  <div >
-                  <a href="" data-toggle="modal" data-target="#cartDeleteModal<?php echo $row->id; ?>" style="color:#000000;">
-                    <span class="glyphicon glyphicon-shopping-cart" product_id="<?php echo $row->id; ?>">
-                      &ensp;Remove
-                    </span>
-                  </a>
+                  <div id="remove_bag">
+                    <a href="" data-toggle="modal" data-target="#cartDeleteModal<?php echo $row->id; ?>"  style="color:#000000;">
+                     <span class="glyphicon glyphicon-remove" product_id="<?php echo $row->id; ?>" ></span>
+                    </a>
+                    <a href="" data-toggle="modal" data-target="#cartDeleteModal<?php echo $row->id; ?>" style="color:#000000;">Remove
+                    </a>
                   </div>
                 </div>
 
-               
+                <div class="col-md-12" id="separator">
+                  <div class="col-md-6 wish" id="<?php echo $row->id; ?>" style="cursor:pointer; margin-left:-20px;">
+                   
+                      <i class="fa fa-star" style="color: #D21E21"></i>
+                    
+                        Add to Wish list
+                  </div>
 
+                </div>
+
+               
+                
                 
               </div>
 
@@ -283,14 +397,21 @@ $('.cart-delete').on('click', function() {
       <div class="modal fade" id="cartDeleteModal<?php echo $row->id; ?>" tabindex="-1" role="dialog" aria-labelledby="cartDeleteModal<?php echo $row->id; ?>" aria-hidden="true">
           <div class="modal-dialog">
               <div class="modal-content modal-margin-top">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                      <span class="sr-only">Close</span>
+                    </button>
+        
+                  </div>
                   <div class="modal-body">
                       <p>
                       <center> Do you really want to delete this product from your cart ? </center> 
                       </p>
                   </div> 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary cart-delete" product_id="<?php echo $row->id; ?>" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span>Cancel</span></button>
+                    <button type="button" class="btn btn-primary glyphicon-remove-circle " product_id="<?php echo $row->id; ?>" data-dismiss="modal">Delete</button>
                   </div> 
               </div>
           </div>
@@ -322,6 +443,8 @@ $('.cart-delete').on('click', function() {
 
             </font>
 
+            <div class="col-md-6">
+
             <button type="button" class="btn btn-default bg-button"> Get a Quote
             </button>
             
@@ -337,15 +460,10 @@ $('.cart-delete').on('click', function() {
             <button type="button" class="btn btn-default bg-button">Update Total
             </button> 
 
-
-
-
-    
           </div>
 
-          <div class="col-md-2 col-md-offset-6 ">
-
-              Subtotal: &ensp;&ensp; 
+          <div class="col-md-6" id="proceed">
+            Subtotal: &ensp;&ensp; 
               <span id="subtotal"><?php echo $data['mult']; ?></span>
               <br>
               
@@ -353,11 +471,15 @@ $('.cart-delete').on('click', function() {
               <span id="total"><?php echo $data['mult']; ?></span>
               <br>
               <p></p>
-              <button type="button" class="btn btn-default bg-button">Proceed to payment &ensp;<span class="glyphicon glyphicon-chevron-right"></span>
+              <button type="button" class="btn btn-default bg-button" id="procd_pay">Proceed to payment &ensp;<span class="glyphicon glyphicon-chevron-right"></span>
               </button> 
+            
 
+          </div>
     
-        </div>
+          </div>
+
+          
   
 
 
@@ -391,6 +513,78 @@ $('.cart-delete').on('click', function() {
             </div>
             
     </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+            
+            <div class="modal-body">
+                <p>
+                <center> You need to log in first. </center> 
+                </p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+            
+        </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productInWishlistModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+        
+            </div>
+            
+            <div class="modal-body">
+                <p>
+                <center> This product already exists in your wish list. </center> 
+                </p>
+            </div>
+            <div class="modal-footer">
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
+
+                Checkout
+              </a>
+            </div>
+            
+        </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productAddedInWishlist" tabindex="-1" role="dialog" aria-labelledby="productAddedInWishlist" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-margin-top">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+              </button>
+        
+            </div>
+            
+            <div class="modal-body">
+                <p>
+                <center> Wish list updated successfully. </center> 
+                </p>
+            </div>
+
+            <div class="modal-footer">
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
+
+                Checkout
+              </a>
+            </div>
+            
+        </div>
   </div>
 </div>
 

@@ -1,15 +1,53 @@
  <!-- mid menu part -->
 <style>
 
+
+
+.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
+
+.nav-tabs> li > a, .nav-tabs> li > a:hover {border: none; background-color: #ffffff;}
+
+.nav-tabs {border-bottom: none;}
+
 .hover {
     display: inline-block;
     overflow: hidden;
     position: relative;
     text-decoration:none;
-   
+  
+}
+
+.hover2 {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-decoration:none;
+    min-height: 312px;
+    vertical-align: top;
+
   
 }
 .hover .text {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 86%;
+    height:95%;
+    color: #ffffff;
+    text-align:center;
+    left: 15px;
+    top: 18px;
+    cursor: pointer;
+  
+   -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
+    transition: opacity 500ms;
+}
+
+.hover .text2 {
     display: none;
     background: rgba(0,0,0,0.5);
   
@@ -19,8 +57,9 @@
     height:100%;
     color: #ffffff;
     text-align:center;
-    left: 0;
-    top: 0;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
   
    -webkit-transition: opacity 500ms;
     -moz-transition: opacity 500ms;
@@ -28,25 +67,23 @@
     transition: opacity 500ms;
 }
 
+.product .item{
+  margin-bottom: 30px;
+}
+.hover:hover .text { display: block; opacity: .3; }
 
-
-
-.hover:hover .text { display: block; opacity: 1;}
+.hover:hover .text2 { display: block; opacity: .8;}
 
 .text .top_text{margin-top: 35%;}
+.text2 .top_text{margin-top: 35%;}
 
-.text .bottom_text{margin-top: 40%;}
 
-.text .bottom_text2{margin-top: 20%;}
 
-.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
+.cart{background-color: #a8a8a8; border:none; padding: 7px 12px; margin-top: 146px; color:#000; }
+.wish{background-color: #a8a8a8; border:none; padding: 7px 2px; margin-left: -2px; color:#000;}
 
-.nav-tabs> li > a, .nav-tabs> li > a:hover {border: none; background-color: #ffffff;}
-
-.nav-tabs {border-bottom: none;}
-
-.cart, .wish, .wishB, .cartB{background-color: #454545; border:none; }
-
+.cartC{background-color: #a8a8a8; border:none; padding: 7px 12px; color:#000;}
+.wishC{background-color: #a8a8a8; border:none; padding: 7px 12px; color:#000;}
 .mid-menu .active .item{
 
   border: 2px solid #cc0001;
@@ -60,14 +97,39 @@
   border:0px;
 }
 
-.price{
-  width:100px;
+.product_price{
+  margin-top: 9px;
+}
+
+.product .item{
+  margin-bottom: 0px;
 }
 
 
+.bottom_text2{
+  margin-bottom: 0px;
+  margin-left: 0;
+  width:104%;
+}
 
-
-
+.cart, .cartB{
+  background-color: #bcbcbc;
+  border:none; 
+  padding: 7px 5px; 
+  
+  color:#fff;
+  margin-left: -5px;
+  margin-right: -3px;
+  border:1px dotted #a8a8a8;
+}
+.wish,.wishB{
+  background-color: #bcbcbc;
+  border:none; 
+  padding: 7px 4px;
+  margin-left: 0px; 
+  color:#fff;
+  border:1px dotted #a8a8a8;
+}
 
 
 </style>
@@ -316,6 +378,66 @@ $('.wishB').on('click', function(e) {
 });
 
 
+function processWishC(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var find1 = id.toString().concat(id.toString()); 
+  var find11 = find1.toString().concat(id.toString());
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/wishlist",
+        data: { data1 : id, },
+        success: function(html)
+        {
+            //$('#'+find11).html(html);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            //console.log(find);
+            //alert("result");
+           // console.log(result);
+        }
+      })
+
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       if (result=="1") {$('#notLoggedInModal').modal('show');}
+       else if (result=="2") {$('#productInWishlistModal').modal('show');}
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+ 
+    });
+
+    
+
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.wishC').on('click', function(e) {
+
+//subcategories();
+ var wishIdB = e.target.id;
+ var wishIdB1 = wishIdB.toString().split(":")[0]; 
+
+ //clicked(idClicked);
+ processWishB(wishIdB1);
+
+  });
+
+
+});
+
+
 
 function processCart(id){
   var base_url =<?php echo $this->url->get(); ?>;
@@ -346,6 +468,7 @@ function processCart(id){
        //alert(result);
        console.log("test successful");
        console.log(result);
+
 
        //if (result=="") {$('#productExistCartModal').modal('show');}
        //else {$('#productAddedCartModal').modal('show');}
@@ -439,6 +562,7 @@ function processCartB(id){
        //alert(result);
        console.log("test successful");
        console.log(result);
+       window.location.href=window.location.href;
 
        //if (result=="") {$('#productExistCartModal').modal('show');}
        //else {$('#productAddedCartModal').modal('show');}
@@ -453,6 +577,102 @@ function processCartB(id){
 
 $(function(){
 $('.cartB').on('click', function(e) {
+
+//subcategories();
+ var cartIdB = e.target.id;
+ //var cartIdB1 = cartIdB.toString().split(":")[0];
+ //var cartIdB = $(this).attr('href');
+ //clicked(idClicked);
+ processCart(cartIdB);
+
+ //Fly effect
+
+ var cart = $('.shopping-cart-button .glyphicon-shopping-cart');
+         var imgtodrag = $(this).parent().siblings(".drag").children(".img-responsive").eq(0);
+        //var src = imgtodrag.attr("src");
+        //console.log("fly");
+        //console.log(src);
+        if (imgtodrag) {
+            var imgclone = imgtodrag.clone()
+                .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+                .css({
+                'opacity': '0.5',
+                    'position': 'absolute',
+                    'height': '150px',
+                    'width': '150px',
+                    'z-index': '100'
+            })
+                .appendTo($('body'))
+                .animate({
+                'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': 250,
+                    'height': 400
+            }, 1000, 'easeInOutExpo');
+            
+            setTimeout(function () {
+                cart.parent().effect("shake", {
+                    times: 2
+                }, 200);
+            }, 1500);
+
+            imgclone.animate({
+                'width': 0,
+                    'height': 0
+            }, function () {
+                $(this).detach()
+            });
+        }
+
+  });
+});
+
+
+function processCartC(id){
+  var base_url =<?php echo $this->url->get(); ?>;
+
+  var p_idB = id.toString().split(":")[0]; 
+
+  var msgB = p_idB.toString().concat(p_idB.toString()); 
+
+    $.ajax({
+
+        type: "POST",
+        url: base_url+"index/addtocart",
+        data: { data1 : p_idB, },
+        success: function(result)
+        {
+            //$("#my_count").html(html);
+            if(result!="")
+              $("#my_count").html(result);
+            //document.getElementById('write_'+id).html(html);
+            //location.reload();
+
+            //console.log();
+            console.log(p_idB);
+        }
+      })
+    .done(function(result) {
+       //alert(result);
+       console.log("test successful");
+       console.log(result);
+
+       //if (result=="") {$('#productExistCartModal').modal('show');}
+       //else {$('#productAddedCartModal').modal('show');}
+ 
+    });
+
+
+    //alert(id);
+
+   
+    }
+
+$(function(){
+$('.cartC').on('click', function(e) {
 
 //subcategories();
  var cartIdB = e.target.id;
@@ -546,6 +766,34 @@ $('.cartB').on('click', function(e) {
 
 </script>
 
+<script type="text/javascript">
+
+  $(document).ready(function() {
+     $('.bottom_text2').hide();
+
+     $('.hover2').hover(
+         function () {
+           //$(this).addClass("open");
+            var id = $(this).attr('id');
+            console.log(id);
+            
+             $('#'+id).children().children(".bottom_text2").show();
+             
+              
+            
+         }, 
+         function () {
+           //$(this).removeClass("open");
+             $('.bottom_text2').hide();
+             
+         }
+     );
+
+
+    });
+
+</script>
+
 
 <div role="tabpanel">
 <div class="container">
@@ -583,26 +831,26 @@ $('.cartB').on('click', function(e) {
     <div class="als-item ">
       <div class="hover">
 
-      <div class="item" id="top_item">
+      <div class="item" >
         
-        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+        <div class="text2"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
           <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
-          <div class="bottom_text">
-            <button class="cart" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
-              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
+          <div class="bottom_text2">
+            <button class="cartC" id="<?php echo $row->id; echo ":"; echo $row->id;?>" type="button" name="submit" value="test">
+              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp;&ensp; Add to Cart
             </button>
             &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
-            <button class="wish" id="<?php echo $row->id; ?>" type="button">
+            <button class="wishC" id="<?php echo $row->id; ?>" type="button">
               <span class="glyphicon glyphicon-heart"></span>
             </button>
           </div>
         </div>
         
-        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>" style="width : 200px; height : 250px;"></img>
+        <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>" style="width : 180px; height : 200px;"></img>
       
       </br>
-        <div class="price">Price: <?php echo $row->price; ?> </div>
+        <div class="product_price"></div>
       </div>
     
   </div>
@@ -638,7 +886,7 @@ $('.cartB').on('click', function(e) {
 
       <div class="item" id="top_item">
         
-        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+        <div class="text2"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
           <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
@@ -687,7 +935,7 @@ $('.cartB').on('click', function(e) {
 
       <div class="item" id="top_item">
         
-        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+        <div class="text2"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
           <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           <div id="<?php echo $row->id;echo $row->id; ?>"> </div>
           <div class="bottom_text">
@@ -748,27 +996,31 @@ $('.cartB').on('click', function(e) {
     <div class="col-md-9">
       <div class="row product">
        <?php foreach ($bottomResult as $row){?>
-        <div class="col-md-3 hover">
+        <div class="col-md-3 hover2" id="<?php echo $row->id ; ?>" >
+         
           <div class="item">
-        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".substr($row->product_description,0,19).'..'; ?></P>
-          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
-          <div id="<?php echo $row->id.$row->id.$row->id; ?>"> </div>
-          <div class="bottom_text2">
-            <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
-              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
-            </button>
-            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
-            <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
-              <span class="glyphicon glyphicon-heart"></span>
-            </button>
-          </div>
-        </div>            
-
-
-            <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
-            <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+ 
+            <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>" class="drag">
+              <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
+            </a>
+            <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>">
+              <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+            </a>
+            
             <div class="product-price">$<?php echo $row->price; ?></div>
+
+            <div class="bottom_text2" id="<?php echo $row->id ; ?>">
+              <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
+                <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to cart &ensp;
+              </button>
+              <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
+               <span>Add to Wishlist</span>
+              </button>
+
+            </div>
+            
           </div>
+
         </div>
        <?php }?>
          

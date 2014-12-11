@@ -1,43 +1,87 @@
 
 <style type="text/css">
-.hover {
+.hover2 {
     display: inline-block;
     overflow: hidden;
     position: relative;
-  text-decoration:none;
+    text-decoration:none;
+    min-height: 312px;
+    vertical-align: top;
+
   
 }
 .hover .text {
-    display: none;
+   
     background: rgba(0,0,0,0.5);
   
     opacity: 0;
     position: absolute;
-    width: 100%;
-    height:100%;
+    width: 86%;
+    height:95%;
     color: #ffffff;
     text-align:center;
-    left: 0;
-    top: 0;
+    left: 15px;
+    top: 18px;
   
-   -webkit-transition: opacity 500ms;
-     -moz-transition: opacity 500ms;
-     -o-transition: opacity 500ms;
+    -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
      transition: opacity 500ms;
 }
-.hover:hover .text { display: block; opacity: 1;}
 
-.text .top_text{margin-top: 35%;}
 
-.text .bottom_text{margin-top: 40%;}
 
-.text .bottom_text2{margin-top: 20%;}
-
-.cart, .wish, .wishB, .cartB{background-color: #454545; border:none; }
-
-.modal-margin-top{
-  margin-top: 40%;
+.product .item{
+  margin-bottom: 0px;
 }
+
+
+.bottom_text2{
+  margin-bottom: 0px;
+  margin-left: 0;
+  width:104%;
+}
+
+.cart, .cartB{
+  background-color: #bcbcbc;
+  border:none; 
+  padding: 7px 5px; 
+  
+  color:#fff;
+  margin-left: -5px;
+  margin-right: -3px;
+  border:1px dotted #a8a8a8;
+}
+.wish,.wishB{
+  background-color: #bcbcbc;
+  border:none; 
+  padding: 7px 4px;
+  margin-left: 0px; 
+  color:#fff;
+  border:1px dotted #a8a8a8;
+}
+
+
+
+#product_hov{
+
+  margin-bottom: 0;
+}
+
+.modal-footer {
+    border-top: none;
+    margin-top: -25px;
+    padding: 0px;
+    text-align: center;
+}
+
+.bottom-item-area .product .item{
+
+  margin-bottom: 25px;
+
+}
+
+
 
 </style>
 
@@ -72,9 +116,15 @@ function processWishB(id){
        console.log("test successful");
        console.log(result);
 
-       if (result=="1") {$('#notLoggedInModal').modal('show');}
-       else if (result=="2") {$('#productInWishlistModal').modal('show');}
-       else if (result=="3") {$('#productAddedInWishlist').modal('show');}
+       if (result=="1") {$('#notLoggedInModal').modal('show');
+        setTimeout( "jQuery('#notLoggedInModal').modal('hide');",3000 );
+      }
+       else if (result=="2") {$('#productInWishlistModal').modal('show');
+        setTimeout( "jQuery('#productInWishlistModal').modal('hide');",3000 );
+      }
+       else if (result=="3") {$('#productAddedInWishlist').modal('show');
+       setTimeout( "jQuery('#productAddedInWishlist').modal('hide');",3000 );
+     }
  
     });
 
@@ -115,6 +165,7 @@ function processCartB(id){
             //$("#my_count").html(html);
             if(result!="")
               $("#my_count").html(result);
+
             //document.getElementById('write_'+id).html(html);
             //location.reload();
 
@@ -122,10 +173,14 @@ function processCartB(id){
             console.log(p_idB);
         }
       })
-    .done(function(result) {
+      .done(function(result) {
        //alert(result);
        console.log("test successful");
        console.log(result);
+
+
+
+
 
        //if (result=="") {$('#productExistCartModal').modal('show');}
        //else {$('#productAddedCartModal').modal('show');}
@@ -151,7 +206,7 @@ $('.cartB').on('click', function(e) {
  //Fly effect
 
  var cart = $('.shopping-cart-button .glyphicon-shopping-cart');
-        var imgtodrag = $(this).parent().parent().siblings(".img-responsive").eq(0);
+        var imgtodrag = $(this).parent().siblings(".drag").children(".img-responsive").eq(0);
         //var src = imgtodrag.attr("src");
         //console.log("fly");
         //console.log(src);
@@ -198,10 +253,6 @@ $('.cartB').on('click', function(e) {
 
 
 
-
-
-
-
 <style type="text/css">
 .search-box{
   border: 1px solid #dadada;
@@ -221,36 +272,49 @@ $('.cartB').on('click', function(e) {
     font-size: 16px;
 }
 
-.mg-image img {
-    -webkit-transition: all 1s ease; /* Safari and Chrome */
-    -moz-transition: all 1s ease; /* Firefox */
-    -o-transition: all 1s ease; /* IE 9 */
-    -ms-transition: all 1s ease; /* Opera */
-    transition: all 1s ease;
-        max-width: 100%;
-}
-.mg-image:hover img {
-    -webkit-transform:scale(1.25); /* Safari and Chrome */
-    -moz-transform:scale(1.25); /* Firefox */
-    -ms-transform:scale(1.25); /* IE 9 */
-    -o-transform:scale(1.25); /* Opera */
-    transform:scale(1.25);
-}
+
 </style>
 
+<script type="text/javascript">
+
+  $(document).ready(function() {
+     $('.bottom_text2').hide();
+
+     $('.hover2').hover(
+         function () {
+           //$(this).addClass("open");
+            var id = $(this).attr('id');
+            console.log(id);
+            
+             $('#'+id).children().children(".bottom_text2").show();
+             
+              
+            
+         }, 
+         function () {
+           //$(this).removeClass("open");
+             $('.bottom_text2').hide();
+             
+         }
+     );
+
+
+    });
+
+</script>
 
 <div class="container bottom-item-area">
 
-	<div class="col-md-3">    
+  <div class="col-md-3">    
        <div class="search-box">REFINE BY</div>
       
        <form id='search-form' action="" mathod="get">
-      	<p><br><span class="caret"></span>MAKE UP <br></p>
+        <p><br><span class="caret"></span>MAKE UP <br></p>
 
         <div class="search-box search-box-text">
 
-      	 <div style="overflow-y:scroll; height:210px;">
-      	  
+         <div style="overflow-y:scroll; height:210px;">
+          
           <?php echo $form->render("accessories"); ?>
           <label>Accessories</label> <br>
 
@@ -322,8 +386,8 @@ $('.cartB').on('click', function(e) {
 
         <div class="search-box search-box-text">
          <div style="overflow-y:scroll; height:210px;">
-      	  
-      	  
+          
+          
           <?php echo $form->render("pop"); ?>
           <label>Pop</label> <br>
 
@@ -356,8 +420,8 @@ $('.cartB').on('click', function(e) {
 
 
         <p><br><span class="caret"></span>COLOUR<br></p>
-      	  
-      	<div class="search-box search-box-text">  
+          
+        <div class="search-box search-box-text">  
           <?php echo $form->render("beige"); ?>
           <label>Beige</label> <br>
 
@@ -376,8 +440,8 @@ $('.cartB').on('click', function(e) {
 
         <p><br><span class="caret"></span>STYLE<br></p>
 
-      	<div class="search-box search-box-text">  
-      	  
+        <div class="search-box search-box-text">  
+          
           <?php echo $form->render("beige"); ?>
           <label>Body & Face</label> <br>
 
@@ -396,35 +460,40 @@ $('.cartB').on('click', function(e) {
     <div class="col-md-9">
       <div class="row product">
        <?php foreach ($Product->items as $row){?>
-        <div class="col-md-3 hover">
+       
+        <div class="col-md-3 hover2" id="<?php echo $row->id ; ?>" >
+         
           <div class="item">
-        <div class="text"><p class="top_text"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".substr($row->product_description,0,19).'..'; ?></P>
-          <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
-          <div id="<?php echo $row->id.$row->id.$row->id; ?>"> </div>
-          <div class="bottom_text2">
-            <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
-              <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to Cart
-            </button>
-            &ensp; <i class="fa fa-minus fa-rotate-90"></i> &ensp;
-            <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
-              <span class="glyphicon glyphicon-heart"></span>
-            </button>
-          </div>
-        </div>            
-
-            <div class="mg-image">
+ 
+            <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>" class="drag">
               <img class="img-responsive" src="<?php echo $this->url->get().$row->picture;?>"></img>
-            </div>
-            <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+            </a>
+            <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>">
+              <div class="product-name"><?php echo substr($row->product_name,0,18);?></div>
+            </a>
+            
             <div class="product-price">$<?php echo $row->price; ?></div>
+
+            <div class="bottom_text2" id="<?php echo $row->id ; ?>">
+              <button class="cartB" id="<?php echo $row->id.":".$row->id.":".$row->id;?>" type="button" name="submit" value="test">
+                <span class="glyphicon glyphicon-shopping-cart"></span>&ensp; Add to cart &ensp;
+              </button>
+              <button class="wishB" id="<?php echo $row->id.":".$row->id; ?>" type="button">
+               <span>Add to Wishlist</span>
+              </button>
+
+            </div>
+            
           </div>
+
         </div>
+      
        <?php }?>
          
       </div> <!-- row ends !-->
       <div class="row" style="padding-top: 50px;">
        <div class="col-md-10 col-md-offset-2">
-      	<ul class="pager"  style="text-align: left; margin: 10px 0;">
+        <ul class="pager"  style="text-align: left; margin: 10px 0;">
             <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
             <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']); ?>">First</a></li>
             <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']."?page=" . $Product->before); ?>">Previous</a></li>
@@ -449,25 +518,51 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
-            
+            <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             <div class="modal-body">
                 <p>
                 <center> You need to log in first. </center> 
                 </p>
             </div>
+
+            <div class="modal-footer">
+              <a href="<?php echo $this->url->get().'session/index/';?>" class="btn btn-md btn-primary">
+
+                Sign In
+              </a>
+            </div>
             
-    </div>
+        </div>
   </div>
 </div>
 
 <div class="modal fade" id="productInWishlistModal" tabindex="-1" role="dialog" aria-labelledby="productInWishlistModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
-            
+            <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             <div class="modal-body">
                 <p>
                 <center> This product already exists in your wish list. </center> 
                 </p>
+            </div>
+
+            <div class="modal-footer">
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
+
+                Checkout
+              </a>
             </div>
             
     </div>
@@ -477,11 +572,24 @@ $('.cartB').on('click', function(e) {
 <div class="modal fade" id="productAddedInWishlist" tabindex="-1" role="dialog" aria-labelledby="productAddedInWishlist" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
-            
+            <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             <div class="modal-body">
                 <p>
                 <center> Wish list updated successfully. </center> 
                 </p>
+            </div>
+
+            <div class="modal-footer">
+             <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
+
+                Checkout
+              </a>
             </div>
             
     </div>
