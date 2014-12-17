@@ -56,6 +56,45 @@ class CategoryController extends ControllerBase
         ));
 
         $shop_name->setOptions($container);*/
+        /*retrive the shop id query variable. If it is set, keep the corresponding radio button checked after in the search
+        result page*/ 
+
+        if ($this->request->isGet()) {
+            # code...
+            if ($this->request->hasQuery('shop_id')) {
+                # code...
+                $shop_id_checked = $this->request->getQuery('shop_id');
+                $data['checked'] = $shop_id_checked;
+            }
+        }
+
+
+        //Shop name
+        $shop_collection = ShopMaster::find();
+        /* Since phalcon 1.2.4 does not support Form\Element\Radio i am not using form helper in this case. An array to 
+         store the shop names and id to pass to the view. It will help to render the form elements in view since ids of 
+         these checkboxes are corresponding shop names. */
+        $shop_names =  array();
+        foreach ($shop_collection as $shop) {
+            # code...
+            /*
+            if ((isset($shop_id_checked)) && ($shop->id == $shop_id_checked)) {
+                # code...
+                $form->add(new Check($shop->shop_name , 
+                array('value' => $shop->id,
+                      'name' => 'shop_id',
+                      //'checked' => 'checked',
+                      'onchange' => 'submit_form()')));
+            }
+            else{
+                $form->add(new Check($shop->shop_name , 
+                array('value' => $shop->id,
+                      'name' => 'shop_id',
+                      'onchange' => 'submit_form()')));
+            }
+            */
+            $shop_names[$shop->id] = $shop->shop_name; 
+        }
 
         $form->add(new Check("accessories"));
         $form->add(new Check("bronzers_and_blushers"));
@@ -114,24 +153,41 @@ class CategoryController extends ControllerBase
         //->getQuery()->execute();
         //CAST(`type` AS SIGNED) CAST('Biz_mela\Models\ProductMaster.price' AS SIGNED) CAST(PROD_CODE AS INT)
 
-        if (($this->request->isGet()) && ($this->request->hasQuery('limit_low')) && ($this->request->hasQuery('limit_high')))
-        {
-            $low = $this->request->getQuery('limit_low');
+        if ($this->request->isGet())
+        {   if($this->request->hasQuery('limit_low')){
+              $low = $this->request->getQuery('limit_low');
+              $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price >= '.$low);
+              $range['low'] = $low;
+            }
 
-            $high = $this->request->getQuery('limit_high');
+
+            if($this->request->hasQuery('limit_high')){
+              $high = $this->request->getQuery('limit_high');
+              $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price <= '.$high);
+              $range['high'] = $high;
+              $this->view->setVar(range,$range);
+
+            }
+
+            if ($this->request->hasQuery('shop_id')) {
+                # code...
+                $shop_id = $this->request->getQuery('shop_id');
+                $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.shop_id = '.$shop_id);
+
+            }
+
+            //$high = $this->request->getQuery('limit_high');
             //$low=1000;
             //$low = $this->request->getQuery('limit_low');
            // $bottomResult =  $bottomResult->betweenWhere('Biz_mela\Models\ProductMaster.price', $low, $high);
             //->andWhere('Biz_mela\Models\ProductMaster.id != :name1:', array('name1' => $value))
-            $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price >= '.$low);
-            $bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price <= '.$high);
+            
+            //$bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price <= '.$high);
             //$bottomResult = $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price <= :name1:', array('name1' => $high));
             //$bottomResult =  $bottomResult->betweenWhere(CAST('Biz_mela\Models\ProductMaster.price' AS INT), $low, $high);
             //$bottomResult =  $bottomResult->andWhere('Biz_mela\Models\ProductMaster.price < :high_value:', array('high_value' => $this->request->getQuery('limit_high')));
-            $range['low'] = $low;
-            $range['high'] = $high;
-            $this->view->setVar(range,$range);
-
+            
+            
 
         }
 
@@ -147,6 +203,7 @@ class CategoryController extends ControllerBase
         $page['value'] = $value;
         $this->view->setVars($page);
         $this->view->setVar(data,$data);
+        $this->view->setVar(shop_names,$shop_names);
         
 
     }
