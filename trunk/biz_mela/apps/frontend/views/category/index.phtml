@@ -303,12 +303,47 @@ $('.cartB').on('click', function(e) {
 
 </script>
 
+<script type="text/javascript">
+
+ function submit_form(){
+  //document.getElementById("search-form").submit();
+  $("#search-form").submit();
+ }
+
+</script>
+
 <div class="container bottom-item-area">
 
   <div class="col-md-3">    
        <div class="search-box">REFINE BY</div>
       
        <form id='search-form' action="" mathod="get">
+        <p><br><span class="caret"></span>SHOP <br></p>
+
+        <div class="search-box search-box-text">
+
+         <div style="overflow-y:scroll; height:210px;">
+          <?php 
+             foreach ($shop_names as $id => $name) {
+               # code...
+              if ((isset($data['checked'])) && ($data['checked'] == $id)) {
+                # code...
+                echo '<input type="radio" name="shop_id" checked="checked" onchange="submit_form()" value="'.$id.'">';
+              }
+              else{
+                echo '<input type="radio" name="shop_id" onchange="submit_form()" value="'.$id.'">';
+              }
+              echo '<label>'.'&nbsp;'.$name.'</label><br>';
+             }
+
+             //echo $shop_id_checked;
+
+          ?>
+         </div>
+
+        </div>
+
+
         <p><br><span class="caret"></span>MAKE UP <br></p>
 
         <div class="search-box search-box-text">
@@ -357,7 +392,7 @@ $('.cartB').on('click', function(e) {
           <?php if(isset($range['low']) && isset($range['high'])) 
                   $temp = $range['low'].";".$range['high'];
 
-                  else $temp = "0;60000"; 
+                  else $temp = "0;100000"; 
           ?> 
           value="<?php echo $temp; ?>" 
           />  
