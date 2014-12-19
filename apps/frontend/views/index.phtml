@@ -40,6 +40,7 @@
 
     <!-- jquery integration -->
     <?php echo \Phalcon\Tag::javascriptInclude("jquery/jquery-1.11.1.min.js"); ?>
+    
     <?php echo \Phalcon\Tag::javascriptInclude("jquery/jquery-migrate-1.2.1.min.js"); ?>
 
     <!-- bootstrap integration -->
@@ -172,10 +173,16 @@ $('.glyphicon-remove-circle').on('click', function() {
         type: "POST",
         url: base_url+"index/updateCookie",
         data: { data1 : pId, },
-        success: function(html)
+        success: function(the_result)
         {
             //$("#sub_cat_id").html(html);
-            $("#my_count").html(html);
+             the_result = the_result.split(",");
+            count = the_result[0];
+            console.log("count is"+count);
+            stotal = the_result[1];
+            console.log("total is"+stotal);
+            $("#my_count").html(count);
+            //$("#my_count").html(html);
         }
       });
 
@@ -389,7 +396,7 @@ $('.glyphicon-remove-circle').on('click', function() {
         <div class="col-md-6 ">
           <div class="input-group">
             <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword ">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+            <span class="input-group-addon" ><span class="glyphicon glyphicon-search" ></span></span>
           </div>
         </div>
       </form>
@@ -844,7 +851,7 @@ $(document).ready(function(){
                //echo "<table><tr>";
                foreach ($categories as $entry){
                 $product_data = ProductMaster::find("cat_id="."'".$entry->id."'");
-                echo '<td><a href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'&ensp;<span class="badge">'.count($product_data).'</span>'.'</a></td>';
+                echo '<td><a class="fifth_menu" href="'.$this->url->get()."category/index/".$entry->id.'">'.$entry->cat_name.'&ensp;<span class="badge">'.count($product_data).'</span>'.'</a></td>';
                 $count++;
                 if ($count%3 == 0){
                     if($count >= count($categories))

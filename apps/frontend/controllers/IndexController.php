@@ -309,7 +309,28 @@ class IndexController extends ControllerBase
         //$value = serialize($cookie_count);
 
       setcookie( 'product', serialize($cookie_array), $date_of_expiry, "/" );
-      echo count($cookie_array);
+     // echo count($cookie_array);
+
+
+      // after delete total calculation 
+
+     
+      $mult = intval(0);
+      foreach ($cookie_array as $key => $value) {
+        $unitPrice = ProductMaster::findFirst("id="."'".$key."'")->price;
+        $mult += intval($unitPrice) * intval($value);
+      }
+
+        //$featured = array('$cookie_array' => '$mult');
+      //$featured = new array();
+      //$featured['count'] = count($cookie_array);
+      //$featured['subtotal'] = $mult;
+      $featured = count($cookie_array).','.$mult;
+      //$featured = 'test';
+
+      //print_r($featured);
+      echo $featured;
+
 
     }
 

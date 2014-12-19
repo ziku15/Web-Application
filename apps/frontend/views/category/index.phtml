@@ -460,35 +460,9 @@ $('.cartB').on('click', function(e) {
 
 
 
-        <p><br><span class="caret"></span>COLOUR<br></p>
-          
-        <div class="search-box search-box-text">  
-          <?php echo $form->render("beige"); ?>
-          <label>Beige</label> <br>
 
-          <?php echo $form->render("blue"); ?>
-          <label>Blue</label> <br>
 
-          <?php echo $form->render("clear"); ?>
-          <label>Clear</label> <br>
 
-          <?php echo $form->render("cream"); ?>
-          <label>Cream</label> <br>
-
-          <?php echo $form->render("green"); ?>
-          <label>Green</label> <br>
-        </div>
-
-        <p><br><span class="caret"></span>STYLE<br></p>
-
-        <div class="search-box search-box-text">  
-          
-          <?php echo $form->render("beige"); ?>
-          <label>Body & Face</label> <br>
-
-          <?php echo $form->render("blue"); ?>
-          <label>Cleanse & Tone</label> <br>
-        </div>
 
         </form>
       
@@ -532,17 +506,7 @@ $('.cartB').on('click', function(e) {
        <?php }?>
          
       </div> <!-- row ends !-->
-      <div class="row" style="padding-top: 50px;">
-       <div class="col-md-10 col-md-offset-2">
-        <ul class="pager"  style="text-align: left; margin: 10px 0;">
-            <li><?php echo "You are in page ", $Product->current, " of ", $Product->total_pages; ?></li>
-            <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']); ?>">First</a></li>
-            <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']."?page=" . $Product->before); ?>">Previous</a></li>
-            <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']."?page=" . $Product->next); ?>">Next</a></li>
-            <li><a href="<?php echo $this->url->get("category/index/".$data['category_id']."?page=" . $Product->last); ?>">Last</a></li>   
-       </ul>
-       </div>
-      </div>
+
 
 
 
