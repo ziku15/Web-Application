@@ -85,6 +85,8 @@
 
 </style>
 
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/topmenu.css"); ?>
+
 <script type="text/javascript">
 
 function processWishB(id){
@@ -203,6 +205,8 @@ $('.cartB').on('click', function(e) {
  //clicked(idClicked);
  processCartB(cartIdB);
 
+
+
  //Fly effect
 
  var cart = $('.shopping-cart-button .glyphicon-shopping-cart');
@@ -230,6 +234,7 @@ $('.cartB').on('click', function(e) {
                     'width': 250,
                     'height': 400
             }, 1000, 'easeInOutExpo');
+
             
             setTimeout(function () {
                 cart.parent().effect("shake", {
@@ -242,6 +247,7 @@ $('.cartB').on('click', function(e) {
                     'height': 0
             }, function () {
                 $(this).detach()
+                location.reload();
             });
         }
 
@@ -517,11 +523,11 @@ $('.cartB').on('click', function(e) {
                <span>Add to Wishlist</span>
               </button>
 
-            </div>
+            </div> <!--button_text2 -->
             
-          </div>
+          </div> <!--item -->
 
-        </div>
+        </div><!--hover 2 -->
       
        <?php }?>
          

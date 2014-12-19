@@ -19,6 +19,7 @@
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/start.css"); ?>
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/cart.css"); ?>
     <?php echo \Phalcon\Tag::stylesheetLink("main/css/modal.css"); ?>
+    <?php echo \Phalcon\Tag::stylesheetLink("main/css/topmenu.css"); ?>
 
     
 
@@ -136,7 +137,21 @@
   color:#106e96;
 }
 
+.hover:hover{
+  opacity:0.50;
+}
 
+.price {
+    background-color: #bcbcbc;
+    
+    color: #717171;
+    display: table;
+    font-size: 12px;
+    height: 20px;
+    margin: 1px auto auto;
+    padding: 5px;
+    width: 100px;
+}
 
 </style>
 
@@ -550,8 +565,8 @@ $(document).ready(function(){
   <div class="main-menu container container-custom">
     <div class="btn-group one">
         <span data-toggle="dropdown" class="dropdown-toggle">Category 1</span>
-            <ul class="one-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
-              <div class="col-md-12">
+            <ul class="one-menu dropdown-menu" style="width : 285%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12" style="width:575px;">
               
                
               <?php 
@@ -580,7 +595,7 @@ $(document).ready(function(){
                 foreach ($relatedProducts as $product) {?>
                   <div class="col-md-3 hover" id="prod_pic">
                     <div class="item">
-                      <div class="text">
+                      <div class="text2">
                         <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
                         <p style="color:#fff;">Price:<?php echo $product->price?></p>
                           <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
@@ -592,7 +607,7 @@ $(document).ready(function(){
                       </div>
                     </div>
               
-                    <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px; "></img>
+                    <img  src="<?php echo $this->url->get().$product->picture;?>" width="110px" style="height:215px; padding:15px; "></img>
                     <div class="price" id="ind_price" >Price:<?php echo $product->price; ?> </div>
                   </div>
 
@@ -620,8 +635,8 @@ $(document).ready(function(){
 
     <div class="btn-group two">
         <span data-toggle="dropdown" class="dropdown-toggle">Category 2</span>
-            <ul class="two-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
-              <div class="col-md-12">
+            <ul class="two-menu dropdown-menu" style="width : 270%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12" style="width:575px;">
               
                
               <?php 
@@ -647,7 +662,7 @@ $(document).ready(function(){
                 foreach ($relatedProducts as $product) {?>
                   <div class="col-md-3 hover" id="prod_pic">
                     <div class="item">
-                      <div class="text">
+                      <div class="text2">
                         <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
                         <p style="color:#fff;">Price:<?php echo $product->price?></p>
                           <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
@@ -659,14 +674,14 @@ $(document).ready(function(){
                       </div>
                     </div>
               
-                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px;"></img>
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="110px" style="height:215px; padding:15px;"></img>
                 <div class="price" style="color:#000">Price:<?php echo $product->price; ?> </div>
                   </div>
 
              <?php } ?>
 
             </div>
-            <div class="col-md-5 col-md-offset-7" id="all_cat">
+            <div class="col-md-5 col-md-offset-7" id="all_cat_else">
 
               <?php
               $categories = ProductCategory::findFirst(2);
@@ -685,8 +700,8 @@ $(document).ready(function(){
 
     <div class="btn-group three">
         <span data-toggle="dropdown" class="dropdown-toggle">Category 3</span>
-            <ul class="three-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
-              <div class="col-md-12">
+            <ul class="three-menu dropdown-menu" style="width : 270%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12" style="width:575px;">
               
                
               <?php 
@@ -712,7 +727,7 @@ $(document).ready(function(){
                 foreach ($relatedProducts as $product) {?>
                   <div class="col-md-3 hover" id="prod_pic">
                     <div class="item">
-                      <div class="text">
+                      <div class="text2">
                         <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
                         <p style="color:#fff;">Price:<?php echo $product->price?></p>
                           <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
@@ -724,7 +739,7 @@ $(document).ready(function(){
                       </div>
                     </div>
               
-                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px;"></img>
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="110px" style="height:215px; padding:15px;"></img>
                 <div class="price" style="color:#000">Price:<?php echo $product->price; ?> </div>
                   </div>
 
@@ -732,7 +747,7 @@ $(document).ready(function(){
 
             </div>
 
-            <div class="col-md-5 col-md-offset-7" id="all_cat">
+            <div class="col-md-5 col-md-offset-7" id="all_cat_else">
 
               <?php
               $categories = ProductCategory::findFirst(3);
@@ -751,8 +766,8 @@ $(document).ready(function(){
     </div>
      <div class="btn-group four">
         <span data-toggle="dropdown" class="dropdown-toggle">Category 4</span>
-            <ul class="four-menu dropdown-menu" style="width : 250%; margin: 0; padding-top: 0px;">
-              <div class="col-md-12">
+            <ul class="four-menu dropdown-menu" style="width : 270%; margin: 0; padding-top: 0px;">
+              <div class="col-md-12" style="width:575px;">
               
                
               <?php 
@@ -778,7 +793,7 @@ $(document).ready(function(){
                 foreach ($relatedProducts as $product) {?>
                   <div class="col-md-3 hover" id="prod_pic">
                     <div class="item">
-                      <div class="text">
+                      <div class="text2">
                         <p class="top_text" style="color:#fff;"><?php echo $product->product_name?></p>
                         <p style="color:#fff;">Price:<?php echo $product->price?></p>
                           <a href="<?php echo $this->url->get().'index/productdetails/'.$product->id;?>"><font color="white">
@@ -790,7 +805,7 @@ $(document).ready(function(){
                       </div>
                     </div>
               
-                <img  src="<?php echo $this->url->get().$product->picture;?>" width="100px" style="height:200px; padding:15px;"></img>
+                <img  src="<?php echo $this->url->get().$product->picture;?>" width="110px" style="height:215px; padding:15px; "></img>
                 <div class="price" style="color:#000">Price:<?php echo $product->price; ?> </div>
                   </div>
 
@@ -798,7 +813,7 @@ $(document).ready(function(){
 
             </div>
 
-            <div class="col-md-5 col-md-offset-7" id="all_cat">
+            <div class="col-md-5 col-md-offset-7" id="all_cat_else">
 
               <?php
               $categories = ProductCategory::findFirst(4);
@@ -905,6 +920,7 @@ $(document).ready(function(){
             success: function (data) {
                //alert(data);
                console.log("in success funvcc");
+               console.log(data);
                 
             },
            
@@ -970,14 +986,27 @@ $(document).ready(function(){
           
         }
 
-        else {console.log("home page failure");
+        else if (result=="14") { 
+         $('#generalsubscribtion').modal('show');
+          setTimeout( "jQuery('#generalsubscribtion').modal('hide');",3000 );
+          $("#subs_form")[0].reset();
+          console.log("4");
+          
+        }
+
+        else {
+
+          console.log("home page failure");
               //console.log(result);
-              }
+            }
 
 
     });
     } else {
-         alert("Type Your Mail");
+         //alert("Type Your Mail");
+         $('#noemail').modal('show');
+         setTimeout( "jQuery('#noemail').modal('hide');",3000 );
+
     }
   });
 

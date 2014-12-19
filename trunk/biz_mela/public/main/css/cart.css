@@ -120,8 +120,12 @@ table{
 
 #all_cat{
   padding-top: 10px;
+  margin-left: 359px;
 }
-
+#all_cat_else{
+  padding-top: 10px;
+  margin-left: 359px;
+}
 .price{
   border: 1px solid #dadada;
   color:#717171;

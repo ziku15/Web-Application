@@ -1,0 +1,150 @@
+.hover {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+  text-decoration:none;
+  
+}
+
+
+.hover .text {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+    text-align:center;
+    left: 0;
+    top: 0;
+  
+   -webkit-transition: opacity 500ms;
+     -moz-transition: opacity 500ms;
+     -o-transition: opacity 500ms;
+     transition: opacity 500ms;
+}
+.hover:hover .text { display: block; opacity: 1;}
+
+.text .top_text{margin-top: 35%;}
+
+.text .bottom_text{margin-top: 40%;}
+
+.text .bottom_text2{margin-top: 20%;}
+
+.nav-tabs> li.active > a, .nav-tabs> li.active > a:hover, .nav-tabs> li.active > a:focus {border-width: 0;}
+
+.nav-tabs> li > a, .nav-tabs> li > a:hover {border: none; background-color: #ffffff;}
+
+.nav-tabs {border-bottom: none;}
+
+
+
+.mid-menu .active .item{
+
+  border: 2px solid #cc0001;
+}
+
+.modal-margin-top{
+  margin-top: 40%;
+}
+
+.cartC{
+  background-color: #bcbcbc;
+  border:none; 
+  padding: 7px 5px; 
+  
+  color:#fff;
+  margin-left: -5px;
+  margin-right: -3px;
+  border:1px dotted #a8a8a8;
+  width:50%;
+}
+.wishC{
+  background-color: #bcbcbc;
+  border:none; 
+  padding: 7px 4px;
+  margin-left: 0px; 
+  color:#fff;
+  border:1px dotted #a8a8a8;
+  width:50%;
+}
+
+.modal-margin-top{
+  margin-top: 30%;
+}
+
+.modal-footer {
+    border-top: none;
+    margin-top: -25px;
+    padding: 0px;
+    text-align: center;
+}
+
+.modal-footer button{
+    width: 30%;
+}
+
+.hover3 {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-decoration:none;
+    min-height: 312px;
+    vertical-align: top;
+
+  
+}
+
+.bottom_text3{
+
+  width:106%;
+}
+
+.drag>img{
+
+  height:250px;
+}
+
+
+/** for collection big items **/
+
+.hover5 {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-decoration:none;
+    min-height: 365px;
+    vertical-align: top;
+
+  
+}
+
+.product_name{
+
+  width:100%;
+  text-align: center;
+}
+
+.item-area .item .product-name {
+    border: 1px solid #dadada;
+    color: #595959;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px;
+    text-align: center;
+}
+.item-area .item .product-price {
+    background-color: #bcbcbc;
+    color: white;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.bottom_text4 {
+    margin-left: 5px;
+    width: 100%;
+}

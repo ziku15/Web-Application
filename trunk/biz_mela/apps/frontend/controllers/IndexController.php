@@ -62,15 +62,15 @@ class IndexController extends ControllerBase
         $this->view->setVar(bestResult,$bestResult);
 
         $bottomResult = $this->modelsManager->createBuilder()
-        ->from('Biz_mela\Models\ProductMaster')
-        ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
-        ->join('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->from('Biz_mela\Models\ProductMaster')
+                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
+                  ->join('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
+                  ->orderBy('Biz_mela\Models\ProductMaster.id ')
+                  ->limit(16)
         
-        ->limit(16)
-        
-        ->getQuery()
+                  ->getQuery()
 
-        ->execute();
+                  ->execute();
         $this->view->setVar(bottomResult,$bottomResult);
 
         
