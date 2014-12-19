@@ -1,0 +1,104 @@
+.als-container {
+  position: relative;
+  width: 100%;
+  margin: 0px auto;
+  z-index: 0;
+}
+
+/****************************************
+ * viewport styling
+ ***************************************/
+
+.als-viewport {
+  position: relative;
+  overflow: hidden;
+  margin: 0px auto;
+  height:362px;
+  width:960px;
+}
+
+
+
+
+/***************************************************
+ * wrapper styling
+ **************************************************/
+
+.als-wrapper {
+  position: relative;
+  width:1920px;
+  height:393px;
+  /* if you are using a list with <ul> <li> */
+  
+}
+
+.als-wrapper-hot {
+  position: relative;
+  width:1920px;
+  height:393px;
+  /* if you are using a list with <ul> <li> */
+  
+}
+
+.als-wrapper-best {
+  position: relative;
+  width:1920px;
+  height:393px;
+  /* if you are using a list with <ul> <li> */
+  
+}
+
+/*************************************
+ * item: single list element
+ ************************************/
+
+#my-als-list .als-item {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+  
+
+}
+
+#my-als-list-hot .als-item {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+  
+
+}
+
+#my-als-list-best .als-item {
+  position: relative;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  float: left;
+  
+
+}
+
+
+
+.als-item{
+  margin-top: 40px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+}
+
+
+
+/***********************************************
+ * prev, next: buttons styling
+ **********************************************/
+ 
+.als-prev, .als-next {
+  position: absolute;
+  cursor: pointer;
+  clear: both;
+}

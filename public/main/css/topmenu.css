@@ -1,0 +1,39 @@
+.hover {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-decoration:none;
+  
+}
+
+
+.hover .text2 {
+    display: none;
+    background: rgba(0,0,0,0.5);
+  
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+    text-align:center;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+  
+   -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
+    transition: opacity 500ms;
+}
+
+#prod_pic {
+    width: 25%;
+}
+
+.text2 .top_text {
+    margin-top: 35%;
+}
+
+
+.hover:hover .text2 { display: block; opacity: .8;}

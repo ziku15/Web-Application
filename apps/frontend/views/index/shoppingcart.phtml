@@ -57,12 +57,7 @@
   padding-left: 0px;
 }
 
-.modal-footer {
-    border-top: 0px solid #e5e5e5;
-    margin-top: 15px;
-    padding: 19px 20px 20px;
-    text-align: right;
-}
+
 
 #proceed{
   margin-top: 65px;
@@ -92,11 +87,19 @@
   border-top: 1px solid black;
 }
 
+.modal-margin-top{
+  margin-top: 30%;
+}
+
 .modal-footer {
     border-top: none;
     margin-top: -25px;
     padding: 0px;
     text-align: center;
+}
+
+.modal-footer button{
+    width: 30%;
 }
 
 </style>
@@ -445,25 +448,25 @@ $('.glyphicon-remove-circle').on('click', function() {
 
             <div class="col-md-6">
 
-            <button type="button" class="btn btn-default bg-button"> Get a Quote
-            </button>
-            
-            <p><br></p>
-            Shipping Method<br>
-            <input type="radio" name="home_delivery" value="home_delivery"><font color="#D1D1D1">Home Delivery: Tk 60</font><br>
+              <button type="button" class="btn btn-default bg-button"> Get a Quote
+              </button>
+              
+              <p><br></p>
+              Shipping Method<br>
+              <input type="radio" name="home_delivery" value="home_delivery"><font color="#D1D1D1">Home Delivery: Tk 60</font><br>
 
-            Pickup from office<br>
-            <input type="radio" name="pick_from_office" value="pick_from_office"><font color="#D1D1D1">Free Tk 0 </font><br>
+              Pickup from office<br>
+              <input type="radio" name="pick_from_office" value="pick_from_office"><font color="#D1D1D1">Free Tk 0 </font><br>
 
-            <p></p>
+              <p></p>
 
-            <button type="button" class="btn btn-default bg-button">Update Total
-            </button> 
+              <button type="button" class="btn btn-default bg-button">Update Total
+              </button> 
 
           </div>
 
           <div class="col-md-6" id="proceed">
-            Subtotal: &ensp;&ensp; 
+              Subtotal: &ensp;&ensp; 
               <span id="subtotal"><?php echo $data['mult']; ?></span>
               <br>
               
@@ -520,6 +523,13 @@ $('.glyphicon-remove-circle').on('click', function() {
 <div class="modal fade" id="notLoggedInModal" tabindex="-1" role="dialog" aria-labelledby="notLoggedInModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content modal-margin-top">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
+              </button>
+        
+            </div>
             
             <div class="modal-body">
                 <p>
@@ -540,7 +550,8 @@ $('.glyphicon-remove-circle').on('click', function() {
         <div class="modal-content modal-margin-top">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>
@@ -566,7 +577,8 @@ $('.glyphicon-remove-circle').on('click', function() {
         <div class="modal-content modal-margin-top">
           <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                <span class="sr-only">Close</span>
               </button>
         
             </div>

@@ -19,6 +19,7 @@ class NewsletterController extends ControllerBase
 
 	public function initialize()
     {
+      
 		$this->view->setTemplateAfter('index');
         
         
@@ -37,11 +38,34 @@ class NewsletterController extends ControllerBase
       $url= $_SERVER['HTTP_REFERER'];
       $prev=explode("/", $url);
      
+      
 
-      if (count($prev)>=6){
+      if (count($prev)>4){
+        if (count($prev)==7){
+          $action=$prev[4];
+          $method=$prev[5];
+          $id=$prev[6];
+        }
+
+      elseif(count($prev)==6){
+          $action=$prev[4];
+          $method=$prev[5];
+          $id='';
+        }
+
+      elseif(count($prev)==5){
         $action=$prev[4];
-        $method=$prev[5];
-        $id=$prev[6];
+        $method='';
+        $id='';
+        }
+      } 
+
+      else {
+        $action='';
+        $method='';
+        $id='';
+
+
       }
       
       
@@ -53,12 +77,12 @@ class NewsletterController extends ControllerBase
           $email = $request->getPost('news_email');
           //$previous_email = Newsletter::find('email=' . "'" . $email . "'" );
 
-           $previous = Newsletter::find("email="."'".$email."'and shop_id="."'".$id."'");
-           $general=  Newsletter::find("email="."'".$email."'and shop_id="."0");
+          $previous = Newsletter::find("email="."'".$email."'and shop_id="."'".$id."'");
+          $general=  Newsletter::find("email="."'".$email."'and shop_id="."0");
           
           $msg="Input an email address";
 
-          
+          // for subscribed for a particular shop
 
           if($action=='shop' && $method=='index'){
             if ($previous->count()>0 ) {
@@ -87,7 +111,37 @@ class NewsletterController extends ControllerBase
 
           }
 
+          // for home page,where it is not working
 
+          elseif (($action=='') && ($method=='')) {
+
+                if ($general->count()>0 ) {
+                    //$msg=" You are already subscribed to general subscription";
+               echo "3";
+                   
+                } else {
+                  $user = new Newsletter();
+                  $user->email=$email;
+                  $user->shop_id=intval(0);
+                  $user->status=1;
+                  $user->created_at = date("Y-m-d h:i:s");
+                  $user->updated_at = date('Y-m-d h:i:s');
+                  $user->save();
+
+                  if ($user->save() == True) {
+                    //$this->flash->success('You have successfully subscribed to our newsletter');
+                  //$msg="General Subscription Successful";
+                   echo "14";  
+                  }
+
+                   else echo "11";
+             
+                }
+
+            
+          }
+
+          // general subscription
           else {
             if ($general->count()>0 ) {
                     //$msg=" You are already subscribed to general subscription";

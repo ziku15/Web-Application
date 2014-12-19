@@ -7,11 +7,22 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/signin.css"); ?>
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/topmenu.css"); ?>
+<?php echo \Phalcon\Tag::stylesheetLink("main/css/cart.css"); ?>
 
 <style>
 
 
-
+.sticky {
+    position:fixed;
+    top:-5px;
+    
+    z-index: 100;
+    margin-left: 250px;
+     margin-right: 20px;
+    background-color: #fff;
+    box-shadow: 0 3px 6px gray;
+}
 
 </style>
 </head>
