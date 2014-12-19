@@ -46,18 +46,18 @@
   padding-top: 5px;
   text-transform: none;
   font-size: 14px;
+  margin-left: 15px;
 
 }
 
 .cart-intro{
   padding-bottom: 10px;
+  margin-left: 30px;
 }
 
 #shop_pic{
   padding-left: 0px;
 }
-
-
 
 #proceed{
   margin-top: 65px;
@@ -76,6 +76,7 @@
 
 #bag_price{
   margin-top: 3px;
+  width:27%;
 }
 
 
@@ -100,6 +101,12 @@
 
 .modal-footer button{
     width: 30%;
+}
+
+.quant-changed {
+    margin-left: 31px;
+    margin-top: -35px;
+    width:50%;
 }
 
 </style>
@@ -133,7 +140,7 @@
 
        if (result=="1") {
         $('#notLoggedInModal').modal('show');
-         setTimeout( "jQuery('#notLoggedInModal').modal('hide');",3000 );
+         //setTimeout( "jQuery('#notLoggedInModal').modal('hide');",3000 );
       }
        else if (result=="2") {
         $('#productInWishlistModal').modal('show');
@@ -173,110 +180,110 @@ $( document ).ready(function() {
 });
  
 $(function(){
-$('.quant-changed').on('change', function(e) {
-var base_url =<?php echo $this->url->get(); ?>;
+    $('.quant-changed').on('change', function(e) {
+      var base_url =<?php echo $this->url->get(); ?>;
 
-var quantId = e.target.id;
-//$(this).mask("9999");
-console.log(quantId);
-var pId = quantId.toString().split(",")[0];
-var priceUnit = quantId.toString().split(",")[1];
-console.log(pId);
-console.log(priceUnit);
-var quantity = $(this).val();
+      var quantId = e.target.id;
+      //$(this).mask("9999");
+      console.log(quantId);
+      var pId = quantId.toString().split(",")[0];
+      var priceUnit = quantId.toString().split(",")[1];
+      console.log(pId);
+      console.log(priceUnit);
+      var quantity = $(this).val();
 
 
-console.log(quantity);
+      console.log(quantity);
 
-var spin_area_id = pId.toString().concat("spin");
-$('#'+spin_area_id).html('<i class="fa fa-spin fa-refresh"></i>');
+      var spin_area_id = pId.toString().concat("spin");
+      $('#'+spin_area_id).html('<i class="fa fa-spin fa-refresh"></i>');
 
-$.ajax({
+      $.ajax({
 
-        type: "POST",
-        url: base_url+"index/checkStock",
-        data: { data1 : pId, },
-        success: function(result)
-        {
-            //$("#sub_cat_id").html(html);
-            //location.reload();
-            if((result=="no") || (result=="No"))
-              $('#checkStockModal').modal('show');
-            console.log(result);
-             $('#'+spin_area_id).html('');
-        }
+              type: "POST",
+              url: base_url+"index/checkStock",
+              data: { data1 : pId, },
+              success: function(result)
+              {
+                  //$("#sub_cat_id").html(html);
+                  //location.reload();
+                  if((result=="no") || (result=="No"))
+                    $('#checkStockModal').modal('show');
+                  console.log(result);
+                   $('#'+spin_area_id).html('');
+              }
+            });
+    //checkStock(quantity);
+    //$('#'+spin_area_id).html('');
+
+
+       if(parseInt(quantity)>=0){
+        
+        var subTotal = parseInt(quantity) * parseInt(priceUnit);
+        console.log(subTotal);
+
+        var sub_text_area_id = pId.toString().concat("sub");
+
+        console.log(sub_text_area_id);
+        
+        $('#'+sub_text_area_id).html('BDT.'+subTotal);
+
+      }
+
+       if(quantity==" "){
+        $('#'+sub_text_area_id).html("0");
+        //$('#negQuantModal').modal('show');
+      }
+
+     
+
+     
+
+      console.log(spin_area_id);
+      /*
+        $('.cart-delete').click(function(){
+          $(this).parent('div').parent('div').slideUp('slow');
       });
-//checkStock(quantity);
-//$('#'+spin_area_id).html('');
+      */
+      console.log("Quantity");
+      console.log(quantity);
+      console.log("Produc ID");
+      console.log(pId);
+
+      $.ajax({
+
+            type: "POST",
+            url: base_url+"index/updateQuantCookie",
+            data: { productID : pId, Quant: quantity },
+            success: function(html)
+            {
+                //console.log("Quantity Successfully updated in cookie");
+                $("#total").html(html);
+                $("#subtotal").html(html);
+
+            }
+          });
+
+      /*
+
+      $.ajax({
+
+            type: "POST",
+            url: "/biz_mela/index/calculateTotal",
+            success: function(html)
+            {
+              $("#total").html(html);
+                
+            }
+          });
+
+      */
 
 
- if(parseInt(quantity)>=0){
-  
-  var subTotal = parseInt(quantity) * parseInt(priceUnit);
-  console.log(subTotal);
 
-  var sub_text_area_id = pId.toString().concat("sub");
 
-  console.log(sub_text_area_id);
-
-  $('#'+sub_text_area_id).html(subTotal);
-
-}
-
- if(quantity==" "){
-  $('#'+sub_text_area_id).html("0");
-  //$('#negQuantModal').modal('show');
-}
-
- 
-
- 
-
-  console.log(spin_area_id);
-  /*
-    $('.cart-delete').click(function(){
-      $(this).parent('div').parent('div').slideUp('slow');
-  });
-  */
-  console.log("Quantity");
-  console.log(quantity);
-  console.log("Produc ID");
-  console.log(pId);
-
-  $.ajax({
-
-        type: "POST",
-        url: base_url+"index/updateQuantCookie",
-        data: { productID : pId, Quant: quantity },
-        success: function(html)
-        {
-            //console.log("Quantity Successfully updated in cookie");
-            $("#total").html(html);
-            $("#subtotal").html(html);
-
-        }
+      
       });
-
-  /*
-
-  $.ajax({
-
-        type: "POST",
-        url: "/biz_mela/index/calculateTotal",
-        success: function(html)
-        {
-          $("#total").html(html);
-            
-        }
-      });
-
-  */
-
-
-
-
-  
-  });
 
 
 });
@@ -296,17 +303,28 @@ $('.glyphicon-remove-circle').on('click', function() {
         type: "POST",
         url: base_url+"index/updateCookie",
         data: { data1 : pId, },
-        success: function(html)
+        success: function(my_result)
         {
             //$("#sub_cat_id").html(html);
-            $("#my_count").html(html);
+            my_result = my_result.split(",");
+            count = my_result[0];
+            console.log("count is"+count);
+            stotal = my_result[1];
+            console.log("total is"+stotal);
+            $("#my_count").html(count);
+            $("#total").html(stotal);
+            $("#subtotal").html(stotal);
         }
       });
 
       //$(this).parent('div').parent('div').slideUp('slow');
       var spin_area_id = pId.toString().concat("spin");
-      $('#'+spin_area_id).parent('div').parent('div').parent('div').parent('div').slideUp('slow');;
-  
+      $('#'+spin_area_id).parent('div').parent('div').parent('div').parent('div').slideUp('slow');
+
+
+
+
+      
 
   });
 });
@@ -353,7 +371,7 @@ $('.glyphicon-remove-circle').on('click', function() {
                    <div><?php echo $row->product_description; ?></div>
 
                    <div class="pro_qty" style="width:25%" >
-                    Qty:
+                    <p style="margin-top:15px;">Qty:</p>
                     <?php $cookie_array = unserialize($_COOKIE['product']);?>
                      <input type="text" class="form-control quant-changed" id="<?php echo $row->id.",".$row->price; ?>" value="<?php echo $cookie_array[$row->id];?>"> &ensp; 
                      <span class="spin" id="<?php echo $row->id."spin"; ?>"></span>
@@ -370,10 +388,8 @@ $('.glyphicon-remove-circle').on('click', function() {
                   </br>
               
                   <div id="remove_bag">
-                    <a href="" data-toggle="modal" data-target="#cartDeleteModal<?php echo $row->id; ?>"  style="color:#000000;">
-                     <span class="glyphicon glyphicon-remove" product_id="<?php echo $row->id; ?>" ></span>
-                    </a>
-                    <a href="" data-toggle="modal" data-target="#cartDeleteModal<?php echo $row->id; ?>" style="color:#000000;">Remove
+                    <a href="#" data-toggle="modal" style="color:#000000;">
+                      <span class="glyphicon glyphicon-remove-circle" product_id="<?php echo $row->id; ?>" style="padding-top:0px;"><p style="padding-left:20px; margin-top:-17px;">Remove</p></span>
                     </a>
                   </div>
                 </div>
@@ -538,7 +554,14 @@ $('.glyphicon-remove-circle').on('click', function() {
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+               <div>
+                <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'session/index/';?>">
+
+                  Sign In
+                </a>
+
+
+              </div>
             </div>
             
         </div>
@@ -564,7 +587,7 @@ $('.glyphicon-remove-circle').on('click', function() {
             <div class="modal-footer">
              <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
 
-                Checkout
+                Go To Wishlist
               </a>
             </div>
             
@@ -592,7 +615,7 @@ $('.glyphicon-remove-circle').on('click', function() {
             <div class="modal-footer">
              <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'wishlist/wish/';?>">
 
-                Checkout
+                Go To Wishlist
               </a>
             </div>
             

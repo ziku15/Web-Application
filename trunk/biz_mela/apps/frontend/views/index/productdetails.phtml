@@ -108,7 +108,7 @@
      transition: opacity 500ms;
 }
 .hover:hover .text { display: block; opacity: 1;}
-.hover2:hover .text2 { display: block; opacity: 1;}
+.hover2:hover .text2 { display: block; opacity: 0.5;}
 
 .text .top_text{margin-top: 35%;}
 .text2 .top_text2{margin-top: 35%;}
@@ -1275,7 +1275,7 @@ magnification:3
         <div class="als-item">
           <div class="hover2" style="height : 368px;">
             <div class="text2">
-              <p class="top_text2"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
+              <p class="top_text2" style="color:#fff;"><?php echo $row->product_name."<br>"."Price: ".$row->price."<br>".$row->product_description; ?></P>
               <a href="<?php echo $this->url->get().'index/productdetails/'.$row->id;?>"><font color="white">Details</font></a>
           
               <div class="bottom_text2">

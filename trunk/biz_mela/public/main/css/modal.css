@@ -20,6 +20,7 @@
     outline: 0 none;
     position: relative;
     background-color: #fff;
+    width:101%;
 }
 
 
@@ -30,6 +31,7 @@
     height: 55px;
     background: url("../../public/main/images/icon.png") no-repeat scroll 0 0 / 40% auto rgba(0, 0, 0, 0);
     background-color: #e5e0e0;
+    border-top-right-radius: 12px;
 }
 
 
@@ -40,7 +42,7 @@
 }
 
 .modal-header .close {
-    margin-right: -10px;
+    margin-right: -9px;
     margin-top: -11px;
 }
 

@@ -74,8 +74,8 @@ class ContactController extends ControllerBase
 
                 return $this->dispatcher->forward(
                         array(
-                            'controller' => 'accdashboard',
-                            'action' => 'dashinfo'
+                            'controller' => 'index',
+                            'action' => 'index'
                             
                             
                             )

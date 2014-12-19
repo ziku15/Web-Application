@@ -1,3 +1,17 @@
+<style>
+#search_page{
+
+  margin-left:90px;
+ 
+}
+
+.hover2{
+  width:233px;
+}
+  
+
+</style>
+
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/search.css"); ?>
 
 <script type="text/javascript">
@@ -251,7 +265,7 @@ $('.cartB').on('click', function(e) {
 <div class="container bottom-item-area">
 
 	<div class="col-md-12">
-		<div class="row product">
+		<div class="row product" id="search_page">
       <?php if($data['value']->count()==0){?>
        <p class="zero_found"><?php echo "Your search  did not match any products. ";?></p>
      <?php } else {
