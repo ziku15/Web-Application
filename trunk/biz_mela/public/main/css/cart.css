@@ -67,12 +67,11 @@ table{
   height:auto;
 }
 
-#checkout{
-  width:25%;
-  height:100px;
-  text-align: left;
-  padding-top: 10px;
-
+#checkout {
+    height: 100px;
+    padding-top: 0;
+    text-align: left;
+    
 }
 
 .btn-primary{
@@ -85,26 +84,26 @@ table{
   border: 1px solid #cd2027;
 }
 
-#cart_data{
-  margin-top: 0px;
-  padding-left: 5px;
-  border-bottom: 1px solid #a8a8a8;
+#cart_data {
+    border-bottom: 1px solid #a8a8a8;
+    margin-bottom: 1px;
+    margin-top: 1px;
+    padding-left: 0;
 }
 
 #cart_gla, #cart_quan, #cart_price, #cart_total{
-  padding-top: 5px;
-  text-align: left;
-  font-size: 12px;
+   font-size: 12px;
+    margin-top: -1px;
+    text-align: left;
 }
 
-#cart_name{
-  width:25%;
-  height:140px;
-  padding-top: 5px;
-  text-align: left;
-  font-size: 12px;
+#cart_name {
+    font-size: 12px;
+    height: 140px;
+    margin-top: -3px;
+    text-align: left;
+   
 }
-
 .cart_prod{
   color:#000;
 }

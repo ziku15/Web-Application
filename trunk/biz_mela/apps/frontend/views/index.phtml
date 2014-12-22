@@ -102,7 +102,7 @@
     
     z-index: 100;
     /*margin-right: -350px;*/
-    margin-top: 194px;
+    margin-top: 187px;
     font-size: 12px;
     border-radius-left:16px;
 
@@ -266,7 +266,7 @@ $('.glyphicon-remove-circle').on('click', function() {
 
                 <div class="col-md-4" id="checkout" style="width:30%;">
 
-                  <img  src="<?php echo $this->url->get().$cart->picture;?>" width="100%" style="height:120px; width:75px;" ></img>
+                  <img  src="<?php echo $this->url->get().$cart->picture;?>" width="100%" style="height:125px; width:85px;" ></img>
 
                 </div>
                 
@@ -317,7 +317,8 @@ $('.glyphicon-remove-circle').on('click', function() {
               </a>
 
 
-          </div>  <?php } else if (count($cookie_array) == 0) {echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There is No item in Your Bag";} ?>
+          </div>  <?php } else if (count($cookie_array) == 0) {
+            echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There is No item in Your Bag";} ?>
         </div><?php } ?>
                 <!-- Scroll Ends Here -->
     </div> 
