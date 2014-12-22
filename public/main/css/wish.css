@@ -91,3 +91,10 @@ table {
 td{
     font-size: 15px;
 }
+
+.modal-footer {
+    border-top: none;
+    margin-top: -5px;
+    padding: 0px;
+    text-align: center;
+}
