@@ -167,6 +167,8 @@
     
     margin-top: 1px;
 }
+
+
 </style>
 
 <script>
@@ -189,7 +191,7 @@ $('.glyphicon-remove-circle').on('click', function() {
         success: function(the_result)
         {
             //$("#sub_cat_id").html(html);
-             the_result = the_result.split(",");
+            the_result = the_result.split(",");
             count = the_result[0];
             console.log("count is"+count);
             stotal = the_result[1];
@@ -197,22 +199,14 @@ $('.glyphicon-remove-circle').on('click', function() {
             $("#my_count").html(count);
             if (count==0){
               $('#side_bag').parent('div').hide();
-              
-
+              $('#scroll_cart').html("<h5>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; No item in Your bag</h5>");
+              $('#scroll_cart').css("color","#cd2027");
+              $('#scroll_cart').css("padding-left","20px");
             }
             //$("#my_count").html(html);
         }
       });
 
-      //$(this).parent('div').parent('div').slideUp('slow');
-      
-      /*var read_cookies = document.cookie;
-      console.log("cookie is"+read_cookies);
-      var ca = document.cookie.split(';');
-      var da = ca[0];
-      console.log("part is"+da);*/
-
-     
      var pace_area_id = pId.toString().concat("pace");
       $('#'+pace_area_id).parent('div').parent('div').slideUp('slow');
 
