@@ -154,6 +154,19 @@
     width: 100px;
 }
 
+.search_btn{
+  margin-left: 305px;
+  margin-top:-35px;
+}
+
+.sub_key{
+
+   border: 0 none;
+   
+    height: 34px;
+    
+    margin-top: 1px;
+}
 </style>
 
 <script>
@@ -393,11 +406,16 @@ $('.glyphicon-remove-circle').on('click', function() {
         </a>
       </div>
       <form action="<?php echo $this->url->get().'search/search/';?>" method="post">
-        <div class="col-md-6 ">
-          <div class="input-group">
-            <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword ">
-            <span class="input-group-addon" ><span class="glyphicon glyphicon-search" ></span></span>
+        <div class="col-md-6">
+          <div style="width:305px;">
+            <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword " autocomplete="off" >
           </div>
+            <div class="search_btn" >
+              <button class="sub_key" title="Search" type="submit" >
+                <span class="input-group-addon" ><span class="glyphicon glyphicon-search" ></span></span>
+              </button>
+            </div>
+          
         </div>
       </form>
       
@@ -1192,11 +1210,6 @@ tempor incididunt ut labore et dolore magna aliqua</div>
     </div>
   </div>
 </div>
-
-
-
-
-
 
   </body>
 </html>

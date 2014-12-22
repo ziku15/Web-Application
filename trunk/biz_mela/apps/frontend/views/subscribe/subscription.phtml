@@ -20,9 +20,17 @@ table{
     border-collapse: separate;
 }
 
+.modal-footer {
+    border-top: none;
+    margin-top: -5px;
+    padding: 0px;
+    text-align: center;
+}
 
+.ques_mod{
 
-
+    padding-left: 100px;
+}
 
 </style>
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
@@ -105,13 +113,14 @@ table{
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                    &times;
+                                                                <button type="button" class="close" data-dismiss="modal">
+                                                                    <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                                                                    <span class="sr-only">Close</span>
                                                                 </button>
                                                                 <h4 class="modal-title" id="myModalLabel"> </h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                               Unsubscribe？
+                                                              <p class="ques_mod"> Unsubscribe？ </p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <div class="top-tabs1">
@@ -228,32 +237,36 @@ table{
                                                             Unsubscribe
                                                         </a>
 
-                                                        <div class="modal fade" id="basicModal2<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                        &times;
-                                                                    </button>
-                                                                    <h4 class="modal-title" id="myModalLabel"> </h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                   Unsubscribe？
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <div class="top-tabs1">
+                                                  
+
+                                                        <div class="modal fade" id="basicModal2<?php echo $record->id; ?>" tabindex="-1" role="dialog" aria-labelledby="loginfirstModal" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content modal-margin-top">
+                                                                    <div class="modal-header">
+                                                                      <button type="button" class="close" data-dismiss="modal">
+                                                                        <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                                                                        <span class="sr-only">Close</span>
+                                                                      </button>
+                                                                
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p class="ques_mod">Unsubscribe？</p>
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
                                                                         <button type="button" class="item btn" data-dismiss="modal">
                                                                              No 
                                                                         </button> &ensp;
                                                                         <button type="button" class="item btn btn-primary" onclick="window.location.href='<?php echo $this->url->get("subscribe/unsubscribe/" . $record->id); ?>'"> 
                                                                             Yes
                                                                         </button> 
-                                                                    </div> 
+                                                                    </div>
                                                                 </div>
+            
                                                             </div>
                                                         </div>
-                                                        </div>
-                                                    </td>
+                                                    </div>
+                                                </td>
                                                     
                                                     
                                                     
