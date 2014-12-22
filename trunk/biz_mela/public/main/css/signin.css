@@ -29,11 +29,20 @@ h4{
     border:1px solid #ECECEC;
 	border-radius: 0px;
 	height:450px;
-	width:50%;
+	width:49%;
 	margin-top: 20px;
 	margin-bottom: 30px;
+    margin-right: 10px;
 }
-
+#signin_socialnetwork {
+    border:1px solid #ECECEC;
+    border-radius: 0px;
+    height:450px;
+    width:49%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+}
 
 .btn{
 
