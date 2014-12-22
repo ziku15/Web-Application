@@ -333,10 +333,12 @@ function processCart(id){
 
         type: "POST",
         url: base_url+"index/addtocart",
+        //dataType: "json",
         data: { data1 : p_id, },
         success: function(result)
         {
             //$("#my_count").html(html);
+           //console.log("count is"+result);
             if(result!="")
               $("#my_count").html(result);
             //document.getElementById('write_'+id).html(html);
