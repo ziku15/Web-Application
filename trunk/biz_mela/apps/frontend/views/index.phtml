@@ -155,7 +155,7 @@
 }
 
 .search_btn{
-  margin-left: 305px;
+  margin-left: 400px;
   margin-top:-35px;
 }
 
@@ -195,14 +195,27 @@ $('.glyphicon-remove-circle').on('click', function() {
             stotal = the_result[1];
             console.log("total is"+stotal);
             $("#my_count").html(count);
+            if (count==0){
+              $('#side_bag').parent('div').hide();
+            }
             //$("#my_count").html(html);
         }
       });
 
       //$(this).parent('div').parent('div').slideUp('slow');
-      var pace_area_id = pId.toString().concat("pace");
-      $('#'+pace_area_id).parent('div').parent('div').slideUp('slow');;
-  
+      
+      /*var read_cookies = document.cookie;
+      console.log("cookie is"+read_cookies);
+      var ca = document.cookie.split(';');
+      var da = ca[0];
+      console.log("part is"+da);*/
+
+     
+     var pace_area_id = pId.toString().concat("pace");
+      $('#'+pace_area_id).parent('div').parent('div').slideUp('slow');
+
+      
+
 
   });
 });
@@ -311,7 +324,7 @@ $('.glyphicon-remove-circle').on('click', function() {
 
             
             <div class="col-md-4 col-md-offset-4">
-              <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'index/shoppingcart/';?>">
+              <a class="btn btn-md btn-primary" href="<?php echo $this->url->get().'index/shoppingcart/';?>" id="side_bag">
 
                 Checkout
               </a>
@@ -408,7 +421,7 @@ $('.glyphicon-remove-circle').on('click', function() {
       </div>
       <form action="<?php echo $this->url->get().'search/search/';?>" method="post">
         <div class="col-md-6">
-          <div style="width:305px;">
+          <div style="width:400px;">
             <input type="text" id="key" name="key" class="form-control" placeholder="Enter keyword " autocomplete="off" >
           </div>
             <div class="search_btn" >
