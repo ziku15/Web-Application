@@ -188,7 +188,7 @@ class IndexController extends ControllerBase
     }
 
 
-     /* $cResult = $this->modelsManager->createBuilder()
+      /*$cResult = $this->modelsManager->createBuilder()
               ->from('Biz_mela\Models\ProductMaster')
               ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name, Biz_mela\Models\ProductMaster.product_description, p.picture')
               ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
