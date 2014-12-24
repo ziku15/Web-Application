@@ -262,6 +262,7 @@ $('.cartB').on('click', function(e) {
                     'height': 0
             }, function () {
                 $(this).detach()
+                //location.href = "<?php echo $this->url->get("search/search"); ?>";
                 location.reload();
             });
         }

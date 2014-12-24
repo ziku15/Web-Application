@@ -64,6 +64,13 @@ table{
 td{
     font-size: 12px;
 }
+
+.modal-footer {
+    border-top: none;
+    margin-top: -25px;
+    padding: 0px;
+    text-align: center;
+}
 </style>
 
 <?php echo \Phalcon\Tag::stylesheetLink("main/css/list.css"); ?>
@@ -148,9 +155,10 @@ td{
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                                        &times;
-                                                                                    </button>
+                                                                                     <button type="button" class="close" data-dismiss="modal">
+                                                                                        <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                                                                                        <span class="sr-only">Close</span>
+                                                                                      </button>
                                                                                     <h4 class="modal-title" id="myModalLabel"> </h4>
                                                                                 </div>
                                                                                 <div class="modal-body">
@@ -340,8 +348,11 @@ td{
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                            <h4 class="modal-title" id="myModalLabel"> </h4>
+                                                                                <button type="button" class="close" data-dismiss="modal">
+                                                                                    <span aria-hidden="true"><img src="<?php echo $this->url->get().'main/images/';?>cancel_btn.png"></span>
+                                                                                    <span class="sr-only">Close</span>
+                                                                                </button>
+                                                                                <h4 class="modal-title" id="myModalLabel"> </h4>
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                  Do You Want to reject the Order？
