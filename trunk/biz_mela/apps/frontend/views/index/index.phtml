@@ -28,21 +28,7 @@
   width:960px;
 }
 
-.als-viewport-hot {
-  position: relative;
-  overflow: hidden;
-  margin: 0px auto;
-  height:393px;
-  width:960px;
-}
 
-.als-viewport-best {
-  position: relative;
-  overflow: hidden;
-  margin: 0px auto;
-  height:393px;
-  width:960px;
-}
 
 /***************************************************
  * wrapper styling
@@ -56,21 +42,7 @@
   
 }
 
-#als-wrapper-hot {
-  position: relative;
-  width:1920px;
-  height:393px;
-  /* if you are using a list with <ul> <li> */
-  
-}
 
-.als-wrapper-best {
-  position: relative;
-  width:1920px;
-  height:393px;
-  /* if you are using a list with <ul> <li> */
-  
-}
 
 /*************************************
  * item: single list element
@@ -82,30 +54,23 @@
   text-align: center;
   cursor: pointer;
   float: left;
-  
-
 }
 
-#my-als-list-hot .als-item {
+#my-als-list2 .als-item {
   position: relative;
   display: block;
   text-align: center;
   cursor: pointer;
   float: left;
-  
-
 }
 
-#my-als-list-best .als-item {
+#my-als-list3 .als-item {
   position: relative;
   display: block;
   text-align: center;
   cursor: pointer;
   float: left;
-  
-
 }
-
 
 
 .als-item{
@@ -338,7 +303,7 @@ function processCart(id){
         success: function(result)
         {
             //$("#my_count").html(html);
-           //console.log("count is"+result);
+           console.log("count is"+result);
             if(result!="")
               $("#my_count").html(result);
             //document.getElementById('write_'+id).html(html);
@@ -411,7 +376,7 @@ $('.cart').on('click', function(e) {
                     'height': 0
             }, function () {
                 $(this).detach()
-                location.reload();
+                //location.reload();
             });
         }
 
@@ -624,32 +589,33 @@ $('.cartC').on('click', function(e) {
           autoscroll: "no",
           speed: 250
 
-        });
+        }); 
+    
+  });
 
- $("#my-als-list-hot").als({
+   /*$("#my-als-list2").als({
           visible_items: 4,
           scrolling_items: 1,
           orientation: "horizontal",
           circular: "yes",
           autoscroll: "no",
           speed: 250
-          
-        });
 
- $("#my-als-list-best").als({
+        }); 
+    
+  });
+
+  $("#my-als-list3").als({
           visible_items: 4,
           scrolling_items: 1,
           orientation: "horizontal",
           circular: "yes",
           autoscroll: "no",
           speed: 250
-          
-        });
 
-
+        }); 
     
-    
-  }); 
+  });*/
 
 
 </script>
@@ -708,26 +674,25 @@ $('.cartC').on('click', function(e) {
 
 
 
-
 <div role="tabpanel">
-<div class="container">
-  <div class="tabbable">
-    <div class="mid-menu">
-      <ul class="nav nav-tabs">
-    
-        <li class="active" ><a href="#pane1" data-toggle="tab"><div class="item">New Products</div></a></li>
-        <li ><a href="#pane2" data-toggle="tab"><div class="item">Hot Products</div></a></li>
-        <li ><a href="#pane3" data-toggle="tab"><div class="item">Best Selling</div></a></li>
+  <div class="container">
+    <div class="tabbable">
+      <div class="mid-menu">
+        <ul class="nav nav-tabs">
+      
+          <li class="active" ><a href="#pane1" data-toggle="tab"><div class="item">New Products</div></a></li>
+          <li ><a href="#pane2" data-toggle="tab"><div class="item">Hot Products</div></a></li>
+          <li ><a href="#pane3" data-toggle="tab"><div class="item">Best Selling</div></a></li>
 
-      </ul>
+        </ul>
+      </div>
+
+      <div class="red-joint"></div>
     </div>
-
-    <div class="red-joint"></div>
-  </div>
 
       
     
-</div>
+  </div>
 
  <div class="tab-content">
   <div id="pane1" class="tab-pane active ">
@@ -784,13 +749,13 @@ $('.cartC').on('click', function(e) {
 
 
 
-    <div id="pane2" class="tab-pane  ">
-    <div class="als-container" id="my-als-list-hot">
+    <div id="pane2" class="tab-pane">
+    <div class="als-container" id="my-als-list2">
       <span class="als-prev" style="left: 150px; top: 150px;">
         <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
       </span>
-      <div class="als-viewport-hot" style="width:960px; height:362px;" data-id="als_viewport_1">
-        <div class="als-wrapper-hot" style="width:1920px; height:362px;">
+      <div class="als-viewport">
+        <div class="als-wrapper">
       
      
     <?php foreach ($hotResult as $row){?>
@@ -834,12 +799,12 @@ $('.cartC').on('click', function(e) {
     </div> <!---pane2 !-->
 
  <div id="pane3" class="tab-pane">
-    <div class="als-container" id="my-als-list-best">
+    <div class="als-container" id="my-als-list3">
       <span class="als-prev" style="left: 150px; top: 150px">
         <img src="<?php echo $this->url->get().'main/images/';?>left.png" alt="prev" title="previous" />
       </span>
-      <div class="als-viewport-best" style="width:960px; height:362px;" >
-        <div class="als-wrapper-best" style="width:1920px; height:362px;">
+      <div class="als-viewport">
+        <div class="als-wrapper">
       
      
     <?php foreach ($bestResult as $row){?>
