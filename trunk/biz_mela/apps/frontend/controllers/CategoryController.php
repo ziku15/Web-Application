@@ -234,7 +234,6 @@ class CategoryController extends ControllerBase
            echo $row["maximum"], ' ', $row["minimum"], "\n";
         }
         */
-
         echo $this->router->getControllerName();
         echo "<br>";
         echo $this->router->getActionName();

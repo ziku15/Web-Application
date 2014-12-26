@@ -474,9 +474,7 @@ class IndexController extends ControllerBase
       if(count($cookie_array) == 0){
         return $this->dispatcher->forward(
             array(
-             
               'action' => 'index'
-              
               )
             );
       }
