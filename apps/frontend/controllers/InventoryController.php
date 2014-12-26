@@ -41,11 +41,7 @@ class InventoryController extends ControllerBase
 	  }
 	
 	public function listAction() {
-		
-		
 			$user_id = $this->session->get('auth')['id'];
-            
-            
 			$newresult = $this->modelsManager->createBuilder()
                   ->from('Biz_mela\Models\ProductMaster')
                   ->columns('Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,Biz_mela\Models\ProductMaster.price,
@@ -57,9 +53,6 @@ class InventoryController extends ControllerBase
                   ->where('s.user_id = :name:', array('name' => $user_id))
                   ->getQuery()
                   ->execute();
-
-       
-
             //$newresult = $this->modelsManager->executeQuery($phql);
 
             $numberPage = $this->request->getQuery("page", "int", 1);
@@ -70,50 +63,33 @@ class InventoryController extends ControllerBase
             ));
             
             $page['Product'] = $paginator->getPaginate();
-            $page['value'] = $value;
+
             $this->view->setVars($page);
-
-
-
             $user_id = $this->session->get('auth')['id'];
             $numberPage = $this->request->getQuery("page", "int", 1);
             $phql = ("SELECT Biz_mela\Models\ProductMaster.product_name,Biz_mela\Models\ProductMaster.id,Biz_mela\Models\ProductMaster.product_description,
             	Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock, Biz_mela\Models\ProductMaster.status,
             	Biz_mela\Models\ProductImage.picture,Biz_mela\Models\ShopMaster.shop_name, Biz_mela\Models\ShopMaster.id as sid
                 FROM Biz_mela\Models\ShopMaster, Biz_mela\Models\ProductMaster, Biz_mela\Models\ProductImage
-                
                 Where Biz_mela\Models\ShopMaster.id = Biz_mela\Models\ProductMaster.shop_id
                 AND Biz_mela\Models\ProductImage.product_id = Biz_mela\Models\ProductMaster.id
                 AND Biz_mela\Models\ShopMaster.user_id = $user_id
-                ORDER BY CAST(Biz_mela\Models\ProductMaster.price AS SIGNED) desc
-
+                ORDER BY CAST(Biz_mela\Models\ProductMaster.price  AS SIGNED) desc
                 ");
+       // echo $phql;exit();
             //ORDER BY CAST(`type` AS SIGNED)
 
             $valueresult = $this->modelsManager->executeQuery($phql);
-
-            /*$valueResult = $this->modelsManager->createBuilder()
-                  ->from('Biz_mela\Models\ProductMaster')
-                  ->columns('Biz_mela\Models\ProductMaster.id, Biz_mela\Models\ProductMaster.price, Biz_mela\Models\ProductMaster.product_name,
-                  	Biz_mela\Models\ProductMaster.status,Biz_mela\Models\ProductMaster.discount,Biz_mela\Models\ProductMaster.in_stock,
-                  	 s.shop_name, s.id as sid, p.picture')
-                  ->leftJoin('Biz_mela\Models\ProductImage', 'p.product_id = Biz_mela\Models\ProductMaster.id', 'p')
-                  ->leftJoin('Biz_mela\Models\ShopMaster', 's.id = Biz_mela\Models\ProductMaster.shop_id', 's')
-                  ->where('s.user_id = :name:', array('name' => $user_id))
-                  ->orderBy (CAST 'Biz_mela\Models\ProductMaster.price AS SIGNED' desc)
-                  ->limit(4)
-                  ->getQuery()
-                  ->execute();*/
-
+        //print_r($valueresult);exit();
             $paginator = new Paginator(array(
                 "data" => $valueresult,
                 "limit" => 8,
                 "page" => $numberPage
             ));
-            
+
             $page['Valuable'] = $paginator->getPaginate();
-            $page['value'] = $value;
-            $this->view->setVars($page); 
+
+            $this->view->setVars($page);
 
 
             $user_id = $this->session->get('auth')['id'];
@@ -132,24 +108,21 @@ class InventoryController extends ControllerBase
                   ->limit(4)
                   ->getQuery()
                   ->execute();
-        
+       // print_r($bestResult);exit();
 
         $paginator = new Paginator(array(
                 "data" => $bestResult,
                 "limit" => 8,
                 "page" => $numberPage
             ));
-            
+
             $page['selling'] = $paginator->getPaginate();
-            $page['value'] = $value;
+
             $this->view->setVars($page);
         
     }
 
 
-    
-	
-	
 	
 	public function newAction() {
 
@@ -158,11 +131,7 @@ class InventoryController extends ControllerBase
         $shop=ShopMaster::find("user_id="."'".$user_id."'");
 		$form = new Form();
 
-		
-
         foreach ($shop as $value) {
-        	
-
         	$container[$value->id] =  $value->shop_name;
         }
 		
@@ -349,23 +318,10 @@ class InventoryController extends ControllerBase
             $sum = intval(0);
 
             foreach ($newresult as $value) {
-            
-            $sum = $sum + $value-> quantity;
-            
-
-  
+                $sum = $sum + $value-> quantity;
         	}
 
-        	
-
-
         	$this->view->setVar(sum,$sum);
-
-
-
-             
-
-          
             /*foreach ($newresult as $value) {
             $product_data=OrderDetails::find("product_id="."'".$value->product_id."'");
             $temp[$value->quantity]=count($product_data);
